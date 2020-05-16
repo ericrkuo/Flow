@@ -1,7 +1,7 @@
 const SpotifyWebApi = require('spotify-web-api-node');
 
-var spotifyApi;
-var trackHashMap;
+let spotifyApi;
+let trackHashMap;
 
 class Spotify {
 
