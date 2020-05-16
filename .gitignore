@@ -2,4 +2,7 @@ node_modules/
 package-lock.json
 coverage
 .env
-dataURL.js
+sampleDataURL.js
+**/.idea/workspace.xml
+**/.idea/tasks.xml
+**/.idea/dictionaries

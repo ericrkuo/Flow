@@ -1,13 +1,23 @@
 var chai = require("chai");
-var dataURL = require("../controllers/dataURL");
+var sampleDataURL = require("./sampleDataURL");
 const request = require('request');
+const {AzureFaceAPI} = require("../controllers/AzureFaceAPI");
 
 describe("unit test for dataURL", function () {
-    before(function(){
-       require('dotenv').config();
+    before(function () {
+        require('dotenv').config();
     });
-    it("checkifEqual", function () {
-        chai.expect(dataURL.browserDATAURL).equal(dataURL.serverDATAURL1);
+    it("test using chai expect ", function () {
+        chai.expect(sampleDataURL.dataURL1).equal(sampleDataURL.dataURL2);
+    });
+
+    it("call successful Azure Face API", function () {
+        let azureFaceAPI = new AzureFaceAPI();
+        return azureFaceAPI.getEmotions(sampleDataURL.dataURL2).then((res)=>{
+            chai.assert(true);
+        }).catch((err) => {
+            chai.expect.fail("not supposed to fail");
+        });
     });
 
     it("try to call face azure API with URL", function () {
@@ -47,9 +57,9 @@ describe("unit test for dataURL", function () {
         });
     });
 
-    // TODO: put this into an azureFaceAPI.js and make it a class file that can be exported
     it("try to call face azure API with binary data", function () {
         // Replace <Subscription Key> with your valid subscription key.
+        let azureFaceAPI = new AzureFaceAPI();
         const subscriptionKey = process.env.AZUREKEY;
         const uriBase = 'https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect';
 
@@ -64,7 +74,7 @@ describe("unit test for dataURL", function () {
         const options = {
             uri: uriBase,
             qs: params,
-            body: convertDataURIToBinary(),
+            body: azureFaceAPI.convertDataURIToBinary(sampleDataURL.dataURL2),
             headers: {
                 'Content-Type': 'application/octet-stream',
                 'Ocp-Apim-Subscription-Key': subscriptionKey
@@ -80,39 +90,4 @@ describe("unit test for dataURL", function () {
             console.log(jsonResponse);
         });
     });
-
-    let convertDataURIToBinary = () => {
-        let dataURI = dataURL.serverDATAURL1;
-        var BASE64_MARKER = ';base64,';
-        var base64Index = dataURI.indexOf(BASE64_MARKER) + BASE64_MARKER.length;
-        var base64 = dataURI.substring(base64Index);
-        var raw = Buffer.from(base64, 'base64').toString("binary");
-        var rawLength = raw.length;
-        var array = new Uint8Array(new ArrayBuffer(rawLength));
-
-        for(var i = 0; i < rawLength; i++) {
-            array[i] = raw.charCodeAt(i);
-        }
-        return array;
-    };
-
-    // IGNORE
-    // TODO: clean up later
-    function getBinaryData2() {
-        let f = open("C:\\Users\\Eric Kuo\\WebstormProjects\\Flow\\test\\image.jpg", "rb");
-        return f.read();
-    }
-    function getBinaryData() {
-        let dataURI = dataURL.serverDATAURL1;
-        let x = dataURI.split(',')[1];
-        var byteString = Buffer.from(x, 'base64').toString("binary");
-        var arrayBuffer = new ArrayBuffer(byteString.length);
-        var _ia = new Uint8Array(arrayBuffer);
-        for (var i = 0; i < byteString.length; i++) {
-            _ia[i] = byteString.charCodeAt(i);
-        }
-        return arrayBuffer;
-        // var dataView = new DataView(arrayBuffer);
-        // console.log(dataView);
-    }
 });
