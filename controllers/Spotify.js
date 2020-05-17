@@ -123,6 +123,10 @@ class Spotify {
             });
     }
 
+    // TODO: add Library: get users saved tracks
+    // TODO: get users saved albums and the tracks inside those albums
+    // TODO: get tracks from playlist
+
 }
 
 module.exports.Spotify = Spotify;
