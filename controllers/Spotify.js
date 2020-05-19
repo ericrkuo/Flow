@@ -1,10 +1,10 @@
 const SpotifyWebApi = require('spotify-web-api-node');
 
-let spotifyApi;
 let trackHashMap;
 
 class Spotify {
 
+    // TODO: figure out why can do this.spotifyApi even tho did not declare it anywhere outside
     constructor() {
         require('dotenv').config();
         this.spotifyApi = new SpotifyWebApi({
@@ -75,12 +75,12 @@ class Spotify {
                     promises.push(this.addArtistTopTracks(topArtist));
                 }
                 return Promise.all(promises);
-            }).then((res) => {
-                promises = [];
-                // for (let topArtist of topArtists) {
-                    promises.push(this.addSimilarArtistsTopTracks(topArtists[0]));
-                // }
-                return Promise.all(promises);
+                // }).then((res) => {
+                //     promises = [];
+                //     // for (let topArtist of topArtists) {
+                //         promises.push(this.addSimilarArtistsTopTracks(topArtists[0]));
+                //     // }
+                //     return Promise.all(promises);
             }).then((res) => {
                 let x = trackHashMap;
                 console.log("HERE");
@@ -121,6 +121,51 @@ class Spotify {
                 console.log(err);
                 return err;
             });
+    }
+
+    getSampleDataToWorkWith() {
+        return this.addTopArtistsTracks()
+            .then(() => {
+                // get array of array of ids (split into 100)
+                let promises = [];
+                let trackIDS = Array.from(trackHashMap.keys());
+
+                while (trackIDS.length !== 0) {
+                    // getAudioFeatures has max of 100
+                    let subsetOfTrackIDS = trackIDS.splice(0, 100);
+                    promises.push(this.getAudioFeatures(subsetOfTrackIDS));
+                }
+                return Promise.all(promises);
+                // return res[] of all the audio features
+            }).then((res) => {
+                // then create json objects with {"id" : {"Acoustic": 0.35, "Danceability":0.96, ...}, "id" : {...} }
+                let data = {};
+                for (let audioFeatures of res) {
+                    audioFeatures = audioFeatures.body["audio_features"];
+                    for (let audioFeature of audioFeatures) {
+                        let id = audioFeature.id;
+                        data[id] = {
+                            "danceability": audioFeature.danceability,
+                            "energy": audioFeature.energy,
+                            "loudness": audioFeature.loudness,
+                            "speechiness": audioFeature.speechiness,
+                            "acousticness": audioFeature.acousticness,
+                            "instrumentalness": audioFeature.instrumentalness,
+                            "liveness": audioFeature.liveness,
+                            "valence": audioFeature.valence,
+                            "tempo": audioFeature.tempo
+                        };
+                    }
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+                return err;
+            })
+    }
+
+    getAudioFeatures(tracks) {
+        return this.spotifyApi.getAudioFeaturesForTracks(tracks);
     }
 
     // TODO: add Library: get users saved tracks

@@ -35,5 +35,11 @@ describe("unit test for dataURL", function () {
 
     });
 
+    it("get Sample Data For AI", async function() {
+        let json = await spotify.getSampleDataToWorkWith();
+        console.log(json);
+
+    });
+
 
 });
