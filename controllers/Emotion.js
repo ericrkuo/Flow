@@ -37,6 +37,7 @@ class Emotion {
                         songFeatures[feature] = songFeatures[feature] + audioFeature[feature];
                     }
                 }
+                // TODO: normalize
                 for (let feature of this.features) {
                     songFeatures[feature] = songFeatures[feature]/numTracks;
                 }
