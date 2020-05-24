@@ -47,5 +47,12 @@ describe("unit test for Spotify", function () {
 
     });
 
+    it("get seed data", async function() {
+        let json = await spotify.addSeedTracks();
+        console.log(json);
+
+    });
+
+
 
 });

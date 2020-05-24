@@ -22,7 +22,7 @@ class KMean {
     kMean(data, k) {
         this.data = Object.entries(data); // [ [id1, {f1, f2, ...}], [id2, {f1, f2, ...}], ...]
         this.k = k;
-        this.meanValueLeniency = 0.001;
+        this.meanValueLeniency = 0.01;
         this.centroids = new Array(k);
         this.clusters = new Array(k);
         this.features = ["danceability", "energy", "loudness", "speechiness", "acousticness", "instrumentalness", "liveness", "valence", "tempo"];
@@ -33,7 +33,6 @@ class KMean {
         return this.clusters;
     }
 
-    // TODO: optimize choosing k random centroids
     // FORGY METHOD
     initializeKRandomCentroids() {
         let length = this.data.length - 1;
@@ -56,7 +55,7 @@ class KMean {
     * 2. for each data vector, find the minimum distance to all previously chosen centroids
     * 3. choose the next centroid as the data vector that has the largest min distance (furthest from all centroids)
     * */
-
+    // K Means++ method
     initializeKPlusPlusCentroids() {
         let n = this.data.length;
 

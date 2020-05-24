@@ -9,8 +9,9 @@ describe("unit test for Spotify", function () {
         require('dotenv').config();
     });
 
-    it("test Sample Function", async function () {
+    it("test sadness", async function () {
         let features = await emotion.getFeatures("sadness");
+        console.log(features);
     });
 
 

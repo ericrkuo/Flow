@@ -1,8 +1,15 @@
 const SpotifyWebApi = require('spotify-web-api-node');
 
-let trackHashMap;
-
 class Spotify {
+
+    /*
+    * addRecentlyPlayedTracks()
+    * addTopTracks()
+    * addSavedTracks()
+    * addTopArtistTracks()
+    * */
+
+
     // TODO: turn add___ functions into get___ and then use universal add(get___));
     // TODO: figure out why can do this.spotifyApi even tho did not declare it anywhere outside
     constructor() {
@@ -14,7 +21,7 @@ class Spotify {
         });
         this.spotifyApi.setAccessToken(process.env.ACCESS_TOKEN);
         // this.spotifyApi.setRefreshToken(process.env.REFRESH_TOKEN);
-        trackHashMap = new Map();
+        this.trackHashMap = new Map();
     }
 
     sampleFunction() {
@@ -27,7 +34,7 @@ class Spotify {
         return this.spotifyApi.getMyRecentlyPlayedTracks({limit: 50})
             .then((res) => {
                 this.addHistoryObjectTracksToHashMap(res.body.items);
-                let x = trackHashMap;
+                let x = this.trackHashMap;
                 return JSON.stringify(res.body.items, null, '  ');
             })
             .catch((err) => {
@@ -37,9 +44,13 @@ class Spotify {
     }
 
     addHistoryObjectTracksToHashMap(historyObjects) {
+        if (historyObjects == null || historyObjects.length === 0) {
+            console.log("tracks is empty or null");
+            return;
+        }
         for (let historyObject of historyObjects) {
             let track = historyObject["track"];
-            trackHashMap.set(track["id"], track);
+            this.trackHashMap.set(track["id"], track);
         }
     }
 
@@ -48,7 +59,7 @@ class Spotify {
         return this.spotifyApi.getMyTopTracks({limit: 50})
             .then((res) => {
                 this.addTracksToHashMap(res.body.items);
-                let x = trackHashMap;
+                let x = this.trackHashMap;
                 return JSON.stringify(res.body.items, null, '  ');
             })
             .catch((err) => {
@@ -59,8 +70,12 @@ class Spotify {
 
 
     addTracksToHashMap(tracks) {
+        if (tracks == null || tracks.length === 0) {
+            console.log("tracks is empty or null");
+            return;
+        }
         for (let track of tracks) {
-            trackHashMap.set(track["id"], track);
+            this.trackHashMap.set(track["id"], track);
         }
     }
 
@@ -72,7 +87,7 @@ class Spotify {
                 let arr = [];
                 for (let item of res.body.items) arr.push(item.track);
                 this.addTracksToHashMap(arr);
-                let x = trackHashMap;
+                let x = this.trackHashMap;
                 return JSON.stringify(arr, null, ' ');
             }).catch((err) => {
                 console.log(err);
@@ -98,7 +113,7 @@ class Spotify {
                 //     // }
                 //     return Promise.all(promises);
             }).then((res) => {
-                let x = trackHashMap;
+                let x = this.trackHashMap;
                 console.log("HERE");
             })
             .catch((err) => {
@@ -144,7 +159,7 @@ class Spotify {
             .then(() => {
                 // get array of array of ids (split into 100)
                 let promises = [];
-                let trackIDS = Array.from(trackHashMap.keys());
+                let trackIDS = Array.from(this.trackHashMap.keys());
 
                 while (trackIDS.length !== 0) {
                     // getAudioFeatures has max of 100
@@ -198,6 +213,36 @@ class Spotify {
     *   - NOTE** only 5 seeds max total
     * get 50 happy, 50 sad, 50 chill, 50 ambient,  50 for top 5 artist, 50 for top 5 track
     * */
+
+    addSeedTracks() {
+        let promises = [];
+        let optionsArray = [{limit: 100, seed_genres: "sad"},
+            // {limit: 100, seed_genres: "chill, ambient"},
+            // {limit: 100, seed_genres: "happy"}
+            // TODO: add helper method for getting 5 artists [ID1, ID2, ID3] and same for tracks
+            ];
+
+        for (let option of optionsArray) {
+            promises.push(this.spotifyApi.getRecommendations(option));
+        }
+        return Promise.all(promises)
+            .then((resArray)=> {
+                for (let res of resArray) {
+                    let tracks = res.body.tracks;
+                    this.addTracksToHashMap(tracks);
+                }
+                let y = [];
+                for (let entry of Array.from(this.trackHashMap.entries())) {
+                    y.push(entry[0]);
+                }
+                return JSON.stringify(resArray, null, " ");
+            })
+            .catch((err)=>{
+                console.log(err);
+                return err;
+            })
+    }
+
 
 }
 
