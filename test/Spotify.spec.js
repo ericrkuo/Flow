@@ -3,7 +3,7 @@ const request = require('request');
 const {Spotify} = require("../controllers/Spotify");
 
 var spotify;
-describe("unit test for dataURL", function () {
+describe("unit test for Spotify", function () {
     before(function () {
         spotify = new Spotify();
         require('dotenv').config();
@@ -31,6 +31,12 @@ describe("unit test for dataURL", function () {
 
     it("get Top Artists", async function() {
         let json = await spotify.addTopArtistsTracks();
+        console.log(json);
+
+    });
+
+    it("add Saved tracks", async function() {
+        let json = await spotify.addSavedTracks();
         console.log(json);
 
     });
