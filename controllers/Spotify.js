@@ -7,11 +7,14 @@ class Spotify {
     * addTopTracks()
     * addSavedTracks()
     * addTopArtistTracks()
+    * addSeedTracks()
+    * addAllTracksToHashMap()
+    * getAllAudioFeatures() - adds all tracks to hashmap and gets all the audio features
     * */
 
 
     // TODO: turn add___ functions into get___ and then use universal add(get___));
-    // TODO: figure out why can do this.spotifyApi even tho did not declare it anywhere outside
+    // TODO: create new constructor for frontend taking in two parameters (access token and refresh token)
     constructor() {
         require('dotenv').config();
         this.spotifyApi = new SpotifyWebApi({
@@ -28,6 +31,24 @@ class Spotify {
         return this.spotifyApi.getArtistAlbums('43ZHCT0cAZBISjO8DG9PnE');
     }
 
+    addAllTracksToHashMap() {
+        let promises = [];
+        promises.push(this.addRecentlyPlayedTracks());
+        promises.push(this.addTopTracks());
+        promises.push(this.addSavedTracks());
+        promises.push(this.addSeedTracks());
+        promises.push(this.addTopArtistsTracks());
+        return Promise.all(promises)
+            .then((res)=> {
+                let x = this.trackHashMap;
+                console.log("SUCCESS - added all tracks to hashmap")
+            })
+            .catch((err) => {
+                console.log("ERROR" - err);
+                throw err
+            })
+    }
+
     // get recent history objects
     // TODO: can get maybe like 250, each time changing index by 50 if dataSet of artists not enough
     addRecentlyPlayedTracks() {
@@ -39,7 +60,7 @@ class Spotify {
             })
             .catch((err) => {
                 console.log(err);
-                return err;
+                throw err;
             });
     }
 
@@ -64,7 +85,7 @@ class Spotify {
             })
             .catch((err) => {
                 console.log(err);
-                return err;
+                throw err;
             });
     }
 
@@ -91,7 +112,7 @@ class Spotify {
                 return JSON.stringify(arr, null, ' ');
             }).catch((err) => {
                 console.log(err);
-                return err;
+                throw err;
             });
     }
 
@@ -118,7 +139,7 @@ class Spotify {
             })
             .catch((err) => {
                 console.log(err);
-                return err;
+                throw err;
             });
     }
 
@@ -132,7 +153,7 @@ class Spotify {
             })
             .catch((err) => {
                 console.log(err);
-                return err;
+                throw err;
             });
     }
 
@@ -150,12 +171,12 @@ class Spotify {
             })
             .catch((err) => {
                 console.log(err);
-                return err;
+                throw err;
             });
     }
 
-    getSampleDataToWorkWith() {
-        return this.addTopArtistsTracks()
+    getAllAudioFeatures() {
+        return this.addAllTracksToHashMap()
             .then(() => {
                 // get array of array of ids (split into 100)
                 let promises = [];
@@ -192,20 +213,27 @@ class Spotify {
                         };
                     }
                 }
+                return data;
             })
             .catch((err) => {
                 console.log(err);
-                return err;
+                throw err;
             })
     }
 
     getAudioFeatures(tracks) {
-        return this.spotifyApi.getAudioFeaturesForTracks(tracks);
+        return this.spotifyApi.getAudioFeaturesForTracks(tracks)
+            .then((res)=> {
+                return res;
+            })
+            .catch((err)=> {
+                console.log("COULD NOT GET AUDIO FEATURES");
+                throw err;
+            });
     }
 
     // TODO: get users saved albums and the tracks inside those albums
     // TODO: get tracks from playlist (maybe not)
-    // TODO: need more VARIETY of tracks of different emotions
     /*
     * get recommendations based on seeds (browse)
     *   - browse by genres (happy,sad) https://developer.spotify.com/console/get-available-genre-seeds/
@@ -213,12 +241,11 @@ class Spotify {
     *   - NOTE** only 5 seeds max total
     * get 50 happy, 50 sad, 50 chill, 50 ambient,  50 for top 5 artist, 50 for top 5 track
     * */
-
     addSeedTracks() {
         let promises = [];
         let optionsArray = [{limit: 100, seed_genres: "sad"},
-            // {limit: 100, seed_genres: "chill, ambient"},
-            // {limit: 100, seed_genres: "happy"}
+            {limit: 100, seed_genres: "chill, ambient"},
+            {limit: 100, seed_genres: "happy"}
             // TODO: add helper method for getting 5 artists [ID1, ID2, ID3] and same for tracks
             ];
 
@@ -231,15 +258,15 @@ class Spotify {
                     let tracks = res.body.tracks;
                     this.addTracksToHashMap(tracks);
                 }
-                let y = [];
-                for (let entry of Array.from(this.trackHashMap.entries())) {
-                    y.push(entry[0]);
-                }
+                // let y = [];
+                // for (let entry of Array.from(this.trackHashMap.entries())) {
+                //     y.push(entry[0]);
+                // }
                 return JSON.stringify(resArray, null, " ");
             })
             .catch((err)=>{
                 console.log(err);
-                return err;
+                throw err;
             })
     }
 

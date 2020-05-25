@@ -19,39 +19,79 @@ describe("unit test for Spotify", function () {
     });
 
     it("get Recent Songs", async function () {
-        let json = await spotify.addRecentlyPlayedTracks();
-        console.log(json);
+        return spotify.addRecentlyPlayedTracks()
+            .then((res)=> {
+                console.log(json);
+            })
+            .catch((err)=> {
+                console.log("ERROR");
+            });
     });
 
     it("get Top Tracks", async function() {
-        let json = await spotify.addTopTracks();
-        console.log(json);
+        return spotify.addTopTracks()
+            .then((res)=> {
+                console.log(json);
+            })
+            .catch((err)=> {
+                console.log("ERROR");
+            });
 
     });
 
     it("get Top Artists", async function() {
-        let json = await spotify.addTopArtistsTracks();
-        console.log(json);
+        return spotify.addTopArtistsTracks()
+            .then((res)=> {
+                console.log(json);
+            })
+            .catch((err)=> {
+                console.log("ERROR");
+            });
 
     });
 
     it("add Saved tracks", async function() {
-        let json = await spotify.addSavedTracks();
-        console.log(json);
+        return spotify.addSavedTracks()
+            .then((res)=> {
+                console.log(json);
+            })
+            .catch((err)=> {
+                console.log("ERROR");
+            });
 
     });
 
-    it("get Sample Data For AI", async function() {
-        let json = await spotify.getSampleDataToWorkWith();
-        console.log(json);
+    it("get all sample data audio features", async function() {
+        return spotify.getAllAudioFeatures()
+            .then((res)=> {
+                console.log(json);
+            })
+            .catch((err)=> {
+                console.log("ERROR");
+            });
 
     });
 
     it("get seed data", async function() {
-        let json = await spotify.addSeedTracks();
-        console.log(json);
-
+        return spotify.addSeedTracks()
+            .then((res)=> {
+                console.log(json);
+            })
+            .catch((err)=> {
+                console.log("ERROR");
+            });
     });
+
+    it("add all the tracks into hashmap", async function() {
+        return spotify.addAllTracksToHashMap()
+            .then((res)=> {
+                console.log(json);
+            })
+            .catch((err)=> {
+                console.log("ERROR");
+            });
+    });
+
 
 
 

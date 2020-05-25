@@ -45,13 +45,13 @@ class Emotion {
                 let loudMAX = 0;
                 let tempoMIN = 0;
                 let tempoMAX = 250;
-                songFeatures["loudness"] = (songFeatures["loudness"] - loudMIN) / (loudMAX - loudMIN)
-                songFeatures["tempo"] = (songFeatures["tempo"] - tempoMIN) / (tempoMAX - tempoMIN)
+                songFeatures["loudness"] = (songFeatures["loudness"] - loudMIN) / (loudMAX - loudMIN);
+                songFeatures["tempo"] = (songFeatures["tempo"] - tempoMIN) / (tempoMAX - tempoMIN);
                 return songFeatures;
             })
             .catch((err) => {
                 console.log(err);
-                return err;
+                throw err;
             })
     }
 
