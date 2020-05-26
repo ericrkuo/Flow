@@ -22,7 +22,7 @@ class KMean {
     kMean(data, k) {
         this.data = Object.entries(data); // [ [id1, {f1, f2, ...}], [id2, {f1, f2, ...}], ...]
         this.k = k;
-        this.meanValueLeniency = 0.01;
+        this.meanValueLeniency = 0.001;
         this.centroids = new Array(k);
         this.clusters = new Array(k);
         this.features = ["danceability", "energy", "loudness", "speechiness", "acousticness", "instrumentalness", "liveness", "valence", "tempo"];
@@ -55,6 +55,7 @@ class KMean {
     * 2. for each data vector, find the minimum distance to all previously chosen centroids
     * 3. choose the next centroid as the data vector that has the largest min distance (furthest from all centroids)
     * */
+
     // K Means++ method
     initializeKPlusPlusCentroids() {
         let n = this.data.length;
@@ -78,13 +79,13 @@ class KMean {
 
             let furthestCentroid;
             let maxDistance = -Infinity;
-            for(let entry of minDistanceArray) {
+            for (let entry of minDistanceArray) {
                 if (entry[1] > maxDistance) {
                     maxDistance = entry[1];
                     furthestCentroid = entry[0];
                 }
             }
-            console.log(maxDistance);
+            // console.log(maxDistance);
             this.centroids[currCentroid] = furthestCentroid[1];
         }
 
@@ -114,9 +115,13 @@ class KMean {
                 vecArray[index][feature] += track[1][feature];
             }
         }
-
         let maxDistance = 0;
         for (let i = 0; i < this.k; i++) {
+            if (this.clusters[i]==null) {
+                // TODO: fix bug if have k-x distinct clusters already, and thus x clusters are empty
+                //  probably in the ERROR area decide later, or actually, maybe just return the clusters already, since they are in distinct clusters
+                console.log();
+            }
             let numTracks = this.clusters[i].length;
             if (numTracks === 0) {
                 console.log("ZERO TRACKS IN CLUSTER");
@@ -133,7 +138,7 @@ class KMean {
 
         // if true, then means centroids did not shift
         if (maxDistance <= this.meanValueLeniency) {
-            console.log(this.iterations); // TODO: delete later
+            // console.log(this.iterations); // TODO: delete later
             return;
         }
 
@@ -166,6 +171,104 @@ class KMean {
         }
         return distance;
     }
+
+    // SILHOUETTE METHOD FOR DIFFERENT VALUES OF K
+    /*
+    * high level steps
+    * compute the mean s(i), for each data point i
+    * s(i) = 0 if |C(i)| = 1
+    * s(i) = (b(i)-a(i))/max(a(i), b(i))
+    * a(i) = similarity of i to cluster - average distance of i to every other point in cluster
+    * b(i) = dissimilarity of i to other clusters - minimum mean distance to all other clusters
+    * */
+
+    computeSilhouetteValue(clusters) {
+        this.a = new Map();
+        this.b = new Map();
+        this.s = new Map();
+        this.computeAForAllClusters(clusters);
+        this.computeBForAllClusters(clusters);
+        this.computeSForAllClusters(clusters);
+        let sArray = Array.from(this.s.values());
+        let sSize = sArray.length;
+        let silhouetteValue = 0;
+        for (let s of sArray) {
+            silhouetteValue += s;
+        }
+        return silhouetteValue/sSize;
+    }
+
+    computeAForAllClusters(clusters) {
+        for (let cluster of clusters) {
+            if (cluster.length === 1) {
+                let singleTrack = cluster[0];
+                this.a.set(singleTrack[0], 0);
+            } else {
+                this.computeAForSingleCluster(cluster);
+            }
+        }
+    }
+
+    computeAForSingleCluster(cluster) {
+        let n = cluster.length;
+        for (let i = 0; i < n; i++) {
+            let t1 = cluster[i];
+            let sumDistance = 0;
+            for (let j = 0; j < n; j++) {
+                if (i !== j) {
+                    let t2 = cluster[j];
+                    sumDistance += this.distance(t1[1], t2[1]);
+                }
+            }
+            this.a.set(t1[0], (sumDistance) / (n - 1));
+        }
+    }
+
+    computeBForAllClusters(clusters) {
+        for (let i = 0; i < this.k; i++) {
+            let cluster = clusters[i];
+            if (cluster.length === 1) {
+                let singleTrack = cluster[0];
+                this.b.set(singleTrack[0], 0);
+            } else {
+                for (let track of cluster) {
+                    let minDistance = Infinity;
+                    for (let j = 0; j < this.k; j++) {
+                        if (i !== j) {
+                            minDistance = Math.min(minDistance, this.computeMeanDistanceToCluster(track, clusters[j]));
+                        }
+                    }
+                    this.b.set(track[0], minDistance);
+                }
+            }
+        }
+    }
+
+    computeMeanDistanceToCluster(t1, cluster) {
+        let n = cluster.length;
+        let sumDistance = 0;
+        for (let t2 of cluster) {
+            sumDistance += this.distance(t1[1], t2[1]);
+        }
+        return sumDistance/n;
+    }
+
+    computeSForAllClusters(clusters) {
+        for(let cluster of clusters) {
+            for (let track of cluster) {
+                let a = this.a.get(track[0]);
+                let b = this.b.get(track[0]);
+                if (a === b) {
+                    this.s.set(track[0], 0);
+                } else {
+                    this.s.set(track[0], (b-a)/Math.max(a,b));
+                    // let x = (b-a)/Math.max(a,b);
+                    // if (x>1 || x<-1) console.log("UHOH" + track + " - "+x);
+                }
+            }
+        }
+    }
+
 
 
 }

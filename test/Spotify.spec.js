@@ -21,20 +21,22 @@ describe("unit test for Spotify", function () {
     it("get Recent Songs", async function () {
         return spotify.addRecentlyPlayedTracks()
             .then((res)=> {
-                console.log(json);
+                console.log(res);
             })
             .catch((err)=> {
                 console.log("ERROR");
+                chai.expect.fail();
             });
     });
 
     it("get Top Tracks", async function() {
         return spotify.addTopTracks()
             .then((res)=> {
-                console.log(json);
+                console.log(res);
             })
             .catch((err)=> {
                 console.log("ERROR");
+                chai.expect.fail();
             });
 
     });
@@ -42,10 +44,11 @@ describe("unit test for Spotify", function () {
     it("get Top Artists", async function() {
         return spotify.addTopArtistsTracks()
             .then((res)=> {
-                console.log(json);
+                console.log(res);
             })
             .catch((err)=> {
                 console.log("ERROR");
+                chai.expect.fail();
             });
 
     });
@@ -53,10 +56,11 @@ describe("unit test for Spotify", function () {
     it("add Saved tracks", async function() {
         return spotify.addSavedTracks()
             .then((res)=> {
-                console.log(json);
+                console.log(res);
             })
             .catch((err)=> {
                 console.log("ERROR");
+                chai.expect.fail();
             });
 
     });
@@ -68,6 +72,7 @@ describe("unit test for Spotify", function () {
             })
             .catch((err)=> {
                 console.log("ERROR");
+                chai.expect.fail();
             });
 
     });
@@ -75,10 +80,11 @@ describe("unit test for Spotify", function () {
     it("get seed data", async function() {
         return spotify.addSeedTracks()
             .then((res)=> {
-                console.log(json);
+                console.log(res);
             })
             .catch((err)=> {
                 console.log("ERROR");
+                chai.expect.fail();
             });
     });
 
@@ -89,6 +95,7 @@ describe("unit test for Spotify", function () {
             })
             .catch((err)=> {
                 console.log("ERROR");
+                chai.expect.fail();
             });
     });
 
