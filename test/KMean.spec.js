@@ -70,7 +70,7 @@ describe("unit test for KMeans", function () {
     });
 
     it("test getOptimalKClusters", function(){
-        let clusters = kMean.getOptimalKClusters(songsClearCluster);
+        let clusters = kMean.getOptimalKClusters(songsLargeClearCluster);
     });
 
 });

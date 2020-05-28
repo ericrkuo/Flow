@@ -55,7 +55,7 @@ class Main {
 
     getRelevantSongsTestingPurposes() {
         let songX;
-        let dominantEmotion = "sadness";
+        let dominantEmotion = "happiness";
         return this.emotion.getFeatures(dominantEmotion)
             .then((feature) => {
                 songX = ["X", feature];

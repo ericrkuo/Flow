@@ -3,7 +3,7 @@ const request = require('request');
 const {Main} = require("../controllers/Main");
 
 let main;
-describe("unit test for Spotify", function () {
+describe("unit test for Main", function () {
     before(function () {
         main = new Main("myDATAURL"); //TODO: fix
         require('dotenv').config();

@@ -14,5 +14,13 @@ describe("unit test for Spotify", function () {
         console.log(features);
     });
 
+    it("test emotions", async function () {
+        let emotions = ["happiness" , "sadness", "neutral"];
+        for (let e of emotions) {
+            let features = await emotion.getFeatures(e);
+            console.log(features);
+        }
+    });
+
 
 });

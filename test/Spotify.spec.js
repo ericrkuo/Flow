@@ -91,7 +91,7 @@ describe("unit test for Spotify", function () {
     it("add all the tracks into hashmap", async function() {
         return spotify.addAllTracksToHashMap()
             .then((res)=> {
-                console.log(json);
+                console.log(res);
             })
             .catch((err)=> {
                 console.log("ERROR");

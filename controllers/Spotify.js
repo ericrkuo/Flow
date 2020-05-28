@@ -244,9 +244,11 @@ class Spotify {
     * */
     addSeedTracks() {
         let promises = [];
-        let optionsArray = [{limit: 100, seed_genres: "sad"},
-            {limit: 100, seed_genres: "chill, ambient"},
-            {limit: 100, seed_genres: "happy"}
+        let optionsArray = [
+            {limit: 100, seed_genres: "sad"},
+            // {limit: 100, seed_genres: "chill, ambient"},
+            {limit: 100, seed_genres: "happy"}, //TODO: put in min_energy, min_tempo, add more happy genres
+            {limit: 100, seed_genres: "chill"}
             // TODO: add helper method for getting 5 artists [ID1, ID2, ID3] and same for tracks
             ];
 
@@ -259,10 +261,10 @@ class Spotify {
                     let tracks = res.body.tracks;
                     this.addTracksToHashMap(tracks);
                 }
-                // let y = [];
-                // for (let entry of Array.from(this.trackHashMap.entries())) {
-                //     y.push(entry[0]);
-                // }
+                let y = [];
+                for (let entry of Array.from(this.trackHashMap.entries())) {
+                    y.push(entry[0]);
+                }
                 return JSON.stringify(resArray, null, " ");
             })
             .catch((err)=>{
