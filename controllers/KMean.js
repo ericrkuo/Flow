@@ -25,7 +25,17 @@ class KMean {
         this.meanValueLeniency = 0.001;
         this.centroids = new Array(k);
         this.clusters = new Array(k);
-        this.features = ["danceability", "energy", "loudness", "speechiness", "acousticness", "instrumentalness", "liveness", "valence", "tempo"];
+
+        // this.features = ["danceability", "energy", "loudness", "speechiness", "acousticness", "instrumentalness", "liveness", "valence", "tempo"];
+        // this.features = ["danceability", "energy", "acousticness", "liveness", "valence"];             //4 = 0.4329
+        this.features = ["danceability", "energy", "acousticness", "tempo", "valence"];                //4 = 0.44687119025731736 --good 1/2
+        // this.features = ["danceability", "energy", "acousticness", "tempo", "valence", "loudness"];    //4 = 0.43940590935718105
+        // this.features = ["danceability", "energy", "acousticness", "liveness", "valence", "loudness"]; //4 = 0.43837215588957434
+        // this.features = ["danceability", "energy", "acousticness", "valence"];                         //4 = 0.4638185356683445
+        // this.features = ["danceability", "energy", "tempo", "valence"];                                //4 = 0.4414057733378225 --good 1/2
+        // this.features = ["danceability", "energy", "acousticness", "valence", "loudness"];             //4 = 0.4658607200015974
+        // this.features = ["danceability", "energy", "acousticness", "valence", "liveness"];             //4 = 0.4502874518540036 --good
+
         // this.initializeKRandomCentroids();
         this.initializeKPlusPlusCentroids();
         this.iterations = 0; //TODO: delete later for testing purposes
@@ -117,10 +127,9 @@ class KMean {
         }
         let maxDistance = 0;
         for (let i = 0; i < this.k; i++) {
-            if (this.clusters[i]==null) {
-                // TODO: fix bug if have k-x distinct clusters already, and thus x clusters are empty
-                //  probably in the ERROR area decide later, or actually, maybe just return the clusters already, since they are in distinct clusters
-                console.log();
+            if (this.clusters[i] == null) {
+                console.log("LESS THAN K CLUSTERS - use another k");
+                throw new Error();
             }
             let numTracks = this.clusters[i].length;
             if (numTracks === 0) {
@@ -195,7 +204,7 @@ class KMean {
         for (let s of sArray) {
             silhouetteValue += s;
         }
-        return silhouetteValue/sSize;
+        return silhouetteValue / sSize;
     }
 
     computeAForAllClusters(clusters) {
@@ -250,18 +259,18 @@ class KMean {
         for (let t2 of cluster) {
             sumDistance += this.distance(t1[1], t2[1]);
         }
-        return sumDistance/n;
+        return sumDistance / n;
     }
 
     computeSForAllClusters(clusters) {
-        for(let cluster of clusters) {
+        for (let cluster of clusters) {
             for (let track of cluster) {
                 let a = this.a.get(track[0]);
                 let b = this.b.get(track[0]);
                 if (a === b) {
                     this.s.set(track[0], 0);
                 } else {
-                    this.s.set(track[0], (b-a)/Math.max(a,b));
+                    this.s.set(track[0], (b - a) / Math.max(a, b));
                     // let x = (b-a)/Math.max(a,b);
                     // if (x>1 || x<-1) console.log("UHOH" + track + " - "+x);
                 }
@@ -269,7 +278,31 @@ class KMean {
         }
     }
 
-
+    getOptimalKClusters(data) {
+        // TODO: play around with values of k
+        let k_START = 6;
+        let k_END = 15;
+        let arr = new Map();
+        for (let k = k_START; k <= k_END; k++) {
+            try {
+                let clusters = this.kMean(data, k);
+                let silhouetteValue = this.computeSilhouetteValue(clusters);
+                arr.set(k, [silhouetteValue, clusters]);
+            } catch (e) {
+                arr.set(k, [-Infinity, null]);
+            }
+        }
+        let maxSilhouetteValue = -Infinity;
+        let clusters = null;
+        for (let entry of Array.from(arr.entries())) {
+            console.log(entry[0] + " - " + entry[1][0]);
+            if (entry[1][0] > maxSilhouetteValue) {
+                clusters = entry[1][1];
+                maxSilhouetteValue = entry[1][0];
+            }
+        }
+        return clusters;
+    }
 
 }
 

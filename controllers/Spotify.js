@@ -175,6 +175,7 @@ class Spotify {
             });
     }
 
+    // TODO: refactor so that doesnt depend on function, make it a // REQUIRES that TrackHashMap cannot be empty, or decide something else
     getAllAudioFeatures() {
         return this.addAllTracksToHashMap()
             .then(() => {

@@ -19,7 +19,6 @@ class Main {
 
     // TODO: use other Spotify constructor when doing frontEnd that takes in clients access and refresh token
     constructor(dataURL) {
-        this.k = 9;
         this.dataURL = dataURL;
         this.emotion = new Emotion();
         this.azureFaceAPI = new AzureFaceAPI();
@@ -64,7 +63,7 @@ class Main {
             })
             .then((data) => {
                 data["X"] = songX[1];
-                let clusters = this.kMean.kMean(data, this.k);
+                let clusters = this.kMean.getOptimalKClusters(data);
                 for (let cluster of clusters) {
                     for (let song of cluster) {
                         if (song[0] === "X"){
