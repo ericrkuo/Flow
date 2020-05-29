@@ -208,8 +208,6 @@ class Emotion {
         });
         this.spotifyApi.setAccessToken(process.env.ACCESS_TOKEN);
         // this.spotifyApi.setRefreshToken(process.env.REFRESH_TOKEN);
-        this.emotionHashMap = new Map();
-        this.emotions = ["anger", "contempt", "disgust", "fear", "happiness", "neutral", "sadness", "surprise"];
         this.features = ["danceability", "energy", "loudness", "speechiness", "acousticness", "instrumentalness", "liveness", "valence", "tempo"];
     }
 
@@ -243,32 +241,34 @@ class Emotion {
     }
 
 
-    async getDominantExpression(emotionsData) {
+    getDominantExpression(emotionsData) {
+        let emotionHashMap = new Map();
+        let emotions = ["anger", "contempt", "disgust", "fear", "happiness", "neutral", "sadness", "surprise"];
 
-        console.log(emotionsData[0][faceAttributes]);
+        let emotionData = emotionsData[0]["faceAttributes"]["emotion"];
         //     let emotionDataString = emotionsData.toString();
         //     let endOfEmotionBracket = emotionDataString.indexOf("}");
         //     let emotionJSONString = emotionDataString.substring(0, endOfEmotionBracket + 1);
         //     let emotionsDataJSON = JSON.parse('{"' + emotionJSONString + '}');
         //
-        //     for(let i=0; i < this.emotions.length; i++) {
-        //         let currEmotion = this.emotions[i];
-        //         let currEmotionVal = emotionsDataJSON["emotion"][currEmotion];
-        //         this.emotionHashMap.set(currEmotion, currEmotionVal);
-        //     }
-        //
-        //     let dominantEmotion = null;
-        //     let dominantEmotionValue = -1;
-        //
-        //     for (const [key, value] of this.emotionHashMap.entries()) {
-        //
-        //         if(value > dominantEmotionValue) {
-        //             dominantEmotion = key;
-        //             dominantEmotionValue = value;
-        //         }
-        //     }
-        //
-        // }
+            for(let i=0; i < emotions.length; i++) {
+                let currEmotion = emotions[i];
+                let currEmotionVal = emotionData[currEmotion];
+                emotionHashMap.set(currEmotion, currEmotionVal);
+            }
+
+            let dominantEmotion = null;
+            let dominantEmotionValue = -1;
+
+            for (const [key, value] of emotionHashMap.entries()) {
+
+                if(value > dominantEmotionValue) {
+                    dominantEmotion = key;
+                    dominantEmotionValue = value;
+                }
+            }
+
+            return dominantEmotion;
 
 
     }

@@ -1,6 +1,8 @@
 var chai = require("chai");
 const request = require('request');
+const {AzureFaceAPI} = require("../controllers/AzureFaceAPI");
 const {Emotion} = require("../controllers/Emotion");
+const sampleDataURL = require("./sampleDataURL");
 
 let emotion;
 describe("unit test for Spotify", function () {
@@ -17,8 +19,7 @@ describe("unit test for Spotify", function () {
     it("testing in general", async function () {
         let azureFaceAPI = new AzureFaceAPI();
         return azureFaceAPI.getEmotions(sampleDataURL.dataURL2).then((res) => {
-            emotion.getDominantExpression(res);
-            chai.assert(true);
+            console.log(emotion.getDominantExpression(res));
         }).catch((err) => {
             chai.expect.fail("not supposed to fail");
         })
