@@ -39,7 +39,7 @@ class Spotify {
         promises.push(this.addSeedTracks());
         promises.push(this.addTopArtistsTracks());
         return Promise.all(promises)
-            .then((res)=> {
+            .then((res) => {
                 let x = this.trackHashMap;
                 console.log("SUCCESS - added all tracks to hashmap")
             })
@@ -175,6 +175,7 @@ class Spotify {
             });
     }
 
+    // TODO: refactor so that doesnt depend on function, make it a // REQUIRES that TrackHashMap cannot be empty, or decide something else
     getAllAudioFeatures() {
         return this.addAllTracksToHashMap()
             .then(() => {
@@ -223,10 +224,10 @@ class Spotify {
 
     getAudioFeatures(tracks) {
         return this.spotifyApi.getAudioFeaturesForTracks(tracks)
-            .then((res)=> {
+            .then((res) => {
                 return res;
             })
-            .catch((err)=> {
+            .catch((err) => {
                 console.log("COULD NOT GET AUDIO FEATURES");
                 throw err;
             });
@@ -243,28 +244,46 @@ class Spotify {
     * */
     addSeedTracks() {
         let promises = [];
-        let optionsArray = [{limit: 100, seed_genres: "sad"},
-            {limit: 100, seed_genres: "chill, ambient"},
-            {limit: 100, seed_genres: "happy"}
-            // TODO: add helper method for getting 5 artists [ID1, ID2, ID3] and same for tracks
-            ];
+        // let optionsArray = [
+        //     {limit: 100, seed_genres: "sad"},
+        //     // {limit: 100, seed_genres: "chill, ambient"},
+        //     {limit: 100, seed_genres: "happy"}, //TODO: put in min_energy, min_tempo, add more happy genres
+        //     {limit: 100, seed_genres: "chill"}
+        //     // TODO: add helper method for getting 5 artists [ID1, ID2, ID3] and same for tracks
+        // ];
 
+        // TODO: can remove the array if don't want multiple options
+        // TODO: fill out rest of arrays
+        let emotionToSeed = {
+            anger: [{limit: 100, seed_genres: "hardcore, heavy-metal, hard-rock", max_valence: 0.15}],
+            contempt: [],
+            disgust: [],
+            fear: [],
+            happiness: [{limit: 100, seed_genres: "happy, hip-hop, r-n-b, summer", min_energy: 0.7, min_valence: 0.9}],
+            neutral: [{limit: 100, seed_genres: "chill, sleep", target_valence: 0.5}],
+            sadness: [{limit: 100, seed_genres: "sad", max_energy: 0.3, max_valence: 0.3}],
+            surprise: [{limit: 100, seed_genres: "happy, hip-hop, r-n-b, summer", min_energy: 0.7, min_valence: 0.9}] // same as happiness
+        };
+
+        if (this.mood === undefined) this.mood = "happiness"; //default mood
+        let optionsArray = emotionToSeed[this.mood];
         for (let option of optionsArray) {
             promises.push(this.spotifyApi.getRecommendations(option));
         }
         return Promise.all(promises)
-            .then((resArray)=> {
+            .then((resArray) => {
                 for (let res of resArray) {
                     let tracks = res.body.tracks;
                     this.addTracksToHashMap(tracks);
                 }
-                // let y = [];
-                // for (let entry of Array.from(this.trackHashMap.entries())) {
-                //     y.push(entry[0]);
-                // }
+                // TODO: comment out
+                let y = [];
+                for (let entry of Array.from(this.trackHashMap.entries())) {
+                    y.push(entry[0]);
+                }
                 return JSON.stringify(resArray, null, " ");
             })
-            .catch((err)=>{
+            .catch((err) => {
                 console.log(err);
                 throw err;
             })

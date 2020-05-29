@@ -19,7 +19,6 @@ class Main {
 
     // TODO: use other Spotify constructor when doing frontEnd that takes in clients access and refresh token
     constructor(dataURL) {
-        this.k = 9;
         this.dataURL = dataURL;
         this.emotion = new Emotion();
         this.azureFaceAPI = new AzureFaceAPI();
@@ -33,6 +32,7 @@ class Main {
             .then((res) => {
                 // TODO: let dominantEmotion = this.emotion.getDominantEmotion(res);
                 let dominantEmotion = "sadness";
+                this.spotify.mood = dominantEmotion;
                 return this.emotion.getFeatures(dominantEmotion);
             })
             .then((feature) => {
@@ -56,15 +56,16 @@ class Main {
 
     getRelevantSongsTestingPurposes() {
         let songX;
-        let dominantEmotion = "sadness";
+        let dominantEmotion = "happiness";
         return this.emotion.getFeatures(dominantEmotion)
             .then((feature) => {
                 songX = ["X", feature];
+                this.spotify.mood = dominantEmotion;
                 return this.spotify.getAllAudioFeatures();
             })
             .then((data) => {
                 data["X"] = songX[1];
-                let clusters = this.kMean.kMean(data, this.k);
+                let clusters = this.kMean.getOptimalKClusters(data);
                 for (let cluster of clusters) {
                     for (let song of cluster) {
                         if (song[0] === "X"){

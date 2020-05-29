@@ -1,6 +1,6 @@
 var chai = require("chai");
 const request = require('request');
-const {songs, songsClearCluster} = require("./sampleSpotifyAudioFeatures");
+const {songs, songsClearCluster, songsLargeClearCluster} = require("./sampleSpotifyAudioFeatures");
 const {KMean} = require("../controllers/KMean");
 
 var spotify;
@@ -55,6 +55,22 @@ describe("unit test for KMeans", function () {
         }
     });
 
-    // TODO: come up with a dataset with distinct clusters (5 songs w danceability 0.5, 6 songs w energy 0.8 etc) and see the silhouette value
-    // TODO: try to see if removing some features help
+    it("find optimum silhouette value with larger clear clustered data", function(){
+        let kStart = 2;
+        let kEnd = 8;
+        let arr = new Map();
+        for (let k = kStart; k<=kEnd; k++){
+            let x = songsLargeClearCluster;
+            let clusters = kMean.kMean(songsLargeClearCluster, k);
+            chai.expect(clusters.length).to.be.equal(k);
+            let silhouetteValue = kMean.computeSilhouetteValue(clusters);
+            chai.assert((silhouetteValue<=1) && (silhouetteValue>=-1));
+            arr.set(k + " = " + silhouetteValue, clusters);
+        }
+    });
+
+    it("test getOptimalKClusters", function(){
+        let clusters = kMean.getOptimalKClusters(songsLargeClearCluster);
+    });
+
 });

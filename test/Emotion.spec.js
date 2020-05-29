@@ -1,8 +1,6 @@
 var chai = require("chai");
 const request = require('request');
 const {Emotion} = require("../controllers/Emotion");
-var sampleDataURL = require("./sampleDataURL");
-const {AzureFaceAPI} = require("../controllers/AzureFaceAPI");
 
 let emotion;
 describe("unit test for Spotify", function () {
@@ -24,6 +22,13 @@ describe("unit test for Spotify", function () {
         }).catch((err) => {
             chai.expect.fail("not supposed to fail");
         });
+
+    it("test emotions", async function () {
+        let emotions = ["happiness" , "sadness", "neutral"];
+        for (let e of emotions) {
+            let features = await emotion.getFeatures(e);
+            console.log(features);
+        }
     });
 
 
