@@ -242,35 +242,25 @@ class Emotion {
 
 
     getDominantExpression(emotionsData) {
-        let emotionHashMap = new Map();
         let emotions = ["anger", "contempt", "disgust", "fear", "happiness", "neutral", "sadness", "surprise"];
 
         let emotionData = emotionsData[0]["faceAttributes"]["emotion"];
-        //     let emotionDataString = emotionsData.toString();
-        //     let endOfEmotionBracket = emotionDataString.indexOf("}");
-        //     let emotionJSONString = emotionDataString.substring(0, endOfEmotionBracket + 1);
-        //     let emotionsDataJSON = JSON.parse('{"' + emotionJSONString + '}');
-        //
-            for(let i=0; i < emotions.length; i++) {
-                let currEmotion = emotions[i];
-                let currEmotionVal = emotionData[currEmotion];
-                emotionHashMap.set(currEmotion, currEmotionVal);
+
+        let dominantEmotion = null;
+        let dominantEmotionValue = -1;
+
+        for (let i = 0; i < emotions.length; i++) {
+            let currEmotion = emotions[i];
+            let currEmotionValue = emotionData[currEmotion];
+
+            if (currEmotionValue > dominantEmotionValue) {
+                dominantEmotion = currEmotion;
+                dominantEmotionValue = currEmotionValue;
             }
 
-            let dominantEmotion = null;
-            let dominantEmotionValue = -1;
+        }
 
-            for (const [key, value] of emotionHashMap.entries()) {
-
-                if(value > dominantEmotionValue) {
-                    dominantEmotion = key;
-                    dominantEmotionValue = value;
-                }
-            }
-
-            return dominantEmotion;
-
-
+        return dominantEmotion;
     }
 }
 
