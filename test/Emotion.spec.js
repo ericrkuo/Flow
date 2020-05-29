@@ -16,12 +16,13 @@ describe("unit test for Spotify", function () {
 
     it("testing in general", async function () {
         let azureFaceAPI = new AzureFaceAPI();
-        return azureFaceAPI.getEmotions(sampleDataURL.dataURL2).then((res)=>{
+        return azureFaceAPI.getEmotions(sampleDataURL.dataURL2).then((res) => {
             emotion.getDominantExpression(res);
             chai.assert(true);
         }).catch((err) => {
             chai.expect.fail("not supposed to fail");
-        });
+        })
+    });
 
     it("test emotions", async function () {
         let emotions = ["happiness" , "sadness", "neutral"];
@@ -30,6 +31,5 @@ describe("unit test for Spotify", function () {
             console.log(features);
         }
     });
-
 
 });
