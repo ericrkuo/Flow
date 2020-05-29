@@ -294,7 +294,7 @@ class KMean {
         }
         let maxSilhouetteValue = -Infinity;
         let clusters = null;
-        for (let entry of Array.from(arr.entries())) {
+        for (let entry of arr.entries()) {
             console.log(entry[0] + " - " + entry[1][0]);
             if (entry[1][0] > maxSilhouetteValue) {
                 clusters = entry[1][1];

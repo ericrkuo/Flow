@@ -32,6 +32,7 @@ class Main {
             .then((res) => {
                 // TODO: let dominantEmotion = this.emotion.getDominantEmotion(res);
                 let dominantEmotion = "sadness";
+                this.spotify.mood = dominantEmotion;
                 return this.emotion.getFeatures(dominantEmotion);
             })
             .then((feature) => {
@@ -59,6 +60,7 @@ class Main {
         return this.emotion.getFeatures(dominantEmotion)
             .then((feature) => {
                 songX = ["X", feature];
+                this.spotify.mood = dominantEmotion;
                 return this.spotify.getAllAudioFeatures();
             })
             .then((data) => {

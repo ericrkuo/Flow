@@ -68,7 +68,7 @@ describe("unit test for Spotify", function () {
     it("get all sample data audio features", async function() {
         return spotify.getAllAudioFeatures()
             .then((res)=> {
-                console.log(json);
+                console.log(res);
             })
             .catch((err)=> {
                 console.log("ERROR");
@@ -78,9 +78,12 @@ describe("unit test for Spotify", function () {
     });
 
     it("get seed data", async function() {
+        spotify.mood = "happiness";
         return spotify.addSeedTracks()
             .then((res)=> {
-                console.log(res);
+                for (let track of spotify.trackHashMap.values()) {
+                    console.log(track.name);
+                }
             })
             .catch((err)=> {
                 console.log("ERROR");
