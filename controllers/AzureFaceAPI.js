@@ -3,16 +3,18 @@ const request = require("request");
 class AzureFaceAPI {
 
     getEmotions(dataURI) {
+        let emotionString;
         const subscriptionKey = process.env.AZUREKEY;
-        // const uriBase = 'https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect';
         const uriBase = 'https://flowapi.cognitiveservices.azure.com/face/v1.0/detect';
 
         // Request parameters.
         const params = {
             'returnFaceId': 'true',
             'returnFaceLandmarks': 'false',
-            'returnFaceAttributes': 'age,gender,headPose,smile,facialHair,glasses,' +
-                'emotion,hair,makeup,occlusion,accessories,blur,exposure,noise'
+            'returnFaceAttributes': 'age,gender,smile,' +
+                'emotion'
+            // 'returnFaceAttributes': 'age,gender,headPose,smile,facialHair,glasses,' +
+            //     'emotion,hair,makeup,occlusion,accessories,blur,exposure,noise'
         };
 
         const options = {
@@ -32,8 +34,11 @@ class AzureFaceAPI {
                 }
 
                 let json = JSON.parse(body);
-                console.log(JSON.stringify(json, null, " "));
+                let jsonResult = JSON.stringify(json, null, " ");
+                // let indexOfEmotions = jsonResult.indexOf("emotion");
+                // let emotionString = jsonResult.substr(indexOfEmotions, jsonResult.length);
                 fullfill(json);
+
             });
         });
 
@@ -52,6 +57,7 @@ class AzureFaceAPI {
         }
         return array;
     }
+
 
 }
 

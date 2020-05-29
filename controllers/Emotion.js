@@ -2,6 +2,19 @@ const SpotifyWebApi = require('spotify-web-api-node');
 
 class Emotion {
 
+    /* PLAN: Find the emotion with largest value possible.
+    * -> (MATCHING OR OPPOSITE) ANGER plays aggressive, harsh music or neutral's
+    * -> CONTEMPT plays ???
+    * -> DISGUST plays ???
+    * -> (OPPOSITE) FEAR plays calm, ambient music
+    * -> (MATCHING OR OPPOSITE) HAPPY plays happy music or sad's
+    * -> (MATCHING OR OPPOSITE) NEUTRAL plays calm, ambient music or anger's
+    * -> (MATCHING OR OPPOSITE) SADNESS plays sad music or happy's
+    * -> SURPRISE plays ???
+    *
+    *
+    * */
+
     emotionMap = {
         anger: [],
         contempt: [],
@@ -23,6 +36,8 @@ class Emotion {
         });
         this.spotifyApi.setAccessToken(process.env.ACCESS_TOKEN);
         // this.spotifyApi.setRefreshToken(process.env.REFRESH_TOKEN);
+        this.emotionHashMap = new Map();
+        this.emotions = ["anger", "contempt", "disgust", "fear", "happiness", "neutral", "sadness", "surprise"];
         this.features = ["danceability", "energy", "loudness", "speechiness", "acousticness", "instrumentalness", "liveness", "valence", "tempo"];
     }
 
@@ -56,6 +71,35 @@ class Emotion {
     }
 
 
+    async getDominantExpression(emotionsData) {
+
+        console.log(emotionsData[0][faceAttributes]);
+        //     let emotionDataString = emotionsData.toString();
+        //     let endOfEmotionBracket = emotionDataString.indexOf("}");
+        //     let emotionJSONString = emotionDataString.substring(0, endOfEmotionBracket + 1);
+        //     let emotionsDataJSON = JSON.parse('{"' + emotionJSONString + '}');
+        //
+        //     for(let i=0; i < this.emotions.length; i++) {
+        //         let currEmotion = this.emotions[i];
+        //         let currEmotionVal = emotionsDataJSON["emotion"][currEmotion];
+        //         this.emotionHashMap.set(currEmotion, currEmotionVal);
+        //     }
+        //
+        //     let dominantEmotion = null;
+        //     let dominantEmotionValue = -1;
+        //
+        //     for (const [key, value] of this.emotionHashMap.entries()) {
+        //
+        //         if(value > dominantEmotionValue) {
+        //             dominantEmotion = key;
+        //             dominantEmotionValue = value;
+        //         }
+        //     }
+        //
+        // }
+
+
+    }
 }
 
 module.exports.Emotion = Emotion;
