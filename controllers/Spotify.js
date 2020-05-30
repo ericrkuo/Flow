@@ -3,11 +3,11 @@ const SpotifyWebApi = require('spotify-web-api-node');
 class Spotify {
 
     /*
-    * addRecentlyPlayedTracks()
-    * addTopTracks()
-    * addSavedTracks()
-    * addTopArtistTracks()
-    * addSeedTracks()
+    * addRecentlyPlayedTracks()  - 50
+    * addTopTracks()             - 100
+    * addSavedTracks()           - 150
+    * addTopArtistTracks()       - 200
+    * addSeedTracks()            - 100
     * addAllTracksToHashMap()
     * getAllAudioFeatures() - adds all tracks to hashmap and gets all the audio features
     * */
@@ -40,8 +40,8 @@ class Spotify {
         promises.push(this.addTopArtistsTracks());
         return Promise.all(promises)
             .then((res) => {
-                let x = this.trackHashMap;
-                console.log("SUCCESS - added all tracks to hashmap")
+                console.log("SUCCESS - added all " + this.trackHashMap.size + " tracks to hashmap")
+                return true;
             })
             .catch((err) => {
                 console.log("ERROR" - err);
@@ -50,13 +50,11 @@ class Spotify {
     }
 
     // get recent history objects
-    // TODO: can get maybe like 250, each time changing index by 50 if dataSet of artists not enough
     addRecentlyPlayedTracks() {
         return this.spotifyApi.getMyRecentlyPlayedTracks({limit: 50})
             .then((res) => {
                 this.addHistoryObjectTracksToHashMap(res.body.items);
-                let x = this.trackHashMap;
-                return JSON.stringify(res.body.items, null, '  ');
+                return true;
             })
             .catch((err) => {
                 console.log(err);
@@ -75,13 +73,18 @@ class Spotify {
         }
     }
 
-    // TODO: can get maybe like 250, each time changing index by 50 if dataSet of artists not enough
     addTopTracks() {
-        return this.spotifyApi.getMyTopTracks({limit: 50})
-            .then((res) => {
-                this.addTracksToHashMap(res.body.items);
-                let x = this.trackHashMap;
-                return JSON.stringify(res.body.items, null, '  ');
+        let options = [{limit: 50}, {limit: 50, offset: 49}];
+        let promises = [];
+        for (let option of options) {
+            promises.push(this.spotifyApi.getMyTopTracks(option));
+        }
+        return Promise.all(promises)
+            .then((topTracksArray) => {
+                for (let topTracks of topTracksArray) {
+                    this.addTracksToHashMap(topTracks.body.items);
+                }
+                return true;
             })
             .catch((err) => {
                 console.log(err);
@@ -100,16 +103,20 @@ class Spotify {
         }
     }
 
-    // TODO: has offest, so can get more than 50 possibly
-    // TODO: handle cases of no saved tracks
     addSavedTracks() {
-        return this.spotifyApi.getMySavedTracks({limit: 50})
-            .then((res) => {
-                let arr = [];
-                for (let item of res.body.items) arr.push(item.track);
-                this.addTracksToHashMap(arr);
-                let x = this.trackHashMap;
-                return JSON.stringify(arr, null, ' ');
+        let options = [{limit: 50}, {limit: 50, offset: 50}, {limit: 50, offset: 100}];
+        let promises = [];
+        for (let option of options) {
+            promises.push(this.spotifyApi.getMySavedTracks(option));
+        }
+        return Promise.all(promises)
+            .then((savedTracksArray) => {
+                for (let savedTracks of savedTracksArray) {
+                    let arr = [];
+                    for (let item of savedTracks.body.items) arr.push(item.track);
+                    this.addTracksToHashMap(arr);
+                }
+                return true;
             }).catch((err) => {
                 console.log(err);
                 throw err;
@@ -120,7 +127,7 @@ class Spotify {
         let promises = [];
         let topArtists;
 
-        return this.spotifyApi.getMyTopArtists({limit: 50, time_range: "long_term"})
+        return this.spotifyApi.getMyTopArtists({limit: 20, time_range: "long_term"})
             .then((res) => {
                 topArtists = res.body.items;
                 for (let topArtist of topArtists) {
@@ -134,8 +141,7 @@ class Spotify {
                 //     // }
                 //     return Promise.all(promises);
             }).then((res) => {
-                let x = this.trackHashMap;
-                console.log("HERE");
+                return true;
             })
             .catch((err) => {
                 console.log(err);
@@ -259,10 +265,10 @@ class Spotify {
             contempt: [],
             disgust: [],
             fear: [],
-            happiness: [{limit: 100, seed_genres: "happy, hip-hop, r-n-b, summer", min_energy: 0.7, min_valence: 0.9}],
+            happiness: [{limit: 100, seed_genres: "happy, hip-hop, r-n-b, summer", min_energy: 0.8, min_valence: 0.8}],
             neutral: [{limit: 100, seed_genres: "chill, sleep", target_valence: 0.5}],
             sadness: [{limit: 100, seed_genres: "sad", max_energy: 0.3, max_valence: 0.3}],
-            surprise: [{limit: 100, seed_genres: "happy, hip-hop, r-n-b, summer", min_energy: 0.7, min_valence: 0.9}] // same as happiness
+            surprise: [{limit: 100, seed_genres: "happy, hip-hop, r-n-b, summer", min_energy: 0.8, min_valence: 0.8}] // same as happiness
         };
 
         if (this.mood === undefined) this.mood = "happiness"; //default mood
@@ -277,11 +283,11 @@ class Spotify {
                     this.addTracksToHashMap(tracks);
                 }
                 // TODO: comment out
-                let y = [];
-                for (let entry of Array.from(this.trackHashMap.entries())) {
-                    y.push(entry[0]);
-                }
-                return JSON.stringify(resArray, null, " ");
+                // let y = [];
+                // for (let entry of Array.from(this.trackHashMap.entries())) {
+                //     y.push(entry[0]);
+                // }
+                return true;
             })
             .catch((err) => {
                 console.log(err);

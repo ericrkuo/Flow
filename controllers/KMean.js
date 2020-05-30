@@ -18,7 +18,6 @@ class KMean {
     * 4. if centroids shifted, redo steps, otherwise return clusters
     * */
 
-    // TODO: add max iterations for safety
     kMean(data, k) {
         this.data = Object.entries(data); // [ [id1, {f1, f2, ...}], [id2, {f1, f2, ...}], ...]
         this.k = k;
@@ -38,7 +37,8 @@ class KMean {
 
         // this.initializeKRandomCentroids();
         this.initializeKPlusPlusCentroids();
-        this.iterations = 0; //TODO: delete later for testing purposes
+        this.iterations = 0;
+        this.MAX_ITERATIONS = 15;
         this.iterate();
         return this.clusters;
     }
@@ -102,6 +102,10 @@ class KMean {
     }
 
     iterate() {
+        if (this.iterations > this.MAX_ITERATIONS) {
+            console.log("kMean - too many iterations");
+            throw new Error();
+        }
         this.clusters = new Array(this.k);
         let numFeatures = this.features.length;
         let vecArray = []; // vecArray[i] corresponds to cluster[i] and the sum of all the features
@@ -128,13 +132,13 @@ class KMean {
         let maxDistance = 0;
         for (let i = 0; i < this.k; i++) {
             if (this.clusters[i] == null) {
-                console.log("LESS THAN K CLUSTERS - use another k");
+                console.log("kMean -LESS THAN K CLUSTERS, use another k");
                 throw new Error();
             }
             let numTracks = this.clusters[i].length;
             if (numTracks === 0) {
-                console.log("ZERO TRACKS IN CLUSTER");
-                // TODO: handle ERROR BETTER
+                console.log("kMean - ZERO TRACKS IN CLUSTER");
+                throw new Error();
             }
             // calculate the mean
             for (let feature of this.features) {
@@ -147,14 +151,14 @@ class KMean {
 
         // if true, then means centroids did not shift
         if (maxDistance <= this.meanValueLeniency) {
-            // console.log(this.iterations); // TODO: delete later
+            console.log("kMean num iterations = " + this.iterations);
             return;
         }
 
         for (let i = 0; i < this.k; i++) {
             this.centroids[i] = vecArray[i];
         }
-        this.iterations = this.iterations + 1; // TODO: delete later
+        this.iterations = this.iterations + 1;
         this.iterate();
     }
 
@@ -279,22 +283,22 @@ class KMean {
     }
 
     getOptimalKClusters(data) {
-        // TODO: play around with values of k
         let k_START = 6;
         let k_END = 15;
-        let arr = new Map();
+        let map = new Map();
+        // used a map for easier debugging
         for (let k = k_START; k <= k_END; k++) {
             try {
                 let clusters = this.kMean(data, k);
                 let silhouetteValue = this.computeSilhouetteValue(clusters);
-                arr.set(k, [silhouetteValue, clusters]);
+                map.set(k, [silhouetteValue, clusters]);
             } catch (e) {
-                arr.set(k, [-Infinity, null]);
+                map.set(k, [-Infinity, null]);
             }
         }
         let maxSilhouetteValue = -Infinity;
         let clusters = null;
-        for (let entry of arr.entries()) {
+        for (let entry of map.entries()) {
             console.log(entry[0] + " - " + entry[1][0]);
             if (entry[1][0] > maxSilhouetteValue) {
                 clusters = entry[1][1];

@@ -30,15 +30,14 @@ class Main {
         let songX;
         return this.azureFaceAPI.getEmotions(this.dataURL)
             .then((res) => {
-                // TODO: let dominantEmotion = this.emotion.getDominantEmotion(res);
-                let dominantEmotion = "sadness";
+                let dominantEmotion = this.emotion.getDominantExpression(res);
                 this.spotify.mood = dominantEmotion;
                 return this.emotion.getFeatures(dominantEmotion);
             })
             .then((feature) => {
                 songX = ["X", feature];
                 this.spotify.trackHashMap.set("X", feature);
-                return this.spotify.addAllTracksToHashMap();
+                return this.spotify.getAllAudioFeatures();
             })
             .then(() => {
                 let clusters = this.kMean.kMean(this.spotify.trackHashMap, this.k);
@@ -56,7 +55,7 @@ class Main {
 
     getRelevantSongsTestingPurposes() {
         let songX;
-        let dominantEmotion = "happiness";
+        let dominantEmotion = "sadness";
         return this.emotion.getFeatures(dominantEmotion)
             .then((feature) => {
                 songX = ["X", feature];
