@@ -87,7 +87,8 @@ describe("unit test for KMeans", function () {
 
     it("test getOptimalKClusters", function () {
         try {
-            let clusters = kMean.getOptimalKClusters(songsLargeClearCluster);
+            let [bestK, clusters, map] = kMean.getOptimalKClusters(songsLargeClearCluster);
+            console.log();
         } catch (err) {
             chai.expect.fail();
         }

@@ -40,7 +40,7 @@ class Main {
                 return this.spotify.getAllAudioFeatures();
             })
             .then(() => {
-                let clusters = this.kMean.kMean(this.spotify.trackHashMap, this.k);
+                let [bestK, clusters, map] = this.kMean.kMean(this.spotify.trackHashMap, this.k);
                 for (let cluster of clusters) {
                     if (cluster.contains(songX)) {
                         this.printOutAllSongTitles(cluster);
@@ -64,15 +64,11 @@ class Main {
             })
             .then((data) => {
                 data["X"] = songX[1];
-                let clusters = this.kMean.getOptimalKClusters(data);
-                for (let cluster of clusters) {
-                    for (let song of cluster) {
-                        if (song[0] === "X"){
-                            this.printOutAllSongTitles(cluster);
-                            break;
-                        }
-                    }
-                }
+                let [bestK, clusters, map] = this.kMean.getOptimalKClusters(data);
+                let arrayOfSongIDS = this.getSongIDsOfClusterContainingSongX(clusters);
+                this.printOutAllSongTitles(arrayOfSongIDS);
+                let newArrayOfSongIDS = this.getDesiredNumberSongs(bestK, arrayOfSongIDS, map);
+                console.log();
             })
             .catch((err) => {
                 console.log(err);
@@ -80,10 +76,67 @@ class Main {
             })
     }
 
+    // returns an array of songIDs for the cluster that contains songX
+    getSongIDsOfClusterContainingSongX(clusters) {
+        for (let cluster of clusters) {
+            for (let song of cluster) {
+                if (song[0] === "X") {
+                    return this.getSongIDSFromCluster(cluster);
+                }
+            }
+        }
+    }
+
+    getSongIDSFromCluster(cluster) {
+        let arr = [];
+        for (let song of cluster) {
+            if (song[0] !== "X") arr.push(song[0]);
+        }
+        return arr;
+    }
+
+    getDesiredNumberSongs(bestK, arrayOfSongIDS, map) {
+        let DESIRED_NUM_SONGS = 30;
+        let n = arrayOfSongIDS.length;
+        console.log("ORIGINAL NUMBER OF SONGS: " + n);
+
+        if (n >= DESIRED_NUM_SONGS) {
+            return arrayOfSongIDS.slice(0, DESIRED_NUM_SONGS);
+        } else {
+            // sorted map based on Silhouette value
+            let sortedMap = Array.from(map.entries()).sort((x, y) => {
+                if (x[1][0] < y[1][0]) return 1;
+                if (x[1][0] > y[1][0]) return -1;
+                return 0;
+            });
+            let set = new Set();
+            for (let id of arrayOfSongIDS) {
+                if (id !== "X") {
+                    set.add(id);
+                }
+            }
+            // for each entry of the map, add in the song IDs to the set until set reaches DESIRED_NUM_SONGS or iterated through entire map array
+            for (let entry of sortedMap) {
+                if (entry[0] !== bestK) {
+                    let clusters = entry[1][1];
+                    let cluster = this.getSongIDsOfClusterContainingSongX(clusters);
+                    for (let id of cluster) {
+                        if (id !== "X") {
+                            set.add(id);
+                        }
+                    }
+                    if (set.size >= DESIRED_NUM_SONGS) return Array.from(set.values()).slice(0, DESIRED_NUM_SONGS);
+                }
+            }
+            // IF still doesn't have DESIRED_NUM_SONGS, just return as much as we can
+            return Array.from(set.values()).slice(0, DESIRED_NUM_SONGS);
+        }
+    }
+
     printOutAllSongTitles(cluster) {
         for (let song of cluster) {
-            if (song[0] !== "X") {
-                console.log(this.spotify.trackHashMap.get(song[0]).name);
+            if (song !== "X") {
+                console.log(this.spotify.trackHashMap.get(song).name);
             }
         }
     }

@@ -36,7 +36,8 @@ class KMean {
         // this.features = ["danceability", "energy", "acousticness", "valence", "liveness"];             //4 = 0.4502874518540036 --good
 
         // this.initializeKRandomCentroids();
-        this.initializeKPlusPlusCentroids();
+        // this.initializeKPlusPlusCentroids();
+        this.initializeKPlusPlusCentroidsOptimized();
         this.iterations = 0;
         this.MAX_ITERATIONS = 15;
         this.iterate();
@@ -66,7 +67,7 @@ class KMean {
     * 3. choose the next centroid as the data vector that has the largest min distance (furthest from all centroids)
     * */
 
-    // K Means++ method
+    // K Means++ method - O(k^2 * n) - bad
     initializeKPlusPlusCentroids() {
         let n = this.data.length;
 
@@ -99,6 +100,34 @@ class KMean {
             this.centroids[currCentroid] = furthestCentroid[1];
         }
 
+    }
+
+    // K Means++ method - O(k * n) - good
+    initializeKPlusPlusCentroidsOptimized() {
+        let n = this.data.length;
+        let minDistanceMap = new Map();
+        let randomIndex = Math.floor(Math.random() * (n - 1)) + 1;
+        this.centroids[0] = this.data[randomIndex][1];
+
+        for (let currCentroid = 1; currCentroid < this.k; currCentroid++) {
+            let maxDistance = -Infinity;
+            let furthestCentroid;
+            // update the mindDistance with last centroid, and also keep track of furthest centroid so far
+            for (let track = 0; track < n; track++) {
+                let trackID = this.data[track][0];
+                let tempDistance = this.distance(this.centroids[currCentroid - 1], this.data[track][1]);
+                if (!minDistanceMap.has(trackID) || minDistanceMap.get(trackID) > tempDistance) {
+                    minDistanceMap.set(trackID, tempDistance);
+                }
+                let dist = minDistanceMap.get(trackID);
+                if (dist > maxDistance) {
+                    maxDistance = dist;
+                    furthestCentroid = this.data[track][1];
+                }
+            }
+            // console.log(maxDistance);
+            this.centroids[currCentroid] = furthestCentroid;
+        }
     }
 
     iterate() {
@@ -282,6 +311,8 @@ class KMean {
         }
     }
 
+    // returns bestK, clusters of the bestK, and map of different k's, SV's and clusters
+    // map = {k: [SV, clusters]}
     getOptimalKClusters(data) {
         let k_START = 6;
         let k_END = 15;
@@ -298,14 +329,16 @@ class KMean {
         }
         let maxSilhouetteValue = -Infinity;
         let clusters = null;
+        let bestK = null;
         for (let entry of map.entries()) {
             console.log(entry[0] + " - " + entry[1][0]);
             if (entry[1][0] > maxSilhouetteValue) {
+                bestK = entry[0];
                 clusters = entry[1][1];
                 maxSilhouetteValue = entry[1][0];
             }
         }
-        return clusters;
+        return [bestK, clusters, map];
     }
 
 }

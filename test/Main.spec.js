@@ -11,6 +11,6 @@ describe("unit test for Main", function () {
 
     it("testing Main function", async function(){
         let resp = await main.getRelevantSongsTestingPurposes();
-    })
+    });
 
 });
