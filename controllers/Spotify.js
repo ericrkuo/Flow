@@ -263,14 +263,14 @@ class Spotify {
         // TODO: can remove the array if don't want multiple options
         // TODO: fill out rest of arrays
         let emotionToSeed = {
-            anger: [{limit: 100, seed_genres: "hardcore, heavy-metal, hard-rock", max_valence: 0.15}],
-            contempt: [],
-            disgust: [],
-            fear: [],
-            happiness: [{limit: 100, seed_genres: "happy, hip-hop, r-n-b, summer", min_energy: 0.8, min_valence: 0.8}],
-            neutral: [{limit: 100, seed_genres: "chill, sleep", target_valence: 0.5}],
-            sadness: [{limit: 100, seed_genres: "sad", max_energy: 0.3, max_valence: 0.3}],
-            surprise: [{limit: 100, seed_genres: "happy, hip-hop, r-n-b, summer", min_energy: 0.8, min_valence: 0.8}] // same as happiness
+            anger: [{limit: 100, seed_genres: "hardcore, heavy-metal, death-metal, hard-rock", max_valence: 0.15}],
+            contempt: [], // described as combo of disgust + anger
+            disgust: [{limit: 100, seed_genres: "metal, metal-misc, metalcore", max_valence: 0.15}],
+            fear: [{limit: 100, seed_genres: "chill, sleep, acoustic, ambient", target_valence: 0.5}], // same as neutral
+            happiness: [{limit: 100, seed_genres: "happy, hip-hop, summer, pop, party", min_energy: 0.8, min_valence: 0.8}],
+            neutral: [{limit: 100, seed_genres: "chill, sleep, acoustic, ambient", target_valence: 0.5}],
+            sadness: [{limit: 100, seed_genres: "sad, blues, rainy-day, r-n-b", max_energy: 0.3, max_valence: 0.3}],
+            surprise: [{limit: 100, seed_genres: "hardstyle, work-out, edm, party", min_energy: 0.8, min_valence: 0.8}]
         };
 
         if (this.mood === undefined) this.mood = "happiness"; //default mood
