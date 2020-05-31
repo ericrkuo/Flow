@@ -8,6 +8,7 @@ class Spotify {
     * addSavedTracks()           - 150
     * addTopArtistTracks()       - 200
     * addSeedTracks()            - 100
+    * addUserPlaylistsTracks     - 100
     * addAllTracksToHashMap()
     * getAllAudioFeatures() - adds all tracks to hashmap and gets all the audio features
     * */
@@ -38,6 +39,7 @@ class Spotify {
         promises.push(this.addSavedTracks());
         promises.push(this.addSeedTracks());
         promises.push(this.addTopArtistsTracks());
+        promises.push(this.addUserPlaylistsTracks());
         return Promise.all(promises)
             .then((res) => {
                 console.log("SUCCESS - added all " + this.trackHashMap.size + " tracks to hashmap")
