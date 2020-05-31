@@ -263,7 +263,7 @@ class Spotify {
         // TODO: can remove the array if don't want multiple options
         // TODO: fill out rest of arrays
         let emotionToSeed = {
-            anger: [{limit: 100, seed_genres: "hardcore, heavy-metal, death-metal, hard-rock", max_valence: 0.15}],
+            anger: [{limit: 100, seed_genres: "hardcore, heavy-metal, death-metal, hard-rock, punk", max_valence: 0.15}],
             contempt: [], // described as combo of disgust + anger
             disgust: [{limit: 100, seed_genres: "metal, metal-misc, metalcore", max_valence: 0.15}],
             fear: [{limit: 100, seed_genres: "chill, sleep, acoustic, ambient", target_valence: 0.5}], // same as neutral
