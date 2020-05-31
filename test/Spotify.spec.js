@@ -117,5 +117,16 @@ describe("unit test for Spotify", function () {
             });
     });
 
+    it("get user's tracks from all playlists", async function() {
+        return spotify.addUserPlaylistsTracks()
+            .then((res) => {
+                console.log(res);
+            })
+            .catch((err) => {
+                console.log("ERROR");
+                chai.expect.fail();
+            })
+    })
+
 
 });
