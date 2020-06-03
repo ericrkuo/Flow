@@ -4,6 +4,7 @@ const {Spotify} = require("./Spotify");
 const {Emotion} = require("./Emotion");
 
 class Main {
+    static tracks = null;
     /*
     * high level steps
     * 1. receive a dataURL from image

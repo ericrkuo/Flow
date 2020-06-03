@@ -13,4 +13,8 @@ describe("unit test for Main", function () {
         let resp = await main.getRelevantSongsTestingPurposes();
     });
 
+    it("test static field", function(){
+        console.log(Main.tracks);
+    })
+
 });

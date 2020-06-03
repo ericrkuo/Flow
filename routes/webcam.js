@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 const {Main} =  require("../controllers/Main")
-const {Track} = require("../controllers/Track")
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -18,7 +17,7 @@ router.post('/', function (req, res, next) {
     let main = new Main();
     return main.getRelevantSongsTestingPurposes()
         .then((tracks)=>{
-            Track.tracks = tracks;
+            Main.tracks = tracks;
             console.log("REACHED HERE");
             // res.redirect("http://localhost:3000/tracks") // cannot do redirect after HTTP REQ, can only make client redirect
             // TODO: send back link in json for the frontend to change URL to
