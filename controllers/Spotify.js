@@ -39,7 +39,7 @@ class Spotify {
         promises.push(this.addSavedTracks());
         promises.push(this.addSeedTracks());
         promises.push(this.addTopArtistsTracks());
-        promises.push(this.addUserPlaylistsTracks());
+        // promises.push(this.addUserPlaylistsTracks());
         return Promise.all(promises)
             .then((res) => {
                 console.log("SUCCESS - added all " + this.trackHashMap.size + " tracks to hashmap")
@@ -304,11 +304,11 @@ class Spotify {
                 let playlistsArray = Array.from(res["body"]["items"]);
                 let playlistsIDs = [];
 
-                for(let i=0; i < playlistsArray.length; i++) {
+                for (let i = 0; i < playlistsArray.length; i++) {
                     playlistsIDs.push(playlistsArray[i]["id"]);
                 }
 
-               return playlistsIDs;
+                return playlistsIDs;
 
             })
             .catch((err) => {
@@ -336,16 +336,16 @@ class Spotify {
                         let numPlaylists = res.length;
                         let numSongsPerPlaylist = 100 / numPlaylists; // temp goal is to get 100 total
 
-                        for(let i=0; i < numPlaylists; i++) {
+                        for (let i = 0; i < numPlaylists; i++) {
                             let tracks = res[i]["body"]["items"];
 
-                            for(let x=0; x < numSongsPerPlaylist; x++) {
+                            for (let x = 0; x < numSongsPerPlaylist; x++) {
                                 allPlaylistTracks.push(tracks[x]["track"]);
                             }
                         }
 
-                         this.addTracksToHashMap(allPlaylistTracks);
-                         return allPlaylistTracks;
+                        this.addTracksToHashMap(allPlaylistTracks);
+                        return allPlaylistTracks;
 
                     })
                     .catch((err) => {
@@ -358,8 +358,6 @@ class Spotify {
                 throw err;
             })
     }
-
-
 
 }
 

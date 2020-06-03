@@ -39,20 +39,20 @@ function turnOffStream() {
     });
 }
 
-function handlePictureWithPOSTMethod(dataURL) {
-    console.log(dataURL);
+function postTracks(dataURL) {
+    // location.href = "http://localhost:3000/tracks";
     let json = JSON.stringify({dataURL: dataURL});
-
     let request = new XMLHttpRequest();
     request.open("POST", "http://localhost:3000/webcam", true);
     request.setRequestHeader('Content-Type', 'application/json');
 
     request.onload = function () {
-        let result = JSON.parse(request.responseText);
+        // let tracks = request.response;
         if (request.status !== 200) {
             alert(`Error ${request.status}: ${request.statusText}`);
         } else {
-            console.log(result);
+            console.log("SUCESS - put tracks, now taking to tracks");
+            location.href = "http://localhost:3000/tracks";
         }
     };
     request.onerror = function () {
@@ -60,6 +60,7 @@ function handlePictureWithPOSTMethod(dataURL) {
     };
     request.send(json);
 }
+
 captureButton.addEventListener("click", () => {
     let context = canvas.getContext('2d');
     console.log("CLICK");
@@ -68,7 +69,7 @@ captureButton.addEventListener("click", () => {
     context.drawImage(video, 0, 0, width, height);
     const dataURL = canvas.toDataURL();
     turnOffStream();
-    handlePictureWithPOSTMethod(dataURL);
+    postTracks(dataURL);
 });
 
 

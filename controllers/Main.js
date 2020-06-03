@@ -69,10 +69,11 @@ class Main {
                 this.printOutAllSongTitles(arrayOfSongIDS);
                 let newArrayOfSongIDS = this.getDesiredNumberSongs(bestK, arrayOfSongIDS, map);
                 console.log();
+                return newArrayOfSongIDS;
             })
             .catch((err) => {
                 console.log(err);
-                return err;
+                throw err;
             })
     }
 

@@ -1,0 +1,9 @@
+extends layout
+
+
+block content
+    h1= tracks
+    div#demo
+    script.
+        let tracks = '!{JSON.stringify(tracks)}';
+    script(src='/js/trackJS.js')
