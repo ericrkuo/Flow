@@ -120,7 +120,8 @@ describe("unit test for Spotify", function () {
     it("get user's tracks from all playlists", async function() {
         return spotify.addUserPlaylistsTracks()
             .then((res) => {
-                console.log(res);
+                console.log("# PLAYLIST SONGS ADDED: " + spotify.trackHashMap.size);
+                chai.assert(res);
             })
             .catch((err) => {
                 console.log("ERROR");

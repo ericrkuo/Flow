@@ -39,7 +39,7 @@ class Spotify {
         promises.push(this.addSavedTracks());
         promises.push(this.addSeedTracks());
         promises.push(this.addTopArtistsTracks());
-        // promises.push(this.addUserPlaylistsTracks());
+        promises.push(this.addUserPlaylistsTracks());
         return Promise.all(promises)
             .then((res) => {
                 console.log("SUCCESS - added all " + this.trackHashMap.size + " tracks to hashmap")
@@ -263,11 +263,20 @@ class Spotify {
         // TODO: can remove the array if don't want multiple options
         // TODO: fill out rest of arrays
         let emotionToSeed = {
-            anger: [{limit: 100, seed_genres: "hardcore, heavy-metal, death-metal, hard-rock, punk", max_valence: 0.15}],
+            anger: [{
+                limit: 100,
+                seed_genres: "hardcore, heavy-metal, death-metal, hard-rock, punk",
+                max_valence: 0.15
+            }],
             contempt: [], // described as combo of disgust + anger
             disgust: [{limit: 100, seed_genres: "metal, metal-misc, metalcore", max_valence: 0.15}],
             fear: [{limit: 100, seed_genres: "chill, sleep, acoustic, ambient", target_valence: 0.5}], // same as neutral
-            happiness: [{limit: 100, seed_genres: "happy, hip-hop, summer, pop, party", min_energy: 0.8, min_valence: 0.8}],
+            happiness: [{
+                limit: 100,
+                seed_genres: "happy, hip-hop, summer, pop, party",
+                min_energy: 0.8,
+                min_valence: 0.8
+            }],
             neutral: [{limit: 100, seed_genres: "chill, sleep, acoustic, ambient", target_valence: 0.5}],
             sadness: [{limit: 100, seed_genres: "sad, blues, rainy-day, r-n-b", max_energy: 0.3, max_valence: 0.3}],
             surprise: [{limit: 100, seed_genres: "hardstyle, work-out, edm, party", min_energy: 0.8, min_valence: 0.8}]
@@ -301,15 +310,12 @@ class Spotify {
     getListOfUserPlaylistsIDs() {
         return this.spotifyApi.getUserPlaylists()
             .then((res) => {
-                let playlistsArray = Array.from(res["body"]["items"]);
+                let playlists = res.body.items;
                 let playlistsIDs = [];
-
-                for (let i = 0; i < playlistsArray.length; i++) {
-                    playlistsIDs.push(playlistsArray[i]["id"]);
+                for (let playlist of playlists) {
+                    playlistsIDs.push(playlist.id);
                 }
-
                 return playlistsIDs;
-
             })
             .catch((err) => {
                 console.log("COULD NOT GET USER'S PLAYLISTS IDS");
@@ -319,38 +325,29 @@ class Spotify {
 
 
     addUserPlaylistsTracks() {
-        let playlistIDs;
         let allPlaylistTracks = [];
-
+        let NUM_TRACKS_FOR_EACH_PLAYLIST = 100;
         return this.getListOfUserPlaylistsIDs()
-            .then((res) => {
-                playlistIDs = res;
+            .then((playlistIDs) => {
                 let promises = [];
-                for (let i = 0; i < playlistIDs.length; i++) {
-                    promises.push(this.spotifyApi.getPlaylistTracks(playlistIDs[i]));
+                let numSongs = Math.floor(NUM_TRACKS_FOR_EACH_PLAYLIST / playlistIDs.length);
+                for (let id of playlistIDs) {
+                    promises.push(this.spotifyApi.getPlaylistTracks(id, {limit: numSongs}))
                 }
 
                 return Promise.all(promises)
                     .then((res) => {
-
                         let numPlaylists = res.length;
-                        let numSongsPerPlaylist = 100 / numPlaylists; // temp goal is to get 100 total
 
                         for (let i = 0; i < numPlaylists; i++) {
                             let tracks = res[i]["body"]["items"];
-
-                            for (let x = 0; x < numSongsPerPlaylist; x++) {
-                                allPlaylistTracks.push(tracks[x]["track"]);
+                            for (let track of tracks) {
+                                allPlaylistTracks.push(track.track);
                             }
                         }
 
                         this.addTracksToHashMap(allPlaylistTracks);
-                        return allPlaylistTracks;
-
-                    })
-                    .catch((err) => {
-                        console.log("COULD NOT GET LIST OF USER PLAYLISTS TRACKS");
-                        throw err;
+                        return true;
                     })
             })
             .catch((err) => {
