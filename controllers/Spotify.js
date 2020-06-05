@@ -265,12 +265,21 @@ class Spotify {
         let emotionToSeed = {
             anger: [{
                 limit: 100,
-                seed_genres: "hardcore, heavy-metal, death-metal, hard-rock, punk",
+                // seed_genres: "hardcore, heavy-metal, death-metal, hard-rock, punk",
+                seed_tracks: "2vwlzO0Qp8kfEtzTsCXfyE, 7nXq1vaZiz7PdbfojpPjW5, 4EnwhEyuVrC1CgvSur5YL4, 34nxgXFCPzDphUJGuRsn10, 2DnJjbjNTV9Nd5NOa1KGba",
                 max_valence: 0.15
             }],
             contempt: [], // described as combo of disgust + anger
-            disgust: [{limit: 100, seed_genres: "metal, metal-misc, metalcore", max_valence: 0.15}],
-            fear: [{limit: 100, seed_genres: "chill, sleep, acoustic, ambient", target_valence: 0.5}], // same as neutral
+            disgust: [{
+                limit: 100,
+                // seed_genres: "metal, metal-misc, metalcore",
+                seed_tracks: "7s25THrKz86DM225dOYwnr, 2zjt2hHBbiv5SuxYg8Z7eP, 2CZi8d774dBB0wiuWMIpr8, 6jyXQ8HGI7ikECGA0670uo, 3Lw7lWTJlcqlx8E9HFmByr",
+                max_valence: 0.15}],
+            fear: [{
+                limit: 100,
+                // seed_genres: "chill, sleep, acoustic, ambient",
+                seed_tracks: "1egVLpTrGvaWtUcR2xDoaN, 45Zo6ftGzq6wRckCUrMoBJ, 7CZvsEFFZffXJ4HxLWtaQc, 688DZF6e1MH5Uf409dwaHm, 4EI01jKoCYK0tZqgAL2RpO",
+                target_valence: 0.5}], // same as neutral
             happiness: [{
                 limit: 100,
                 seed_genres: "happy, hip-hop, summer, pop, party",

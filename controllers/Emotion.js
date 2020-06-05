@@ -16,10 +16,10 @@ class Emotion {
     * */
 
     emotionMap = {
-        anger: [],
+        anger: ["2vwlzO0Qp8kfEtzTsCXfyE", "7nXq1vaZiz7PdbfojpPjW5", "4EnwhEyuVrC1CgvSur5YL4", "34nxgXFCPzDphUJGuRsn10", "2DnJjbjNTV9Nd5NOa1KGba", "1hlveB9M6ijHZRbzZ2teyh", "3lYwz0F1ry4p31HfUFbCW9", "3xrn9i8zhNZsTtcoWgQEAd", "7K5dzhGda2vRTaAWYI3hrb", "4QkvD53COA5qLA7rQ1Pa7D"],
         contempt: [],
-        disgust: [],
-        fear: [],
+        disgust: ["7s25THrKz86DM225dOYwnr","2zjt2hHBbiv5SuxYg8Z7eP",  "2CZi8d774dBB0wiuWMIpr8", "6jyXQ8HGI7ikECGA0670uo”, ”3Lw7lWTJlcqlx8E9HFmByr", "1jypmXUJgxWKWJZdDsJiXQ", "27QvYgBk0CHOVHthWnkuWt", "2tkIIkF3CPqsmYhsncNEGN", "1Y4ZdPOOgCUhBcKZOrUFiS", "2nwCO1PqpvyoFIvq3Vrj8N"],
+        fear: ["1egVLpTrGvaWtUcR2xDoaN", "45Zo6ftGzq6wRckCUrMoBJ", "7CZvsEFFZffXJ4HxLWtaQc", "688DZF6e1MH5Uf409dwaHm", "4EI01jKoCYK0tZqgAL2RpO", "4iJGRLFZRwFZY3ZRleloBf", "20efeySIfZoiSaISGLBbNs", "1QbQL5m30YNvukitIqAnFG", "4dwrL3Z5U2RZ6MZiKE2PgL", "6BGIYRM9XSFgbQrBtsxuQa"],
         happiness: [
             "2Vi0fxL1fyE7KrKt3JihJn",
             "1FSWSs9CL01RCYxXtm08Rf",
