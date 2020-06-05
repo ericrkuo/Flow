@@ -91,8 +91,11 @@ describe("unit test for Spotify", function () {
 
     });
 
-    it("get seed data", async function () {
-        spotify.mood = "sadness";
+
+    // SEED TESTS
+
+    function testSeedFunction(mood) {
+        spotify.mood = mood;
         return spotify.addSeedTracks()
             .then((res) => {
                 chai.assert(res);
@@ -103,6 +106,40 @@ describe("unit test for Spotify", function () {
                 console.log("ERROR");
                 chai.expect.fail();
             });
+    }
+
+    let emotions = ["anger", "contempt", "disgust", "fear", "happiness", "neutral", "sadness", "surprise"];
+
+    it("anger - test seed data", async function () {
+        return testSeedFunction("anger");
+    });
+
+    it("contempt - test seed data", async function () {
+        return testSeedFunction("contempt");
+    });
+
+    it("disgust - test seed data", async function () {
+        return testSeedFunction("disgust");
+    });
+
+    it("fear - test seed data", async function () {
+        return testSeedFunction("fear");
+    });
+
+    it("happiness - test seed data", async function () {
+        return testSeedFunction("happiness");
+    });
+
+    it("neutral - test seed data", async function () {
+        return testSeedFunction("neutral");
+    });
+
+    it("sadness - test seed data", async function () {
+        return testSeedFunction("sadness");
+    });
+
+    it("surprise - test seed data", async function () {
+        return testSeedFunction("surprise");
     });
 
     it("add all the tracks into hashmap", async function () {
