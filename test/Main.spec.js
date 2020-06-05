@@ -14,7 +14,9 @@ describe("unit test for Main", function () {
     });
 
     it("test static field", function(){
-        console.log(Main.tracks);
+        chai.assert(Main.tracks === null);
+        Main.tracks = "x";
+        chai.assert(Main.tracks === "x");
     })
 
 });
