@@ -255,9 +255,9 @@ class Spotify {
         // let optionsArray = [
         //     {limit: 100, seed_genres: "sad"},
         //     // {limit: 100, seed_genres: "chill, ambient"},
-        //     {limit: 100, seed_genres: "happy"}, //TODO: put in min_energy, min_tempo, add more happy genres
+        //     {limit: 100, seed_genres: "happy"},
         //     {limit: 100, seed_genres: "chill"}
-        //     // TODO: add helper method for getting 5 artists [ID1, ID2, ID3] and same for tracks
+        //
         // ];
 
         // TODO: can remove the array if don't want multiple options
@@ -266,19 +266,24 @@ class Spotify {
             anger: [{
                 limit: 100,
                 // seed_genres: "hardcore, heavy-metal, death-metal, hard-rock, punk",
-                seed_tracks: "2vwlzO0Qp8kfEtzTsCXfyE, 7nXq1vaZiz7PdbfojpPjW5, 4EnwhEyuVrC1CgvSur5YL4, 34nxgXFCPzDphUJGuRsn10, 2DnJjbjNTV9Nd5NOa1KGba",
+                seed_genres: "death-metal, punk",
+                seed_tracks: "2vwlzO0Qp8kfEtzTsCXfyE,3xrn9i8zhNZsTtcoWgQEAd,7K5dzhGda2vRTaAWYI3hrb",
                 max_valence: 0.15
             }],
-            contempt: [], // described as combo of disgust + anger
+            contempt: [{
+                limit: 100,
+                seed_genres: "death-metal, hardcore",
+                seed_tracks: "2vwlzO0Qp8kfEtzTsCXfyE,1KGi9sZVMeszgZOWivFpxs,5vTPxzm4h2bY9rYyVrGEU5"
+            }], // described as combo of disgust + anger
             disgust: [{
                 limit: 100,
-                // seed_genres: "metal, metal-misc, metalcore",
-                seed_tracks: "7s25THrKz86DM225dOYwnr, 2zjt2hHBbiv5SuxYg8Z7eP, 2CZi8d774dBB0wiuWMIpr8, 6jyXQ8HGI7ikECGA0670uo, 3Lw7lWTJlcqlx8E9HFmByr",
+                seed_genres: "heavy-metal, hardcore",
+                seed_tracks: "1KGi9sZVMeszgZOWivFpxs,5vTPxzm4h2bY9rYyVrGEU5,6rUp7v3l8yC4TKxAAR5Bmx,",
                 max_valence: 0.15}],
             fear: [{
                 limit: 100,
                 // seed_genres: "chill, sleep, acoustic, ambient",
-                seed_tracks: "1egVLpTrGvaWtUcR2xDoaN, 45Zo6ftGzq6wRckCUrMoBJ, 7CZvsEFFZffXJ4HxLWtaQc, 688DZF6e1MH5Uf409dwaHm, 4EI01jKoCYK0tZqgAL2RpO",
+                seed_tracks: "1egVLpTrGvaWtUcR2xDoaN,45Zo6ftGzq6wRckCUrMoBJ,7CZvsEFFZffXJ4HxLWtaQc,45Zo6ftGzq6wRckCUrMoBJ,688DZF6e1MH5Uf409dwaHm",
                 target_valence: 0.5}], // same as neutral
             happiness: [{
                 limit: 100,
@@ -288,7 +293,7 @@ class Spotify {
             }],
             neutral: [{limit: 100, seed_genres: "chill, sleep, acoustic, ambient", target_valence: 0.5}],
             sadness: [{limit: 100, seed_genres: "sad, blues, rainy-day, r-n-b", max_energy: 0.3, max_valence: 0.3}],
-            surprise: [{limit: 100, seed_genres: "hardstyle, work-out, edm, party", min_energy: 0.8, min_valence: 0.8}]
+            surprise: [{limit: 100, seed_genres: "hardstyle, work-out, edm, party"}]
         };
 
         if (this.mood === undefined) this.mood = "happiness"; //default mood
