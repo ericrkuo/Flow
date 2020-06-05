@@ -279,7 +279,7 @@ class Spotify {
                 limit: 100,
                 seed_genres: "heavy-metal, hardcore",
                 seed_tracks: "1KGi9sZVMeszgZOWivFpxs,5vTPxzm4h2bY9rYyVrGEU5,6rUp7v3l8yC4TKxAAR5Bmx,",
-                max_valence: 0.15}],
+                max_valence: 0.17}],
             fear: [{
                 limit: 100,
                 // seed_genres: "chill, sleep, acoustic, ambient",
