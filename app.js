@@ -6,11 +6,14 @@ var logger = require('morgan');
 
 require('dotenv').config();
 
-var indexRouter = require('./routes/index');
+var indexRouter = require('./routes/indexRouter');
 var usersRouter = require('./routes/users');
-var webcamRouter = require('./routes/webcam');
-var spotifyRouter = require('./routes/spotify');
-var tracksRouter = require('./routes/tracks');
+var webcamRouter = require('./routes/webcamRouter');
+var spotifyRouter = require('./routes/spotifyRouter');
+var tracksRouter = require('./routes/trackRouter');
+var loadRouter = require('./routes/loadRouter');
+var tutorialRouter = require('./routes/tutorialRouter')
+var infoRouter = require('./routes/infoRouter')
 
 var app = express();
 
@@ -30,6 +33,9 @@ app.use('/users', usersRouter);
 app.use('/webcam', webcamRouter);
 app.use('/spotify', spotifyRouter);
 app.use('/tracks', tracksRouter);
+app.use('/load', loadRouter);
+app.use('/tutorial', tutorialRouter);
+app.use('/info', infoRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

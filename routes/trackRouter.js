@@ -5,9 +5,9 @@ const {Main} =  require("../controllers/Main")
 // output: returns html rendering of the tracks
 router.get('/', function(req, res, next) {
     if (Main.tracks !== null) {
-        res.render("tracks", {tracks: Main.tracks});
+        res.render("track", {tracks: Main.tracks});
     } else {
-        res.render("tracks", {tracks: ["song1", "song2", "song3"]})
+        res.render("track", {tracks: ["song1", "song2", "song3"]})
     }
     // TODO: have to put something to replace else statement
 });
