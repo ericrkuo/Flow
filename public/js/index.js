@@ -1,7 +1,7 @@
-let webcamButton = document.getElementById("webcam")
+let getStarteButton = document.getElementById("getStarted")
 
-webcamButton.addEventListener("click", () => {
-    location.href = "http://localhost:3000/webcam/";
+getStarteButton.addEventListener("click", () => {
+    location.href = "http://localhost:3000/spotify/login";
 })
 
 let demo = document.getElementById("demo");

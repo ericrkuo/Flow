@@ -11,7 +11,6 @@ var usersRouter = require('./routes/users');
 var webcamRouter = require('./routes/webcamRouter');
 var spotifyRouter = require('./routes/spotifyRouter');
 var tracksRouter = require('./routes/trackRouter');
-var loadRouter = require('./routes/loadRouter');
 var tutorialRouter = require('./routes/tutorialRouter')
 var infoRouter = require('./routes/infoRouter')
 
@@ -33,7 +32,6 @@ app.use('/users', usersRouter);
 app.use('/webcam', webcamRouter);
 app.use('/spotify', spotifyRouter);
 app.use('/tracks', tracksRouter);
-app.use('/load', loadRouter);
 app.use('/tutorial', tutorialRouter);
 app.use('/info', infoRouter);
 
@@ -54,3 +52,6 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+const {Main} = require("./controllers/Main")
+app.locals.main = new Main();
+app.locals.globalString = "I am a global string in app.js";

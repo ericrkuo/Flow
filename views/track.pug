@@ -2,8 +2,16 @@ extends layout
 
 
 block content
-    h1= tracks
-    div#demo
+    h1 #{mood}
+    h2 !{Object.keys(tracks)}
+    div#title Thanks for waiting! Here's your playlist
+    div#mediaContent
+        div#tracksDiv TRACKS GO HERE
+        div#rightDiv
+            div#userDiv USER GO HERE
+            div#moodDiv MOOD GO HERE
     script.
-        let tracks = '!{JSON.stringify(tracks)}';
+        let tracks = JSON.parse('!{JSON.stringify(tracks)}');
+        let userInfo = JSON.parse('!{JSON.stringify(userInfo)}');
+        let mood = JSON.parse('!{JSON.stringify(mood)}');
     script(src='/js/track.js')

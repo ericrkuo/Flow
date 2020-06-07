@@ -16,15 +16,26 @@ class Spotify {
 
     // TODO: turn add___ functions into get___ and then use universal add(get___));
     // TODO: create new constructor for frontend taking in two parameters (access token and refresh token)
-    constructor() {
+    // constructor() {
+    //     require('dotenv').config();
+    //     this.spotifyApi = new SpotifyWebApi({
+    //         clientId: process.env.SPOTIFY_API_ID,
+    //         clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
+    //         redirectUri: process.env.CALLBACK_URL,
+    //     });
+    //     this.spotifyApi.setAccessToken(process.env.ACCESS_TOKEN);
+    //     // this.spotifyApi.setRefreshToken(process.env.REFRESH_TOKEN);
+    //     this.trackHashMap = new Map();
+    // }
+    constructor(accessToken, refreshToken) {
         require('dotenv').config();
         this.spotifyApi = new SpotifyWebApi({
             clientId: process.env.SPOTIFY_API_ID,
             clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
             redirectUri: process.env.CALLBACK_URL,
         });
-        this.spotifyApi.setAccessToken(process.env.ACCESS_TOKEN);
-        // this.spotifyApi.setRefreshToken(process.env.REFRESH_TOKEN);
+        this.spotifyApi.setAccessToken(accessToken === undefined ? process.env.ACCESS_TOKEN : accessToken);
+        this.spotifyApi.setRefreshToken(refreshToken === undefined ? null : refreshToken);
         this.trackHashMap = new Map();
     }
 
@@ -115,7 +126,11 @@ class Spotify {
             .then((savedTracksArray) => {
                 for (let savedTracks of savedTracksArray) {
                     let arr = [];
-                    for (let item of savedTracks.body.items) arr.push(item.track);
+                    for (let item of savedTracks.body.items){
+                      if (item !== null && item.track !== null) {
+                          arr.push(item.track);
+                      }
+                    }
                     this.addTracksToHashMap(arr);
                 }
                 return true;
@@ -208,18 +223,20 @@ class Spotify {
                 for (let audioFeatures of res) {
                     audioFeatures = audioFeatures.body["audio_features"];
                     for (let audioFeature of audioFeatures) {
-                        let id = audioFeature.id;
-                        data[id] = {
-                            "danceability": audioFeature.danceability,
-                            "energy": audioFeature.energy,
-                            "loudness": (audioFeature.loudness - loudMIN) / (loudMAX - loudMIN),
-                            "speechiness": audioFeature.speechiness,
-                            "acousticness": audioFeature.acousticness,
-                            "instrumentalness": audioFeature.instrumentalness,
-                            "liveness": audioFeature.liveness,
-                            "valence": audioFeature.valence,
-                            "tempo": (audioFeature.tempo - tempoMIN) / (tempoMAX - tempoMIN)
-                        };
+                        if (audioFeature !== null){
+                            let id = audioFeature.id;
+                            data[id] = {
+                                "danceability": audioFeature.danceability,
+                                "energy": audioFeature.energy,
+                                "loudness": (audioFeature.loudness - loudMIN) / (loudMAX - loudMIN),
+                                "speechiness": audioFeature.speechiness,
+                                "acousticness": audioFeature.acousticness,
+                                "instrumentalness": audioFeature.instrumentalness,
+                                "liveness": audioFeature.liveness,
+                                "valence": audioFeature.valence,
+                                "tempo": (audioFeature.tempo - tempoMIN) / (tempoMAX - tempoMIN)
+                            };
+                        }
                     }
                 }
                 return data;
@@ -370,6 +387,9 @@ class Spotify {
             })
     }
 
+    getInfoAboutUser(){
+        return this.spotifyApi.g
+    }
 }
 
 module.exports.Spotify = Spotify;

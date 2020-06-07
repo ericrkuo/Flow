@@ -4,7 +4,10 @@ const video = document.getElementById('video');
 const canvas = document.getElementById('canvas');
 const captureButton = document.getElementById('snap');
 const tryAgainButton = document.getElementById('tryagain');
+const trackButton = document.getElementById('track');
 const errorMsgElement = document.getElementById('spanErrorMsg');
+const loadingDiv = document.getElementById("loading");
+const videoDiv = document.getElementById("videowrap");
 let stream;
 
 const constraints = {
@@ -18,6 +21,8 @@ async function init() {
     try {
         canvas.style.display = "none";
         tryAgainButton.style.display = "none";
+        trackButton.style.display = "none";
+        loadingDiv.style.display = "none";
         stream = await navigator.mediaDevices.getUserMedia(constraints);
         handleSuccess(stream);
     } catch (err) {
@@ -40,7 +45,6 @@ function turnOffStream() {
 }
 
 function postTracks(dataURL) {
-    // location.href = "http://localhost:3000/tracks";
     let json = JSON.stringify({dataURL: dataURL});
     let request = new XMLHttpRequest();
     request.open("POST", "http://localhost:3000/webcam", true);
@@ -51,7 +55,7 @@ function postTracks(dataURL) {
         if (request.status !== 200) {
             alert(`Error ${request.status}: ${request.statusText}`);
         } else {
-            console.log("SUCESS - put tracks, now taking to tracks");
+            console.log("SUCCESS - put tracks, now taking to tracks");
             location.href = "http://localhost:3000/tracks";
         }
     };
@@ -61,15 +65,22 @@ function postTracks(dataURL) {
     request.send(json);
 }
 
+trackButton.addEventListener("click", ()=>{
+    console.log("CLICK");
+    const dataURL = canvas.toDataURL();
+    videoDiv.style.display = "none";
+    loadingDiv.style.display = "block";
+    postTracks(dataURL);
+})
+
 captureButton.addEventListener("click", () => {
     let context = canvas.getContext('2d');
-    console.log("CLICK");
-    hideAndShowHTMLElementsforCaptureButton();
+    // console.log("CLICK");
+    hideAndShowHTMLElementsForCaptureButton();
 
     context.drawImage(video, 0, 0, width, height);
-    const dataURL = canvas.toDataURL();
+    // const dataURL = canvas.toDataURL();
     turnOffStream();
-    postTracks(dataURL);
 });
 
 
@@ -82,12 +93,14 @@ function hideAndShowHTMLElementsForTryAgainButton() {
     video.style.display = "block";
     captureButton.style.display = "block";
     tryAgainButton.style.display = "none";
+    trackButton.style.display = "none";
     canvas.style.display = "none";
 }
 
-function hideAndShowHTMLElementsforCaptureButton() {
+function hideAndShowHTMLElementsForCaptureButton() {
     video.style.display = "none";
     captureButton.style.display = "none";
     tryAgainButton.style.display = "block";
+    trackButton.style.display = "block";
     canvas.style.display = "block";
 }
