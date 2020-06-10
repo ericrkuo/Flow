@@ -166,5 +166,20 @@ describe("unit test for Spotify", function () {
             })
     })
 
+    it("get user info", async function() {
+        return spotify.getUserInfo()
+            .then((res) => {
+                chai.expect(res).hasOwnProperty("display_name");
+                chai.expect(res).hasOwnProperty("email");
+                chai.expect(res).hasOwnProperty("images");
+                chai.expect(res).hasOwnProperty("external_urls");
+                console.log(res);
+            })
+            .catch((err) => {
+                console.log("ERROR");
+                chai.expect.fail();
+            })
+    })
+
 
 });

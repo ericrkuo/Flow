@@ -1030,15 +1030,29 @@ tracks["0BD9XqvXSSxlHsdBlLKhqA"] = {
 
 let sampleData = {
     tracks: tracks,
-    userInfo: {},
-    mood: "Happy"
+    userInfo: {
+        "display_name": "Eric Kuo",
+        "email": "ericrkuo@gmail.com",
+        "external_urls": {
+            "spotify": "https://open.spotify.com/user/22ermas6jsnwxmgbenafsy6vi"
+        },
+        "images": [
+            {
+                "height": null,
+                "url": "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=875070459255356&height=300&width=300&ext=1594146634&hash=AeRZjHHIaGBlcJmk",
+                "width": null
+            }
+        ]
+    },
+    mood: "Happy",
+    test: {"I'm": 2},
 }
 
 
 // input: dataURL
 // output: returns html rendering of the tracks
 router.get('/', function (req, res, next) {
-    if (Main.tracks !== null) {
+    if (req.app.locals.main.result !== null) {
         res.render("track", req.app.locals.main.result);
     } else {
         res.render("track", sampleData)

@@ -4,7 +4,6 @@ const {Spotify} = require("./Spotify");
 const {Emotion} = require("./Emotion");
 
 class Main {
-    static tracks = null;
     /*
     * high level steps
     * 1. receive a dataURL from image
@@ -51,6 +50,7 @@ class Main {
                 let arrayOfSongIDS = this.getSongIDsOfClusterContainingSongX(clusters);
                 this.printOutAllSongTitles(arrayOfSongIDS);
                 let newArrayOfSongIDS = this.getDesiredNumberSongs(bestK, arrayOfSongIDS, map);
+                // TODO: fix this since setResults is async once fix Azure api
                 this.setResults(newArrayOfSongIDS, audioFeatureData, this.spotify.mood);
                 return newArrayOfSongIDS;
             })
@@ -62,7 +62,8 @@ class Main {
 
     getRelevantSongsTestingPurposes() {
         let songX;
-        let dominantEmotion = "happiness";
+        let dominantEmotion = "surprise";
+        let newArrayOfSongIDS
         return this.emotion.getFeatures(dominantEmotion)
             .then((feature) => {
                 songX = ["X", feature];
@@ -74,8 +75,11 @@ class Main {
                 let [bestK, clusters, map] = this.kMean.getOptimalKClusters(audioFeatureData);
                 let arrayOfSongIDS = this.getSongIDsOfClusterContainingSongX(clusters);
                 this.printOutAllSongTitles(arrayOfSongIDS);
-                let newArrayOfSongIDS = this.getDesiredNumberSongs(bestK, arrayOfSongIDS, map);
-                this.setResults(newArrayOfSongIDS, audioFeatureData, this.spotify.mood);
+                newArrayOfSongIDS = this.getDesiredNumberSongs(bestK, arrayOfSongIDS, map);
+                return this.setResults(newArrayOfSongIDS, audioFeatureData, this.spotify.mood);
+            })
+            .then((res) => {
+                let self = this;
                 return newArrayOfSongIDS;
             })
             .catch((err) => {
@@ -88,12 +92,19 @@ class Main {
     // result = {tracks: trackObjects, userInfo: userInfoObject, mood: string}
     // trackObjects = {{id: {track, audioFeatures}}, {id: {track, audioFeatures}}, {id: {track, audioFeatures}}, ...}
     setResults(songIDs, audioFeatureData, mood) {
-        let temp = {tracks: {}, userInfo: {}, mood: mood};
+        this.result = {tracks: {}, userInfo: {}, mood: mood};
         for (let songID of songIDs) {
-            temp.tracks[songID] = {track: this.spotify.trackHashMap.get(songID), audioFeatures: audioFeatureData[songID]};
+            this.result.tracks[songID] = {
+                track: this.spotify.trackHashMap.get(songID),
+                audioFeatures: audioFeatureData[songID]
+            };
         }
-        // TODO: get user info
-        this.result = temp;
+        return this.spotify.getUserInfo()
+            .then((res) => {
+                this.result.userInfo = res;
+            }).catch((err) => {
+                throw err;
+            })
     }
 
     // returns an array of songIDs for the cluster that contains songX

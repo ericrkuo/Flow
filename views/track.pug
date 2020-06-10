@@ -1,17 +1,29 @@
 extends layout
 
-
+block append stylesheets
+    link(rel='stylesheet', href='/stylesheets/trackCSS.css')
 block content
     h1 #{mood}
     h2 !{Object.keys(tracks)}
     div#title Thanks for waiting! Here's your playlist
-    div#mediaContent
-        div#tracksDiv TRACKS GO HERE
-        div#rightDiv
-            div#userDiv USER GO HERE
-            div#moodDiv MOOD GO HERE
+    div#media-content
+        div#tracks-div TRACKS GO HERE
+        div#userandmood-div
+            div#user-div USER GO HERE
+            div#mood-div MOOD GO HERE
+
+    div#track-modal-background
+        div#track-modal
+
     script.
-        let tracks = JSON.parse('!{JSON.stringify(tracks)}');
-        let userInfo = JSON.parse('!{JSON.stringify(userInfo)}');
-        let mood = JSON.parse('!{JSON.stringify(mood)}');
+        // let test = !{JSON.stringify(test)};
+        // let tracks = JSON.parse('!{JSON.stringify(tracks)}');
+        // let userInfo = JSON.parse('!{JSON.stringify(userInfo)}');
+        // let mood = JSON.parse('!{JSON.stringify(mood)}');
+
+        // let test = !{JSON.stringify(test)};
+        let tracks = !{JSON.stringify(tracks)};
+        let userInfo = !{JSON.stringify(userInfo)};
+        let mood = !{JSON.stringify(mood)};
     script(src='/js/track.js')
+

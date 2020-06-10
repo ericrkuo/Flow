@@ -387,8 +387,21 @@ class Spotify {
             })
     }
 
-    getInfoAboutUser(){
-        return this.spotifyApi.g
+    // returns name, email, URL, and image of user
+    getUserInfo(){
+        return this.spotifyApi.getMe()
+            .then((res)=>{
+                let json = {};
+                json.display_name = res.body.display_name;
+                json.email = res.body.email;
+                json.external_urls = res.body.external_urls;
+                json.images = res.body.images;
+                return json;
+            })
+            .catch((err)=> {
+                console.log("ERROR in getting info about user");
+                throw err;
+            })
     }
 }
 

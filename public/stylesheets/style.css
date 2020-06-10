@@ -7,9 +7,3 @@ a {
   color: #00B7FF;
 }
 
-#mediaContent {
-  background-color: #00B7FF;
-  width: 80%;
-  display: flex;
-  flex-direction: row;
-}
