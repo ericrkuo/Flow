@@ -1,15 +1,21 @@
 let tracksDiv = document.getElementById("tracks-div");
 let userDiv = document.getElementById("user-div");
 let moodDiv = document.getElementById("mood-div");
-let trackModalBackground = document.getElementById("track-modal-background");
-let trackModal = document.getElementById("track-modal");
+
+// MODAL INFO
+let modalBackground = document.getElementById("modal-background");
+let modal = document.getElementById("modal");
+let modalTrackInfo = document.getElementById("modal-trackInfo");
+let modalContent = document.getElementById("modal-content");
+let modalAnalytics = document.getElementById("modal-analytics");
+let trackChart = document.getElementById("trackChart");
 
 // console.log("HI: " + test["I'm"]);
 
-moodDiv.innerHTML = getMoodInnerHTML();
-userDiv.innerHTML = getUserInfoInnerHTML();
-// tracksDiv.innerHTML = getAllTracksDiv();
+initializeUserInfoDiv();
 initializeTracksDiv();
+initializeMoodDiv();
+
 let x = {hello: 1, hi: 2};
 console.log(Object.keys(x));
 console.log(Object.values(x));
@@ -22,13 +28,20 @@ console.log(Object.values(x));
 // console.log(x);
 // demo.innerHTML = x;
 
-function getMoodInnerHTML() {
-    return "<h1> DETECTED MOOD: " + mood + "</h1>"
+function initializeMoodDiv() {
+    let moodHeader = document.createElement("h1");
+    moodHeader.innerText = "DETECTED MOOD: " + mood;
+    moodDiv.append(moodHeader);
 }
 
-function getUserInfoInnerHTML() {
-    return '<img src=' + userInfo.images[0].url + '> </img>'
-        + '<h1>' + userInfo.display_name + '</h1>';
+function initializeUserInfoDiv() {
+    let img = document.createElement("img");
+    img.src = userInfo.images[0].url;
+
+    let nameHeader = document.createElement("h1");
+    nameHeader.innerText = userInfo.display_name;
+
+    userDiv.append(img, nameHeader);
 }
 
 function getAllTracksDiv() {
@@ -65,39 +78,115 @@ function createSingleTrackDiv(id) {
     return trackDiv;
 }
 
+// MODAL INFO ----------------------------------------
 function editModalContent(id) {
-    trackModalBackground.style.display = "block";
-    while (trackModal.lastChild !== null) {
-        trackModal.removeChild(trackModal.lastChild); //TODO: make removeChildElement if decide to do a div
+    modalBackground.style.display = "block";
+    initializeModalTrackInfo(id);
+    initializeModalContent(id);
+    initializeModalAnalytics(id);
+}
+
+function initializeModalAnalytics(id) {
+    let audioFeatures = tracks[id].audioFeatures;
+    let labels = Object.keys(audioFeatures);
+    let data = [];
+    for (let label of labels) {
+        data.push(audioFeatures[label]);
     }
 
+
+    let ctx = trackChart.getContext('2d');
+    let chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'line',
+        ticks: {
+            reverse: true
+        },
+        // The data for our dataset
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Audio Features',
+                backgroundColor: 'rgb(136,170,231)',
+                pointHoverBackgroundColor: 'rgb(186,200,227)',
+                borderColor: 'rgb(255,255,255)',
+                data: data,
+            }]
+        },
+
+        // Configuration options go here
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+        }
+    });
+}
+
+function initializeModalContent(id) {
+    let track = tracks[id].track;
+    let previewURL = track.preview_url;
+    let trackURL = track.external_urls.spotify
+
+    removeAllChildren(modalContent);
+    let video = null;
+    if (previewURL!==null) {
+        video = document.createElement("video");
+        video.controls = true;
+        video.src = previewURL;
+        modalContent.append(video);
+    } else {
+        modalContent.append("Sorry, no preview available!");
+    }
+
+    let urlButton = document.createElement("button");
+    urlButton.innerText = "Open in Spotify";
+    urlButton.addEventListener("click", ()=>{
+        window.open(trackURL, "_blank");
+    })
+
+    modalContent.append(urlButton);
+}
+function initializeModalTrackInfo(id) {
+    removeAllChildren(modalTrackInfo);
+
+    let image = document.createElement("img");
+    image.src = tracks[id].track.album.images[0].url;
+    image.id = "modal-trackInfo-image";
+
+    // TODO: refactor into getTrackHeader, etc;
     let track = tracks[id].track;
     let trackName = track.name;
-    let trackLength = getTimeInMinutes(track.duration_ms);
-    let trackURL = track.external_urls.spotify;
-    let trackOpenInSpotifyAppURL = track.uri;
-    let trackPreviewURL = track.preview_url;
     let artistNames = getArtistNames(track.artists);
+    let trackLength = getTimeInMinutes(track.duration_ms);
 
-    trackModal.append(id, document.createElement("br"),
-        trackName, document.createElement("br"),
-        trackLength, document.createElement("br"),
-        trackURL, document.createElement("br"),
-        trackOpenInSpotifyAppURL, document.createElement("br"),
-        trackPreviewURL, document.createElement("br"),
-        JSON.stringify(artistNames));
+    let trackNameHeader = document.createElement("h1");
+    trackNameHeader.innerText = "TRACK: " + trackName;
+
+    let artistsHeader = document.createElement("h1");
+    artistsHeader.innerText = "ARTIST: " + artistNames;
+
+    let trackLengthHeader = document.createElement("h1");
+    trackLengthHeader.innerText = "LENGTH: " + trackLength;
+
+    let modalTrackInfoRight = document.createElement("div");
+    modalTrackInfoRight.id = "modal-trackInfo-right";
+    modalTrackInfoRight.append(trackNameHeader, artistsHeader, trackLengthHeader);
+
+    modalTrackInfo.append(image, modalTrackInfoRight);
+
+
 }
 
 function getArtistNames(artists) {
-    let arr = [];
+    let artistNames = "";
     for (let artist of artists) {
-        arr.push(artist.name);
+        artistNames += artist.name + ", ";
     }
-    return arr;
+    return artistNames;
 }
 
-function getTimeInMinutes(totalms) {
-    let totalSeconds = totalms / 1000;
+function getTimeInMinutes(totalMs) {
+    let totalSeconds = totalMs / 1000;
     let minutes = Math.floor(totalSeconds / 60);
     let seconds = Math.floor(totalSeconds % 60);
 
@@ -105,52 +194,21 @@ function getTimeInMinutes(totalms) {
 
 }
 
-window.onclick = function (event) {
-    if (event.target === trackModalBackground) {
-        trackModalBackground.style.display = "none";
+function removeAllChildren(node) {
+    while (node.firstChild) {
+        node.removeChild(node.lastChild);
     }
+
 }
 
-
-// function createTrackDiv(id) {
-//     let name = tracks[id].track.name;
-//     return '<div class=track id=' + id + '>'
-//         + addButton(id)
-//         + name + '</div>';
-// }
-//
-// function addButton(id) {
-//     let imageURL = tracks[id].track.album.images[0].url;
-//     // return '<button type="image" src=' + imageURL +
-//     //     ' class=track-button ' +
-//     //     'id='+id+'>' +
-//     //     '</button>'
-//
-//     return '<button class=track-button ' + 'id='+id+'>'
-//         + '<img class=track-image src='+ imageURL +'>' + '</img>' +
-//         '</button>'
-// }
-// function createTrackDiv2(id) {
-//     const trackDiv = document.createElement("div");
-//     trackDiv.className = "track";
-//     trackDiv.id = id;
-//     trackDiv.appendChild(addButton2(id));
-//     trackDiv.innerHTML += tracks[id].track.name; // TODO: figure out how to add button and text
-//     tracksDiv.appendChild(trackDiv);
-// }
-//
-// function addButton2(id) {
-//     const button = document.createElement("button");
-//     button.className = "track-button";
-//
-//     let imageURL = tracks[id].track.album.images[0].url;
-//     const image = document.createElement("img");
-//     image.className = "track-image";
-//     image.src = imageURL;
-//     button.appendChild(image);
-//     button.addEventListener("click", function(){
-//         console.log(id);
-//     });
-//     return button;
-// }
+window.onclick = function (event) {
+    if (event.target === modalBackground) {
+        modalBackground.style.display = "none";
+        removeAllChildren(modalTrackInfo);
+        removeAllChildren(modalContent);
+        if (modalAnalytics.firstChild !== trackChart) {
+            modalAnalytics.removeChild(modalAnalytics.firstChild);
+        }
+    }
+}
 

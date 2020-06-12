@@ -2,6 +2,7 @@ extends layout
 
 block append stylesheets
     link(rel='stylesheet', href='/stylesheets/trackCSS.css')
+    script(src='./libraries/Chart.min.js', type="text/javascript")
 block content
     h1 #{mood}
     h2 !{Object.keys(tracks)}
@@ -9,11 +10,17 @@ block content
     div#media-content
         div#tracks-div TRACKS GO HERE
         div#userandmood-div
-            div#user-div USER GO HERE
-            div#mood-div MOOD GO HERE
+            div#user-div
+            div#mood-div
 
-    div#track-modal-background
-        div#track-modal
+    div#modal-background
+        div#modal
+            div#modal-up
+                div#modal-trackInfo
+                div#modal-content
+            div#modal-analytics
+                canvas#trackChart
+
 
     script.
         // let test = !{JSON.stringify(test)};

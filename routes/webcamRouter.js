@@ -14,6 +14,7 @@ router.post('/', function (req, res, next) {
     req.app.locals.main.dataURL = req.body;
     return req.app.locals.main.getRelevantSongsTestingPurposes()
         .then((tracks)=>{
+            // TODO: main POST more semantically correct
             console.log("REACHED HERE");
             // res.redirect("http://localhost:3000/tracks") // cannot do redirect after HTTP REQ, can only make client redirect
             // TODO: send back link in json for the frontend to change URL to
