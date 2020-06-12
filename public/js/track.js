@@ -8,7 +8,6 @@ let modal = document.getElementById("modal");
 let modalTrackInfo = document.getElementById("modal-trackInfo");
 let modalContent = document.getElementById("modal-content");
 let modalAnalytics = document.getElementById("modal-analytics");
-let trackChart = document.getElementById("trackChart");
 
 // console.log("HI: " + test["I'm"]);
 
@@ -87,6 +86,7 @@ function editModalContent(id) {
 }
 
 function initializeModalAnalytics(id) {
+    let trackChart = document.createElement("canvas");
     let audioFeatures = tracks[id].audioFeatures;
     let labels = Object.keys(audioFeatures);
     let data = [];
@@ -120,6 +120,7 @@ function initializeModalAnalytics(id) {
             maintainAspectRatio: false,
         }
     });
+    modalAnalytics.appendChild(trackChart);
 }
 
 function initializeModalContent(id) {
@@ -206,9 +207,7 @@ window.onclick = function (event) {
         modalBackground.style.display = "none";
         removeAllChildren(modalTrackInfo);
         removeAllChildren(modalContent);
-        if (modalAnalytics.firstChild !== trackChart) {
-            modalAnalytics.removeChild(modalAnalytics.firstChild);
-        }
+        removeAllChildren(modalAnalytics);
     }
 }
 
