@@ -31,9 +31,20 @@
 }
 
 #user-div {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+
     width: 100%;
     height: 60%;
     background-color: aliceblue;
+}
+
+#user-image {
+    width: 35vh;
+    height: 35vh;
 }
 
 /*id = mood-div*/

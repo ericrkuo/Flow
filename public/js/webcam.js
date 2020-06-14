@@ -56,7 +56,8 @@ function postTracks(dataURL) {
             alert(`Error ${request.status}: ${request.statusText}`);
         } else {
             console.log("SUCCESS - put tracks, now taking to tracks");
-            location.href = "http://localhost:3000/tracks";
+            // console.log(JSON.parse(request.response).link);
+            location.href = JSON.parse(request.response).link;
         }
     };
     request.onerror = function () {

@@ -35,6 +35,7 @@ function initializeMoodDiv() {
 
 function initializeUserInfoDiv() {
     let img = document.createElement("img");
+    img.id = "user-image";
     img.src = userInfo.images[0].url;
 
     let nameHeader = document.createElement("h1");
@@ -87,6 +88,7 @@ function editModalContent(id) {
 
 function initializeModalAnalytics(id) {
     let trackChart = document.createElement("canvas");
+    modalAnalytics.appendChild(trackChart);
     let audioFeatures = tracks[id].audioFeatures;
     let labels = Object.keys(audioFeatures);
     let data = [];
@@ -120,7 +122,6 @@ function initializeModalAnalytics(id) {
             maintainAspectRatio: false,
         }
     });
-    modalAnalytics.appendChild(trackChart);
 }
 
 function initializeModalContent(id) {
