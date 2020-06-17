@@ -3,12 +3,15 @@ html
   head
     title= title
     block stylesheets
-      link(rel='stylesheet', href='/stylesheets/style.css')
-    block scripts
+      link(rel='stylesheet', href='/stylesheets/layoutCSS.css')
+      link(rel='stylesheet', href='/stylesheets/buttonCSS.css')
+      link(rel="stylesheet", href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap")
+    block title
       div#title
-        button#tutorial Tutorial
-        button#home Home
-        button#info About Us
-        script(src='/js/layout.js')
+        button#tutorial(class='layout-button') Tutorial
+        button#home(class='layout-button') Home
+        button#info(class='layout-button') About Us
+    block scripts
+      script(src='/js/layout.js')
   body
     block content

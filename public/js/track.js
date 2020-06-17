@@ -135,6 +135,7 @@ function initializeModalContent(id) {
         video = document.createElement("video");
         video.controls = true;
         video.src = previewURL;
+        video.id = "modal-content-video";
         modalContent.append(video);
     } else {
         modalContent.append("Sorry, no preview available!");

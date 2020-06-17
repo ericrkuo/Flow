@@ -1,13 +1,20 @@
 extends layout
 
+block append stylesheets
+    link(href='/libraries/circle.png', type="image")
+    link(rel='stylesheet', href='/stylesheets/webcamCSS.css')
 block content
-    div#videowrap
-        video#video(playsinline='' autoplay='')
-        canvas#canvas(width='640' height='480')
+    div#webcam
+        label#content Let us see how you feel!
+        div#videowrap
+            div.pulsate-css
+            video#video(playsinline='' autoplay='')
+            canvas#canvas
         div#controller
-            button#snap Capture
-            button#tryagain Take Photo Again
-            button#track Get Curated Tracks
+            button#take-photo Capture
+            button#try-again Take Photo Again
+            button#get-tracks Get Curated Tracks
+
     div#loading
         h1 loading...
     script(src='/js/webcam.js')
