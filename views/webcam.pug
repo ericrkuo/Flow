@@ -1,12 +1,33 @@
+
 doctype html
-.videowrap
-    video#video(playsinline='' autoplay='')
 
-canvas(id='canvas' width='640' height='480')
+block content
+    div#videowrap
+        head
+            style.
+                .container {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    -moz-transform: translateX(-50%) translateY(-50%);
+                    -webkit-transform: translateX(-50%) translateY(-50%);
+                    transform: translateX(-50%) translateY(-50%);
+                }
+        body(style='text-align: center')
+        h1= "let us see how you feel!"
 
-.controller
-    button#snap Capture
-    button#tryagain Take Photo Again
-    button#home Go Home
+        .container
+        .videowrap
+        video#video(playsinline='' autoplay='')
+
+        canvas(id='canvas' width='640' height='480')
+
+        .controller
+        button#snap Capture
+        button#next Next
+        button#tryagain Take Photo Again
+
+    div#loading
+        h1= "Curating your playlist..."
 
 script(src='/js/webcam.js')

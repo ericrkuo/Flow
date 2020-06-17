@@ -4,7 +4,6 @@ const {Spotify} = require("./Spotify");
 const {Emotion} = require("./Emotion");
 
 class Main {
-    static tracks = null;
     /*
     * high level steps
     * 1. receive a dataURL from image
@@ -19,13 +18,25 @@ class Main {
     * */
 
     // TODO: use other Spotify constructor when doing frontEnd that takes in clients access and refresh token
-    constructor(dataURL) {
-        this.dataURL = dataURL;
+    // constructor(dataURL) {
+    //     this.dataURL = dataURL;
+    //     this.emotion = new Emotion();
+    //     this.azureFaceAPI = new AzureFaceAPI();
+    //     this.spotify = new Spotify();
+    //     this.kMean = new KMean();
+    //     this.tracks = null;
+    // }
+
+    constructor() {
+        this.dataURL = null;
         this.emotion = new Emotion();
         this.azureFaceAPI = new AzureFaceAPI();
         this.spotify = new Spotify();
         this.kMean = new KMean();
+        this.result = null;
     }
+
+
 
     getRelevantSongs() {
         let songX;
@@ -40,7 +51,8 @@ class Main {
                 this.spotify.trackHashMap.set("X", feature);
                 return this.spotify.getAllAudioFeatures();
             })
-            .then(() => {
+            .then((res) => {
+                this.audioFeatures = res;
                 let [bestK, clusters, map] = this.kMean.kMean(this.spotify.trackHashMap, this.k);
                 for (let cluster of clusters) {
                     if (cluster.contains(songX)) {
@@ -63,17 +75,36 @@ class Main {
                 this.spotify.mood = dominantEmotion;
                 return this.spotify.getAllAudioFeatures();
             })
-            .then((data) => {
-                data["X"] = songX[1];
-                let [bestK, clusters, map] = this.kMean.getOptimalKClusters(data);
+            .then((audioFeatureData) => {
+                audioFeatureData["X"] = songX[1];
+                let [bestK, clusters, map] = this.kMean.getOptimalKClusters(audioFeatureData);
                 let arrayOfSongIDS = this.getSongIDsOfClusterContainingSongX(clusters);
                 this.printOutAllSongTitles(arrayOfSongIDS);
                 let newArrayOfSongIDS = this.getDesiredNumberSongs(bestK, arrayOfSongIDS, map);
-                console.log();
-                return newArrayOfSongIDS;
+                this.setResults(newArrayOfSongIDS, audioFeatureData, this.spotify.mood);
+               // return newArrayOfSongIDS;
             })
             .catch((err) => {
                 console.log(err);
+                throw err;
+            })
+    }
+
+    // PURPOSE - set the results for global access inside trackRouter.js
+    // result = {tracks: trackObjects, userInfo: userInfoObject, mood: string}
+    // trackObjects = {{id: {track, audioFeatures}}, {id: {track, audioFeatures}}, {id: {track, audioFeatures}}, ...}
+    setResults(songIDs, audioFeatureData, mood) {
+        this.result = {tracks: {}, userInfo: {}, mood: mood};
+        for (let songID of songIDs) {
+            this.result.tracks[songID] = {
+                track: this.spotify.trackHashMap.get(songID),
+                audioFeatures: audioFeatureData[songID]
+            };
+        }
+        return this.spotify.getUserInfo()
+            .then((res) => {
+                this.result.userInfo = res;
+            }).catch((err) => {
                 throw err;
             })
     }

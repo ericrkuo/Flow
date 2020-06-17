@@ -1,8 +1,18 @@
 doctype html
 html
-  script(src='/js/layout.js')
-  head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+  script(src="/js/layout.js")
+  block stylesheets
+    link(rel='stylesheet', href='/stylesheets/layoutCSS.css')
+
+  button#tutorial TUTORIAL
+  button#home HOME
+  button#aboutUs ABOUT US
+
+      //ul
+      //  a(href="/tutorial") Tutorial
+      //  a(href="/") Home
+      //  a(href="/info") About Us
+
+
   body
     block content

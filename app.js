@@ -4,6 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+const {Main} = require("./controllers/Main");
+
 require('dotenv').config();
 
 var indexRouter = require('./routes/indexRouter');
@@ -11,7 +13,6 @@ var usersRouter = require('./routes/users');
 var webcamRouter = require('./routes/webcamRouter');
 var spotifyRouter = require('./routes/spotifyRouter');
 var tracksRouter = require('./routes/trackRouter');
-var loadRouter = require('./routes/loadRouter');
 var tutorialRouter = require('./routes/tutorialRouter')
 var infoRouter = require('./routes/infoRouter')
 
@@ -28,12 +29,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(express.static(__dirname + '/node_modules/bootstrap/dist'));
+app.use("/bootstrap", express.static(path.join(__dirname, '/node_modules/bootstrap/dist/css')));
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/webcam', webcamRouter);
 app.use('/spotify', spotifyRouter);
 app.use('/tracks', tracksRouter);
-app.use('/load', loadRouter);
 app.use('/tutorial', tutorialRouter);
 app.use('/info', infoRouter);
 
@@ -53,4 +56,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+app.locals.main = new Main();
+
 module.exports = app;
+

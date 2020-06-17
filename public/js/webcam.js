@@ -4,7 +4,10 @@ const video = document.getElementById('video');
 const canvas = document.getElementById('canvas');
 const captureButton = document.getElementById('snap');
 const tryAgainButton = document.getElementById('tryagain');
+const nextButton = document.getElementById('next');
 const errorMsgElement = document.getElementById('spanErrorMsg');
+const loadingDiv = document.getElementById("loading");
+const videoDiv = document.getElementById("videowrap");
 let stream;
 
 const constraints = {
@@ -18,6 +21,8 @@ async function init() {
     try {
         canvas.style.display = "none";
         tryAgainButton.style.display = "none";
+        nextButton.style.display = "none";
+        loadingDiv.style.display = "none";
         stream = await navigator.mediaDevices.getUserMedia(constraints);
         handleSuccess(stream);
     } catch (err) {
@@ -49,9 +54,9 @@ function postTracks(dataURL) {
     request.onload = function () {
         // let tracks = request.response;
         if (request.status !== 200) {
-            alert(`Error ${request.status}: ${request.statusText}`);
+           // alert(`Error ${request.status}: ${request.statusText}`);
         } else {
-            console.log("SUCESS - put tracks, now taking to tracks");
+            console.log("SUCCESS - put tracks, now taking to tracks");
             location.href = "http://localhost:3000/tracks";
         }
     };
@@ -61,16 +66,24 @@ function postTracks(dataURL) {
     request.send(json);
 }
 
+
 captureButton.addEventListener("click", () => {
     let context = canvas.getContext('2d');
-    console.log("CLICK");
+    //console.log("CLICK");
     hideAndShowHTMLElementsforCaptureButton();
 
     context.drawImage(video, 0, 0, width, height);
-    const dataURL = canvas.toDataURL();
+   // const dataURL = canvas.toDataURL();
     turnOffStream();
-    postTracks(dataURL);
+   // postTracks(dataURL);
 });
+
+nextButton.addEventListener("click", () => {
+    const dataURL = canvas.toDataURL();
+    videoDiv.style.display = "none";
+    loadingDiv.style.display = "block";
+    postTracks(dataURL);
+})
 
 
 tryAgainButton.addEventListener("click", () => {
@@ -82,6 +95,7 @@ function hideAndShowHTMLElementsForTryAgainButton() {
     video.style.display = "block";
     captureButton.style.display = "block";
     tryAgainButton.style.display = "none";
+    nextButton.style.display = "none";
     canvas.style.display = "none";
 }
 
@@ -89,5 +103,6 @@ function hideAndShowHTMLElementsforCaptureButton() {
     video.style.display = "none";
     captureButton.style.display = "none";
     tryAgainButton.style.display = "block";
+    nextButton.style.display = "block";
     canvas.style.display = "block";
 }

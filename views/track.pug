@@ -1,9 +1,30 @@
 extends layout
 
-
+block append stylesheets
+    link(rel='stylesheet', href='/stylesheets/trackCSS.css')
+    script(src='./libraries/Chart.min.js', type="text/javascript")
 block content
-    h1= tracks
-    div#demo
+
+    div#table
+
+    .bottomright
+        div#detectedMood
+            h1= "DETECTED MOOD:"
+            h2= mood
+
+    // The Modal
+    #myModal.modal
+        // Modal content
+        #modal-content
+            span.close &times;
+            div#modal-rightSection
+                button#openSpotify
+            div#modal-leftSection
+            div#modal-audioFeatures
+
+
     script.
-        let tracks = '!{JSON.stringify(tracks)}';
+        let tracks = !{JSON.stringify(tracks)};
+        let userInfo = !{JSON.stringify(userInfo)};
+        let mood = !{JSON.stringify(mood)};
     script(src='/js/track.js')

@@ -1,2 +1,20 @@
+extends layout
 
-script(src='/js/info.js')
+block content
+    layout
+    head
+        style.
+            .container {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                -moz-transform: translateX(-50%) translateY(-50%);
+                -webkit-transform: translateX(-50%) translateY(-50%);
+                transform: translateX(-50%) translateY(-50%);
+            }
+        body(style='text-align: center')
+            header
+            .container
+                h1= "About Us"
+
+    script(src='/js/info.js')

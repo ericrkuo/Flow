@@ -1,16 +1,20 @@
 extends layout
 
+block append stylesheets
+    link(rel='stylesheet', href='/stylesheets/indexCSS.css')
 block content
-    h1= title
-    h2= test
-    p Welcome to #{title}
-    button#webcam Webcam
-    div#demo
+    layout
+    head
+        body(style='text-align: center')
+            header
+            .container
+                #welcomeMessage Welcome to&nbsp;
+                #serviceName Flow
+                #captionMessage a playlist curated for how you feel...
+                button#getStarted GET STARTED
 
-    each val in [1, 2, 3, 4, 5]
-        li= val
-    script.
-        let t = 2;
+
     script(src='/js/index.js')
+
 
 

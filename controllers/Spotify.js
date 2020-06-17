@@ -16,15 +16,17 @@ class Spotify {
 
     // TODO: turn add___ functions into get___ and then use universal add(get___));
     // TODO: create new constructor for frontend taking in two parameters (access token and refresh token)
-    constructor() {
+    constructor(accessToken, refreshToken) {
         require('dotenv').config();
         this.spotifyApi = new SpotifyWebApi({
             clientId: process.env.SPOTIFY_API_ID,
             clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
             redirectUri: process.env.CALLBACK_URL,
         });
-        this.spotifyApi.setAccessToken(process.env.ACCESS_TOKEN);
+       // this.spotifyApi.setAccessToken(process.env.ACCESS_TOKEN);
         // this.spotifyApi.setRefreshToken(process.env.REFRESH_TOKEN);
+        this.spotifyApi.setAccessToken(accessToken === undefined ? process.env.ACCESS_TOKEN : accessToken);
+        this.spotifyApi.setRefreshToken(refreshToken === undefined ? null : refreshToken);
         this.trackHashMap = new Map();
     }
 
@@ -113,9 +115,14 @@ class Spotify {
         }
         return Promise.all(promises)
             .then((savedTracksArray) => {
+
                 for (let savedTracks of savedTracksArray) {
                     let arr = [];
-                    for (let item of savedTracks.body.items) arr.push(item.track);
+                    for (let item of savedTracks.body.items){
+                        if (item !== null && item.track !== null) {
+                            arr.push(item.track);
+                        }
+                    }
                     this.addTracksToHashMap(arr);
                 }
                 return true;
@@ -208,18 +215,20 @@ class Spotify {
                 for (let audioFeatures of res) {
                     audioFeatures = audioFeatures.body["audio_features"];
                     for (let audioFeature of audioFeatures) {
-                        let id = audioFeature.id;
-                        data[id] = {
-                            "danceability": audioFeature.danceability,
-                            "energy": audioFeature.energy,
-                            "loudness": (audioFeature.loudness - loudMIN) / (loudMAX - loudMIN),
-                            "speechiness": audioFeature.speechiness,
-                            "acousticness": audioFeature.acousticness,
-                            "instrumentalness": audioFeature.instrumentalness,
-                            "liveness": audioFeature.liveness,
-                            "valence": audioFeature.valence,
-                            "tempo": (audioFeature.tempo - tempoMIN) / (tempoMAX - tempoMIN)
-                        };
+                        if (audioFeature !== null) {
+                            let id = audioFeature.id;
+                            data[id] = {
+                                "danceability": audioFeature.danceability,
+                                "energy": audioFeature.energy,
+                                "loudness": (audioFeature.loudness - loudMIN) / (loudMAX - loudMIN),
+                                "speechiness": audioFeature.speechiness,
+                                "acousticness": audioFeature.acousticness,
+                                "instrumentalness": audioFeature.instrumentalness,
+                                "liveness": audioFeature.liveness,
+                                "valence": audioFeature.valence,
+                                "tempo": (audioFeature.tempo - tempoMIN) / (tempoMAX - tempoMIN)
+                            };
+                        }
                     }
                 }
                 return data;
@@ -366,6 +375,24 @@ class Spotify {
             })
             .catch((err) => {
                 console.log("COULD NOT GET LIST OF USER PLAYLISTS IDS FROM getListOfUserPlaylistsTracks");
+                throw err;
+            })
+    }
+
+
+    // returns name, email, URL, and image of user
+    getUserInfo(){
+        return this.spotifyApi.getMe()
+            .then((res)=>{
+                let json = {};
+                json.display_name = res.body.display_name;
+                json.email = res.body.email;
+                json.external_urls = res.body.external_urls;
+                json.images = res.body.images;
+                return json;
+            })
+            .catch((err)=> {
+                console.log("ERROR in getting info about user");
                 throw err;
             })
     }

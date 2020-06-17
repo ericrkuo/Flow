@@ -1,9 +1,20 @@
 var express = require('express');
 var router = express.Router();
+const {Spotify} = require("../controllers/Spotify");
 
 
 var SpotifyWebApi = require('spotify-web-api-node');
-scopes = ['user-read-private', 'user-read-email','playlist-modify-public','playlist-modify-private'];
+scopes = ['user-read-private',
+    'user-read-email',
+    'playlist-modify-public',
+    'playlist-modify-private',
+    'user-library-read',
+    'user-read-private',
+    'user-top-read',
+    'user-follow-read',
+    'playlist-read-private',
+    'playlist-read-collaborative',
+    'user-read-recently-played'];
 
 require('dotenv').config();
 
@@ -31,15 +42,16 @@ router.get('/callback', async (req,res) => {
     try {
         var data = await spotifyApi.authorizationCodeGrant(code);
         const { access_token, refresh_token } = data.body;
-        spotifyApi.setAccessToken(access_token);
-        // console.log("ACCESSTOKEN - "+ access_token);
-        // console.log("\n");
-        // console.log("REFRESHTOKEN - " + refresh_token);
 
-        spotifyApi.setRefreshToken(refresh_token);
+        req.app.locals.main.spotify = new Spotify(access_token, refresh_token);
+        req.app.locals.main.emotion.spotifyApi = req.app.locals.main.spotify.spotifyApi;
 
-        res.redirect('http://localhost:3000/spotify/');
+        // req.app.locals.main.spotify.spotifyApi.setAccessToken(access_token);
+        // req.app.locals.main.spotify.spotifyApi.setRefreshToken(refresh_token);
+
+        res.redirect('http://localhost:3000/webcam');
     } catch(err) {
+        console.log(err);
         res.redirect('/#/error/invalid token');
     }
 });
