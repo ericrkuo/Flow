@@ -26,9 +26,11 @@ body {
 }
 
 #getStarted {
-    background-color: #ffffff;
+    /*background: linear-gradient(-45deg, #ef3e06, #e70a5f, #049cd2, #04d5a4);*/
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    /*background-color: #ffffff;*/
     border: none;
-    color: #000000;
     font-weight: bolder;
     padding: 15px 32px;
     text-align: center;
@@ -37,6 +39,7 @@ body {
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
+    border-style: ridge;
 }
 
 #welcomeMessage {

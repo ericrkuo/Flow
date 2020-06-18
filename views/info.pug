@@ -1,20 +1,26 @@
 extends layout
 
+block append stylesheets
+    link(rel='stylesheet', href='/stylesheets/infoCSS.css')
 block content
     layout
     head
-        style.
-            .container {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                -moz-transform: translateX(-50%) translateY(-50%);
-                -webkit-transform: translateX(-50%) translateY(-50%);
-                transform: translateX(-50%) translateY(-50%);
-            }
         body(style='text-align: center')
             header
             .container
                 h1= "About Us"
+        #wrapper
+            .circle
+            .line-top
+            .circle
+            .line-bottom
+            .circle
+            //.line-top
+            //.circle
+            //.line-bottom
+            //.circle
+            //.line-top
+            //.circle
+            //.circle
 
     script(src='/js/info.js')
