@@ -4,8 +4,8 @@ let takePhotoButton = document.getElementById('take-photo');
 let tryAgainButton = document.getElementById('try-again');
 let getTracksButton = document.getElementById('get-tracks');
 let errorMsgElement = document.getElementById('spanErrorMsg');
-let loadingDiv = document.getElementById("loading");
-let videoWrap = document.getElementById("videowrap");
+let loadingDiv = document.getElementById("loader");
+let webcam = document.getElementById("webcam");
 let stream;
 
 const constraints = {
@@ -31,7 +31,10 @@ function handleSuccess(stream) {
     video.srcObject = stream;
 }
 
+// CHANGE BACK
 init();
+// webcam.style.display = "none";
+// loadingDiv.style.display = "flex";
 
 function turnOffStream() {
     console.log("turning off webcam");
@@ -65,8 +68,8 @@ function postTracks(dataURL) {
 getTracksButton.addEventListener("click", ()=>{
     console.log("CLICK");
     const dataURL = canvas.toDataURL();
-    videoWrap.style.display = "none";
-    loadingDiv.style.display = "block";
+    webcam.style.display = "none";
+    loadingDiv.style.display = "flex";
     postTracks(dataURL);
 })
 

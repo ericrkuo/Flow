@@ -1,3 +1,21 @@
+body {
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
 #webcam {
     display: flex;
     flex-direction: column;
@@ -6,7 +24,7 @@
     align-items: center;
     width: 100vw;
     height: 100vh;
-    background-color: #fb000042;
+    /*background-color: #fb000042;*/
 }
 
 #content {
@@ -51,14 +69,14 @@
 #video {
     width: 90vmin;
     height: 70vmin;
-    -webkit-mask-image: url("/libraries/circle.png");
+    -webkit-mask-image: url("../libraries/circle.png");
     -webkit-mask-size: 65vmin;
     -webkit-mask-position: center;
     -webkit-mask-repeat: no-repeat;
 }
 
 #canvas {
-    -webkit-mask-image: url("/libraries/circle.png");
+    -webkit-mask-image: url("../libraries/circle.png");
     -webkit-mask-size: 65vmin;
     -webkit-mask-position: center;
     -webkit-mask-repeat: no-repeat;
@@ -86,6 +104,59 @@
 #get-tracks {
 
 }
+
+#loader {
+    /*animation: loader 5s linear infinite;  */
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+/*makes jello move across*/
+@keyframes loader {
+    0% { left: -100px }
+    100% { left: 110%; }
+}
+#box {
+    width: 10vmin;
+    height: 10vmin;
+    background: #fff;
+    animation: animate .5s linear infinite;
+    border-radius: 1vmin;
+}
+@keyframes animate {
+    17% { border-bottom-right-radius: 1vmin; }
+    25% { transform: translateY(9px) rotate(22.5deg); }
+    50% {
+        transform: translateY(18px) scale(1,.9) rotate(45deg) ;
+        border-bottom-right-radius: 6vmin;
+    }
+    75% { transform: translateY(9px) rotate(67.5deg); }
+    100% { transform: translateY(0) rotate(90deg); }
+}
+#shadow {
+    width: 10vmin;
+    height: 1vmin;
+    background: #000;
+    opacity: 0.1;
+    border-radius: 50%;
+    animation: shadow .5s linear infinite;
+    margin-top: 1.2vmin;
+}
+@keyframes shadow {
+    50% {
+        transform: scale(1.2,1);
+    }
+}
+
+#loadingtext{
+    color:white;
+}
+
+/*_______________________________ONLINE SOURCE________________________________*/
 
 /* Make the element pulse (grow large and small slowly) */
 /* Usage
@@ -125,8 +196,8 @@
 */
 @-webkit-keyframes alertPulse {
     0% {background-color: #9A2727; opacity: 1;}
-    50% {opacity: red; opacity: 0.75; }
-    100% {opacity: #9A2727; opacity: 1;}
+    50% {background-color: red; opacity: 0.75; }
+    100% {background-color: #9A2727; opacity: 1;}
 }
 
 
