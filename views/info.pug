@@ -1,26 +1,43 @@
 extends layout
 
-block append stylesheets
+block stylesheets
     link(rel='stylesheet', href='/stylesheets/infoCSS.css')
 block content
     layout
-    head
         body(style='text-align: center')
-            header
-            .container
-                h1= "About Us"
-        #wrapper
-            .circle
-            .line-top
-            .circle
-            .line-bottom
-            .circle
-            //.line-top
-            //.circle
-            //.line-bottom
-            //.circle
-            //.line-top
-            //.circle
-            //.circle
+            //header
+            //.container
+            //    h1= "About Us"
+        .timeline
+            .container.left
+                .content
+                    h2 WELCOME
+                    p
+                        | Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.
+            .container.right
+                .content
+                    h2 MOTIVATION
+                    p
+                        | Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.
+            .container.left
+                .content
+                    h2 HOW WE DID IT
+                    p
+                        | Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.
+            .container.right
+                .content
+                    h2 FUTURE
+                    p
+                        | Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.
+            .container.left
+                .content
+                    h2 REFLECTION
+                    p
+                        | Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.
+            .container.right
+                .content
+                    h2 ABOUT US
+                    p
+                        | Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.
 
     script(src='/js/info.js')
