@@ -90,6 +90,11 @@
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
     background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    flex-direction: column;
 }
 
 #modal {
@@ -97,8 +102,8 @@
     width: 80%; /* Could be more or less, depending on screen size */
     height: 80%;
     position: fixed;
-    top: 10%;
-    left: 10%;
+    /*top: 10%;*/
+    /*left: 10%;*/
 
     display: flex;
     flex-direction: column;

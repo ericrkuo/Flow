@@ -12,7 +12,7 @@ let modalAnalytics = document.getElementById("modal-analytics");
 // console.log("HI: " + test["I'm"]);
 
 initializeUserInfoDiv();
-// initializeTracksDiv();
+initializeTracksDiv();
 initializeMoodDiv();
 
 let x = {hello: 1, hi: 2};
@@ -26,34 +26,6 @@ console.log(Object.values(x));
 // }
 // console.log(x);
 // demo.innerHTML = x;
-tracksDiv.appendChild(createTrackCard(Object.keys(tracks)[0]))
-function createTrackCard(id) {
-    let track = document.createElement('div');
-    track.className = "card w-25";
-    track.id = id;
-
-    let imageURL = tracks[id].track.album.images[0].url;
-    let image = document.createElement("img");
-    image.src = imageURL;
-    image.className = "card-img-top";
-    image.addEventListener("click", function () {
-        editModalContent(id);
-    });
-
-    let trackBody = document.createElement("div");
-    trackBody.className = "card-body";
-
-    let trackTitle = document.createElement("h5");
-    trackTitle.class = "card-title";
-    trackTitle.innerText = tracks[id].track.name
-
-    let trackArtist = document.createElement("h7");
-    trackArtist.class = "card-title";
-    trackArtist.innerText = getArtistNames(tracks[id].track.artists);
-    trackBody.append(trackTitle, trackArtist);
-    track.append(image, trackBody);
-    return track;
-}
 
 function initializeMoodDiv() {
     let moodHeader = document.createElement("h1");

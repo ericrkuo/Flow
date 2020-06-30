@@ -1,5 +1,13 @@
 extends layout
 
+block append stylesheets
+    link(rel='stylesheet', href='/stylesheets/infoCSS.css')
+    link(rel='stylesheet', href='/stylesheets/trackCSS.css')
+    link(href='../libraries/infoPictures')
 block content
-    h1 ABOUT US
+    div#aboutUsTitle About Us
+    div#lineContent
+        div#line
+    div#modal-background
+        div#modal
     script(src='/js/info.js')

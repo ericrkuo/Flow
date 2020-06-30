@@ -62,3 +62,7 @@
 .layout-button:focus {
     outline: none;
 }
+
+.btn-light{
+    margin: 0.5vmin;
+}

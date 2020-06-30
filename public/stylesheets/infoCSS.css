@@ -1,0 +1,97 @@
+#aboutUsTitle {
+    width: 100%;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#lineContent {
+    width: 100vw;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #ffe813;
+}
+
+#line {
+    height: inherit;
+    width: 2.5vmin;
+    background: #bcc7ff;
+    border-radius: 3vmin;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    align-items: center;
+    /*position: relative;*/
+}
+
+.line-div {
+    width: 100vmin;
+    height: 30vmin;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    background-color: #ce0a83;
+    margin: 8vmin;
+}
+
+.line-div-content-left {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    background-color: #e2caca;
+    border: 2px solid white;
+}
+
+.line-div-content-right {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    background-color: #e2caca;
+    border: 2px solid white;
+}
+
+.circle {
+    width: 3.5vmin;
+    height: 3.5vmin;
+    background: #ec533d;
+    border-radius: 50%;
+    /*position: absolute;*/
+    z-index: 1;
+    border: 0.5vmin solid #00a000;
+}
+
+.circle:hover{
+    outline: none;
+    width: 3.6vmin;
+    height: 3.6vmin;
+    background: #e97162;
+}
+
+#modalTitle {
+    width: 100%;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#modalImage {
+    width: 15vmin;
+    height: 15vmin;
+}
