@@ -9,13 +9,7 @@
 
 #tracks-div {
     background-color: #ff0000;
-    height: inherit;
-    width: 70%;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    align-items: center;
+    max-height: 90vh;
     overflow: auto;
 }
 
@@ -31,14 +25,6 @@
 }
 
 #user-div {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    width: 100%;
-    height: 60%;
     background-color: aliceblue;
 }
 
@@ -47,35 +33,11 @@
     height: 25vmin;
 }
 
-/*id = mood-div*/
 #mood-div {
-    width: 100%;
-    height: 40%;
     background-color: cadetblue;
 }
 
-/*class = track*/
-.track {
-    width: 98%;
-    background-color: yellow;
-    margin: 1%;
-    padding: 1%;
-
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    align-items: center;
-}
-
-.track-image {
-    height: 10vmin;
-    width: 10vmin;
-    box-shadow: 0 0 6px 2px black;
-    margin-right: 3%;
-}
-
-.track-image:hover {
+.card-img-top:hover {
     background: #0000ff;
     opacity: 0.9;
 }
@@ -99,71 +61,6 @@
 
 #modal {
     background-color: #fefefe;
-    width: 80%; /* Could be more or less, depending on screen size */
-    height: 80%;
-    position: fixed;
-    /*top: 10%;*/
-    /*left: 10%;*/
-
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    align-items: center;
-}
-
-#modal-up {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    align-items: center;
-
-    width: 100%;
-    height: 50%;
-    background-color: #229238;
-}
-
-#modal-trackInfo {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
-
-    width: 50%;
-    height: 100%;
-    background-color: #c9d8ff;
-}
-
-#modal-trackInfo-image {
-    width: 20vmin;
-    height: 20vmin;
-    margin: 5%;
-}
-
-#modal-trackInfo-right {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    align-items: flex-start;
-
-    width: 100%;
-    height: 100%;
-    background-color: #3159a8;
-}
-
-#modal-content {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    align-items: center;
-
-    width: 50%;
-    height: 100%;
-    background-color: #cc1dba;
 }
 
 #modal-content-video:focus{
@@ -171,13 +68,5 @@
 }
 
 #modal-analytics {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    align-items: center;
-
-    width: 100%;
-    height: 50%;
-    background-color: #ec6767;
+    height: 40vmin;
 }

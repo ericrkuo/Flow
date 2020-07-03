@@ -6,15 +6,21 @@ html
       link(rel='stylesheet', href='/stylesheets/layoutCSS.css')
       link(rel='stylesheet', href='/stylesheets/buttonCSS.css')
       link(rel="stylesheet", href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap")
+      // script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js")
       script(src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous")
       script(src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous")
       link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous")
 
     block title
-      #title
-        button#tutorial(type="button" class='btn btn-light') Tutorial
-        button#home(type="button" class='btn btn-light') Home
-        button#info(type="button" class='btn btn-light') About Us
+      nav.navbar.navbar-expand-lg.navbar-light.bg-light
+        a.navbar-brand(href="#") Flow
+        button(class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation")
+          span(class="navbar-toggler-icon")
+        .collapse.navbar-collapse#navbarNavAltMarkup
+          .navbar-nav
+            a#home.nav-item.nav-link(href="#") Home
+            a#tutorial.nav-item.nav-link(href="#") Tutorial
+            a#info.nav-item.nav-link(href="#") About Us
     block scripts
       script(src='/js/layout.js')
   body

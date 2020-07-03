@@ -1,3 +1,5 @@
+document.getElementById("home").classList.add("active");
+
 let getStarteButton = document.getElementById("getStarted")
 
 getStarteButton.addEventListener("click", () => {
@@ -15,4 +17,7 @@ x = x + "<h>" + "MY VARIABLE - "  + t + "</h>";
 let y = new Map();
 y.set("1", "<h>hello</h>");
 
-document.getElementById("demo").innerHTML = x;
+// document.getElementById("demo").innerHTML = x;
+
+
+$('#demo').html('hello');

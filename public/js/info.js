@@ -1,3 +1,5 @@
+document.getElementById("info").classList.add("active");
+
 let lineContent = document.getElementById("lineContent");
 let line = document.getElementById("line");
 let lineWidth = line.offsetWidth;

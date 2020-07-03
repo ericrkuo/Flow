@@ -4,23 +4,37 @@ block append stylesheets
     link(rel='stylesheet', href='/stylesheets/trackCSS.css')
     script(src='./libraries/Chart.min.js', type="text/javascript")
 block content
-    h1 #{mood}
-    h2 !{Object.keys(tracks)}
+    //h1 #{mood}
+    //h2 !{Object.keys(tracks)}
     div#title Thanks for waiting! Here's your playlist
-    div#media-content
-        div#tracks-div TRACKS GO HERE
-        div#userandmood-div
-            div#user-div
-            div#mood-div
-
+    .container-fluid.bg-gradient-info
+        .row.row-cols-2
+            .col-8
+                #tracks-div.container
+            .col-4
+                .row
+                    #user-div
+                .row
+                    #mood-div
     div#modal-background
-        div#modal
-            div#modal-up
-                div#modal-trackInfo
-                div#modal-content
-            div#modal-analytics
-
-
+        div#modal.container.w-80.text-center
+            .row.row-cols-2
+                .col-md-4
+                    img#modal-image.img-fluid.mx-auto.shadow-lg.rounded-lg.p-1.m-2
+                .col-md-8.bg-primary
+                    .row
+                        .card.w-100.text-left.pl-5.border-0
+                            h4.card-title#modal-track-title
+                            h4.card-title#modal-track-artist
+                            h4.card-title#modal-track-length
+                    .row.row-cols-2
+                        .col-md-6
+                            audio#modal-content-video(style="width: 100%").embed-responsive-item
+                        .col-md-6
+                            button#modal-content-button.btn.btn-light Open in Spotify
+            .row
+                .col-md-12.align-self-center.bg-info
+                    #modal-analytics
     script.
         let tracks = !{JSON.stringify(tracks)};
         let userInfo = !{JSON.stringify(userInfo)};

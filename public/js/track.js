@@ -4,32 +4,52 @@ let moodDiv = document.getElementById("mood-div");
 
 // MODAL INFO
 let modalBackground = document.getElementById("modal-background");
-let modal = document.getElementById("modal");
-let modalTrackInfo = document.getElementById("modal-trackInfo");
-let modalContent = document.getElementById("modal-content");
 let modalAnalytics = document.getElementById("modal-analytics");
 
 // console.log("HI: " + test["I'm"]);
 
 initializeUserInfoDiv();
-// initializeTracksDiv();
+initializeTracksDiv2();
 initializeMoodDiv();
 
-let x = {hello: 1, hi: 2};
-console.log(Object.keys(x));
-console.log(Object.values(x));
-// console.log(tracks);
-// console.log(JSON.parse(tracks));
-// console.log(JSON.parse(tracks).length);
-// for (let track of JSON.parse(tracks)) {
-//     x = x + "<h1>" + track+ "</h1>";
-// }
-// console.log(x);
-// demo.innerHTML = x;
-tracksDiv.appendChild(createTrackCard(Object.keys(tracks)[0]))
-function createTrackCard(id) {
+function initializeTracksDiv2() {
+
+    let counter = 1;
+    let rowClassName = "row w-100 mb-1 no-gutters"
+    let numColumns=5
+    let row = document.createElement("div");
+    row.className = rowClassName;
+    for (let i = 0; i<10; i++) {
+        for (let id of Object.keys(tracks)) {
+            row.appendChild(createTrackCard(id));
+            if (counter%numColumns===0) {
+                tracksDiv.append(row);
+                row = document.createElement("div");
+                row.className = rowClassName;
+            }
+            counter++;
+        }
+    }
+
+    // create remaining columns
+    if (--counter%numColumns !== 0) {
+        let remainingColumns = numColumns - (counter%numColumns);
+        for (let i=0; i<remainingColumns; i++) {
+            let column = document.createElement("div");
+            column.className = "col m-2";
+            row.appendChild(column);
+        }
+        tracksDiv.append(row);
+    }
+
+}
+
+function createTrackCard(id, row) {
+    let column = document.createElement("div");
+    column.className = "col m-2";
+
     let track = document.createElement('div');
-    track.className = "card w-25";
+    track.className = "card border-light mh-50 h-100"; // sets height = 100% to row height, and row height determined by largest card
     track.id = id;
 
     let imageURL = tracks[id].track.album.images[0].url;
@@ -50,10 +70,13 @@ function createTrackCard(id) {
     let trackArtist = document.createElement("h7");
     trackArtist.class = "card-title";
     trackArtist.innerText = getArtistNames(tracks[id].track.artists);
+
     trackBody.append(trackTitle, trackArtist);
     track.append(image, trackBody);
-    return track;
+    column.appendChild(track);
+    return column;
 }
+
 
 function initializeMoodDiv() {
     let moodHeader = document.createElement("h1");
@@ -80,7 +103,6 @@ function getAllTracksDiv() {
     return result;
 }
 
-// TODO: make note in docs this is called JS HTML DOM
 function initializeTracksDiv() {
     for (let id of Object.keys(tracks)) {
         console.log("adding - " + id);
@@ -109,12 +131,14 @@ function createSingleTrackDiv(id) {
 // MODAL INFO ----------------------------------------
 function editModalContent(id) {
     modalBackground.style.display = "flex";
-    initializeModalTrackInfo(id);
+
+    initializeModalImage(id);
     initializeModalContent(id);
     initializeModalAnalytics(id);
 }
 
 function initializeModalAnalytics(id) {
+    removeAllChildren(modalAnalytics);
     let trackChart = document.createElement("canvas");
     modalAnalytics.appendChild(trackChart);
     let audioFeatures = tracks[id].audioFeatures;
@@ -124,11 +148,10 @@ function initializeModalAnalytics(id) {
         data.push(audioFeatures[label]);
     }
 
-
     let ctx = trackChart.getContext('2d');
     let chart = new Chart(ctx, {
         // The type of chart we want to create
-        type: 'line',
+        type: 'bar',
         ticks: {
             reverse: true
         },
@@ -155,57 +178,30 @@ function initializeModalAnalytics(id) {
 function initializeModalContent(id) {
     let track = tracks[id].track;
     let previewURL = track.preview_url;
-    let trackURL = track.external_urls.spotify
-
-    removeAllChildren(modalContent);
-    let video = null;
-    if (previewURL!==null) {
-        video = document.createElement("video");
-        video.controls = true;
-        video.src = previewURL;
-        video.id = "modal-content-video";
-        modalContent.append(video);
-    } else {
-        modalContent.append("Sorry, no preview available!");
-    }
-
-    let urlButton = document.createElement("button");
-    urlButton.innerText = "Open in Spotify";
-    urlButton.addEventListener("click", ()=>{
-        window.open(trackURL, "_blank");
-    })
-
-    modalContent.append(urlButton);
-}
-function initializeModalTrackInfo(id) {
-    removeAllChildren(modalTrackInfo);
-
-    let image = document.createElement("img");
-    image.src = tracks[id].track.album.images[0].url;
-    image.id = "modal-trackInfo-image";
-
-    // TODO: refactor into getTrackHeader, etc;
-    let track = tracks[id].track;
     let trackName = track.name;
     let artistNames = getArtistNames(track.artists);
     let trackLength = getTimeInMinutes(track.duration_ms);
-
-    let trackNameHeader = document.createElement("h1");
-    trackNameHeader.innerText = "TRACK: " + trackName;
-
-    let artistsHeader = document.createElement("h1");
-    artistsHeader.innerText = "ARTIST: " + artistNames;
-
-    let trackLengthHeader = document.createElement("h1");
-    trackLengthHeader.innerText = "LENGTH: " + trackLength;
-
-    let modalTrackInfoRight = document.createElement("div");
-    modalTrackInfoRight.id = "modal-trackInfo-right";
-    modalTrackInfoRight.append(trackNameHeader, artistsHeader, trackLengthHeader);
-
-    modalTrackInfo.append(image, modalTrackInfoRight);
+    let trackURL = track.external_urls.spotify
 
 
+    document.getElementById("modal-track-title").innerText = "TRACK NAME: " + trackName
+    document.getElementById("modal-track-artist").innerText = "TRACK ARTIST(s): " + artistNames
+    document.getElementById("modal-track-length").innerText = "LENGTH: " + trackLength
+
+    let video = document.getElementById("modal-content-video");
+    if (previewURL!==null) {
+        video.controls = true;
+        video.src = previewURL;
+    }
+    // TODO: handle no video src
+
+    let urlButton = document.getElementById("modal-content-button");
+    urlButton.addEventListener("click", ()=>{
+        window.open(trackURL, "_blank");
+    })
+}
+function initializeModalImage(id) {
+    document.getElementById("modal-image").src = tracks[id].track.album.images[0].url;
 }
 
 function getArtistNames(artists) {
@@ -235,9 +231,7 @@ function removeAllChildren(node) {
 window.onclick = function (event) {
     if (event.target === modalBackground) {
         modalBackground.style.display = "none";
-        removeAllChildren(modalTrackInfo);
-        removeAllChildren(modalContent);
-        removeAllChildren(modalAnalytics);
+        document.getElementById("modal-content-video").pause();
     }
 }
 
