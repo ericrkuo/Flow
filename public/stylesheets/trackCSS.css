@@ -8,38 +8,28 @@
 }
 
 #tracks-div {
-    background-color: #ff0000;
-    max-height: 90vh;
-    overflow: auto;
-}
-
-#userandmood-div {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    align-items: center;
-    background-color: #4cff00;
-    height: inherit;
-    width: 30%;
-}
-
-#user-div {
-    background-color: aliceblue;
+    /*max-height: 90vh;*/
+    /*overflow: auto;*/
 }
 
 #user-image {
-    width: 25vmin;
-    height: 25vmin;
+    width: 35vmin;
+    height: 35vmin;
 }
 
-#mood-div {
-    background-color: cadetblue;
+#mood {
+    height: 40vmin
 }
 
-.card-img-top:hover {
+.track-image:hover {
     background: #0000ff;
     opacity: 0.9;
+}
+
+.track-title {
+    line-height: 120%;
+    font-size: 100%;
+    font-weight: normal;
 }
 
 #modal-background {

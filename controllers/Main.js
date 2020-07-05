@@ -51,7 +51,7 @@ class Main {
                 this.printOutAllSongTitles(arrayOfSongIDS);
                 let newArrayOfSongIDS = this.getDesiredNumberSongs(bestK, arrayOfSongIDS, map);
                 // TODO: fix this since setResults is async once fix Azure api
-                this.setResults(newArrayOfSongIDS, audioFeatureData, this.spotify.mood);
+                this.setResults(newArrayOfSongIDS, audioFeatureData, this.spotify.mood, null); // TODO: add emotions
                 return newArrayOfSongIDS;
             })
             .catch((err) => {
@@ -62,8 +62,18 @@ class Main {
 
     getRelevantSongsTestingPurposes() {
         let songX;
-        let dominantEmotion = "surprise";
+        let dominantEmotion = "happiness";
         let newArrayOfSongIDS
+        let emotions = {
+            "anger": 0.575,
+            "contempt": 0,
+            "disgust": 0.006,
+            "fear": 0.008,
+            "happiness": 0.394,
+            "neutral": 0.013,
+            "sadness": 0,
+            "surprise": 0.004
+        };
         return this.emotion.getFeatures(dominantEmotion)
             .then((feature) => {
                 songX = ["X", feature];
@@ -76,7 +86,7 @@ class Main {
                 let arrayOfSongIDS = this.getSongIDsOfClusterContainingSongX(clusters);
                 this.printOutAllSongTitles(arrayOfSongIDS);
                 newArrayOfSongIDS = this.getDesiredNumberSongs(bestK, arrayOfSongIDS, map);
-                return this.setResults(newArrayOfSongIDS, audioFeatureData, this.spotify.mood);
+                return this.setResults(newArrayOfSongIDS, audioFeatureData, this.spotify.mood, emotions);
             })
             .then((res) => {
                 let self = this;
@@ -89,16 +99,20 @@ class Main {
     }
 
     // PURPOSE - set the results for global access inside trackRouter.js
-    // result = {tracks: trackObjects, userInfo: userInfoObject, mood: string}
+    // result = {tracks: trackObjects, userInfo: userInfoObject, mood: {dominantMood, {happiness: 0.8, sadness: 0.2}}}
     // trackObjects = {{id: {track, audioFeatures}}, {id: {track, audioFeatures}}, {id: {track, audioFeatures}}, ...}
-    setResults(songIDs, audioFeatureData, mood) {
-        this.result = {tracks: {}, userInfo: {}, mood: mood};
+    setResults(songIDs, audioFeatureData, mood, emotions) {
+        this.result = {tracks: {}, userInfo: {}, mood: {}};
         for (let songID of songIDs) {
             this.result.tracks[songID] = {
                 track: this.spotify.trackHashMap.get(songID),
                 audioFeatures: audioFeatureData[songID]
             };
         }
+
+        this.result.mood.dominantMood = mood;
+        this.result.mood.emotions = emotions;
+
         return this.spotify.getUserInfo()
             .then((res) => {
                 this.result.userInfo = res;

@@ -18,6 +18,14 @@ describe("unit test for Spotify", function () {
             console.log(track.name);
         }
     }
+
+    it("test tokens", function () {
+        spotify = new Spotify("hello");
+
+        let x = spotify.spotifyApi.getAccessToken();
+        chai.expect(x).to.be.equal("hello");
+    });
+
     it("test Sample Function", function () {
         return spotify.sampleFunction().then((res) => {
             console.log(JSON.stringify(res.body));

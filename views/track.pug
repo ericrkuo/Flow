@@ -6,34 +6,67 @@ block append stylesheets
 block content
     //h1 #{mood}
     //h2 !{Object.keys(tracks)}
-    div#title Thanks for waiting! Here's your playlist
+    h1#title Thanks for waiting! Here's your playlist
     .container-fluid.bg-gradient-info
         .row.row-cols-2
             .col-8
-                #tracks-div.container
+                #tracks-div.container-fluid
             .col-4
+                .row.mb-5
+                    .container-fluid.w-100.text-center
+                        img#user-image.text-center.rounded-circle.shadow-lg.img-fluid
+                        h1#user-name
+                        button#user-link.btn.btn-outline-info(type="button") My Spotify Account
                 .row
-                    #user-div
-                .row
-                    #mood-div
+                    #mood.w-100.text-center.container-fluid
+                        h1.font-weight-bold Detected Mood:&#32;
+                            h1#mood-string
+                        canvas#mood-canvas
     div#modal-background
-        div#modal.container.w-80.text-center
+        div#modal.container.w-80.text-center.rounded-lg.shadow-lg
             .row.row-cols-2
-                .col-md-4
-                    img#modal-image.img-fluid.mx-auto.shadow-lg.rounded-lg.p-1.m-2
-                .col-md-8.bg-primary
-                    .row
-                        .card.w-100.text-left.pl-5.border-0
-                            h4.card-title#modal-track-title
-                            h4.card-title#modal-track-artist
-                            h4.card-title#modal-track-length
-                    .row.row-cols-2
-                        .col-md-6
+                .col-md-4.p-3
+                    img#modal-image.img-fluid.mx-auto.shadow.rounded-lg
+                .col-md-8
+                    .container-fluid.my-3
+                        .row
+                            .col-md-1.text-right
+                                svg(width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-music-note" fill="currentColor" xmlns="http://www.w3.org/2000/svg")
+                                    path(d="M9 13c0 1.105-1.12 2-2.5 2S4 14.105 4 13s1.12-2 2.5-2 2.5.895 2.5 2z")
+                                    path(fill-rule="evenodd" d="M9 3v10H8V3h1z")
+                                    path(d="M8 2.82a1 1 0 0 1 .804-.98l3-.6A1 1 0 0 1 13 2.22V4L8 5V2.82z")
+                            .col-md-11.text-left
+                                h4#modal-track-title
+                        .row
+                            .col-md-1.text-right
+                                svg(width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg")
+                                    path(fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z")
+                            .col-md-11.text-left
+                                h4#modal-track-artist
+                        .row
+                            .col-md-1.text-right
+                                svg(width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-music-note-list" fill="currentColor" xmlns="http://www.w3.org/2000/svg")
+                                    path(d="M12 13c0 1.105-1.12 2-2.5 2S7 14.105 7 13s1.12-2 2.5-2 2.5.895 2.5 2z")
+                                    path(fill-rule="evenodd" d="M12 3v10h-1V3h1z")
+                                    path(d="M11 2.82a1 1 0 0 1 .804-.98l3-.6A1 1 0 0 1 16 2.22V4l-5 1V2.82z")
+                                    path(fill-rule="evenodd" d="M0 11.5a.5.5 0 0 1 .5-.5H4a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 .5 7H8a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 .5 3H8a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5z")
+                            .col-md-11.text-left
+                                h4#modal-track-album
+                        .row
+                            .col-md-1.text-right
+                                svg(width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-clock" fill="currentColor" xmlns="http://www.w3.org/2000/svg")
+                                    path(fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm8-7A8 8 0 1 1 0 8a8 8 0 0 1 16 0z")
+                                    path(fill-rule="evenodd" d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5z")
+                            .col-md-11.text-left
+                                h4#modal-track-length
+                    .row.row-cols-2.pl-4
+                        .col-md-7
                             audio#modal-content-video(style="width: 100%").embed-responsive-item
-                        .col-md-6
-                            button#modal-content-button.btn.btn-light Open in Spotify
+                            figcaption#modal-content-caption.figure-caption.text-center
+                        .col-md-4.text-left
+                            button#modal-content-button.btn.btn-success.btn-lg.rounded-pill Open in Spotify
             .row
-                .col-md-12.align-self-center.bg-info
+                .col-md-12.align-self-center
                     #modal-analytics
     script.
         let tracks = !{JSON.stringify(tracks)};
