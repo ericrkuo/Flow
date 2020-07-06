@@ -46,6 +46,10 @@ router.get('/callback', async (req,res) => {
         req.app.locals.main.spotify = new Spotify(access_token, refresh_token);
         req.app.locals.main.emotion.spotifyApi = req.app.locals.main.spotify.spotifyApi;
 
+        let str2 = "lalaa";
+        str2.to
+
+
         // req.app.locals.main.spotify.spotifyApi.setAccessToken(access_token);
         // req.app.locals.main.spotify.spotifyApi.setRefreshToken(refresh_token);
 

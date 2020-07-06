@@ -1,33 +1,33 @@
+extends layout
 
-doctype html
-
+append stylesheets
+    meta(charset='utf-8')
+    meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no")
+    link(href='../libraries/circle.png', type="image")
+    link(rel='stylesheet', href='/stylesheets/webcamCSS.css')
+    link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css')
+    script(src='https://code.jquery.com/jquery-3.5.1.slim.min.js' integrity='sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj' crossorigin='anonymous')
+    script(src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js' integrity='sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo' crossorigin='anonymous')
+    script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js' integrity='sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI' crossorigin='anonymous')
 block content
-    div#videowrap
-        head
-            style.
-                .container {
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    -moz-transform: translateX(-50%) translateY(-50%);
-                    -webkit-transform: translateX(-50%) translateY(-50%);
-                    transform: translateX(-50%) translateY(-50%);
-                }
-        body(style='text-align: center')
-        h1= "let us see how you feel!"
+    body(style='text-align: center')
+        layout
+    div#webcam
+        .breakSpace
+        h2.text-white How are you feeling right now?
+        div#videowrap
+            video#video(playsinline='' autoplay='')
+            canvas#canvas
+        div#controller
+            button.btn.btn-outline-light#take-photo CAPTURE
+            button.btn.btn-outline-light#try-again TAKE PHOTO AGAIN
+            button.btn.btn-outline-light#get-tracks SUBMIT
 
-        .container
-        .videowrap
-        video#video(playsinline='' autoplay='')
+    div#loader
+        div#box
+        div#shadow
+        .breakSpace
+        h1.text-white#loadingtext Curating your playlist
 
-        canvas(id='canvas' width='640' height='480')
-
-        .controller
-        button#snap Capture
-        button#next Next
-        button#tryagain Take Photo Again
-
-    div#loading
-        h1= "Curating your playlist..."
-
-script(src='/js/webcam.js')
+block scripts
+    script(src='/js/webcam.js')

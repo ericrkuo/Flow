@@ -2,17 +2,19 @@ extends layout
 
 block stylesheets
     link(rel='stylesheet', href='/stylesheets/indexCSS.css')
+    link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css' integrity='sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk' crossorigin='anonymous')
     //link(rel='stylesheet', href='/stylesheets/style.css')
 block content
+
     layout
     head
         body(style='text-align: center')
             header
             .container
-                #welcomeMessage Welcome to&nbsp;
-                #serviceName Flow
+                #welcomeMessage Welcome to
+                #serviceName &nbsp;Flow
                 #captionMessage a playlist curated for how you feel...
-                button#getStarted GET STARTED
+                button.btn.btn-outline-light(type='button' onclick='getStarted()') GET STARTED
 
 
     script(src='/js/index.js')

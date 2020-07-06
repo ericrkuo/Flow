@@ -1,27 +1,24 @@
-const width = 640;
-const height = 480;
-const video = document.getElementById('video');
-const canvas = document.getElementById('canvas');
-const captureButton = document.getElementById('snap');
-const tryAgainButton = document.getElementById('tryagain');
-const nextButton = document.getElementById('next');
-const errorMsgElement = document.getElementById('spanErrorMsg');
-const loadingDiv = document.getElementById("loading");
-const videoDiv = document.getElementById("videowrap");
+let video = document.getElementById('video');
+let canvas = document.getElementById('canvas');
+let takePhotoButton = document.getElementById('take-photo');
+let tryAgainButton = document.getElementById('try-again');
+let getTracksButton = document.getElementById('get-tracks');
+let errorMsgElement = document.getElementById('spanErrorMsg');
+let loadingDiv = document.getElementById("loader");
+let h2 = document.getElementsByClassName("h2");
+let webcam = document.getElementById("webcam");
 let stream;
 
 const constraints = {
     audio: false,
-    video: {
-        width: width, height: height
-    }
+    video: true
 };
 
 async function init() {
     try {
         canvas.style.display = "none";
         tryAgainButton.style.display = "none";
-        nextButton.style.display = "none";
+        getTracksButton.style.display = "none";
         loadingDiv.style.display = "none";
         stream = await navigator.mediaDevices.getUserMedia(constraints);
         handleSuccess(stream);
@@ -35,7 +32,10 @@ function handleSuccess(stream) {
     video.srcObject = stream;
 }
 
+// CHANGE BACK
 init();
+// webcam.style.display = "none";
+// loadingDiv.style.display = "flex";
 
 function turnOffStream() {
     console.log("turning off webcam");
@@ -45,7 +45,6 @@ function turnOffStream() {
 }
 
 function postTracks(dataURL) {
-    // location.href = "http://localhost:3000/tracks";
     let json = JSON.stringify({dataURL: dataURL});
     let request = new XMLHttpRequest();
     request.open("POST", "http://localhost:3000/webcam", true);
@@ -54,10 +53,11 @@ function postTracks(dataURL) {
     request.onload = function () {
         // let tracks = request.response;
         if (request.status !== 200) {
-           // alert(`Error ${request.status}: ${request.statusText}`);
+            alert(`Error ${request.status}: ${request.statusText}`);
         } else {
             console.log("SUCCESS - put tracks, now taking to tracks");
-            location.href = "http://localhost:3000/tracks";
+            // console.log(JSON.parse(request.response).link);
+            location.href = JSON.parse(request.response).link;
         }
     };
     request.onerror = function () {
@@ -66,24 +66,28 @@ function postTracks(dataURL) {
     request.send(json);
 }
 
-
-captureButton.addEventListener("click", () => {
-    let context = canvas.getContext('2d');
-    //console.log("CLICK");
-    hideAndShowHTMLElementsforCaptureButton();
-
-    context.drawImage(video, 0, 0, width, height);
-   // const dataURL = canvas.toDataURL();
-    turnOffStream();
-   // postTracks(dataURL);
-});
-
-nextButton.addEventListener("click", () => {
+getTracksButton.addEventListener("click", ()=>{
+    console.log("CLICK");
     const dataURL = canvas.toDataURL();
-    videoDiv.style.display = "none";
-    loadingDiv.style.display = "block";
+    webcam.style.display = "none";
+    loadingDiv.style.display = "flex";
     postTracks(dataURL);
 })
+
+takePhotoButton.addEventListener("click", () => {
+    canvas.width = video.offsetWidth;
+    canvas.height = video.offsetHeight;
+    console.log(video.offsetWidth);
+    console.log(video.offsetHeight);
+    let context = canvas.getContext('2d');
+    // console.log("CLICK");
+    // context.drawImage(video, 0, 0, width, height);
+    context.drawImage(video, 0, 0, video.offsetWidth, video.offsetHeight);
+    hideAndShowHTMLElementsForCaptureButton();
+    // context.drawImage(video, 0, 0);
+    // const dataURL = canvas.toDataURL();
+    turnOffStream();
+});
 
 
 tryAgainButton.addEventListener("click", () => {
@@ -93,16 +97,16 @@ tryAgainButton.addEventListener("click", () => {
 
 function hideAndShowHTMLElementsForTryAgainButton() {
     video.style.display = "block";
-    captureButton.style.display = "block";
+    takePhotoButton.style.display = "block";
     tryAgainButton.style.display = "none";
-    nextButton.style.display = "none";
+    getTracksButton.style.display = "none";
     canvas.style.display = "none";
 }
 
-function hideAndShowHTMLElementsforCaptureButton() {
+function hideAndShowHTMLElementsForCaptureButton() {
     video.style.display = "none";
-    captureButton.style.display = "none";
+    takePhotoButton.style.display = "none";
     tryAgainButton.style.display = "block";
-    nextButton.style.display = "block";
+    getTracksButton.style.display = "block";
     canvas.style.display = "block";
 }

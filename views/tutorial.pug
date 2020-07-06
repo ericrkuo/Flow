@@ -1,23 +1,43 @@
 extends layout
 
 block stylesheets
-    link(rel='stylesheet', href='/stylesheets/style.css')
-
+    link(rel='stylesheet', href='/stylesheets/tutorialCSS.css')
+    meta(charset='utf-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1')
+    link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js')
 block content
     layout
     head
-        style.
-            .container {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                -moz-transform: translateX(-50%) translateY(-50%);
-                -webkit-transform: translateX(-50%) translateY(-50%);
-                transform: translateX(-50%) translateY(-50%);
-            }
         body(style='text-align: center')
-            header
-            .container
-                h1= "Tutorial of Flow"
+    br
+    br
+    br
+    br
+    br
+    h2.text-white-50 Curious how this works? Follow our tutorial below!
+    #demo.carousel.slide(data-ride='carousel')
+        // Indicators
+        ul.carousel-indicators
+            li.active(data-target='#demo' data-slide-to='0')
+            li(data-target='#demo' data-slide-to='1')
+            li(data-target='#demo' data-slide-to='2')
+        // The slideshow
+        .carousel-inner
+            .carousel-item.active
+                img(src='https://blog.eurail.com/wp-content/uploads/2013/10/shutterstock_273176609.jpg' alt='Los Angeles' width='1100' height='500')
+                h5 Will this caption appear?
+            .carousel-item
+                img(src='https://files.tripstodiscover.com/files/2014/06/Cinque-Tierre.jpg' alt='Chicago' width='1100' height='500')
+            .carousel-item
+                img(src='pictures/sanfran.png' alt='New York' width='1100' height='500')
+        // Left and right controls
+        a.carousel-control-prev(href='#demo' data-slide='prev')
+            span.carousel-control-prev-icon
+        a.carousel-control-next(href='#demo' data-slide='next')
+            span.carousel-control-next-icon
+
 
     script(src='/js/tutorial.js')

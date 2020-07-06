@@ -1,0 +1,135 @@
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+#webcam {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+#videowrap {
+    width: 100%;
+    height: 80vmin;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#video {
+    height: 70vmin;
+    -webkit-mask-image: url("../libraries/circle.png");
+    -webkit-mask-size: 65vmin;
+    -webkit-mask-position: center;
+    -webkit-mask-repeat: no-repeat;
+    animation: backInDown;
+    animation-duration: 4s;
+}
+
+#canvas {
+    -webkit-mask-image: url("../libraries/circle.png");
+    -webkit-mask-size: 65vmin;
+    -webkit-mask-position: center;
+    -webkit-mask-repeat: no-repeat;
+}
+
+#controller {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    width: inherit;
+    height: 10%;
+}
+
+#take-photo {
+    width: 200px;
+    height: 50px;
+}
+
+#loader {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+/*makes jello move across*/
+@keyframes loader {
+    0% { left: -100px }
+    100% { left: 110%; }
+}
+
+#box {
+    width: 10vmin;
+    height: 10vmin;
+    background: #fff;
+    animation: animate .5s linear infinite;
+    border-radius: 1vmin;
+}
+
+@keyframes animate {
+    17% { border-bottom-right-radius: 1vmin; }
+    25% { transform: translateY(9px) rotate(22.5deg); }
+    50% {
+        transform: translateY(18px) scale(1,.9) rotate(45deg) ;
+        border-bottom-right-radius: 6vmin;
+    }
+    75% { transform: translateY(9px) rotate(67.5deg); }
+    100% { transform: translateY(0) rotate(90deg); }
+}
+
+#shadow {
+    width: 10vmin;
+    height: 1vmin;
+    background: #000;
+    opacity: 0.1;
+    border-radius: 50%;
+    animation: shadow .5s linear infinite;
+    margin-top: 1.2vmin;
+}
+
+@keyframes shadow {
+    50% {
+        transform: scale(1.2,1);
+    }
+}
+
+#loadingtext::after {
+    content: ' .';
+    animation: dots 1s steps(5, end) infinite;
+}
+
+@keyframes dots {
+    0%, 20% {
+        color: rgba(0,0,0,0);
+        text-shadow:
+                .25em 0 0 rgba(0,0,0,0),
+                .5em 0 0 rgba(0,0,0,0);}
+    40% {
+        color: white;
+        text-shadow:
+                .25em 0 0 rgba(0,0,0,0),
+                .5em 0 0 rgba(0,0,0,0);}
+    60% {
+        text-shadow:
+                .25em 0 0 white,
+                .5em 0 0 rgba(0,0,0,0);}
+    80%, 100% {
+        text-shadow:
+                .25em 0 0 white,
+                .5em 0 0 white;}
+}
+
+.breakSpace {
+    margin-top: 100px;
+}

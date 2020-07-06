@@ -1,18 +1,17 @@
 doctype html
 html
-  script(src="/js/layout.js")
   block stylesheets
     link(rel='stylesheet', href='/stylesheets/layoutCSS.css')
+    link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css' integrity='sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk' crossorigin='anonymous')
 
-  button#tutorial TUTORIAL
-  button#home HOME
-  button#aboutUs ABOUT US
-
-      //ul
-      //  a(href="/tutorial") Tutorial
-      //  a(href="/") Home
-      //  a(href="/info") About Us
-
+  .btn-group(role='group')
+    button(type='button' class="btn btn-outline-light mr-2 mt-5" onclick='redirectTutorial()') TUTORIAL
+    button(type='button' class="btn btn-outline-light mr-2 mt-5" onclick='redirectHome()' margin='20px') HOME
+    button(type='button' class="btn btn-outline-light mt-5" onclick='redirectAboutUs()' margin='20px') ABOUT US
 
   body
     block content
+    block scripts
+
+
+  script(src='/js/layout.js')

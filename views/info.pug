@@ -2,42 +2,95 @@ extends layout
 
 block stylesheets
     link(rel='stylesheet', href='/stylesheets/infoCSS.css')
+    script(src='/jquery/jquery.js')
+    script(src='//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js')
+    link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css' integrity='sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk' crossorigin='anonymous')
 block content
     layout
+    head
         body(style='text-align: center')
-            //header
-            //.container
-            //    h1= "About Us"
-        .timeline
-            .container.left
-                .content
-                    h2 WELCOME
-                    p
-                        | Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.
-            .container.right
-                .content
-                    h2 MOTIVATION
-                    p
-                        | Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.
-            .container.left
-                .content
-                    h2 HOW WE DID IT
-                    p
-                        | Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.
-            .container.right
-                .content
-                    h2 FUTURE
-                    p
-                        | Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.
-            .container.left
-                .content
-                    h2 REFLECTION
-                    p
-                        | Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.
-            .container.right
-                .content
-                    h2 ABOUT US
-                    p
-                        | Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.
+            .container.py-5
+                .row.h-100.align-items-center.py-5
+                    .col-lg-6
+                        h1.display-4.text-white ABOUT US
+                        p.lead.text-muted.mb-0.text-white-50 How did it all start?
+                    .col-lg-6.d-none.d-lg-block
+                        img.img-fluid(src='https://res.cloudinary.com/mhmd/image/upload/v1556834136/illus_kftyh4.png' alt='')
+            .bg-white.py-5
+                .container.py-5
+                    .row.align-items-center.mb-5
+                        .col-lg-6.order-2.order-lg-1
+                            h2.font-weight-light Welcome
+                            p.font-italic.text-muted.mb-4
+                                | Welcome to Flow, a service designed to curate a playlist based on your current mood and Spotify history. Simply capture a selfie showing how you feel, and we’ll do the work for you!
+                                | Excited to see what results you’ll get?
+                            a.btn.btn-light.px-5.rounded-pill.shadow-sm(href='/spotify/login') Get Started
+                        .col-lg-5.px-5.mx-auto.order-1.order-lg-2
+                            img.img-fluid.mb-4.mb-lg-0(src='https://res.cloudinary.com/mhmd/image/upload/v1556834139/img-1_e25nvh.jpg' alt='')
+                    .row.align-items-center
+                        .col-lg-5.px-5.mx-auto
+                            img.img-fluid.mb-4.mb-lg-0(src='https://res.cloudinary.com/mhmd/image/upload/v1556834136/img-2_vdgqgn.jpg' alt='')
+                        .col-lg-6
+                            h2.font-weight-light Our Motivation
+                            p.font-italic.text-muted.mb-4
+                                | Flow is inspired by our passion for creating innovative and exciting software projects- specifically our desire to learn new concepts, frameworks, libraries, and tools used in the present tech industry. Not to mention, we are also avid Spotify users and love to listen to music whenever we’re not busy studying! 
+                            //a.btn.btn-light.px-5.rounded-pill.shadow-sm(href='#') Learn More
+                    .row.align-items-center.mb-5
+                        .col-lg-6.order-2.order-lg-1
+                            h2.font-weight-light How We Did It
+                            p.font-italic.text-muted.mb-4
+                                | After securing permission to a user’s Spotify account, our application will request for a webcam image of the user. With the image, our application utilizes the Azure Face API to detect the associated mood features. Afterwards, using the Spotify Web API, we gather information from the user’s listening history and use the dominant emotion to select the matching songs from our kMeans algorithm, which is verified by silhouette values. Afterwards, we compile all the information together and present the results to the user!
+                            //a.btn.btn-light.px-5.rounded-pill.shadow-sm(href='/spotify/login') Get Started
+                        .col-lg-5.px-5.mx-auto.order-1.order-lg-2
+                            img.img-fluid.mb-4.mb-lg-0(src='https://res.cloudinary.com/mhmd/image/upload/v1556834139/img-1_e25nvh.jpg' alt='')
+                    .row.align-items-center
+                        .col-lg-5.px-5.mx-auto
+                            img.img-fluid.mb-4.mb-lg-0(src='https://res.cloudinary.com/mhmd/image/upload/v1556834136/img-2_vdgqgn.jpg' alt='')
+                        .col-lg-6
+                            h2.font-weight-light The Future of Flow
+                            p.font-italic.text-muted.mb-4
+                                | As with any outstanding project, application or product- there is always room for improvements and enhancement! For Flow, in the near future, we hope to be able to execute the following ideas:
+                                | Provide more accurate song recommendations for the moods that are subjectively difficult to translate into music (anger, contempt, disgust, fear, surprise).
+                                | Further optimization of the kMeans algorithm
+                                | Implement other machine learning algorithms in substitution of kMeans
+                                | Utilize a database system for more organized data management
+                                | Introduce opposite moods as a selection choice for type of recommended tracks
+                            a.btn.btn-light.px-5.rounded-pill.shadow-sm(href='#') Learn More
+                    .row.align-items-center.mb-5
+                        .col-lg-6.order-2.order-lg-1
+                            h2.font-weight-light Reflection
+                            p.font-italic.text-muted.mb-4
+                                | Being able to explore new frameworks, learn about template engines, and experiment with various APIs and libraries, has been extremely fun and eye-opening! Though at times difficult through the hours of debugging and confusion, we are grateful to have been able to dedicate our energy and efforts to this project whole-heartedly.
+                                | Initially, upon discussion of the structure and functionalities, we had expected the project to be a small feat. However, as we continued to progress through our checkpoints, we recognized the numerous complexities we faced. From figuring out the communication levels of our code structure [REPHRASE], to learning how to work with Pug for the first time, we were able to understand the importance of making wise decisions for both major and minor details.
+                                | Further, we identified the positive effects of weighing out the pros and cons of all our ideas, as we pushed to produce the best version of our application. Thanks to many trials and errors, we are proud of what we have accomplished, both with this service and in terms of our growth as software engineers.
+                            //a.btn.btn-light.px-5.rounded-pill.shadow-sm(href='/spotify/login') Get Started
+                        .col-lg-5.px-5.mx-auto.order-1.order-lg-2
+                            img.img-fluid.mb-4.mb-lg-0(src='https://res.cloudinary.com/mhmd/image/upload/v1556834139/img-1_e25nvh.jpg' alt='')
+                    .row.align-items-center
+                        .col-lg-5.px-5.mx-auto
+                            img.img-fluid.mb-4.mb-lg-0(src='https://res.cloudinary.com/mhmd/image/upload/v1556834136/img-2_vdgqgn.jpg' alt='')
+                        .col-lg-6
+                            h2.font-weight-light About Us
+                            p.font-italic.text-muted.mb-4
+                                | Insert text here
+            .bg-light.py-5
+                .container.py-5
+                    .row.mb-4
+                        .col-lg-5
+                            h2.display-4.font-weight-light Our team
+                            p.font-italic.text-muted Meet the two behind the creation.
+                    .row.text-center
+                        .col-xl-3.col-sm-6.mb-5
+                            .bg-white.rounded.shadow-sm.py-5.px-4
+                                img.img-fluid.rounded-circle.mb-3.img-thumbnail.shadow-sm(src='https://res.cloudinary.com/mhmd/image/upload/v1556834130/avatar-3_hzlize.png' alt='' width='100')
+                                h5.mb-0 ERIC KUO
+                                span.small.text-uppercase.text-muted Developer
+
+                        .col-xl-3.col-sm-6.mb-5
+                            .bg-white.rounded.shadow-sm.py-5.px-4
+                                img.img-fluid.rounded-circle.mb-3.img-thumbnail.shadow-sm(src='https://res.cloudinary.com/mhmd/image/upload/v1556834132/avatar-4_ozhrib.png' alt='' width='100')
+                                h5.mb-0 LILY DU
+                                span.small.text-uppercase.text-muted Developer
+
 
     script(src='/js/info.js')
