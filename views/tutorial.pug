@@ -1,9 +1,9 @@
 extends layout
 
 block stylesheets
-    link(rel='stylesheet', href='/stylesheets/tutorialCSS.css')
     meta(charset='utf-8')
     meta(name='viewport' content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='/stylesheets/tutorialCSS.css')
     link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css')
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js')
@@ -28,7 +28,6 @@ block content
         .carousel-inner
             .carousel-item.active
                 img(src='https://blog.eurail.com/wp-content/uploads/2013/10/shutterstock_273176609.jpg' alt='Los Angeles' width='1100' height='500')
-                h5 Will this caption appear?
             .carousel-item
                 img(src='https://files.tripstodiscover.com/files/2014/06/Cinque-Tierre.jpg' alt='Chicago' width='1100' height='500')
             .carousel-item

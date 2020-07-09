@@ -389,6 +389,7 @@ class Spotify {
                 json.email = res.body.email;
                 json.external_urls = res.body.external_urls;
                 json.images = res.body.images;
+                json.id = res.body.id;
                 return json;
             })
             .catch((err)=> {
@@ -396,6 +397,30 @@ class Spotify {
                 throw err;
             })
     }
+
+    createNewPlaylist() {
+        return this.getUserInfo()
+            .then((result) => {
+                let userId = result.id;
+                return this.spotifyApi.createPlaylist(userId, 'Flow Playlist');
+            }).catch((error) => {
+                console.log("Error in creating new playlist");
+                throw error;
+        })
+    }
+
+    getNewPlaylist(matchingTracks) {
+        return this.createNewPlaylist().then((result) => {
+            let link = result.body.external_urls["spotify"];
+            return this.spotifyApi.addTracksToPlaylist(result.body.id, matchingTracks).then(() => {
+                return link;
+            })
+        }).catch((error) => {
+            console.log("Error in adding tracks to newly created playlist");
+            throw error;
+        })
+    }
+
 
 }
 

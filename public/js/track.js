@@ -1,5 +1,6 @@
 var table = document.getElementById("table");
 var spotifyButton = document.getElementById("openSpotify");
+var createPlaylistButton = document.getElementById("createPlaylist");
 
 // MODAL
 var modal = document.getElementById("myModal");
@@ -209,3 +210,28 @@ function millisToMinutesAndSeconds(millis) {
     var seconds = ((millis % 60000) / 1000).toFixed(0);
     return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
 }
+
+createPlaylistButton.addEventListener("click", () => {
+    // NOTE: HOW LONG WILL THIS TAKE?
+    let request = new XMLHttpRequest();
+    request.open("POST", "http://localhost:3000/tracks", true);
+    request.setRequestHeader('Content-Type', 'application/json');
+
+    request.onload = function () {
+        if (request.status !== 200) {
+            console.log("REACHING ERROR IN TRACK.JS")
+            alert(`Error ${request.status}: ${request.statusText}`);
+        } else {
+            console.log("SUCCESS - created new playlist");
+            location.href = JSON.parse(request.response).link;
+        }
+    };
+    request.onerror = function () {
+        alert("The request failed");
+    };
+
+    let json = JSON.stringify({tracks: tracks});
+
+    request.send(json);
+})
+

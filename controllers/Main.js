@@ -34,6 +34,7 @@ class Main {
         this.spotify = new Spotify();
         this.kMean = new KMean();
         this.result = null;
+        this.playlistURL = null;
     }
 
 
@@ -172,6 +173,18 @@ class Main {
                 console.log(this.spotify.trackHashMap.get(song).name);
             }
         }
+    }
+
+    createMoodPlaylist(tracks) {
+        let tracksArray = Object.values(tracks.tracks);
+        let tracksURIArray = [];
+        for(let track of tracksArray) {
+            tracksURIArray.push(track.track.uri);
+        }
+        return this.spotify.getNewPlaylist(tracksURIArray).then((playlistLink) => {
+            this.playlistURL = playlistLink
+        })
+
     }
 }
 

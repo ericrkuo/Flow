@@ -1063,4 +1063,17 @@ router.get('/', function(req, res, next) {
 
 });
 
+router.post('/', function (req, res, next) {
+    let main = req.app.locals.main;
+    return main.createMoodPlaylist(req.body)
+        .then(()=>{
+            return res.status(200).json({link: req.app.locals.main.playlistURL});
+        })
+        .catch((err)=>{
+            console.log("ERROR FROM TRACKROUTER.JS");
+            console.log(err);
+            return res.status(400).json({"error" : err});
+        });
+});
+
 module.exports = router;

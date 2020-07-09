@@ -44,165 +44,17 @@ body {
     color: #555;
 }
 
+#modalLabel {
+    text-align: center;
+}
 
-/*.cd-horizontal-timeline ol, .cd-horizontal-timeline ul {*/
-/*    list-style: none;*/
-/*}*/
-/*.cd-timeline-navigation a:hover, .cd-timeline-navigation a:focus {*/
-/*    border-color:#313740;*/
+.modal-content {
+    background: black;
+}
 
-/*}*/
-/*.cd-horizontal-timeline a, .cd-horizontal-timeline a:hover, .cd-horizontal-timeline a:focus{ color:#313740;}*/
-/*.cd-horizontal-timeline blockquote, .cd-horizontal-timeline q {*/
-/*    quotes: none;*/
-/*}*/
-/*.cd-horizontal-timeline blockquote:before, .cd-horizontal-timeline blockquote:after,*/
-/*.cd-horizontal-timeline q:before, .cd-horizontal-timeline q:after {*/
-/*    content: '';*/
-/*    content: none;*/
-/*}*/
-/*.cd-horizontal-timeline table {*/
-/*    border-collapse: collapse;*/
-/*    border-spacing: 0;*/
-/*}*/
-/*.cd-horizontal-timeline {*/
-/*    opacity: 0;*/
-/*    margin: 2em auto;*/
-/*    -webkit-transition: opacity 0.2s;*/
-/*    -moz-transition: opacity 0.2s;*/
-/*    transition: opacity 0.2s;*/
-/*}*/
-/*.cd-horizontal-timeline::before {*/
-/*    !* never visible - this is used in jQuery to check the current MQ *!*/
-/*    content: 'mobile';*/
-/*    display: none;*/
-/*}*/
-/*.cd-horizontal-timeline.loaded {*/
-/*    !* show the timeline after events position has been set (using JavaScript) *!*/
-/*    opacity: 1;*/
-/*}*/
-/*.cd-horizontal-timeline .timeline {*/
-/*    position: relative;*/
-/*    height: 100px;*/
-/*    width: 90%;*/
-/*    max-width: 800px;*/
-/*    margin: 0 auto;*/
-/*}*/
-/*.cd-horizontal-timeline .events-wrapper {*/
-/*    position: relative;*/
-/*    height: 100%;*/
-/*    margin: 0 40px;*/
-/*    overflow: hidden;*/
-/*}*/
-/*.cd-horizontal-timeline .events-wrapper::after, .cd-horizontal-timeline .events-wrapper::before {*/
-/*    !* these are used to create a shadow effect at the sides of the timeline *!*/
-/*    content: '';*/
-/*    position: absolute;*/
-/*    z-index: 2;*/
-/*    top: 0;*/
-/*    height: 100%;*/
-/*    width: 20px;*/
-/*}*/
-/*.cd-horizontal-timeline .events-wrapper::before {*/
-/*    left: 0;*/
-
-/*}*/
-/*.cd-horizontal-timeline .events-wrapper::after {*/
-/*    right: 0;*/
-
-/*}*/
-/*.cd-horizontal-timeline .events {*/
-/*    !* this is the grey line/timeline *!*/
-/*    position: absolute;*/
-/*    z-index: 1;*/
-/*    left: 0;*/
-/*    top: 50px;*/
-/*    height: 2px;*/
-/*    !* width will be set using JavaScript *!*/
-/*    background: #dfdfdf;*/
-/*    -webkit-transition: -webkit-transform 0.4s;*/
-/*    -moz-transition: -moz-transform 0.4s;*/
-/*    transition: transform 0.4s;*/
-/*}*/
-/*.cd-horizontal-timeline .filling-line {*/
-/*    !* this is used to create the green line filling the timeline *!*/
-/*    position: absolute;*/
-/*    z-index: 1;*/
-/*    left: 0;*/
-/*    top: 0;*/
-/*    height: 100%;*/
-/*    width: 100%;*/
-/*    background-color: #313740;*/
-/*    -webkit-transform: scaleX(0);*/
-/*    -moz-transform: scaleX(0);*/
-/*    -ms-transform: scaleX(0);*/
-/*    -o-transform: scaleX(0);*/
-/*    transform: scaleX(0);*/
-/*    -webkit-transform-origin: left center;*/
-/*    -moz-transform-origin: left center;*/
-/*    -ms-transform-origin: left center;*/
-/*    -o-transform-origin: left center;*/
-/*    transform-origin: left center;*/
-/*    -webkit-transition: -webkit-transform 0.3s;*/
-/*    -moz-transition: -moz-transform 0.3s;*/
-/*    transition: transform 0.3s;*/
-/*}*/
-/*.cd-horizontal-timeline .events a {*/
-/*    position: absolute;*/
-/*    bottom: 0;*/
-/*    z-index: 2;*/
-/*    text-align: center;*/
-/*    font-size: 1rem;*/
-/*    padding-bottom: 15px;*/
-
-/*    !* fix bug on Safari - text flickering while timeline translates *!*/
-/*    -webkit-transform: translateZ(0);*/
-/*    -moz-transform: translateZ(0);*/
-/*    -ms-transform: translateZ(0);*/
-/*    -o-transform: translateZ(0);*/
-/*    transform: translateZ(0);*/
-/*}*/
-/*.cd-horizontal-timeline .events a::after {*/
-/*    !* this is used to create the event spot *!*/
-/*    content: '';*/
-/*    position: absolute;*/
-/*    left: 50%;*/
-/*    right: auto;*/
-/*    -webkit-transform: translateX(-50%);*/
-/*    -moz-transform: translateX(-50%);*/
-/*    -ms-transform: translateX(-50%);*/
-/*    -o-transform: translateX(-50%);*/
-/*    transform: translateX(-50%);*/
-/*    bottom: -5px;*/
-/*    height: 12px;*/
-/*    width: 12px;*/
-/*    border-radius: 50%;*/
-/*    border: 2px solid #dfdfdf;*/
-/*    background-color: #f8f8f8;*/
-/*    -webkit-transition: background-color 0.3s, border-color 0.3s;*/
-/*    -moz-transition: background-color 0.3s, border-color 0.3s;*/
-/*    transition: background-color 0.3s, border-color 0.3s;*/
-/*}*/
-/*.no-touch .cd-horizontal-timeline .events a:hover::after {*/
-/*    background-color: #313740;*/
-/*    border-color: #313740;*/
-/*}*/
-/*.cd-horizontal-timeline .events a.selected {*/
-/*    pointer-events: none;*/
-/*}*/
-/*.cd-horizontal-timeline .events a.selected::after {*/
-/*    background-color: #313740;*/
-/*    border-color: #313740;*/
-/*}*/
-/*.cd-horizontal-timeline .events a.older-event::after {*/
-/*    border-color: #313740;*/
-/*}*/
-/*@media only screen and (min-width: 1100px) {*/
-/*    .cd-horizontal-timeline::before {*/
-/*        !* never visible - this is used in jQuery to check the current MQ *!*/
-/*        content: 'desktop';*/
-/*    }*/
-/*}*/
+.breakSpace {
+    margin-top: 100px;
+}
 
 .cd-timeline-navigation a {
     /* these are the left/right arrows to navigate the timeline */

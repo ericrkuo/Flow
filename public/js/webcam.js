@@ -80,12 +80,8 @@ takePhotoButton.addEventListener("click", () => {
     console.log(video.offsetWidth);
     console.log(video.offsetHeight);
     let context = canvas.getContext('2d');
-    // console.log("CLICK");
-    // context.drawImage(video, 0, 0, width, height);
     context.drawImage(video, 0, 0, video.offsetWidth, video.offsetHeight);
     hideAndShowHTMLElementsForCaptureButton();
-    // context.drawImage(video, 0, 0);
-    // const dataURL = canvas.toDataURL();
     turnOffStream();
 });
 
