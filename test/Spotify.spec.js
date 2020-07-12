@@ -19,11 +19,12 @@ describe("unit test for Spotify", function () {
         }
     }
 
-    it("test tokens", function () {
+    it("test tokens", async function () {
         spotify = new Spotify("hello");
-
         let x = spotify.spotifyApi.getAccessToken();
         chai.expect(x).to.be.equal("hello");
+        let result = await spotify.checkCredentials()
+        console.log(result);
     });
 
     it("test Sample Function", function () {

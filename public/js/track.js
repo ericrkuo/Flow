@@ -38,6 +38,10 @@ let colors = {
     ]
 }
 
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+})
+
 initializeUserInfoDiv();
 initializeTracksDiv2();
 initializeMoodDiv();
@@ -49,7 +53,7 @@ function initializeTracksDiv2() {
     let numColumns = 4;
     let row = document.createElement("div");
     row.className = rowClassName;
-    for (let i = 0; i < 1; i++) {
+    for (let i = 0; i < 10; i++) {
         for (let id of Object.keys(tracks)) {
             let column = document.createElement("div");
             column.className = "col my-5";
@@ -81,10 +85,12 @@ function createTrackCard(id) {
     let container = document.createElement("div");
     container.className = "container-fluid px-5"
 
-    let imageURL = getImageURL(id);
+    let imageURL = getAlbumImageURL(id);
     let image = document.createElement("img");
     image.src = imageURL;
     image.className = "track-image rounded-circle shadow-lg img-fluid mb-2";
+    image.setAttribute("data-toggle", "modal");
+    image.setAttribute("data-target", "#trackModal");
     image.addEventListener("click", function () {
         editModalContent(id);
     });
@@ -138,42 +144,53 @@ function createTrackCardOLD(id) {
 function initializeMoodDiv() {
     document.getElementById("mood-string").innerText = mood.dominantMood.charAt(0).toUpperCase() + mood.dominantMood.substring(1);
 
-    let moodChart = document.getElementById("mood-canvas");
-    let labels = Object.keys(mood.emotions);
-    let data = [];
-    for (let val of Object.values(mood.emotions)) {
-        data.push(val);
-    }
-    let ctx = moodChart.getContext('2d');
-    let myDoughnutChart = new Chart(ctx, {
-        type: 'polarArea',
-        data: {
-            labels: labels,
-            datasets: [{
-                backgroundColor: colors.backgroundColor,
-                borderColor: colors.borderColor,
-                pointHoverBackgroundColor: colors.pointHoverBackgroundColor,
-                borderWidth: 2,
-                data: data,
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            animation: {
-                animateRotate: true,
-            },
-            legend: {
-                display: true,
-                position: 'bottom'
-            }
+    $('#collapseOne').on('shown.bs.collapse', function () {
+        let moodDiv = document.getElementById("mood");
+        let moodChart = document.createElement("canvas");
+        moodDiv.appendChild(moodChart);
+        let labels = Object.keys(mood.emotions);
+        let data = [];
+        for (let val of Object.values(mood.emotions)) {
+            data.push(val);
         }
-    });
+        let ctx = moodChart.getContext('2d');
+        let myDoughnutChart = new Chart(ctx, {
+            type: 'polarArea',
+            data: {
+                labels: labels,
+                datasets: [{
+                    backgroundColor: colors.backgroundColor,
+                    borderColor: colors.borderColor,
+                    pointHoverBackgroundColor: colors.pointHoverBackgroundColor,
+                    borderWidth: 2,
+                    data: data,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                animation: {
+                    animateRotate: true,
+                },
+                legend: {
+                    display: true,
+                    position: 'bottom'
+                }
+            }
+        });
+    }).on('hide.bs.collapse', function () {
+        let moodDiv = document.getElementById("mood");
+        removeAllChildren(moodDiv);
+    })
+
+    document.getElementById("see-more").addEventListener("click", function(){
+
+    })
 }
 
 function initializeUserInfoDiv() {
     let img = document.getElementById("user-image");
-    img.src = userInfo.images[0].url;
+    img.src = getUserImageURL();
 
     document.getElementById("user-name").innerText = userInfo.display_name;
     document.getElementById("user-link").addEventListener("click", () => {
@@ -183,7 +200,7 @@ function initializeUserInfoDiv() {
 
 // MODAL INFO ----------------------------------------
 function editModalContent(id) {
-    modalBackground.style.display = "flex";
+    // modalBackground.style.display = "flex";
 
     initializeModalImage(id);
     initializeModalContent(id);
@@ -253,7 +270,6 @@ function initializeModalContent(id) {
         document.getElementById("modal-content-caption").innerText = "Sorry, No Preview Available";
         video.src = "";
     }
-    // TODO: handle no video src
 
     let urlButton = document.getElementById("modal-content-button");
     urlButton.addEventListener("click", () => {
@@ -262,12 +278,21 @@ function initializeModalContent(id) {
 }
 
 function initializeModalImage(id) {
-    document.getElementById("modal-image").src = getImageURL(id);
+    document.getElementById("modal-image").src = getAlbumImageURL(id);
 }
-function getImageURL(id) {
+function getAlbumImageURL(id) {
     let images = tracks[id].track.album.images;
     if (images.length !== 0 && images[0].url !== undefined && images[0].url !== null && images[0].url !== "") {
         return images[0].url;
+    } else {
+        return "../libraries/unavailable.png";
+    }
+}
+
+function getUserImageURL() {
+    let userImages = userInfo.images;
+    if (userImages.length !== 0 && userImages[0].url !== undefined && userImages[0].url !== null && userImages[0].url !== "") {
+        return userImages[0].url;
     } else {
         return "../libraries/unavailable.png";
     }
@@ -298,10 +323,10 @@ function removeAllChildren(node) {
 
 }
 
-window.onclick = function (event) {
-    if (event.target === modalBackground) {
-        modalBackground.style.display = "none";
-        document.getElementById("modal-content-video").pause();
-    }
-}
+// window.onclick = function (event) {
+//     if (event.target === modalBackground) {
+//         modalBackground.style.display = "none";
+//         document.getElementById("modal-content-video").pause();
+//     }
+// }
 

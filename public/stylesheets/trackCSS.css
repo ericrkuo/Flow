@@ -13,17 +13,22 @@
 }
 
 #user-image {
-    width: 35vmin;
-    height: 35vmin;
+    /*width: 35vmin;*/
+    /*height: 35vmin;*/
 }
 
 #mood {
-    height: 40vmin
+    height: 45vmin;
+}
+
+.track-image {
+    transition: transform .1s ease-in-out;
 }
 
 .track-image:hover {
     background: #0000ff;
     opacity: 0.9;
+    transform: scale(0.95);
 }
 
 .track-title {
@@ -49,10 +54,6 @@
     flex-direction: column;
 }
 
-#modal {
-    background-color: #fefefe;
-}
-
 #modal-content-video:focus{
     outline: none;
 }
@@ -60,3 +61,23 @@
 #modal-analytics {
     height: 40vmin;
 }
+
+/*body {*/
+/*    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);*/
+/*    background-size: 100000% 100000%;*/
+/*    animation: gradient 15s ease infinite;;*/
+/*    width: 100vw;*/
+/*    height: 100vh;*/
+/*}*/
+
+/*@keyframes gradient {*/
+/*    0% {*/
+/*        background-position: 0% 50%;*/
+/*    }*/
+/*    50% {*/
+/*        background-position: 100% 50%;*/
+/*    }*/
+/*    100% {*/
+/*        background-position: 0% 50%;*/
+/*    }*/
+/*}*/

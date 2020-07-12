@@ -43,6 +43,16 @@ class Spotify {
         return this.spotifyApi.getArtistAlbums('43ZHCT0cAZBISjO8DG9PnE');
     }
 
+    checkCredentials() {
+        return this.spotifyApi.getArtist('2hazSY4Ef3aB9ATXW7F5w3')
+            .then((data) => {
+                return true;
+            })
+            .catch((err) => {
+                return false;
+            })
+    }
+
     addAllTracksToHashMap() {
         let promises = [];
         promises.push(this.addRecentlyPlayedTracks());
@@ -126,10 +136,10 @@ class Spotify {
             .then((savedTracksArray) => {
                 for (let savedTracks of savedTracksArray) {
                     let arr = [];
-                    for (let item of savedTracks.body.items){
-                      if (item !== null && item.track !== null) {
-                          arr.push(item.track);
-                      }
+                    for (let item of savedTracks.body.items) {
+                        if (item !== null && item.track !== null) {
+                            arr.push(item.track);
+                        }
                     }
                     this.addTracksToHashMap(arr);
                 }
@@ -223,7 +233,7 @@ class Spotify {
                 for (let audioFeatures of res) {
                     audioFeatures = audioFeatures.body["audio_features"];
                     for (let audioFeature of audioFeatures) {
-                        if (audioFeature !== null){
+                        if (audioFeature !== null) {
                             let id = audioFeature.id;
                             data[id] = {
                                 "danceability": audioFeature.danceability,
@@ -296,12 +306,14 @@ class Spotify {
                 limit: 100,
                 seed_genres: "heavy-metal, hardcore",
                 seed_tracks: "1KGi9sZVMeszgZOWivFpxs,5vTPxzm4h2bY9rYyVrGEU5,6rUp7v3l8yC4TKxAAR5Bmx,",
-                max_valence: 0.17}],
+                max_valence: 0.17
+            }],
             fear: [{
                 limit: 100,
                 // seed_genres: "chill, sleep, acoustic, ambient",
                 seed_tracks: "1egVLpTrGvaWtUcR2xDoaN,45Zo6ftGzq6wRckCUrMoBJ,7CZvsEFFZffXJ4HxLWtaQc,45Zo6ftGzq6wRckCUrMoBJ,688DZF6e1MH5Uf409dwaHm",
-                target_valence: 0.5}], // same as neutral
+                target_valence: 0.5
+            }], // same as neutral
             happiness: [{
                 limit: 100,
                 seed_genres: "happy, hip-hop, summer, pop, party",
@@ -388,9 +400,9 @@ class Spotify {
     }
 
     // returns name, email, URL, and image of user
-    getUserInfo(){
+    getUserInfo() {
         return this.spotifyApi.getMe()
-            .then((res)=>{
+            .then((res) => {
                 let json = {};
                 json.display_name = res.body.display_name;
                 json.email = res.body.email;
@@ -398,7 +410,7 @@ class Spotify {
                 json.images = res.body.images;
                 return json;
             })
-            .catch((err)=> {
+            .catch((err) => {
                 console.log("ERROR in getting info about user");
                 throw err;
             })

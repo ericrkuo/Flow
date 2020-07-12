@@ -11,6 +11,30 @@ block content
     audio#v2(style="width: 100%").embed-responsive-item
     figcaption.figure-caption.text-center No Preview Available
 
+    p
+        a.btn.btn-primary(data-toggle='collapse' href='#collapseExample' role='button' aria-expanded='false' aria-controls='collapseExample') Link with href
+        button.btn.btn-primary(type='button' data-toggle='collapse' data-target='#collapseExample' aria-expanded='false' aria-controls='collapseExample') Button with data-target
+    #collapseExample.collapse
+        .card.card-body Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+
+    // Button trigger modal
+    button.btn.btn-primary(type='button' data-toggle='modal' data-target='#exampleModal')
+        | Launch demo modal
+    // Modal
+    #exampleModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true')
+        .modal-dialog.modal-dialog-centered
+            .modal-content
+                .modal-header
+                    h5#exampleModalLabel.modal-title Modal title
+                    button.close(type='button' data-dismiss='modal' aria-label='Close')
+                        span(aria-hidden='true') &times;
+                .modal-body
+                    | ...
+                .modal-footer
+                    button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+                    button.btn.btn-primary(type='button') Save changes
+
+
     each val in [1, 2, 3, 4, 5]
         li= val
     script.

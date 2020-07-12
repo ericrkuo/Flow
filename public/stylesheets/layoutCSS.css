@@ -1,11 +1,11 @@
 body {
   /*padding: 50px;*/
-  font: 14px "Lucida Grande", 'Roboto Condensed', sans-serif;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  width: 100vw;
-  height: 100vh;
+  /*font: 14px "Lucida Grande", 'Roboto Condensed', sans-serif;*/
+  /*display: flex;*/
+  /*flex-direction: column;*/
+  /*flex-wrap: nowrap;*/
+  /*width: 100vw;*/
+  /*height: 100vh;*/
 }
 
 a {
@@ -13,10 +13,10 @@ a {
 }
 
 #title {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
+  /*display: flex;*/
+  /*flex-direction: row;*/
+  /*flex-wrap: nowrap;*/
+  /*justify-content: center;*/
+  /*align-items: center;*/
+  /*width: 100vw;*/
 }
