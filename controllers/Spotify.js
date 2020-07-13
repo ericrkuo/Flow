@@ -16,6 +16,17 @@ class Spotify {
 
     // TODO: turn add___ functions into get___ and then use universal add(get___));
     // TODO: create new constructor for frontend taking in two parameters (access token and refresh token)
+    // constructor() {
+    //     require('dotenv').config();
+    //     this.spotifyApi = new SpotifyWebApi({
+    //         clientId: process.env.SPOTIFY_API_ID,
+    //         clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
+    //         redirectUri: process.env.CALLBACK_URL,
+    //     });
+    //     this.spotifyApi.setAccessToken(process.env.ACCESS_TOKEN);
+    //     // this.spotifyApi.setRefreshToken(process.env.REFRESH_TOKEN);
+    //     this.trackHashMap = new Map();
+    // }
     constructor(accessToken, refreshToken) {
         require('dotenv').config();
         this.spotifyApi = new SpotifyWebApi({
@@ -23,8 +34,6 @@ class Spotify {
             clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
             redirectUri: process.env.CALLBACK_URL,
         });
-       // this.spotifyApi.setAccessToken(process.env.ACCESS_TOKEN);
-        // this.spotifyApi.setRefreshToken(process.env.REFRESH_TOKEN);
         this.spotifyApi.setAccessToken(accessToken === undefined ? process.env.ACCESS_TOKEN : accessToken);
         this.spotifyApi.setRefreshToken(refreshToken === undefined ? null : refreshToken);
         this.trackHashMap = new Map();
@@ -32,6 +41,16 @@ class Spotify {
 
     sampleFunction() {
         return this.spotifyApi.getArtistAlbums('43ZHCT0cAZBISjO8DG9PnE');
+    }
+
+    checkCredentials() {
+        return this.spotifyApi.getArtist('2hazSY4Ef3aB9ATXW7F5w3')
+            .then((data) => {
+                return true;
+            })
+            .catch((err) => {
+                return false;
+            })
     }
 
     addAllTracksToHashMap() {
@@ -115,10 +134,9 @@ class Spotify {
         }
         return Promise.all(promises)
             .then((savedTracksArray) => {
-
                 for (let savedTracks of savedTracksArray) {
                     let arr = [];
-                    for (let item of savedTracks.body.items){
+                    for (let item of savedTracks.body.items) {
                         if (item !== null && item.track !== null) {
                             arr.push(item.track);
                         }
@@ -288,12 +306,14 @@ class Spotify {
                 limit: 100,
                 seed_genres: "heavy-metal, hardcore",
                 seed_tracks: "1KGi9sZVMeszgZOWivFpxs,5vTPxzm4h2bY9rYyVrGEU5,6rUp7v3l8yC4TKxAAR5Bmx,",
-                max_valence: 0.17}],
+                max_valence: 0.17
+            }],
             fear: [{
                 limit: 100,
                 // seed_genres: "chill, sleep, acoustic, ambient",
                 seed_tracks: "1egVLpTrGvaWtUcR2xDoaN,45Zo6ftGzq6wRckCUrMoBJ,7CZvsEFFZffXJ4HxLWtaQc,45Zo6ftGzq6wRckCUrMoBJ,688DZF6e1MH5Uf409dwaHm",
-                target_valence: 0.5}], // same as neutral
+                target_valence: 0.5
+            }], // same as neutral
             happiness: [{
                 limit: 100,
                 seed_genres: "happy, hip-hop, summer, pop, party",
@@ -381,9 +401,9 @@ class Spotify {
 
 
     // returns name, email, URL, and image of user
-    getUserInfo(){
+    getUserInfo() {
         return this.spotifyApi.getMe()
-            .then((res)=>{
+            .then((res) => {
                 let json = {};
                 json.display_name = res.body.display_name;
                 json.email = res.body.email;
@@ -392,12 +412,14 @@ class Spotify {
                 json.id = res.body.id;
                 return json;
             })
-            .catch((err)=> {
+            .catch((err) => {
                 console.log("ERROR in getting info about user");
                 throw err;
             })
     }
 
+    // TODO: make test when already created playlist
+    // TODO: make test delete playlist after
     createNewPlaylist() {
         return this.getUserInfo()
             .then((result) => {
@@ -406,7 +428,7 @@ class Spotify {
             }).catch((error) => {
                 console.log("Error in creating new playlist");
                 throw error;
-        })
+            })
     }
 
     getNewPlaylist(matchingTracks) {

@@ -1,47 +1,10 @@
-body {
-    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-    background-size: 100000% 100000%;
-    animation: gradient 15s ease infinite;;
-    width: 100vw;
-    height: 100vh;
-}
-
-@keyframes gradient {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
-
-.container {
+.centered-div {
     position: absolute;
     top: 50%;
     left: 50%;
     -moz-transform: translateX(-50%) translateY(-50%);
     -webkit-transform: translateX(-50%) translateY(-50%);
     transform: translateX(-50%) translateY(-50%);
-}
-
-#getStarted {
-    /*background: linear-gradient(-45deg, #ef3e06, #e70a5f, #049cd2, #04d5a4);*/
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    /*background-color: #ffffff;*/
-    border: none;
-    font-weight: bolder;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-style: ridge;
 }
 
 #welcomeMessage {

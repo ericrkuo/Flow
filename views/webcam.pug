@@ -1,17 +1,11 @@
 extends layout
 
-append stylesheets
-    meta(charset='utf-8')
-    meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no")
+block append stylesheets
     link(href='../libraries/circle.png', type="image")
     link(rel='stylesheet', href='/stylesheets/webcamCSS.css')
+    link(rel='stylesheet', href='/stylesheets/backgroundCSS.css')
     link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css')
-    script(src='https://code.jquery.com/jquery-3.5.1.slim.min.js' integrity='sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj' crossorigin='anonymous')
-    script(src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js' integrity='sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo' crossorigin='anonymous')
-    script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js' integrity='sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI' crossorigin='anonymous')
 block content
-    body(style='text-align: center')
-        layout
     div#webcam
         .breakSpace
         h2.text-white How are you feeling right now?
@@ -28,6 +22,4 @@ block content
         div#shadow
         .breakSpace
         h1.text-white#loadingtext Curating your playlist
-
-block scripts
     script(src='/js/webcam.js')

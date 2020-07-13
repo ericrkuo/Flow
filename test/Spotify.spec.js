@@ -18,6 +18,15 @@ describe("unit test for Spotify", function () {
             console.log(track.name);
         }
     }
+
+    it("test tokens", async function () {
+        spotify = new Spotify("hello");
+        let x = spotify.spotifyApi.getAccessToken();
+        chai.expect(x).to.be.equal("hello");
+        let result = await spotify.checkCredentials()
+        console.log(result);
+    });
+
     it("test Sample Function", function () {
         return spotify.sampleFunction().then((res) => {
             console.log(JSON.stringify(res.body));
@@ -159,6 +168,21 @@ describe("unit test for Spotify", function () {
             .then((res) => {
                 console.log("# PLAYLIST SONGS ADDED: " + spotify.trackHashMap.size);
                 chai.assert(res);
+            })
+            .catch((err) => {
+                console.log("ERROR");
+                chai.expect.fail();
+            })
+    })
+
+    it("get user info", async function() {
+        return spotify.getUserInfo()
+            .then((res) => {
+                chai.expect(res).hasOwnProperty("display_name");
+                chai.expect(res).hasOwnProperty("email");
+                chai.expect(res).hasOwnProperty("images");
+                chai.expect(res).hasOwnProperty("external_urls");
+                console.log(res);
             })
             .catch((err) => {
                 console.log("ERROR");

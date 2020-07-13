@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const {Main} =  require("../controllers/Main")
-const {app} = require("../app");
+const {Main} = require("../controllers/Main")
 
 let tracks = {};
 tracks["703Y8dw2MMfEodrw5D6hDd"] = {
@@ -1045,19 +1044,29 @@ let sampleData = {
             }
         ]
     },
-    mood: "Happy",
+    mood: {
+        "dominantMood": "surprise",
+        "emotions": {
+            "anger": 0.575,
+            "contempt": 0,
+            "disgust": 0.006,
+            "fear": 0.008,
+            "happiness": 0.394,
+            "neutral": 0.013,
+            "sadness": 0,
+            "surprise": 0.004
+        }
+    },
     test: {"I'm": 2},
 }
 
+
 // input: dataURL
 // output: returns html rendering of the tracks
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
     if (req.app.locals.main.result !== null) {
-        console.log("DOING NOT NULL");
         res.render("track", req.app.locals.main.result);
     } else {
-       // res.render("track", {tracks: ["song1", "song2", "song3"]})
-        console.log("DOING NULL");
         res.render("track", sampleData)
     }
 

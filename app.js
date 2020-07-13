@@ -4,8 +4,6 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-const {Main} = require("./controllers/Main");
-
 require('dotenv').config();
 
 var indexRouter = require('./routes/indexRouter');
@@ -28,10 +26,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-app.use(express.static(__dirname + '/node_modules/bootstrap/dist'));
-app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist/'));
-app.use("/bootstrap", express.static(path.join(__dirname, '/node_modules/bootstrap/dist/css')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
@@ -57,7 +51,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-app.locals.main = new Main();
-
 module.exports = app;
-
+const {Main} = require("./controllers/Main")
+app.locals.main = new Main();
+app.locals.globalString = "I am a global string in app.js";

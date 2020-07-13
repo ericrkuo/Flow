@@ -1,237 +1,332 @@
-var table = document.getElementById("table");
-var spotifyButton = document.getElementById("openSpotify");
-var createPlaylistButton = document.getElementById("createPlaylist");
+let tracksDiv = document.getElementById("tracks-div");
+let moodDiv = document.getElementById("mood-div");
 
-// MODAL
-var modal = document.getElementById("myModal");
-var span = document.getElementsByClassName("close")[0];
-var modalContent = document.getElementById("modal-content");
+// MODAL INFO
+let modalBackground = document.getElementById("modal-background");
+let modalAnalytics = document.getElementById("modal-analytics");
 
-// MODAL CONTENT
-var modalRightSection = document.getElementById("modal-rightSection");
-var modalLeftSection = document.getElementById("modal-leftSection");
-var modalAudioFeatures = document.getElementById("modal-audioFeatures");
+let colors = {
+    backgroundColor: [
+        'rgba(255,99,132,0.5)',
+        'rgba(54, 162, 23, 0.5)',
+        'rgba(255, 206, 86, 0.5)',
+        'rgba(75, 192, 192, 0.5)',
+        'rgba(153, 102, 255, 0.5)',
+        'rgb(255,159,64, 0.5)',
+        'rgb(89,11,241, 0.5)',
+        'rgba(0,255,0,0.5)',
+    ],
+    borderColor: [
+        'rgba(255, 99, 132)',
+        'rgba(54, 162, 23)',
+        'rgba(255, 206, 86)',
+        'rgba(75, 192, 192)',
+        'rgba(153, 102, 255)',
+        'rgb(255,159,64)',
+        'rgb(89,11,241)',
+        'rgba(0,255,0)',
+    ],
+    pointHoverBackgroundColor: [
+        'rgba(255, 99, 132, 0.8)',
+        'rgba(54, 162, 23, 0.8)',
+        'rgba(255, 206, 86, 0.8)',
+        'rgba(75, 192, 192, 0.8)',
+        'rgba(153, 102, 255, 0.8)',
+        'rgb(255,159,64, 0.8)',
+        'rgb(89,11,241, 0.8)',
+        'rgba(0,255,0,0.8)',
+    ]
+}
 
-makeTracksList();
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+})
 
-function makeTracksList() {
-    table.setAttribute("style", "overflow:auto;height:600px;width:500px");
+initializeUserInfoDiv();
+initializeTracksDiv2();
+initializeMoodDiv();
 
-    for (let track of Object.values(tracks)) {
-        x = track.track.name;
-        var imageLink = track.track.album.images["0"].url;
-        var tr = document.createElement('tr');
+function initializeTracksDiv2() {
 
-        var td1 = document.createElement('td');
-        var td2 = document.createElement('td');
-
-        var img = document.createElement("img");
-        img.src = imageLink;
-        img.width = 100;
-        img.height = 100;
-        var text2 = document.createTextNode(x);
-
-        // td1.appendChild(text1);
-        td1.appendChild(img);
-        td2.appendChild(text2);
-        tr.appendChild(td1);
-        tr.appendChild(td2);
-
-        tr.addEventListener('click', function () {
-            initiateModal(track.track.id);
-        })
-
-        table.appendChild(tr);
+    let counter = 1;
+    let rowClassName = "row";
+    let numColumns = 4;
+    let row = document.createElement("div");
+    row.className = rowClassName;
+    for (let i = 0; i < 10; i++) {
+        for (let id of Object.keys(tracks)) {
+            let column = document.createElement("div");
+            column.className = "col my-5";
+            column.appendChild(createTrackCard(id));
+            row.appendChild(column);
+            if (counter % numColumns === 0) {
+                tracksDiv.append(row);
+                row = document.createElement("div");
+                row.className = rowClassName;
+            }
+            counter++;
+        }
     }
 
-    document.body.appendChild(table);
+    // create remaining columns
+    if (--counter % numColumns !== 0) {
+        let remainingColumns = numColumns - (counter % numColumns);
+        for (let i = 0; i < remainingColumns; i++) {
+            let column = document.createElement("div");
+            column.className = "col m-2";
+            row.appendChild(column);
+        }
+        tracksDiv.append(row);
+    }
+
+}
+
+function createTrackCard(id) {
+    let container = document.createElement("div");
+    container.className = "container-fluid px-5"
+
+    let imageURL = getAlbumImageURL(id);
+    let image = document.createElement("img");
+    image.src = imageURL;
+    image.className = "track-image rounded-circle shadow-lg img-fluid mb-2";
+    image.setAttribute("data-toggle", "modal");
+    image.setAttribute("data-target", "#trackModal");
+    image.addEventListener("click", function () {
+        editModalContent(id);
+    });
+
+    let trackTitle = document.createElement("span");
+    trackTitle.className = "track-title font-weight-bold d-block text-center text-truncate";
+    trackTitle.innerText = tracks[id].track.name
+
+    let trackArtist = document.createElement("span");
+    trackArtist.className = "d-block text-center text-truncate";
+    trackArtist.innerText = getArtistNames(tracks[id].track.artists);
+
+    container.append(image, trackTitle, trackArtist)
+    return container
+}
+
+function createTrackCardOLD(id) {
+    let column = document.createElement("div");
+    column.className = "col m-2";
+
+    let track = document.createElement('div');
+    track.className = "card border-light h-50"; // sets height = 100% to row height, and row height determined by largest card
+    track.id = id;
+
+    let imageURL = tracks[id].track.album.images[0].url;
+    let image = document.createElement("img");
+    image.src = imageURL;
+    image.className = "card-img-top rounded-circle shadow-lg img-fluid";
+    image.addEventListener("click", function () {
+        editModalContent(id);
+    });
+
+    let trackBody = document.createElement("div");
+    trackBody.className = "card-body";
+
+    let trackTitle = document.createElement("h5");
+    trackTitle.className = "card-title";
+    trackTitle.innerText = tracks[id].track.name
+
+    let trackArtist = document.createElement("h7");
+    trackArtist.className = "card-title";
+    trackArtist.innerText = getArtistNames(tracks[id].track.artists);
+
+    trackBody.append(trackTitle, trackArtist);
+    track.append(trackBody);
+    column.append(image, track);
+    return column;
 }
 
 
-function initiateModal(trackID) {
+function initializeMoodDiv() {
+    document.getElementById("mood-string").innerText = mood.dominantMood.charAt(0).toUpperCase() + mood.dominantMood.substring(1);
 
-    modal.style.display = "block";
-    createModalTrackRight(trackID);
-    createModalTrackLeft(trackID);
-    appendChildren();
-    createChart(trackID);
-}
-
-
-function redirectSpotify(trackID) {
-    window.location.href = tracks[trackID].track.external_urls.spotify;
-}
-
-function createModalTrackRight(trackID) {
-
-    var modalTrackName = document.createTextNode("TRACK NAME: " + tracks[trackID].track.name + " ");
-    modalRightSection.appendChild(modalTrackName);
-    insertBreaks();
-
-    // need to handle multiple artists
-    var modalTrackArtist = document.createTextNode("TRACK ARTIST(s): " + tracks[trackID].track.artists["0"].name + " ");
-    modalRightSection.appendChild(modalTrackArtist);
-    insertBreaks();
-
-    var modalTrackLength = millisToMinutesAndSeconds(tracks[trackID].track.duration_ms)
-    modalTrackLength = document.createTextNode("LENGTH:  " + modalTrackLength + " ");
-    modalRightSection.appendChild(modalTrackLength);
-    insertBreaks();
-
-    modalRightSection.appendChild(spotifyButton);
-    spotifyButton.innerText = "OPEN ON SPOTIFY";
-    spotifyButton.addEventListener('click', function () {
-        redirectSpotify(trackID);
+    $('#collapseOne').on('shown.bs.collapse', function () {
+        let moodDiv = document.getElementById("mood");
+        let moodChart = document.createElement("canvas");
+        moodDiv.appendChild(moodChart);
+        let labels = Object.keys(mood.emotions);
+        let data = [];
+        for (let val of Object.values(mood.emotions)) {
+            data.push(val);
+        }
+        let ctx = moodChart.getContext('2d');
+        let myDoughnutChart = new Chart(ctx, {
+            type: 'polarArea',
+            data: {
+                labels: labels,
+                datasets: [{
+                    backgroundColor: colors.backgroundColor,
+                    borderColor: colors.borderColor,
+                    pointHoverBackgroundColor: colors.pointHoverBackgroundColor,
+                    borderWidth: 2,
+                    data: data,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                animation: {
+                    animateRotate: true,
+                },
+                legend: {
+                    display: true,
+                    position: 'bottom'
+                }
+            }
+        });
+    }).on('hide.bs.collapse', function () {
+        let moodDiv = document.getElementById("mood");
+        removeAllChildren(moodDiv);
     })
 
-    var modalTrackPreview = document.createElement('audio');
-    modalTrackPreview.setAttribute("style", "padding-left: 40px");
-    modalTrackPreview.id = 'audio-player';
-    modalTrackPreview.controls = 'controls';
-    modalTrackPreview.src = tracks[trackID].track.preview_url;
-    modalTrackPreview.type = 'audio/mpeg';
+    document.getElementById("see-more").addEventListener("click", function(){
 
-    modalRightSection.appendChild(modalTrackPreview);
-
-}
-
-function setAttributes(element, attributes) {
-    Object.keys(attributes).forEach(function(name) {
-        element.setAttribute(name, attributes[name]);
     })
 }
 
-function insertBreaks() {
-    modalRightSection.appendChild(document.createElement("br"));
-    modalRightSection.appendChild(document.createElement("br"));
-    modalRightSection.appendChild(document.createElement("br"));
-}
-function createModalTrackLeft(trackID) {
-    var modalTrackImage = document.createElement('img');
-    modalTrackImage.src = tracks[trackID].track.album.images["0"].url;
-    modalTrackImage.width = 325;
-    modalTrackImage.height = 325;
+function initializeUserInfoDiv() {
+    let img = document.getElementById("user-image");
+    img.src = getUserImageURL();
 
-    modalLeftSection.appendChild(modalTrackImage);
-
+    document.getElementById("user-name").innerText = userInfo.display_name;
+    document.getElementById("user-link").addEventListener("click", () => {
+        window.open(userInfo.external_urls.spotify, "_blank");
+    });
 }
 
-function createChart(trackID) {
+// MODAL INFO ----------------------------------------
+function editModalContent(id) {
+    // modalBackground.style.display = "flex";
 
-    var trackChart = document.createElement("canvas");
-    modalAudioFeatures.appendChild(trackChart);
+    initializeModalImage(id);
+    initializeModalContent(id);
+    initializeModalAnalytics(id);
+}
 
-    let audioFeatures = tracks[trackID].audioFeatures;
+function initializeModalAnalytics(id) {
+    removeAllChildren(modalAnalytics);
+    let trackChart = document.createElement("canvas");
+    modalAnalytics.appendChild(trackChart);
+    let audioFeatures = tracks[id].audioFeatures;
     let labels = Object.keys(audioFeatures);
     let data = [];
     for (let label of labels) {
         data.push(audioFeatures[label]);
     }
 
-    var ctx = trackChart.getContext('2d');
-    var trackChart = new Chart(ctx, {
+    let ctx = trackChart.getContext('2d');
+    let chart = new Chart(ctx, {
+        // The type of chart we want to create
         type: 'bar',
+        ticks: {
+            reverse: true
+        },
+        // The data for our dataset
         data: {
-            labels: ['danceability', "energy", "loudness", "speechiness", "acousticness", "instrumentalness", "liveness", "valence", "tempo"],
+            labels: labels,
             datasets: [{
-                label: 'Amount of feature found within track (scaled to 1)',
+                label: "Song Features",
+                backgroundColor: colors.backgroundColor,
+                borderColor: colors.borderColor,
+                pointHoverBackgroundColor: colors.pointHoverBackgroundColor,
+                borderWidth: 2,
                 data: data,
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)',
-                    'rgba(255, 109, 43, 0.2)',
-                    'rgba(125, 49, 34, 0.2)',
-                    'rgba(14, 19, 204, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)',
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                ],
-                borderWidth: 1
             }]
         },
+
+        // Configuration options go here
         options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
-            }
+            responsive: true,
+            maintainAspectRatio: false,
         }
     });
-
-
 }
 
+function initializeModalContent(id) {
+    let track = tracks[id].track;
+    let previewURL = track.preview_url;
+    let trackName = track.name;
+    let artistNames = getArtistNames(track.artists);
+    let albumName = track.album.name;
+    let trackLength = getTimeInMinutes(track.duration_ms);
+    let trackURL = track.external_urls.spotify
 
-// When the user clicks on <span> (x), close the modal
-span.onclick = function () {
-    modal.style.display = "none";
-    removeAllChildren();
-}
 
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function (event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-        removeAllChildren(modalRightSection);
-        removeAllChildren(modalLeftSection);
-        removeAllChildren(modalAudioFeatures);
-        removeAllChildren(modalContent);
+    document.getElementById("modal-track-title").innerText = trackName
+    document.getElementById("modal-track-artist").innerText = artistNames
+    document.getElementById("modal-track-album").innerText = albumName
+    document.getElementById("modal-track-length").innerText = trackLength
+
+    let video = document.getElementById("modal-content-video");
+    video.controls = true;
+    if (previewURL !== null) {
+        video.src = previewURL;
+        document.getElementById("modal-content-caption").innerText = "";
+    } else {
+        document.getElementById("modal-content-caption").innerText = "Sorry, No Preview Available";
+        video.src = "";
     }
+
+    let urlButton = document.getElementById("modal-content-button");
+    urlButton.addEventListener("click", () => {
+        window.open(trackURL, "_blank");
+    })
+}
+
+function initializeModalImage(id) {
+    document.getElementById("modal-image").src = getAlbumImageURL(id);
+}
+function getAlbumImageURL(id) {
+    let images = tracks[id].track.album.images;
+    if (images.length !== 0 && images[0].url !== undefined && images[0].url !== null && images[0].url !== "") {
+        return images[0].url;
+    } else {
+        return "../libraries/unavailable.png";
+    }
+}
+
+function getUserImageURL() {
+    let userImages = userInfo.images;
+    if (userImages.length !== 0 && userImages[0].url !== undefined && userImages[0].url !== null && userImages[0].url !== "") {
+        return userImages[0].url;
+    } else {
+        return "../libraries/unavailable.png";
+    }
+}
+
+function getArtistNames(artists) {
+    let artistNames = "";
+    let n = artists.length;
+    for (let i=0; i<n-1; i++) {
+        artistNames += artists[i].name + ", ";
+    }
+    return artistNames + artists[--n].name;
+}
+
+function getTimeInMinutes(totalMs) {
+    let totalSeconds = totalMs / 1000;
+    let minutes = Math.floor(totalSeconds / 60);
+    let seconds = Math.floor(totalSeconds % 60);
+
+    return minutes.toString() + ":" + (seconds < 10 ? ("0" + seconds.toString()) : seconds.toString());
+
 }
 
 function removeAllChildren(node) {
     while (node.firstChild) {
         node.removeChild(node.lastChild);
     }
+
 }
 
-function appendChildren() {
-    modalContent.appendChild(modalAudioFeatures);
-    modalContent.appendChild(modalRightSection);
-    modalContent.appendChild(modalLeftSection);
-}
-
-function millisToMinutesAndSeconds(millis) {
-    var minutes = Math.floor(millis / 60000);
-    var seconds = ((millis % 60000) / 1000).toFixed(0);
-    return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
-}
-
-createPlaylistButton.addEventListener("click", () => {
-    // NOTE: HOW LONG WILL THIS TAKE?
-    let request = new XMLHttpRequest();
-    request.open("POST", "http://localhost:3000/tracks", true);
-    request.setRequestHeader('Content-Type', 'application/json');
-
-    request.onload = function () {
-        if (request.status !== 200) {
-            console.log("REACHING ERROR IN TRACK.JS")
-            alert(`Error ${request.status}: ${request.statusText}`);
-        } else {
-            console.log("SUCCESS - created new playlist");
-            location.href = JSON.parse(request.response).link;
-        }
-    };
-    request.onerror = function () {
-        alert("The request failed");
-    };
-
-    let json = JSON.stringify({tracks: tracks});
-
-    request.send(json);
-})
+// window.onclick = function (event) {
+//     if (event.target === modalBackground) {
+//         modalBackground.style.display = "none";
+//         document.getElementById("modal-content-video").pause();
+//     }
+// }
 

@@ -1,33 +1,84 @@
 extends layout
 
-block stylesheets
+block append stylesheets
     link(rel='stylesheet', href='/stylesheets/trackCSS.css')
-    link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css' integrity='sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk' crossorigin='anonymous')
     script(src='./libraries/Chart.min.js', type="text/javascript")
 block content
+    //h1 #{mood}
+    //h2 !{Object.keys(tracks)}
+    .container-fluid.bg-gradient-info
+        .row.row-cols-2
+            .col-9
+                h3#title.text-center.text-truncate.mt-3.mb-0 Thanks for waiting! Here's your playlist
+                #tracks-div.container-fluid
+            .col-3
+                .card.shadow-lg.m-5
+                    .card-header MY PROFILE
+                    img#user-image.img-fluid.card-img-top
+                    .card-body
+                        h1#user-name.card-title
+                        button#user-link.btn.btn-outline-info(type="button") MY SPOTIFY ACCOUNT
+                .card.shadow-lg.m-5
+                    .card-header DETECTED MOOD
+                    .card-body
+                        h1#mood-string.card-title
+                    #accordion.accordion
+                        #headingOne.card-header
+                            h2.mb-0
+                                button#see-more(class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne") SEE MORE
+                        #collapseOne.collapse(aria-labelledby="headingOne" data-parent="#accordion")
+                            #mood.w-100.text-center.container-fluid
 
-    div#table
-
-    .bottomright
-        div#detectedMood
-            h1= "DETECTED MOOD:"
-            h2= mood
-
-    // The Modal
-    #myModal.modal
-        // Modal content
-        #modal-content
-            span.close &times;
-            div#modal-rightSection
-                button#openSpotify
-                button#createPlaylist CREATE PLAYLIST
-            div#modal-leftSection
-            //div#modal-audioFeatures
-
-
-
+    #trackModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='trackModalLabel' aria-hidden='true')
+        .modal-dialog.modal-dialog-centered.modal-xl
+            .modal-content.w-80.text-center.rounded-lg.shadow-lg.px-3
+                .row.row-cols-2
+                    .col-md-4.p-3
+                        img#modal-image.img-fluid.mx-auto.shadow.rounded-lg
+                    .col-md-8
+                        .container-fluid.mt-5.mb-4.mx-4
+                            .row.my-2
+                                .col-md-1.text-right
+                                    svg(width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-music-note" fill="currentColor" xmlns="http://www.w3.org/2000/svg" data-toggle='tooltip' data-placement='left' title='Track')
+                                        path(d="M9 13c0 1.105-1.12 2-2.5 2S4 14.105 4 13s1.12-2 2.5-2 2.5.895 2.5 2z")
+                                        path(fill-rule="evenodd" d="M9 3v10H8V3h1z")
+                                        path(d="M8 2.82a1 1 0 0 1 .804-.98l3-.6A1 1 0 0 1 13 2.22V4L8 5V2.82z")
+                                .col-md-11.text-left
+                                    h3#modal-track-title.text-truncate
+                            .row.my-2
+                                .col-md-1.text-right
+                                    svg(width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-person-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg" data-toggle='tooltip' data-placement='left' title='Artist')
+                                        path(fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z")
+                                .col-md-11.text-left
+                                    h3#modal-track-artist.text-truncate
+                            .row.my-2
+                                .col-md-1.text-right
+                                    svg(width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-music-note-list" fill="currentColor" xmlns="http://www.w3.org/2000/svg" data-toggle='tooltip' data-placement='left' title='Album')
+                                        path(d="M12 13c0 1.105-1.12 2-2.5 2S7 14.105 7 13s1.12-2 2.5-2 2.5.895 2.5 2z")
+                                        path(fill-rule="evenodd" d="M12 3v10h-1V3h1z")
+                                        path(d="M11 2.82a1 1 0 0 1 .804-.98l3-.6A1 1 0 0 1 16 2.22V4l-5 1V2.82z")
+                                        path(fill-rule="evenodd" d="M0 11.5a.5.5 0 0 1 .5-.5H4a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 .5 7H8a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 .5 3H8a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5z")
+                                .col-md-11.text-left
+                                    h3#modal-track-album.text-truncate
+                            .row.my-2
+                                .col-md-1.text-right
+                                    svg(width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-clock" fill="currentColor" xmlns="http://www.w3.org/2000/svg" data-toggle='tooltip' data-placement='left' title='Length')
+                                        path(fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm8-7A8 8 0 1 1 0 8a8 8 0 0 1 16 0z")
+                                        path(fill-rule="evenodd" d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5z")
+                                .col-md-11.text-left
+                                    h3#modal-track-length.text-truncate
+                        .row.row-cols-2.pl-4
+                            .col-md-7
+                                audio#modal-content-video(style="width: 100%").embed-responsive-item
+                                figcaption#modal-content-caption.figure-caption.text-center
+                            .col-md-4.text-left
+                                button#modal-content-button.btn.btn-success.btn-lg.rounded-pill Open in Spotify
+                .row
+                    .col-md-12.align-self-center
+                        #modal-analytics
     script.
         let tracks = !{JSON.stringify(tracks)};
         let userInfo = !{JSON.stringify(userInfo)};
         let mood = !{JSON.stringify(mood)};
     script(src='/js/track.js')
+

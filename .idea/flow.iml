@@ -6,6 +6,5 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="handlebars" level="application" />
   </component>
 </module>

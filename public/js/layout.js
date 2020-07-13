@@ -1,11 +1,18 @@
-function redirectTutorial() {
-    location.href= "http://localhost:3000/tutorial"
-}
+let tutorialButton = document.getElementById("tutorial");
+let homeButton = document.getElementById("home");
+let aboutUsButton = document.getElementById("info");
+let domain = "http://localhost:3000"
+tutorialButton.addEventListener("click", ()=>{
+    console.log("click");
+   location.href = domain + "/tutorial";
+});
 
-function redirectHome() {
-    location.href= "http://localhost:3000/"
-}
+homeButton.addEventListener("click", ()=>{
+    console.log("click");
+    location.href = domain;
+});
 
-function redirectAboutUs() {
-    location.href= "http://localhost:3000/info"
-}
+aboutUsButton.addEventListener("click", ()=>{
+    console.log("click");
+    location.href = domain + "/info";
+});

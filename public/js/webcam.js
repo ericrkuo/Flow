@@ -5,7 +5,6 @@ let tryAgainButton = document.getElementById('try-again');
 let getTracksButton = document.getElementById('get-tracks');
 let errorMsgElement = document.getElementById('spanErrorMsg');
 let loadingDiv = document.getElementById("loader");
-let h2 = document.getElementsByClassName("h2");
 let webcam = document.getElementById("webcam");
 let stream;
 
@@ -80,11 +79,14 @@ takePhotoButton.addEventListener("click", () => {
     console.log(video.offsetWidth);
     console.log(video.offsetHeight);
     let context = canvas.getContext('2d');
+    // console.log("CLICK");
+    // context.drawImage(video, 0, 0, width, height);
     context.drawImage(video, 0, 0, video.offsetWidth, video.offsetHeight);
     hideAndShowHTMLElementsForCaptureButton();
+    // context.drawImage(video, 0, 0);
+    // const dataURL = canvas.toDataURL();
     turnOffStream();
-});
-
+})
 
 tryAgainButton.addEventListener("click", () => {
     hideAndShowHTMLElementsForTryAgainButton();
