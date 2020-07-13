@@ -1,3 +1,4 @@
+// NOTE: this js script is used in both info.pug and index.pug
 let getStartedButton = document.getElementById("getStarted")
 
 getStartedButton.addEventListener("click", () => {

@@ -1,9 +1,6 @@
 let tracksDiv = document.getElementById("tracks-div");
-let moodDiv = document.getElementById("mood-div");
-
-// MODAL INFO
-let modalBackground = document.getElementById("modal-background");
 let modalAnalytics = document.getElementById("modal-analytics");
+let noImageAvailablePath = "../libraries/pictures/nopreview.png";
 
 let colors = {
     backgroundColor: [
@@ -42,9 +39,28 @@ $(function () {
     $('[data-toggle="tooltip"]').tooltip()
 })
 
+$('#trackModal').on('hide.bs.modal', function () {
+    removeAllChildren(modalAnalytics);
+    document.getElementById("modal-content-video").pause();
+})
+
+initialize();
 initializeUserInfoDiv();
 initializeTracksDiv2();
 initializeMoodDiv();
+
+function initialize() {
+    let tutorialButton = document.getElementById("tutorial");
+    let homeButton = document.getElementById("home");
+    let aboutUsButton = document.getElementById("info");
+    let newString = "btn-outline-dark";
+    let oldString = "btn-outline-light";
+
+    tutorialButton.setAttribute("class", tutorialButton.getAttribute("class").replace(oldString, newString));
+    homeButton.setAttribute("class", homeButton.getAttribute("class").replace(oldString, newString));
+    aboutUsButton.setAttribute("class", aboutUsButton.getAttribute("class").replace(oldString, newString));
+
+}
 
 function initializeTracksDiv2() {
 
@@ -53,7 +69,7 @@ function initializeTracksDiv2() {
     let numColumns = 4;
     let row = document.createElement("div");
     row.className = rowClassName;
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 1; i++) {
         for (let id of Object.keys(tracks)) {
             let column = document.createElement("div");
             column.className = "col my-5";
@@ -107,40 +123,6 @@ function createTrackCard(id) {
     return container
 }
 
-function createTrackCardOLD(id) {
-    let column = document.createElement("div");
-    column.className = "col m-2";
-
-    let track = document.createElement('div');
-    track.className = "card border-light h-50"; // sets height = 100% to row height, and row height determined by largest card
-    track.id = id;
-
-    let imageURL = tracks[id].track.album.images[0].url;
-    let image = document.createElement("img");
-    image.src = imageURL;
-    image.className = "card-img-top rounded-circle shadow-lg img-fluid";
-    image.addEventListener("click", function () {
-        editModalContent(id);
-    });
-
-    let trackBody = document.createElement("div");
-    trackBody.className = "card-body";
-
-    let trackTitle = document.createElement("h5");
-    trackTitle.className = "card-title";
-    trackTitle.innerText = tracks[id].track.name
-
-    let trackArtist = document.createElement("h7");
-    trackArtist.className = "card-title";
-    trackArtist.innerText = getArtistNames(tracks[id].track.artists);
-
-    trackBody.append(trackTitle, trackArtist);
-    track.append(trackBody);
-    column.append(image, track);
-    return column;
-}
-
-
 function initializeMoodDiv() {
     document.getElementById("mood-string").innerText = mood.dominantMood.charAt(0).toUpperCase() + mood.dominantMood.substring(1);
 
@@ -182,10 +164,6 @@ function initializeMoodDiv() {
         let moodDiv = document.getElementById("mood");
         removeAllChildren(moodDiv);
     })
-
-    document.getElementById("see-more").addEventListener("click", function(){
-
-    })
 }
 
 function initializeUserInfoDiv() {
@@ -200,15 +178,12 @@ function initializeUserInfoDiv() {
 
 // MODAL INFO ----------------------------------------
 function editModalContent(id) {
-    // modalBackground.style.display = "flex";
-
     initializeModalImage(id);
     initializeModalContent(id);
     initializeModalAnalytics(id);
 }
 
 function initializeModalAnalytics(id) {
-    removeAllChildren(modalAnalytics);
     let trackChart = document.createElement("canvas");
     modalAnalytics.appendChild(trackChart);
     let audioFeatures = tracks[id].audioFeatures;
@@ -285,7 +260,7 @@ function getAlbumImageURL(id) {
     if (images.length !== 0 && images[0].url !== undefined && images[0].url !== null && images[0].url !== "") {
         return images[0].url;
     } else {
-        return "../libraries/unavailable.png";
+        return noImageAvailablePath;
     }
 }
 
@@ -294,7 +269,7 @@ function getUserImageURL() {
     if (userImages.length !== 0 && userImages[0].url !== undefined && userImages[0].url !== null && userImages[0].url !== "") {
         return userImages[0].url;
     } else {
-        return "../libraries/unavailable.png";
+        return noImageAvailablePath;
     }
 }
 
@@ -320,13 +295,4 @@ function removeAllChildren(node) {
     while (node.firstChild) {
         node.removeChild(node.lastChild);
     }
-
 }
-
-// window.onclick = function (event) {
-//     if (event.target === modalBackground) {
-//         modalBackground.style.display = "none";
-//         document.getElementById("modal-content-video").pause();
-//     }
-// }
-
