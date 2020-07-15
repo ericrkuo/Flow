@@ -5,24 +5,25 @@ block append stylesheets
     link(rel='stylesheet', href='/stylesheets/backgroundCSS.css')
 block content
     .container.w-100.text-center
-        h2.text-white-50.mt-5 Curious how this works? Follow our tutorial below!
-        #demo.carousel.slide(data-ride='carousel')
-            // Indicators
-            ul.carousel-indicators
-                li.active(data-target='#demo' data-slide-to='0')
-                li(data-target='#demo' data-slide-to='1')
-                li(data-target='#demo' data-slide-to='2')
-            // The slideshow
-            .carousel-inner
-                .carousel-item.active
-                    img(src='https://blog.eurail.com/wp-content/uploads/2013/10/shutterstock_273176609.jpg' alt='Los Angeles' width='1100' height='500')
-                .carousel-item
-                    img(src='https://files.tripstodiscover.com/files/2014/06/Cinque-Tierre.jpg' alt='Chicago' width='1100' height='500')
-                .carousel-item
-                    img(src='../libraries/pictures/sanfran.png' alt='New York' width='1100' height='500')
-            // Left and right controls
-            a.carousel-control-prev(href='#demo' data-slide='prev')
-                span.carousel-control-prev-icon
-            a.carousel-control-next(href='#demo' data-slide='next')
-                span.carousel-control-next-icon
+        .col-sm-auto
+            h2.text-white-50.mt-5 Curious how this works? Follow our tutorial below!
+                #demo.carousel.slide(data-ride='carousel')
+                    // Indicators
+                    ul.carousel-indicators
+                        li.active(data-target='#demo' data-slide-to='0')
+                        li(data-target='#demo' data-slide-to='1')
+                        li(data-target='#demo' data-slide-to='2')
+                    // The slideshow
+                    .carousel-inner
+                        .carousel-item.active
+                            img(src='https://blog.eurail.com/wp-content/uploads/2013/10/shutterstock_273176609.jpg' alt='Los Angeles')
+                        .carousel-item
+                            img(src='https://files.tripstodiscover.com/files/2014/06/Cinque-Tierre.jpg' alt='Chicago')
+                        .carousel-item
+                            img(src='../libraries/pictures/sanfran.png' alt='New York')
+                    // Left and right controls
+                    carousel-control-prev(href='#demo' data-slide='prev')
+                        span.carousel-control-prev-icon
+                    carousel-control-next(href='#demo' data-slide='next')
+                        span.carousel-control-next-icon
     script(src='/js/tutorial.js')
