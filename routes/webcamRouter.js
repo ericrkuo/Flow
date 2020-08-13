@@ -11,7 +11,6 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function (req, res, next) {
-    let dataURL = req.body;
     let main = req.app.locals.main;
     main.dataURL = req.body;
     return main.getRelevantSongsTestingPurposes()

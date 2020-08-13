@@ -5,10 +5,10 @@ block append stylesheets
     link(rel='stylesheet', href='/stylesheets/backgroundCSS.css')
 block content
     .centered-div.text-center
-        #welcomeMessage Welcome to
-        #serviceName &nbsp;Flow
-        #captionMessage a playlist curated for how you feel...
-        button#getStarted.btn.btn-outline-light.btn-lg(type='button') GET STARTED
+        h1.text-white.center.d-inline-block#welcomeMessage Welcome to
+        h1.text-white.font-weight-bolder.center.d-inline-block#serviceName &nbsp;Flow
+        h5.text-white.font-italic.text-light.center.pt-4.pb-4#captionMessage a playlist curated for how you feel...
+        button#getStarted.btn.btn-outline-light.btn-lg.center(type='button') GET STARTED
     script(src='/js/index.js')
 
 
