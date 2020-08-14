@@ -46,7 +46,7 @@ $('#trackModal').on('hide.bs.modal', function () {
 
 initialize();
 initializeUserInfoDiv();
-initializeTracksDiv2();
+initializeTracksDiv();
 initializeMoodDiv();
 
 function initialize() {
@@ -62,7 +62,7 @@ function initialize() {
 
 }
 
-function initializeTracksDiv2() {
+function initializeTracksDiv() {
 
     let counter = 1;
     let rowClassName = "row";
@@ -122,6 +122,7 @@ function createTrackCard(id) {
     container.append(image, trackTitle, trackArtist)
     return container
 }
+
 
 function initializeMoodDiv() {
     document.getElementById("mood-string").innerText = mood.dominantMood.charAt(0).toUpperCase() + mood.dominantMood.substring(1);
