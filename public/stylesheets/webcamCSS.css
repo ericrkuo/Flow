@@ -23,7 +23,7 @@
     -webkit-mask-position: center;
     -webkit-mask-repeat: no-repeat;
     animation: backInDown;
-    animation-duration: 4s;
+    animation-duration: 2s;
 }
 
 #canvas {

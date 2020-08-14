@@ -7,7 +7,8 @@ block content
     .container.w-100.text-center
         .col-sm-auto
             h2.text-white.mt-5 Curious how this works? Follow our tutorial below!
-                #demo.carousel.slide(data-ride='carousel')
+                #demo.carousel.slide(data-ride='carousel' data-interval='false')
+
                     // Indicators
                     ul.carousel-indicators
                         li.active(data-target='#demo' data-slide-to='0')
@@ -26,4 +27,3 @@ block content
                         span.carousel-control-prev-icon
                     carousel-control-next(href='#demo' data-slide='next')
                         span.carousel-control-next-icon
-    script(src='/js/tutorial.js')
