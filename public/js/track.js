@@ -177,7 +177,7 @@ function initializeUserInfoDiv() {
     });
 }
 
-// MODAL INFO ----------------------------------------
+// MODAL INFO ---------------------------------------
 function editModalContent(id) {
     initializeModalImage(id);
     initializeModalContent(id);
