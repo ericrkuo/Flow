@@ -25,7 +25,6 @@ class Main {
         this.spotify = new Spotify();
         this.kMean = new KMean();
         this.result = null;
-        this.playlistURL = null;
     }
 
     // REQUIRES. this.dataURL to be set
@@ -187,16 +186,13 @@ class Main {
         }
     }
 
+    // REQUIRES: array of track URIs in format ["spotify:track:1ue7zm5TVVvmoQV8lK6K2H", ...]
     createMoodPlaylist(tracks) {
-        let tracksArray = Object.values(tracks.tracks);
-        let tracksURIArray = [];
-        for(let track of tracksArray) {
-            tracksURIArray.push(track.track.uri);
+        if (tracks !== null && tracks !== undefined && Array.isArray(tracks) && tracks.length !== 0)
+        {
+            return this.spotify.getNewPlaylist(tracks)
         }
-        return this.spotify.getNewPlaylist(tracksURIArray).then((playlistLink) => {
-            this.playlistURL = playlistLink
-        })
-
+        throw new Error("Incorrect input for tracks: " + tracks);
     }
 }
 

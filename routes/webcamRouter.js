@@ -15,15 +15,14 @@ router.post('/', function (req, res, next) {
     main.dataURL = req.body;
     return main.getRelevantSongsTestingPurposes()
         .then((tracks)=>{
-            // TODO: main POST more semantically correct
+            // TODO: make POST more semantically correct
             console.log("REACHED HERE");
             // res.redirect("http://localhost:3000/tracks") // cannot do redirect after HTTP REQ, can only make client redirect
-            // TODO: send back link in json for the frontend to change URL to
             return res.status(200).json({link: "http://localhost:3000/tracks", result: req.app.locals.main.result});
         })
         .catch((err)=>{
             console.log(err);
-            return res.status(400).json({"error" : err});
+            return res.status(400).json({"error" : err.message});
         });
 });
 
