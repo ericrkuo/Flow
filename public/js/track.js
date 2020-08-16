@@ -1,6 +1,7 @@
 let tracksDiv = document.getElementById("tracks-div");
 let modalAnalytics = document.getElementById("modal-analytics");
 let noImageAvailablePath = "../libraries/pictures/nopreview.png";
+let noUserProfilePath = "../libraries/pictures/unknownuser.png";
 
 let colors = {
     backgroundColor: [
@@ -48,6 +49,7 @@ initialize();
 initializeUserInfoDiv();
 initializeTracksDiv();
 initializeMoodDiv();
+addPlaylistEventListeners();
 
 function initialize() {
     let tutorialButton = document.getElementById("tutorial");
@@ -165,6 +167,77 @@ function initializeMoodDiv() {
         let moodDiv = document.getElementById("mood");
         removeAllChildren(moodDiv);
     })
+}
+
+function addPlaylistEventListeners()
+{
+    let playlistButton = document.getElementById("playlist");
+    let createPlaylistButton = document.getElementById("createPlaylist");
+    let cancelPlaylistButton = document.getElementById("cancelPlaylist");
+
+    createPlaylistButton.addEventListener("click", async function(){
+        cancelPlaylistButton.setAttribute('disabled', "");
+        createPlaylistButton.setAttribute('disabled', "");
+        sendPOSTRequestToCreatePlaylist();
+    })
+}
+
+function sendPOSTRequestToCreatePlaylist()
+{
+    let playlistButton = document.getElementById("playlist");
+    let createPlaylistButton = document.getElementById("createPlaylist");
+    let cancelPlaylistButton = document.getElementById("cancelPlaylist");
+    let data = JSON.stringify(getAllTrackURLs());
+    let request = new XMLHttpRequest();
+
+    request.open("POST", "http://localhost:3000/tracks", true);
+    request.setRequestHeader('Content-Type', 'application/json');
+
+    request.onerror = function () {
+        alert("The request failed");
+    };
+
+    request.onload = function () {
+        if (request.status !== 200) {
+            alert(`Error ${request.status}: ${request.response}`);
+            $('#playlistModal').modal('hide');
+            cancelPlaylistButton.removeAttribute('disabled');
+            createPlaylistButton.removeAttribute('disabled');
+        } else {
+            let response = JSON.parse(request.response);
+            if (response !== null && response.link !== null) {
+                let url = response.link;
+                console.log("FINISHED POST REQUEST");
+
+                cancelPlaylistButton.removeAttribute('disabled');
+                createPlaylistButton.className = createPlaylistButton.className.replace('btn-primary', 'btn-secondary');
+
+                playlistButton.className = playlistButton.className.replace('btn-success', 'btn-primary');
+                playlistButton.removeAttribute("data-toggle");
+                playlistButton.removeAttribute("data-target");
+                playlistButton.innerText = "Go to playlist"
+                playlistButton.addEventListener("click", () => {
+                    window.open(url, "_blank");
+                });
+                $('#playlistModal').modal('hide');
+                window.open(url, "_blank");
+            }
+        }
+    };
+
+    request.send(data);
+    console.log("SENT POST REQUEST");
+}
+
+function getAllTrackURLs() {
+    let data = [];
+    for (let track of Object.values(tracks))
+    {
+        if (track !== null && track.track !== null && track.track.uri !== null) {
+            data.push(track.track.uri);
+        }
+    }
+    return data;
 }
 
 function initializeUserInfoDiv() {

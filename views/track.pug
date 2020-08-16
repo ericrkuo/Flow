@@ -5,7 +5,12 @@ block append stylesheets
     script(src='./libraries/Chart.min.js', type="text/javascript")
 block content
     .container-fluid.bg-gradient-info
-        h3#title.text-center.text-truncate.mt-3.mb-0 Thanks for waiting! Here's your playlist
+        .row.row-cols-2
+            .col-9
+                h3#title.text-center.text-truncate.mt-3.mb-0 Thanks for waiting! Here's your playlist
+            .col-3
+                .container.text-center
+                    button#playlist.btn.btn-success.btn-lg.mt-3.mb-0(type="button" data-toggle="modal" data-target="#playlistModal") Create A Playlist
         .row.row-cols-2
             .col-9
                 #tracks-div.container-fluid
@@ -74,6 +79,16 @@ block content
                 .row
                     .col-md-12.align-self-center
                         #modal-analytics
+    #playlistModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='playlistModal' aria-hidden='true' data-backdrop="static" data-keyboard="false")
+        .modal-dialog.modal-dialog-centered
+            .modal-content.text-center.rounded-lg.shadow-lg.px-3
+                .modal-header
+                    h5.modal-title Creating a playlist
+                .modal-body This will create a private playlist with the following songs directly in your Spotify account. Would you still like to proceed?
+                .modal-footer
+                    button#cancelPlaylist.btn.btn-secondary(data-dismiss="modal") Cancel
+                    button#createPlaylist.btn.btn-primary Continue
+
     script.
         let tracks = !{JSON.stringify(tracks)};
         let userInfo = !{JSON.stringify(userInfo)};

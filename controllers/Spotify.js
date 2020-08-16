@@ -37,6 +37,7 @@ class Spotify {
         this.spotifyApi.setAccessToken(accessToken === undefined ? process.env.ACCESS_TOKEN : accessToken);
         this.spotifyApi.setRefreshToken(refreshToken === undefined ? null : refreshToken);
         this.trackHashMap = new Map();
+        this.mood = "happiness"; // default
     }
 
     sampleFunction() {
@@ -418,32 +419,59 @@ class Spotify {
             })
     }
 
-    // TODO: make test when already created playlist
-    // TODO: make test delete playlist after
+    // NOTE: this will create duplicate playlist if playlist already exists, there is no way to delete a playlist through Spotify API
+    // since deleting a playlist will only make the owner unfollow it, while others can still follow the "deleted" playlist
     createNewPlaylist() {
         return this.getUserInfo()
             .then((result) => {
-                let userId = result.id;
-                return this.spotifyApi.createPlaylist(userId, 'Flow Playlist');
+                if (result && result.id !== null && this.mood) {
+                    let userId = result.id;
+                    return this.spotifyApi.createPlaylist(userId, 'Flow Playlist: ' + this.mood, {public: false});
+                } else {
+                    throw new Error("userInfo or mood is not created correctly");
+                }
             }).catch((error) => {
-                console.log("Error in creating new playlist");
+                console.log("Error in creating new playlist: "  + error);
                 throw error;
             })
     }
 
-    getNewPlaylist(matchingTracks) {
-        return this.createNewPlaylist().then((result) => {
-            let link = result.body.external_urls["spotify"];
-            return this.spotifyApi.addTracksToPlaylist(result.body.id, matchingTracks).then(() => {
-                return link;
-            })
-        }).catch((error) => {
-            console.log("Error in adding tracks to newly created playlist");
-            throw error;
-        })
+    getNewPlaylist(trackURLs) {
+        let link = null;
+        if (this.isTrackURLsValid(trackURLs)) {
+            return this.createNewPlaylist()
+                .then((playlist) => {
+                    if (this.isCreatedPlaylistValid(playlist)) {
+                        link = playlist.body.external_urls.spotify;
+                        return this.spotifyApi.addTracksToPlaylist(playlist.body.id, trackURLs)
+                    } else {
+                        throw new Error("Error in created playlist");
+                    }
+                })
+                .then((result) => {
+                    if (link === null || (result.statusCode !== 200 && result.statusCode !== 201)) throw new Error("link is null or tracks did not add correctly");
+                    return link;
+                })
+                .catch((error) => {
+                    console.log("Error in adding tracks to newly created playlist: " + error);
+                    throw error;
+                })
+        }
+        else
+        {
+            throw new Error("invalid trackURLs input");
+        }
     }
 
+    isCreatedPlaylistValid(playlist)
+    {
+        return playlist && playlist.body && (playlist.statusCode === 200 || playlist.statusCode === 201) && playlist.body.external_urls && playlist.body.external_urls.spotify && playlist.body.id;
+    }
 
+    isTrackURLsValid(trackURLs)
+    {
+        return trackURLs && Array.isArray(trackURLs) && trackURLs.length !== 0;
+    }
 }
 
 module.exports.Spotify = Spotify;

@@ -25,4 +25,37 @@ describe("unit test for Main", function () {
         chai.assert(Main.tracks === "x");
     })
 
+    it("test createMoodPlaylist with null input", function() {
+        try
+        {
+            main.createMoodPlaylist(null)
+            chai.assert.fail("expected error to be thrown")
+        } catch (e) { }
+    })
+
+    it("test createMoodPlaylist with undefined input", function() {
+        try
+        {
+            main.createMoodPlaylist(undefined)
+            chai.assert.fail("expected error to be thrown")
+        } catch (e) { }
+    })
+
+    it("test createMoodPlaylist with incorrect input type", function() {
+        try
+        {
+            main.createMoodPlaylist("testString")
+            chai.assert.fail("expected error to be thrown")
+        } catch (e) { }
+    })
+
+    it("test createMoodPlaylist with empty array", function() {
+        try
+        {
+            main.createMoodPlaylist([])
+            chai.assert.fail("expected error to be thrown")
+        }
+        catch (e) { }
+    })
+
 });
