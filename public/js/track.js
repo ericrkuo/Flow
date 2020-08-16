@@ -201,7 +201,7 @@ function initializeModalAnalytics(id) {
         ticks: {
             reverse: true
         },
-        // The data for our dataset 
+        // The data for our dataset
         data: {
             labels: labels,
             datasets: [{
