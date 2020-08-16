@@ -236,7 +236,7 @@ describe("unit test for Spotify", function () {
         catch(e) {}
     })
 
-    it("test getNewPlaylist incorrect input type", async function() {
+    it("test getNewPlaylist empty array", async function() {
         try {
             let url = await spotify.getNewPlaylist([]);
             chai.expect.fail();

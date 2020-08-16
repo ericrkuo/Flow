@@ -188,7 +188,7 @@ class Main {
 
     // REQUIRES: array of track URIs in format ["spotify:track:1ue7zm5TVVvmoQV8lK6K2H", ...]
     createMoodPlaylist(tracks) {
-        if (tracks !== null && tracks !== undefined && Array.isArray(tracks) && tracks.length !== 0)
+        if (tracks && Array.isArray(tracks) && tracks.length !== 0)
         {
             return this.spotify.getNewPlaylist(tracks)
         }

@@ -33,6 +33,14 @@ describe("unit test for Main", function () {
         } catch (e) { }
     })
 
+    it("test createMoodPlaylist with undefined input", function() {
+        try
+        {
+            main.createMoodPlaylist(undefined)
+            chai.assert.fail("expected error to be thrown")
+        } catch (e) { }
+    })
+
     it("test createMoodPlaylist with incorrect input type", function() {
         try
         {

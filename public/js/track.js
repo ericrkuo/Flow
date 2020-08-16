@@ -208,9 +208,13 @@ function sendPOSTRequestToCreatePlaylist()
             if (response !== null && response.link !== null) {
                 let url = response.link;
                 console.log("FINISHED POST REQUEST");
+
                 cancelPlaylistButton.removeAttribute('disabled');
-                playlistButton.className = playlistButton.className.replace('btn-success', 'btn-primary');
                 createPlaylistButton.className = createPlaylistButton.className.replace('btn-primary', 'btn-secondary');
+
+                playlistButton.className = playlistButton.className.replace('btn-success', 'btn-primary');
+                playlistButton.removeAttribute("data-toggle");
+                playlistButton.removeAttribute("data-target");
                 playlistButton.innerText = "Go to playlist"
                 playlistButton.addEventListener("click", () => {
                     window.open(url, "_blank");

@@ -424,7 +424,7 @@ class Spotify {
     createNewPlaylist() {
         return this.getUserInfo()
             .then((result) => {
-                if (result !== null && result.id !== null && this.mood !== undefined && this.mood != null) {
+                if (result && result.id !== null && this.mood) {
                     let userId = result.id;
                     return this.spotifyApi.createPlaylist(userId, 'Flow Playlist: ' + this.mood, {public: false});
                 } else {
@@ -445,7 +445,7 @@ class Spotify {
                         link = playlist.body.external_urls.spotify;
                         return this.spotifyApi.addTracksToPlaylist(playlist.body.id, trackURLs)
                     } else {
-                        throw new Error();
+                        throw new Error("Error in created playlist");
                     }
                 })
                 .then((result) => {
@@ -465,12 +465,12 @@ class Spotify {
 
     isCreatedPlaylistValid(playlist)
     {
-        return playlist !== null && playlist.body !== null && (playlist.statusCode === 200 || playlist.statusCode === 201) && playlist.body.external_urls !== null && playlist.body.external_urls.spotify !== null && playlist.body.id !== null;
+        return playlist && playlist.body && (playlist.statusCode === 200 || playlist.statusCode === 201) && playlist.body.external_urls && playlist.body.external_urls.spotify && playlist.body.id;
     }
 
     isTrackURLsValid(trackURLs)
     {
-        return trackURLs !== null && trackURLs !== undefined && Array.isArray(trackURLs) && trackURLs.length !== 0;
+        return trackURLs && Array.isArray(trackURLs) && trackURLs.length !== 0;
     }
 }
 
