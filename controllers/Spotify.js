@@ -409,8 +409,22 @@ class Spotify {
                 return json;
             })
             .catch((err) => {
-                console.log("ERROR in getting info about user");
-                throw err;
+                console.log("Failed to get user information" + err);
+                if(this.checkCredentials()) {
+                    console.log(err);
+                    throw err;
+                } else {
+                    this.getNewAccessToken().then((access_token) => {
+                        this.spotifyApi.setAccessToken(access_token);
+                        if(this.checkCredentials()) {
+                            this.getUserInfo().then(() => {});
+                        } else {
+                            console.log(err);
+                            throw err;
+                        }
+
+                    })
+                }
             })
     }
 
@@ -448,15 +462,54 @@ class Spotify {
                     return link;
                 })
                 .catch((error) => {
-                    console.log("Error in adding tracks to newly created playlist: " + error);
-                    throw error;
+                    console.log("Error in adding tracks to newly created playlist");
+                    if(this.checkCredentials()) {
+                        console.log(error);
+                        throw error;
+                    } else {
+                        this.getNewAccessToken().then((access_token) => {
+                            this.spotifyApi.setAccessToken(access_token);
+                            if(this.checkCredentials()) {
+                                this.getNewPlaylist(matchingTracks).then(() => {});
+                            } else {
+                                console.log(error);
+                                throw error;
+                            }
+                        })
+                    }
                 })
+
         }
         else
         {
             throw new Error("invalid trackURLs input");
         }
     }
+
+    getNewAccessToken() {
+        var refresh_token = this.spotifyApi.getRefreshToken();
+        var authOptions = {
+            url: 'https://accounts.spotify.com/api/token',
+            headers: { 'Authorization': 'Basic ' + Buffer.from(process.env.SPOTIFY_API_ID +':' + process.env.SPOTIFY_CLIENT_SECRET).toString("base64") },
+            form: {
+                grant_type: 'refresh_token',
+                refresh_token: refresh_token
+            },
+            json: true
+        };
+
+        return new Promise(function(fulfill, reject) {
+            request.post(authOptions, function (error, response, body) {
+                if (!error && response.statusCode === 200) {
+                    fulfill(body.access_token);
+                } else {
+                    console.log(error);
+                    reject();
+                }
+            });
+        });
+    }
+
 
     isCreatedPlaylistValid(playlist)
     {
