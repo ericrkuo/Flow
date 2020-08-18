@@ -62,8 +62,20 @@ class Main {
                 return newArrayOfSongIDS;
             })
             .catch((err) => {
-                console.log(err);
-                throw err;
+                if(this.spotify.checkCredentials()) {
+                    console.log(err);
+                    throw err;
+                } else {
+                    this.spotify.getNewAccessToken().then((access_token) => {
+                        this.spotify.spotifyApi.setAccessToken(access_token);
+                        this.emotion.spotifyApi.setAccessToken(access_token);
+                        if(this.spotify.checkCredentials()) {
+                            return this.getRelevantSongs();
+                        } else {
+                            throw new Error("Failed to update credentials");
+                        }
+                    })
+                }
             })
     }
 
@@ -100,8 +112,20 @@ class Main {
                 return newArrayOfSongIDS;
             })
             .catch((err) => {
-                console.log(err);
-                throw err;
+                if(this.spotify.checkCredentials()) {
+                    console.log(err);
+                    throw err;
+                } else {
+                    this.spotify.getNewAccessToken().then((access_token) => {
+                        this.spotify.spotifyApi.setAccessToken(access_token);
+                        this.emotion.spotifyApi.setAccessToken(access_token);
+                        if(this.spotify.checkCredentials()) {
+                            return this.getRelevantSongsTestingPurposes();
+                        } else {
+                            throw new Error("Failed to update credentials");
+                        }
+                    })
+                }
             })
     }
 

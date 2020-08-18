@@ -248,9 +248,15 @@ class Spotify {
                 return data;
             })
             .catch((err) => {
+<<<<<<< HEAD
                 console.log(err);
                 throw err;
             })
+=======
+                console.log("Failed to get all audio features" + err);
+                throw err;
+            });
+>>>>>>> resolved merge conflict errors
     }
 
     getAudioFeatures(tracks) {
@@ -409,18 +415,16 @@ class Spotify {
                 return json;
             })
             .catch((err) => {
-                console.log("Failed to get user information" + err);
-                if(this.checkCredentials()) {
-                    console.log(err);
+                if (this.checkCredentials()) {
+                    console.log("Failed to get user information" + err);
                     throw err;
                 } else {
                     this.getNewAccessToken().then((access_token) => {
                         this.spotifyApi.setAccessToken(access_token);
-                        if(this.checkCredentials()) {
-                            this.getUserInfo().then(() => {});
+                        if (this.checkCredentials()) {
+                            return this.getUserInfo();
                         } else {
-                            console.log(err);
-                            throw err;
+                            throw new Error("Failed to update credentials");
                         }
 
                     })
@@ -440,7 +444,11 @@ class Spotify {
                     throw new Error("userInfo or mood is not created correctly");
                 }
             }).catch((error) => {
+<<<<<<< HEAD
                 console.log("Error in creating new playlist: "  + error);
+=======
+                console.log("Error in creating new playlist: " + error);
+>>>>>>> resolved merge conflict errors
                 throw error;
             })
     }
@@ -462,13 +470,19 @@ class Spotify {
                     return link;
                 })
                 .catch((error) => {
+<<<<<<< HEAD
                     console.log("Error in adding tracks to newly created playlist");
                     if(this.checkCredentials()) {
                         console.log(error);
+=======
+                    if (this.checkCredentials()) {
+                        console.log("Error in adding tracks to newly created playlist: " + error);
+>>>>>>> resolved merge conflict errors
                         throw error;
                     } else {
                         this.getNewAccessToken().then((access_token) => {
                             this.spotifyApi.setAccessToken(access_token);
+<<<<<<< HEAD
                             if(this.checkCredentials()) {
                                 this.getNewPlaylist(matchingTracks).then(() => {});
                             } else {
@@ -482,6 +496,18 @@ class Spotify {
         }
         else
         {
+=======
+                            if (this.checkCredentials()) {
+                                return this.getNewPlaylist(trackURLs);
+                            } else {
+                                throw new Error("Failed to update credentials");
+                            }
+
+                        })
+                    }
+                })
+        } else {
+>>>>>>> resolved merge conflict errors
             throw new Error("invalid trackURLs input");
         }
     }
@@ -490,7 +516,7 @@ class Spotify {
         var refresh_token = this.spotifyApi.getRefreshToken();
         var authOptions = {
             url: 'https://accounts.spotify.com/api/token',
-            headers: { 'Authorization': 'Basic ' + Buffer.from(process.env.SPOTIFY_API_ID +':' + process.env.SPOTIFY_CLIENT_SECRET).toString("base64") },
+            headers: {'Authorization': 'Basic ' + Buffer.from(process.env.SPOTIFY_API_ID + ':' + process.env.SPOTIFY_CLIENT_SECRET).toString("base64")},
             form: {
                 grant_type: 'refresh_token',
                 refresh_token: refresh_token
@@ -498,7 +524,7 @@ class Spotify {
             json: true
         };
 
-        return new Promise(function(fulfill, reject) {
+        return new Promise(function (fulfill, reject) {
             request.post(authOptions, function (error, response, body) {
                 if (!error && response.statusCode === 200) {
                     fulfill(body.access_token);
@@ -511,6 +537,7 @@ class Spotify {
     }
 
 
+<<<<<<< HEAD
     isCreatedPlaylistValid(playlist)
     {
         return playlist && playlist.body && (playlist.statusCode === 200 || playlist.statusCode === 201) && playlist.body.external_urls && playlist.body.external_urls.spotify && playlist.body.id;
@@ -518,6 +545,13 @@ class Spotify {
 
     isTrackURLsValid(trackURLs)
     {
+=======
+    isCreatedPlaylistValid(playlist) {
+        return playlist && playlist.body && (playlist.statusCode === 200 || playlist.statusCode === 201) && playlist.body.external_urls && playlist.body.external_urls.spotify && playlist.body.id;
+    }
+
+    isTrackURLsValid(trackURLs) {
+>>>>>>> resolved merge conflict errors
         return trackURLs && Array.isArray(trackURLs) && trackURLs.length !== 0;
     }
 }
