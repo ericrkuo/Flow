@@ -248,15 +248,9 @@ class Spotify {
                 return data;
             })
             .catch((err) => {
-<<<<<<< HEAD
-                console.log(err);
-                throw err;
-            })
-=======
                 console.log("Failed to get all audio features" + err);
                 throw err;
             });
->>>>>>> resolved merge conflict errors
     }
 
     getAudioFeatures(tracks) {
@@ -444,11 +438,7 @@ class Spotify {
                     throw new Error("userInfo or mood is not created correctly");
                 }
             }).catch((error) => {
-<<<<<<< HEAD
-                console.log("Error in creating new playlist: "  + error);
-=======
                 console.log("Error in creating new playlist: " + error);
->>>>>>> resolved merge conflict errors
                 throw error;
             })
     }
@@ -470,33 +460,12 @@ class Spotify {
                     return link;
                 })
                 .catch((error) => {
-<<<<<<< HEAD
-                    console.log("Error in adding tracks to newly created playlist");
-                    if(this.checkCredentials()) {
-                        console.log(error);
-=======
                     if (this.checkCredentials()) {
                         console.log("Error in adding tracks to newly created playlist: " + error);
->>>>>>> resolved merge conflict errors
                         throw error;
                     } else {
                         this.getNewAccessToken().then((access_token) => {
                             this.spotifyApi.setAccessToken(access_token);
-<<<<<<< HEAD
-                            if(this.checkCredentials()) {
-                                this.getNewPlaylist(matchingTracks).then(() => {});
-                            } else {
-                                console.log(error);
-                                throw error;
-                            }
-                        })
-                    }
-                })
-
-        }
-        else
-        {
-=======
                             if (this.checkCredentials()) {
                                 return this.getNewPlaylist(trackURLs);
                             } else {
@@ -507,7 +476,6 @@ class Spotify {
                     }
                 })
         } else {
->>>>>>> resolved merge conflict errors
             throw new Error("invalid trackURLs input");
         }
     }
@@ -537,21 +505,11 @@ class Spotify {
     }
 
 
-<<<<<<< HEAD
-    isCreatedPlaylistValid(playlist)
-    {
-        return playlist && playlist.body && (playlist.statusCode === 200 || playlist.statusCode === 201) && playlist.body.external_urls && playlist.body.external_urls.spotify && playlist.body.id;
-    }
-
-    isTrackURLsValid(trackURLs)
-    {
-=======
     isCreatedPlaylistValid(playlist) {
         return playlist && playlist.body && (playlist.statusCode === 200 || playlist.statusCode === 201) && playlist.body.external_urls && playlist.body.external_urls.spotify && playlist.body.id;
     }
 
     isTrackURLsValid(trackURLs) {
->>>>>>> resolved merge conflict errors
         return trackURLs && Array.isArray(trackURLs) && trackURLs.length !== 0;
     }
 }
