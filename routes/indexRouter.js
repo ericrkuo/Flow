@@ -8,10 +8,10 @@ router.get('/', function (req, res, next) {
 
 async function checkCredentials(req) {
     let main = req.app.locals.main;
-    if (main && main.spotify && main.spotify.spotifyApi) {
+    if (main && main.spotify && main.spotify.spotifyApi && main.spotify.refreshCredential) {
         let accessToken = req.app.locals.main.spotify.spotifyApi.getAccessToken();
         let refreshToken = req.app.locals.main.spotify.spotifyApi.getRefreshToken();
-        let result = await main.spotify.checkCredentials();
+        let result = await main.spotify.refreshCredential.checkCredentials();
         if (accessToken && refreshToken && typeof accessToken === 'string' && typeof refreshToken === 'string' && result) {
             return true;
         }

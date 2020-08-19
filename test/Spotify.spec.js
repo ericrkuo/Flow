@@ -29,7 +29,7 @@ describe("unit test for Spotify", function () {
         spotify = new Spotify(spotifyApi, "hello");
         let x = spotify.spotifyApi.getAccessToken();
         chai.expect(x).to.be.equal("hello");
-        let result = await spotify.checkCredentials()
+        let result = await spotify.refreshCredential.checkCredentials()
         console.log(result);
     });
 

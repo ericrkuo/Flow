@@ -1,3 +1,4 @@
+const {RefreshCredential} = require("./RefreshCredential");
 
 class Spotify {
 
@@ -33,21 +34,22 @@ class Spotify {
         this.spotifyApi.setRefreshToken(refreshToken === undefined ? process.env.REFRESH_TOKEN : refreshToken);
         this.trackHashMap = new Map();
         this.mood = "happiness"; // default
+        this.refreshCredential = new RefreshCredential(this.spotifyApi);
     }
 
     sampleFunction() {
         return this.spotifyApi.getArtistAlbums('43ZHCT0cAZBISjO8DG9PnE');
     }
 
-    checkCredentials() {
-        return this.spotifyApi.getArtist('2hazSY4Ef3aB9ATXW7F5w3')
-            .then((data) => {
-                return true;
-            })
-            .catch((err) => {
-                return false;
-            })
-    }
+    // checkCredentials() {
+    //     return this.spotifyApi.getArtist('2hazSY4Ef3aB9ATXW7F5w3')
+    //         .then((data) => {
+    //             return true;
+    //         })
+    //         .catch((err) => {
+    //             return false;
+    //         })
+    // }
 
     addAllTracksToHashMap() {
         let promises = [];
@@ -206,6 +208,7 @@ class Spotify {
 
     // TODO: refactor so that doesnt depend on function, make it a // REQUIRES that TrackHashMap cannot be empty, or decide something else
     getAllAudioFeatures() {
+        let self = this;
         return this.addAllTracksToHashMap()
             .then(() => {
                 // get array of array of ids (split into 100)
@@ -248,8 +251,18 @@ class Spotify {
                 return data;
             })
             .catch((err) => {
-                console.log("Failed to get all audio features" + err);
-                throw err;
+                if (this.refreshCredential.checkCredentials()) {
+                    console.log("Failed to get all audio features" + err);
+                    throw err;
+                } else {
+                    return this.refreshCredential.refreshCredentials(function() {
+                       // this.getAllAudioFeatures()
+                        self.getAllAudioFeatures()
+                    }, err).catch((error) => {
+                        console.log(error);
+                        throw error;
+                    });
+                }
             });
     }
 
@@ -398,6 +411,7 @@ class Spotify {
 
     // returns name, email, URL, and image of user
     getUserInfo() {
+        let self = this;
         return this.spotifyApi.getMe()
             .then((res) => {
                 let json = {};
@@ -409,21 +423,18 @@ class Spotify {
                 return json;
             })
             .catch((err) => {
-                if (this.checkCredentials()) {
+                if (this.refreshCredential.checkCredentials()) {
                     console.log("Failed to get user information" + err);
                     throw err;
                 } else {
-                    this.getNewAccessToken().then((access_token) => {
-                        this.spotifyApi.setAccessToken(access_token);
-                        if (this.checkCredentials()) {
-                            return this.getUserInfo();
-                        } else {
-                            throw new Error("Failed to update credentials");
-                        }
-
-                    })
+                    return this.refreshCredential.refreshCredentials(function() {
+                        self.getUserInfo()
+                    }, err).catch((error) => {
+                        console.log(error);
+                        throw error;
+                    });
                 }
-            })
+            });
     }
 
     // NOTE: this will create duplicate playlist if playlist already exists, there is no way to delete a playlist through Spotify API
@@ -445,6 +456,7 @@ class Spotify {
 
     getNewPlaylist(trackURLs) {
         let link = null;
+        let self = this;
         if (this.isTrackURLsValid(trackURLs)) {
             return this.createNewPlaylist()
                 .then((playlist) => {
@@ -459,51 +471,23 @@ class Spotify {
                     if (link === null || (result.statusCode !== 200 && result.statusCode !== 201)) throw new Error("link is null or tracks did not add correctly");
                     return link;
                 })
-                .catch((error) => {
-                    if (this.checkCredentials()) {
-                        console.log("Error in adding tracks to newly created playlist: " + error);
-                        throw error;
+                .catch((err) => {
+                    if (this.refreshCredential.checkCredentials()) {
+                        console.log("Failed to get new playlist" + err);
+                        throw err;
                     } else {
-                        this.getNewAccessToken().then((access_token) => {
-                            this.spotifyApi.setAccessToken(access_token);
-                            if (this.checkCredentials()) {
-                                return this.getNewPlaylist(trackURLs);
-                            } else {
-                                throw new Error("Failed to update credentials");
-                            }
-
-                        })
+                        return this.refreshCredential.refreshCredentials(function() {
+                            self.getNewPlaylist(trackURLs);
+                        }, err).catch((error) => {
+                            console.log(error);
+                            throw error;
+                        });
                     }
                 })
         } else {
             throw new Error("invalid trackURLs input");
         }
     }
-
-    getNewAccessToken() {
-        var refresh_token = this.spotifyApi.getRefreshToken();
-        var authOptions = {
-            url: 'https://accounts.spotify.com/api/token',
-            headers: {'Authorization': 'Basic ' + Buffer.from(process.env.SPOTIFY_API_ID + ':' + process.env.SPOTIFY_CLIENT_SECRET).toString("base64")},
-            form: {
-                grant_type: 'refresh_token',
-                refresh_token: refresh_token
-            },
-            json: true
-        };
-
-        return new Promise(function (fulfill, reject) {
-            request.post(authOptions, function (error, response, body) {
-                if (!error && response.statusCode === 200) {
-                    fulfill(body.access_token);
-                } else {
-                    console.log(error);
-                    reject();
-                }
-            });
-        });
-    }
-
 
     isCreatedPlaylistValid(playlist) {
         return playlist && playlist.body && (playlist.statusCode === 200 || playlist.statusCode === 201) && playlist.body.external_urls && playlist.body.external_urls.spotify && playlist.body.id;

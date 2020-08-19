@@ -1,3 +1,4 @@
+const {RefreshCredential} = require("./RefreshCredential");
 class Emotion {
 
     /* PLAN: Find the emotion with largest value possible.
@@ -706,10 +707,12 @@ class Emotion {
         this.spotifyApi.setAccessToken(accessToken === undefined ? process.env.ACCESS_TOKEN : accessToken);
         this.spotifyApi.setRefreshToken(refreshToken === undefined ? process.env.REFRESH_TOKEN : refreshToken);
         this.features = ["danceability", "energy", "loudness", "speechiness", "acousticness", "instrumentalness", "liveness", "valence", "tempo"];
+        this.refreshCredential = new RefreshCredential(this.spotifyApi);
     }
 
     getFeatures(mood) {
         let numTracks = this.emotionMap[mood].length;
+        let self = this;
         return this.spotifyApi.getAudioFeaturesForTracks(this.emotionMap[mood])
             .then((res) => {
                 let songFeatures = {};
@@ -732,8 +735,17 @@ class Emotion {
                 return songFeatures;
             })
             .catch((err) => {
-                console.log(err);
-                throw err;
+                if (this.refreshCredential.checkCredentials()) {
+                    console.log("Failed to get features for emotion" + err);
+                    throw err;
+                } else {
+                    return this.refreshCredential.refreshCredentials(function() {
+                        self.getFeatures(mood)
+                    }, err).catch((error) => {
+                        console.log(error);
+                        throw error;
+                    });
+                }
             })
     }
 
@@ -754,9 +766,7 @@ class Emotion {
                 dominantEmotion = currEmotion;
                 dominantEmotionValue = currEmotionValue;
             }
-
         }
-
         return dominantEmotion;
     }
 }
