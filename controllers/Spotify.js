@@ -41,16 +41,6 @@ class Spotify {
         return this.spotifyApi.getArtistAlbums('43ZHCT0cAZBISjO8DG9PnE');
     }
 
-    // checkCredentials() {
-    //     return this.spotifyApi.getArtist('2hazSY4Ef3aB9ATXW7F5w3')
-    //         .then((data) => {
-    //             return true;
-    //         })
-    //         .catch((err) => {
-    //             return false;
-    //         })
-    // }
-
     addAllTracksToHashMap() {
         let promises = [];
         promises.push(this.addRecentlyPlayedTracks());
