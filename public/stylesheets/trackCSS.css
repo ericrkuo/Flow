@@ -45,6 +45,26 @@
     height: 40vmin;
 }
 
+.fill {
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    background-color: #b4e8fe;
+}
+
+.unfill {
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    background-color: #f6f6f673;
+}
+
+.playlist-image {
+    height: 9vh;
+}
+
 body {
     /*background: #ddd6f3;  !* fallback for old browsers *!*/
     /*background: -webkit-linear-gradient(to bottom, #faaca8, #ddd6f3);  !* Chrome 10-25, Safari 5.1-6 *!*/

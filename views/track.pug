@@ -80,11 +80,16 @@ block content
                     .col-md-12.align-self-center
                         #modal-analytics
     #playlistModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='playlistModal' aria-hidden='true' data-backdrop="static" data-keyboard="false")
-        .modal-dialog.modal-dialog-centered
+        .modal-dialog.modal-dialog-centered.modal-lg
             .modal-content.text-center.rounded-lg.shadow-lg.px-3
                 .modal-header
                     h5.modal-title Creating a playlist
-                .modal-body This will create a private playlist with the following songs directly in your Spotify account. Would you still like to proceed?
+                .modal-body
+                    p.text-left.my-0 Click the tracks below you want to save into your own private playlist directly in your Spotify account. Would you still like to proceed?
+                    .custom-control.custom-switch.text-left.my-1
+                        input#selectAll.custom-control-input(type='checkbox' value='option1' name='playlistForm')
+                        label.custom-control-label(for='selectAll') Select All
+                    #playlist-container.container.text-center.overflow-auto(style='height: 60vh')
                 .modal-footer
                     button#cancelPlaylist.btn.btn-secondary(data-dismiss="modal") Cancel
                     button#createPlaylist.btn.btn-primary Continue

@@ -2,6 +2,7 @@ let tracksDiv = document.getElementById("tracks-div");
 let modalAnalytics = document.getElementById("modal-analytics");
 let noImageAvailablePath = "../libraries/pictures/nopreview.png";
 let noUserProfilePath = "../libraries/pictures/unknownuser.png";
+let playlistMap = new Map();
 
 let colors = {
     backgroundColor: [
@@ -49,7 +50,7 @@ initialize();
 initializeUserInfoDiv();
 initializeTracksDiv();
 initializeMoodDiv();
-addPlaylistEventListeners();
+initializePlaylistDiv();
 
 function initialize() {
     let tutorialButton = document.getElementById("tutorial");
@@ -169,21 +170,117 @@ function initializeMoodDiv() {
     })
 }
 
-function addPlaylistEventListeners()
-{
+function initializePlaylistDiv() {
+    let playlistRowClassName = "row row-cols-2 justify-content-center"
+    let counter = 1;
+    let playlistContainer = document.getElementById("playlist-container");
+    let row = document.createElement('div');
+    row.className = playlistRowClassName;
+
+    for (let id of Object.keys(tracks)) {
+        let column = document.createElement('div');
+        column.className = "col col-6 my-2 p-0";
+        column.appendChild(createPlaylistRow(id));
+        row.appendChild(column);
+
+        if (counter % 2 === 0) {
+            playlistContainer.appendChild(row);
+            row = document.createElement('div');
+            row.className = playlistRowClassName;
+        }
+        counter += 1;
+    }
+
+    // create remaining columns
+    if (--counter % 2 !== 0) {
+        let dummyColumn = document.createElement('div');
+        dummyColumn.className = "col col-6 my-2 p-0";
+        row.appendChild(dummyColumn);
+        playlistContainer.appendChild(row);
+    }
+
+    addPlaylistEventListeners();
+}
+
+function createPlaylistRow(id) {
+    let row = document.createElement('div');
+    row.className = "row row-cols-2 justify-content-center mx-2 unfill border rounded";
+    row.id = 'playlistRow-' + id;
+
+    let trackColumn = document.createElement('div');
+    trackColumn.className = "col-4 p-1 align-self-center";
+
+    let trackImage = document.createElement('img');
+    trackImage.src = this.getAlbumImageURL(id);
+    trackImage.className = "rounded-circle shadow-lg img-fluid playlist-image";
+
+    trackColumn.appendChild(trackImage);
+
+    let trackInfoColumn = document.createElement('div');
+    trackInfoColumn.className = "col-8 text-left align-self-center";
+
+    let trackSpan = document.createElement('span');
+    trackSpan.className = 'd-block text-left text-truncate font-weight-bold';
+    trackSpan.innerText = tracks[id].track.name
+
+    let artistSpan = document.createElement('span');
+    artistSpan.className = 'd-block text-left text-truncate';
+    artistSpan.innerText = getArtistNames(tracks[id].track.artists);
+
+    trackInfoColumn.append(trackSpan, artistSpan);
+    row.append(trackColumn, trackInfoColumn);
+
+    row.addEventListener('click', () => {
+        if (playlistMap.has(id)) {
+            console.log('removing: ' + id);
+            playlistMap.delete(id);
+
+            row.classList.remove('fill')
+            row.classList.add('unfill')
+        } else {
+            console.log('putting: ' + id);
+            playlistMap.set(id, id);
+
+            row.classList.remove('unfill')
+            row.classList.add('fill')
+        }
+    })
+
+    return row;
+}
+
+function addPlaylistEventListeners() {
     let playlistButton = document.getElementById("playlist");
     let createPlaylistButton = document.getElementById("createPlaylist");
     let cancelPlaylistButton = document.getElementById("cancelPlaylist");
+    let selectAllInput = document.getElementById('selectAll');
 
-    createPlaylistButton.addEventListener("click", async function(){
+    createPlaylistButton.addEventListener("click", async function () {
         cancelPlaylistButton.setAttribute('disabled', "");
         createPlaylistButton.setAttribute('disabled', "");
         sendPOSTRequestToCreatePlaylist();
-    })
+    });
+
+    selectAllInput.addEventListener('click', function () {
+        let isChecked = selectAllInput.checked;
+        for (let id of Object.keys(tracks)) {
+            let row = document.getElementById('playlistRow-' + id);
+            if (row) {
+                if (isChecked) {
+                    playlistMap.set(id, id);
+                    row.classList.remove('unfill')
+                    row.classList.add('fill')
+                } else {
+                    playlistMap.delete(id);
+                    row.classList.remove('fill')
+                    row.classList.add('unfill')
+                }
+            }
+        }
+    });
 }
 
-function sendPOSTRequestToCreatePlaylist()
-{
+function sendPOSTRequestToCreatePlaylist() {
     let playlistButton = document.getElementById("playlist");
     let createPlaylistButton = document.getElementById("createPlaylist");
     let cancelPlaylistButton = document.getElementById("cancelPlaylist");
@@ -231,8 +328,8 @@ function sendPOSTRequestToCreatePlaylist()
 
 function getAllTrackURLs() {
     let data = [];
-    for (let track of Object.values(tracks))
-    {
+    for (let id of playlistMap.keys()) {
+        let track = tracks[id];
         if (track !== null && track.track !== null && track.track.uri !== null) {
             data.push(track.track.uri);
         }
@@ -329,6 +426,7 @@ function initializeModalContent(id) {
 function initializeModalImage(id) {
     document.getElementById("modal-image").src = getAlbumImageURL(id);
 }
+
 function getAlbumImageURL(id) {
     let images = tracks[id].track.album.images;
     if (images.length !== 0 && images[0].url !== undefined && images[0].url !== null && images[0].url !== "") {
@@ -350,7 +448,7 @@ function getUserImageURL() {
 function getArtistNames(artists) {
     let artistNames = "";
     let n = artists.length;
-    for (let i=0; i<n-1; i++) {
+    for (let i = 0; i < n - 1; i++) {
         artistNames += artists[i].name + ", ";
     }
     return artistNames + artists[--n].name;
