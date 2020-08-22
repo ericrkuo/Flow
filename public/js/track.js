@@ -311,7 +311,7 @@ function addPlaylistEventListeners() {
 }
 
 function sendPOSTRequestToCreatePlaylist() {
-    return new Promise(async function(resolve, reject) {
+    return new Promise(function(resolve, reject) {
         let playlistButton = document.getElementById("playlist");
         let createPlaylistButton = document.getElementById("createPlaylist");
         let cancelPlaylistButton = document.getElementById("cancelPlaylist");
