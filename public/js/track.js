@@ -286,8 +286,8 @@ function addPlaylistEventListeners() {
                     createPlaylistButton.removeAttribute('disabled');
                 });
         } else {
-            alert("Please confirm below");
             confirmPlaylistLabel.classList.add('alert-playlist-label');
+            alert("Please confirm below");
         }
     });
 
