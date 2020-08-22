@@ -4,7 +4,6 @@ class RefreshCredential {
 
     constructor(spotifyApi) {
         this.spotifyApi = spotifyApi;
-        this.alreadyRefreshed = false;
     }
 
     checkCredentials() {
@@ -17,14 +16,12 @@ class RefreshCredential {
             })
     }
 
-    refreshCredentials(fnPtr, error) {
-        if (this.alreadyRefreshed) throw error
-        this.alreadyRefreshed = true;
+    refreshCredentials(fnPtr) {
         return this.getNewAccessToken().then((access_token) => {
             this.spotifyApi.setAccessToken(access_token);
-            fnPtr();
+            return fnPtr();
         }).catch((err) => {
-            console.log("Error in getting new access token" + err);
+            console.log("Error in getting new access token " + err);
             throw err;
         });
     }
@@ -49,7 +46,7 @@ class RefreshCredential {
                     fulfill(accessToken);
                 } else {
                     console.log(error);
-                    reject();
+                    reject(error);
                 }
             });
         });

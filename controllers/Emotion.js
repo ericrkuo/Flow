@@ -712,7 +712,6 @@ class Emotion {
 
     getFeatures(mood) {
         let numTracks = this.emotionMap[mood].length;
-        let self = this;
         return this.spotifyApi.getAudioFeaturesForTracks(this.emotionMap[mood])
             .then((res) => {
                 let songFeatures = {};
@@ -735,18 +734,11 @@ class Emotion {
                 return songFeatures;
             })
             .catch((err) => {
-                if (this.refreshCredential.checkCredentials()) {
-                    console.log("Failed to get features for emotion" + err);
-                    throw err;
-                } else {
-                    return this.refreshCredential.refreshCredentials(function() {
-                        self.getFeatures(mood)
-                    }, err).catch((error) => {
-                        console.log(error);
-                        throw error;
-                    });
-                }
-            })
+                let that = this;
+                return this.errorHandler(function() {
+                    return that.getFeatures(mood);
+                }, err);
+            });
     }
 
 
@@ -768,6 +760,19 @@ class Emotion {
             }
         }
         return dominantEmotion;
+    }
+
+    errorHandler(fnPtr, err) {
+        return this.refreshCredential.checkCredentials().then(result => {
+            if(result) {
+                console.log(err);
+                throw err;
+            } else {
+                return this.refreshCredential.refreshCredentials(function() {
+                    return fnPtr();
+                });
+            }
+        });
     }
 }
 

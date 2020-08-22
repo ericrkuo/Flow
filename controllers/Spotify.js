@@ -55,9 +55,11 @@ class Spotify {
                 return true;
             })
             .catch((err) => {
-                console.log("ERROR" - err);
-                throw err
-            })
+                let that = this;
+                return this.errorHandler(function() {
+                    return that.addAllTracksToHashMap();
+                }, err);
+            });
     }
 
     // get recent history objects
@@ -68,8 +70,10 @@ class Spotify {
                 return true;
             })
             .catch((err) => {
-                console.log(err);
-                throw err;
+                let that = this;
+                return this.errorHandler(function() {
+                    return that.addRecentlyPlayedTracks();
+                }, err);
             });
     }
 
@@ -98,8 +102,10 @@ class Spotify {
                 return true;
             })
             .catch((err) => {
-                console.log(err);
-                throw err;
+                let that = this;
+                return this.errorHandler(function() {
+                    return that.addTopTracks();
+                }, err);
             });
     }
 
@@ -133,8 +139,10 @@ class Spotify {
                 }
                 return true;
             }).catch((err) => {
-                console.log(err);
-                throw err;
+                let that = this;
+                return this.errorHandler(function() {
+                    return that.addSavedTracks();
+                }, err);
             });
     }
 
@@ -159,8 +167,10 @@ class Spotify {
                 return true;
             })
             .catch((err) => {
-                console.log(err);
-                throw err;
+                let that = this;
+                return this.errorHandler(function() {
+                    return that.addTopArtistsTracks();
+                }, err);
             });
     }
 
@@ -173,8 +183,10 @@ class Spotify {
                 this.addTracksToHashMap(tracks);
             })
             .catch((err) => {
-                console.log(err);
-                throw err;
+                let that = this;
+                return this.errorHandler(function() {
+                    return that.addArtistTopTracks(artist);
+                }, err);
             });
     }
 
@@ -191,14 +203,15 @@ class Spotify {
                 return Promise.all(promises);
             })
             .catch((err) => {
-                console.log(err);
-                throw err;
+                let that = this;
+                return this.errorHandler(function() {
+                    return that.addSimilarArtistsTopTracks();
+                }, err);
             });
     }
 
     // TODO: refactor so that doesnt depend on function, make it a // REQUIRES that TrackHashMap cannot be empty, or decide something else
     getAllAudioFeatures() {
-        let self = this;
         return this.addAllTracksToHashMap()
             .then(() => {
                 // get array of array of ids (split into 100)
@@ -241,18 +254,10 @@ class Spotify {
                 return data;
             })
             .catch((err) => {
-                if (this.refreshCredential.checkCredentials()) {
-                    console.log("Failed to get all audio features" + err);
-                    throw err;
-                } else {
-                    return this.refreshCredential.refreshCredentials(function() {
-                       // this.getAllAudioFeatures()
-                        self.getAllAudioFeatures()
-                    }, err).catch((error) => {
-                        console.log(error);
-                        throw error;
-                    });
-                }
+                let that = this;
+                return this.errorHandler(function() {
+                    return that.getAllAudioFeatures();
+                }, err);
             });
     }
 
@@ -262,8 +267,10 @@ class Spotify {
                 return res;
             })
             .catch((err) => {
-                console.log("COULD NOT GET AUDIO FEATURES");
-                throw err;
+                let that = this;
+                return this.errorHandler(function() {
+                    return that.getAudioFeatures(tracks);
+                }, err);
             });
     }
 
@@ -343,9 +350,11 @@ class Spotify {
                 return true;
             })
             .catch((err) => {
-                console.log(err);
-                throw err;
-            })
+                let that = this;
+                return this.errorHandler(function() {
+                    return that.addSeedTracks();
+                }, err);
+            });
     }
 
 
@@ -360,8 +369,10 @@ class Spotify {
                 return playlistsIDs;
             })
             .catch((err) => {
-                console.log("COULD NOT GET USER'S PLAYLISTS IDS");
-                throw err;
+                let that = this;
+                return this.errorHandler(function() {
+                    return that.getListOfUserPlaylistsIDs();
+                }, err);
             });
     }
 
@@ -393,15 +404,16 @@ class Spotify {
                     })
             })
             .catch((err) => {
-                console.log("COULD NOT GET LIST OF USER PLAYLISTS IDS FROM getListOfUserPlaylistsTracks");
-                throw err;
-            })
+                let that = this;
+                return this.errorHandler(function() {
+                    return that.addUserPlaylistsTracks();
+                }, err);
+            });
     }
 
 
     // returns name, email, URL, and image of user
     getUserInfo() {
-        let self = this;
         return this.spotifyApi.getMe()
             .then((res) => {
                 let json = {};
@@ -413,17 +425,10 @@ class Spotify {
                 return json;
             })
             .catch((err) => {
-                if (this.refreshCredential.checkCredentials()) {
-                    console.log("Failed to get user information" + err);
-                    throw err;
-                } else {
-                    return this.refreshCredential.refreshCredentials(function() {
-                        self.getUserInfo()
-                    }, err).catch((error) => {
-                        console.log(error);
-                        throw error;
-                    });
-                }
+                let that = this;
+                return this.errorHandler(function() {
+                    return that.getUserInfo();
+                }, err);
             });
     }
 
@@ -438,15 +443,16 @@ class Spotify {
                 } else {
                     throw new Error("userInfo or mood is not created correctly");
                 }
-            }).catch((error) => {
-                console.log("Error in creating new playlist: " + error);
-                throw error;
-            })
+            }).catch((err) => {
+                let that = this;
+                return this.errorHandler(function() {
+                    return that.createNewPlaylist();
+                }, err);
+            });
     }
 
     getNewPlaylist(trackURLs) {
         let link = null;
-        let self = this;
         if (this.isTrackURLsValid(trackURLs)) {
             return this.createNewPlaylist()
                 .then((playlist) => {
@@ -462,18 +468,11 @@ class Spotify {
                     return link;
                 })
                 .catch((err) => {
-                    if (this.refreshCredential.checkCredentials()) {
-                        console.log("Failed to get new playlist" + err);
-                        throw err;
-                    } else {
-                        return this.refreshCredential.refreshCredentials(function() {
-                            self.getNewPlaylist(trackURLs);
-                        }, err).catch((error) => {
-                            console.log(error);
-                            throw error;
-                        });
-                    }
-                })
+                    let that = this;
+                    return this.errorHandler(function() {
+                        return that.getNewPlaylist(trackURLs);
+                    }, err);
+                });
         } else {
             throw new Error("invalid trackURLs input");
         }
@@ -485,6 +484,19 @@ class Spotify {
 
     isTrackURLsValid(trackURLs) {
         return trackURLs && Array.isArray(trackURLs) && trackURLs.length !== 0;
+    }
+
+    errorHandler(fnPtr, err) {
+        return this.refreshCredential.checkCredentials().then(result => {
+            if(result) {
+                console.log(err);
+                throw err;
+            } else {
+                return this.refreshCredential.refreshCredentials(function() {
+                    return fnPtr();
+                });
+            }
+        });
     }
 }
 
