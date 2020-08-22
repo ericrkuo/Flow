@@ -85,14 +85,19 @@ block content
                 .modal-header
                     h5.modal-title Creating a playlist
                 .modal-body
-                    p.text-left.my-0 Click the tracks below you want to save into your own private playlist directly in your Spotify account. Would you still like to proceed?
+                    p.text-left.my-0 Select which tracks you would like saved to your own private playlist!
                     .custom-control.custom-switch.text-left.my-1
                         input#selectAll.custom-control-input(type='checkbox' value='option1' name='playlistForm')
                         label.custom-control-label(for='selectAll') Select All
                     #playlist-container.container.text-center.overflow-auto(style='height: 60vh')
                 .modal-footer
-                    button#cancelPlaylist.btn.btn-secondary(data-dismiss="modal") Cancel
-                    button#createPlaylist.btn.btn-primary Continue
+                    .container-fluid.text-right
+                        .custom-control.custom-checkbox
+                            input#confirmPlaylistInput.custom-control-input(type='checkbox')
+                            label#confirmPlaylistLabel.custom-control-label(for='confirmPlaylistInput') I understand the curated playlist will be saved directly under my Spotify account
+                    .container-fluid.text-right
+                        button#cancelPlaylist.btn.btn-secondary.mr-1(data-dismiss="modal") Cancel
+                        button#createPlaylist.btn.btn-primary Create Playlist
 
     script.
         let tracks = !{JSON.stringify(tracks)};
