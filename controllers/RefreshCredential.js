@@ -16,7 +16,7 @@ class RefreshCredential {
             })
     }
 
-    refreshCredentials(fnPtr) {
+    refreshCredential(fnPtr) {
         return this.getNewAccessToken().then((access_token) => {
             this.spotifyApi.setAccessToken(access_token);
             return fnPtr();

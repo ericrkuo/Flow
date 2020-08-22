@@ -99,9 +99,8 @@ describe("test refreshing with credentials", function () {
 
     it("test refreshing once with invalid credentials for Spotify", async function() {
         let oldCredentials = spotify.spotifyApi.getAccessToken();
-        console.log(oldCredentials);
         let err = new Error("ERROR OCCURRED")
-        return spotify.refreshCredential.refreshCredentials(function () {
+        return spotify.refreshCredential.refreshCredential(function () {
             console.log("Reached function pointer!");
         }, err).then(() => {
             chai.expect(oldCredentials).to.not.equal(spotify.spotifyApi.getAccessToken());
@@ -115,10 +114,9 @@ describe("test refreshing with credentials", function () {
         emotion.spotifyApi.setAccessToken(process.env.EXPIRED_ACCESS_TOKEN);
         let oldCredentials = emotion.spotifyApi.getAccessToken();
         emotion.spotifyApi.setRefreshToken(process.env.REFRESH_TOKEN);
-        console.log(oldCredentials);
         let err = new Error("ERROR OCCURRED")
 
-        return emotion.refreshCredential.refreshCredentials(function () {
+        return emotion.refreshCredential.refreshCredential(function () {
             console.log("Reached function pointer!");
         }, err).then(() => {
             chai.expect(oldCredentials).to.not.equal(spotify.spotifyApi.getAccessToken());
@@ -130,11 +128,9 @@ describe("test refreshing with credentials", function () {
 
     it("test refreshing once with invalid credentials for RefreshCredential", async function() {
         let oldCredentials = refreshCredential.spotifyApi.getAccessToken();
-        refreshCredential.spotifyApi.setRefreshToken(process.env.REFRESH_TOKEN);
-        console.log(oldCredentials);
         let err = new Error("ERROR OCCURRED")
 
-        return refreshCredential.refreshCredentials(function () {
+        return refreshCredential.refreshCredential(function () {
             console.log("Reached function pointer!");
         }, err).then(() => {
             chai.expect(oldCredentials).to.not.equal(spotify.spotifyApi.getAccessToken());

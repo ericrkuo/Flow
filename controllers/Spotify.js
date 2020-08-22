@@ -492,7 +492,7 @@ class Spotify {
                 console.log(err);
                 throw err;
             } else {
-                return this.refreshCredential.refreshCredentials(function() {
+                return this.refreshCredential.refreshCredential(function() {
                     return fnPtr();
                 });
             }

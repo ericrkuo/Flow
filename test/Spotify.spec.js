@@ -253,10 +253,8 @@ describe("unit test for Spotify", function () {
     it("testing refresh credential", async function() {
         try {
             spotify = new Spotify(process.env.EXPIRED_ACCESS_TOKEN, process.env.REFRESH_TOKEN);
-            console.log("OLD TOKEN " + process.env.EXPIRED_ACCESS_TOKEN);
-            let result = await spotify.getAllAudioFeatures();
+            await spotify.getAllAudioFeatures();
             chai.expect(process.env.EXPIRED_ACCESS_TOKEN).to.not.equal(spotify.spotifyApi.getAccessToken());
-            console.log(result);
         } catch(e) {
             console.log(e);
             chai.expect.fail();
