@@ -14,9 +14,7 @@ class RefreshCredential {
                     console.log(err);
                     throw err;
                 } else {
-                    return this.refreshCredential(function () {
-                        return fnPtr();
-                    });
+                    return this.refreshCredential(fnPtr);
                 }
         });
     }
@@ -63,10 +61,10 @@ class RefreshCredential {
             request.post(authOptions, function (error, response, body) {
                 if (!error && response.statusCode === 200) {
                     console.log(body);
-                    fulfill(body.access_token);
+                    return fulfill(body.access_token);
                 } else {
                     console.log(error);
-                    reject(error);
+                    return reject(error);
                 }
             });
         });
