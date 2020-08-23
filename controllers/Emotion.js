@@ -735,7 +735,7 @@ class Emotion {
             })
             .catch((err) => {
                 let that = this;
-                return this.errorHandler(function() {
+                return this.refreshCredential.handleRefreshCredential(function() {
                     return that.getFeatures(mood);
                 }, err);
             });
@@ -762,18 +762,6 @@ class Emotion {
         return dominantEmotion;
     }
 
-    errorHandler(fnPtr, err) {
-        return this.refreshCredential.checkCredentials().then(result => {
-            if(result) {
-                console.log(err);
-                throw err;
-            } else {
-                return this.refreshCredential.refreshCredential(function() {
-                    return fnPtr();
-                });
-            }
-        });
-    }
 }
 
 module.exports.Emotion = Emotion;

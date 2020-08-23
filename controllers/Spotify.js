@@ -56,7 +56,7 @@ class Spotify {
             })
             .catch((err) => {
                 let that = this;
-                return this.errorHandler(function() {
+                return this.refreshCredential.handleRefreshCredential(function() {
                     return that.addAllTracksToHashMap();
                 }, err);
             });
@@ -71,7 +71,7 @@ class Spotify {
             })
             .catch((err) => {
                 let that = this;
-                return this.errorHandler(function() {
+                return this.refreshCredential.handleRefreshCredential(function() {
                     return that.addRecentlyPlayedTracks();
                 }, err);
             });
@@ -103,7 +103,7 @@ class Spotify {
             })
             .catch((err) => {
                 let that = this;
-                return this.errorHandler(function() {
+                return this.refreshCredential.handleRefreshCredential(function() {
                     return that.addTopTracks();
                 }, err);
             });
@@ -140,7 +140,7 @@ class Spotify {
                 return true;
             }).catch((err) => {
                 let that = this;
-                return this.errorHandler(function() {
+                return this.refreshCredential.handleRefreshCredential(function() {
                     return that.addSavedTracks();
                 }, err);
             });
@@ -168,7 +168,7 @@ class Spotify {
             })
             .catch((err) => {
                 let that = this;
-                return this.errorHandler(function() {
+                return this.refreshCredential.handleRefreshCredential(function() {
                     return that.addTopArtistsTracks();
                 }, err);
             });
@@ -184,7 +184,7 @@ class Spotify {
             })
             .catch((err) => {
                 let that = this;
-                return this.errorHandler(function() {
+                return this.refreshCredential.handleRefreshCredential(function() {
                     return that.addArtistTopTracks(artist);
                 }, err);
             });
@@ -204,7 +204,7 @@ class Spotify {
             })
             .catch((err) => {
                 let that = this;
-                return this.errorHandler(function() {
+                return this.refreshCredential.handleRefreshCredential(function() {
                     return that.addSimilarArtistsTopTracks();
                 }, err);
             });
@@ -255,7 +255,7 @@ class Spotify {
             })
             .catch((err) => {
                 let that = this;
-                return this.errorHandler(function() {
+                return this.refreshCredential.handleRefreshCredential(function() {
                     return that.getAllAudioFeatures();
                 }, err);
             });
@@ -268,7 +268,7 @@ class Spotify {
             })
             .catch((err) => {
                 let that = this;
-                return this.errorHandler(function() {
+                return this.refreshCredential.handleRefreshCredential(function() {
                     return that.getAudioFeatures(tracks);
                 }, err);
             });
@@ -351,7 +351,7 @@ class Spotify {
             })
             .catch((err) => {
                 let that = this;
-                return this.errorHandler(function() {
+                return this.refreshCredential.handleRefreshCredential(function() {
                     return that.addSeedTracks();
                 }, err);
             });
@@ -370,7 +370,7 @@ class Spotify {
             })
             .catch((err) => {
                 let that = this;
-                return this.errorHandler(function() {
+                return this.refreshCredential.handleRefreshCredential(function() {
                     return that.getListOfUserPlaylistsIDs();
                 }, err);
             });
@@ -405,7 +405,7 @@ class Spotify {
             })
             .catch((err) => {
                 let that = this;
-                return this.errorHandler(function() {
+                return this.refreshCredential.handleRefreshCredential(function() {
                     return that.addUserPlaylistsTracks();
                 }, err);
             });
@@ -426,7 +426,7 @@ class Spotify {
             })
             .catch((err) => {
                 let that = this;
-                return this.errorHandler(function() {
+                return this.refreshCredential.handleRefreshCredential(function() {
                     return that.getUserInfo();
                 }, err);
             });
@@ -445,7 +445,7 @@ class Spotify {
                 }
             }).catch((err) => {
                 let that = this;
-                return this.errorHandler(function() {
+                return this.refreshCredential.handleRefreshCredential(function() {
                     return that.createNewPlaylist();
                 }, err);
             });
@@ -469,7 +469,7 @@ class Spotify {
                 })
                 .catch((err) => {
                     let that = this;
-                    return this.errorHandler(function() {
+                    return this.refreshCredential.handleRefreshCredential(function() {
                         return that.getNewPlaylist(trackURLs);
                     }, err);
                 });
@@ -484,19 +484,6 @@ class Spotify {
 
     isTrackURLsValid(trackURLs) {
         return trackURLs && Array.isArray(trackURLs) && trackURLs.length !== 0;
-    }
-
-    errorHandler(fnPtr, err) {
-        return this.refreshCredential.checkCredentials().then(result => {
-            if(result) {
-                console.log(err);
-                throw err;
-            } else {
-                return this.refreshCredential.refreshCredential(function() {
-                    return fnPtr();
-                });
-            }
-        });
     }
 }
 

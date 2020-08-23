@@ -3,7 +3,22 @@ const request = require("request");
 class RefreshCredential {
 
     constructor(spotifyApi) {
+        if(!spotifyApi) throw new Error("spotifyApi is null or undefined");
         this.spotifyApi = spotifyApi;
+    }
+
+    handleRefreshCredential(fnPtr, err) {
+        return this.checkCredentials()
+            .then(isValidCredential => {
+                if (isValidCredential) {
+                    console.log(err);
+                    throw err;
+                } else {
+                    return this.refreshCredential(function () {
+                        return fnPtr();
+                    });
+                }
+        });
     }
 
     checkCredentials() {
@@ -17,9 +32,10 @@ class RefreshCredential {
     }
 
     refreshCredential(fnPtr) {
-        return this.getNewAccessToken().then((access_token) => {
-            this.spotifyApi.setAccessToken(access_token);
-            return fnPtr();
+        return this.getNewAccessToken()
+            .then((access_token) => {
+                this.spotifyApi.setAccessToken(access_token);
+                return fnPtr();
         }).catch((err) => {
             console.log("Error in getting new access token " + err);
             throw err;
@@ -28,6 +44,11 @@ class RefreshCredential {
 
     getNewAccessToken() {
         let refresh_token = this.spotifyApi.getRefreshToken();
+
+        if(!refresh_token) {
+            throw new Error("Refresh token is null or undefined");
+        }
+
         let authOptions = {
             url: 'https://accounts.spotify.com/api/token',
             headers: {'Authorization': 'Basic ' + Buffer.from(process.env.SPOTIFY_API_ID + ':' + process.env.SPOTIFY_CLIENT_SECRET).toString("base64")},
@@ -42,8 +63,7 @@ class RefreshCredential {
             request.post(authOptions, function (error, response, body) {
                 if (!error && response.statusCode === 200) {
                     console.log(body);
-                    let accessToken = body.access_token;
-                    fulfill(accessToken);
+                    fulfill(body.access_token);
                 } else {
                     console.log(error);
                     reject(error);
