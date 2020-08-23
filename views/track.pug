@@ -91,10 +91,14 @@ block content
                         label.custom-control-label(for='selectAll') Select All
                     #playlist-container.container.text-center.overflow-auto(style='height: 60vh')
                 .modal-footer
-                    .container-fluid.text-right
+                    .container-fluid.text-left
+                        .collapse#collapsePlaylistMessage
+                            p.my-0.alert-playlist-label Please confirm your understanding by checking the box below
                         .custom-control.custom-checkbox
                             input#confirmPlaylistInput.custom-control-input(type='checkbox')
-                            label#confirmPlaylistLabel.custom-control-label(for='confirmPlaylistInput') I understand the curated playlist will be saved directly under my Spotify account
+                            label#confirmPlaylistLabel.custom-control-label(for='confirmPlaylistInput')
+                                span I understand the curated playlist will be saved directly under my Spotify account
+                                span.alert-playlist-label  *
                     .container-fluid.text-right
                         button#cancelPlaylist.btn.btn-secondary.mr-1(data-dismiss="modal") Cancel
                         button#createPlaylist.btn.btn-primary Create Playlist

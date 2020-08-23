@@ -46,6 +46,10 @@ $('#trackModal').on('hide.bs.modal', function () {
     document.getElementById("modal-content-video").pause();
 })
 
+$('#playlistModal').on('hide.bs.modal', function () {
+    $('#collapsePlaylistMessage').collapse('hide');
+})
+
 initialize();
 initializeUserInfoDiv();
 initializeTracksDiv();
@@ -171,7 +175,7 @@ function initializeMoodDiv() {
 }
 
 function initializePlaylistDiv() {
-    let playlistRowClassName = "row row-cols-2 justify-content-center"
+    let playlistRowClassName = "row row-cols-2"
     let counter = 1;
     let playlistContainer = document.getElementById("playlist-container");
     let row = document.createElement('div');
@@ -204,7 +208,7 @@ function initializePlaylistDiv() {
 
 function createPlaylistRow(id) {
     let row = document.createElement('div');
-    row.className = "row row-cols-2 justify-content-center mx-2 unfill border rounded";
+    row.className = "row row-cols-2 mx-2 unfill border rounded";
     row.id = 'playlistRow-' + id;
 
     let trackColumn = document.createElement('div');
@@ -255,7 +259,6 @@ function addPlaylistEventListeners() {
     let cancelPlaylistButton = document.getElementById("cancelPlaylist");
     let selectAllInput = document.getElementById('selectAll');
     let confirmPlaylistInput = document.getElementById('confirmPlaylistInput');
-    let confirmPlaylistLabel = document.getElementById('confirmPlaylistLabel');
 
     createPlaylistButton.addEventListener("click", async function () {
         let isConfirmPlaylistChecked = confirmPlaylistInput.checked;
@@ -263,7 +266,6 @@ function addPlaylistEventListeners() {
         if (isConfirmPlaylistChecked) {
             cancelPlaylistButton.setAttribute('disabled', "");
             createPlaylistButton.setAttribute('disabled', "");
-            confirmPlaylistLabel.classList.remove('alert-playlist-label');
 
             return sendPOSTRequestToCreatePlaylist()
                 .then((url)=> {
@@ -277,6 +279,8 @@ function addPlaylistEventListeners() {
                     playlistButton.addEventListener("click", () => {
                         window.open(url, "_blank");
                     });
+
+                    $('#collapsePlaylistMessage').collapse('hide');
                     $('#playlistModal').modal('hide');
                     window.open(url, "_blank");
                 })
@@ -286,8 +290,7 @@ function addPlaylistEventListeners() {
                     createPlaylistButton.removeAttribute('disabled');
                 });
         } else {
-            confirmPlaylistLabel.classList.add('alert-playlist-label');
-            alert("Please confirm below");
+            $('#collapsePlaylistMessage').collapse('show');
         }
     });
 
