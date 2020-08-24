@@ -1,16 +1,29 @@
 var chai = require("chai");
 const request = require('request');
 const {Spotify} = require("../controllers/Spotify");
+const SpotifyWebApi = require('spotify-web-api-node');
 
 var spotify;
+let spotifyApi;
+
 describe("unit test for Spotify", function () {
     before(function () {
-        spotify = new Spotify();
+        spotifyApi = new SpotifyWebApi({
+            clientId: process.env.SPOTIFY_API_ID,
+            clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
+            redirectUri: process.env.CALLBACK_URL,
+        });
+        spotify = new Spotify(spotifyApi);
         require('dotenv').config();
     });
 
     beforeEach(()=> {
-        spotify = new Spotify();
+        spotifyApi = new SpotifyWebApi({
+            clientId: process.env.SPOTIFY_API_ID,
+            clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
+            redirectUri: process.env.CALLBACK_URL,
+        });
+        spotify = new Spotify(spotifyApi);
     });
 
     function printOutSongNames() {
@@ -20,7 +33,7 @@ describe("unit test for Spotify", function () {
     }
 
     it("test tokens", async function () {
-        spotify = new Spotify("hello");
+        spotify = new Spotify(spotifyApi, "hello");
         let x = spotify.spotifyApi.getAccessToken();
         chai.expect(x).to.be.equal("hello");
         let result = await spotify.checkCredentials()
