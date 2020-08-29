@@ -1,20 +1,20 @@
 let tutorialButton = document.getElementById("tutorial");
 let homeButton = document.getElementById("home");
 let aboutUsButton = document.getElementById("info");
-let domain = "http://localhost:3000"
+
 tutorialButton.addEventListener("click", ()=>{
     console.log("click");
-   location.href = domain + "/tutorial";
+   location.href = "/tutorial";
 });
 
 homeButton.addEventListener("click", ()=>{
     console.log("click");
-    location.href = domain;
+    location.href = "/";
 });
 
 aboutUsButton.addEventListener("click", ()=>{
     console.log("click");
-    location.href = domain + "/info";
+    location.href = "/info";
 });
 
 updateNavigation();

@@ -46,7 +46,8 @@ function turnOffStream() {
 function postTracks(dataURL) {
     let json = JSON.stringify({dataURL: dataURL});
     let request = new XMLHttpRequest();
-    request.open("POST", "http://localhost:3000/webcam", true);
+    let url = window.location.origin + "/webcam"
+    request.open("POST", url, true);
     request.setRequestHeader('Content-Type', 'application/json');
 
     request.onload = function () {
@@ -55,8 +56,7 @@ function postTracks(dataURL) {
             alert(`Error ${request.status}: ${request.statusText}`);
         } else {
             console.log("SUCCESS - put tracks, now taking to tracks");
-            // console.log(JSON.parse(request.response).link);
-            location.href = JSON.parse(request.response).link;
+            location.href = "/tracks";
         }
     };
     request.onerror = function () {
