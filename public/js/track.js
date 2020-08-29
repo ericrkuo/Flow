@@ -4,6 +4,9 @@ let noImageAvailablePath = "../libraries/pictures/nopreview.png";
 let noUserProfilePath = "../libraries/pictures/unknownuser.png";
 let playlistMap = new Map();
 
+const PLAYLIST_NEED_SONGS_MSG = "Please select some songs first to save";
+const PLAYLIST_CHECK_MSG = "Please confirm your understanding by checking the box below";
+
 let colors = {
     backgroundColor: [
         'rgba(255,99,132,0.5)',
@@ -239,14 +242,20 @@ function createPlaylistRow(id) {
             console.log('removing: ' + id);
             playlistMap.delete(id);
 
-            row.classList.remove('fill')
-            row.classList.add('unfill')
+            row.classList.remove('fill');
+            row.classList.add('unfill');
         } else {
             console.log('putting: ' + id);
             playlistMap.set(id, id);
 
-            row.classList.remove('unfill')
-            row.classList.add('fill')
+            row.classList.remove('unfill');
+            row.classList.add('fill');
+
+            // hide message once user selects a song
+            let collapsePlaylistMessageText = document.getElementById('collapsePlaylistMessageText');
+            if (collapsePlaylistMessageText.innerText === PLAYLIST_NEED_SONGS_MSG) {
+                $('#collapsePlaylistMessage').collapse('hide');
+            }
         }
     })
 
@@ -259,37 +268,52 @@ function addPlaylistEventListeners() {
     let cancelPlaylistButton = document.getElementById("cancelPlaylist");
     let selectAllInput = document.getElementById('selectAll');
     let confirmPlaylistInput = document.getElementById('confirmPlaylistInput');
+    let collapsePlaylistMessageText = document.getElementById('collapsePlaylistMessageText');
+
+    // Collapse message if user confirms playlist creation
+    confirmPlaylistInput.addEventListener("click", function() {
+        if (confirmPlaylistInput.checked && collapsePlaylistMessageText.innerText === PLAYLIST_CHECK_MSG) {
+            $('#collapsePlaylistMessage').collapse('hide');
+        }
+    });
 
     createPlaylistButton.addEventListener("click", async function () {
         let isConfirmPlaylistChecked = confirmPlaylistInput.checked;
 
         if (isConfirmPlaylistChecked) {
-            cancelPlaylistButton.setAttribute('disabled', "");
-            createPlaylistButton.setAttribute('disabled', "");
+            let data = getAllTrackURLs();
+            if (!data || data.length === 0) {
+                collapsePlaylistMessageText.innerText = PLAYLIST_NEED_SONGS_MSG;
+                $('#collapsePlaylistMessage').collapse('show');
+            } else {
+                cancelPlaylistButton.setAttribute('disabled', "");
+                createPlaylistButton.setAttribute('disabled', "");
 
-            return sendPOSTRequestToCreatePlaylist()
-                .then((url)=> {
-                    cancelPlaylistButton.removeAttribute('disabled');
-                    createPlaylistButton.className = createPlaylistButton.className.replace('btn-primary', 'btn-secondary');
+                return sendPOSTRequestToCreatePlaylist(JSON.stringify(data))
+                    .then((url)=> {
+                        cancelPlaylistButton.removeAttribute('disabled');
+                        createPlaylistButton.className = createPlaylistButton.className.replace('btn-primary', 'btn-secondary');
 
-                    playlistButton.className = playlistButton.className.replace('btn-success', 'btn-primary');
-                    playlistButton.removeAttribute("data-toggle");
-                    playlistButton.removeAttribute("data-target");
-                    playlistButton.innerText = "Go to playlist"
-                    playlistButton.addEventListener("click", () => {
+                        playlistButton.className = playlistButton.className.replace('btn-success', 'btn-primary');
+                        playlistButton.removeAttribute("data-toggle");
+                        playlistButton.removeAttribute("data-target");
+                        playlistButton.innerText = "Go to playlist"
+                        playlistButton.addEventListener("click", () => {
+                            window.open(url, "_blank");
+                        });
+
+                        $('#collapsePlaylistMessage').collapse('hide');
+                        $('#playlistModal').modal('hide');
                         window.open(url, "_blank");
+                    })
+                    .catch((errMessage)=> {
+                        alert(errMessage);
+                        cancelPlaylistButton.removeAttribute('disabled');
+                        createPlaylistButton.removeAttribute('disabled');
                     });
-
-                    $('#collapsePlaylistMessage').collapse('hide');
-                    $('#playlistModal').modal('hide');
-                    window.open(url, "_blank");
-                })
-                .catch((errMessage)=> {
-                    alert(errMessage);
-                    cancelPlaylistButton.removeAttribute('disabled');
-                    createPlaylistButton.removeAttribute('disabled');
-                });
+            }
         } else {
+            collapsePlaylistMessageText.innerText = PLAYLIST_CHECK_MSG;
             $('#collapsePlaylistMessage').collapse('show');
         }
     });
@@ -313,16 +337,11 @@ function addPlaylistEventListeners() {
     });
 }
 
-function sendPOSTRequestToCreatePlaylist() {
+function sendPOSTRequestToCreatePlaylist(data) {
     return new Promise(function(resolve, reject) {
         let playlistButton = document.getElementById("playlist");
         let createPlaylistButton = document.getElementById("createPlaylist");
         let cancelPlaylistButton = document.getElementById("cancelPlaylist");
-        let data = getAllTrackURLs();
-        if (!data || data.length === 0) {
-            return reject("Please select some songs first to save!");
-        }
-        data = JSON.stringify(data);
 
         let request = new XMLHttpRequest();
         request.open("POST", "http://localhost:3000/tracks", true);
@@ -336,7 +355,7 @@ function sendPOSTRequestToCreatePlaylist() {
                 return reject(`Error ${request.status}: ${request.response}`);
             } else {
                 let response = JSON.parse(request.response);
-                if (response !== null && response.link !== null && typeof response.link === 'string') {
+                if (response && response.link && typeof response.link === 'string') {
                     return resolve(response.link);
                 } else {
                     return reject("response is null or response.link is null or not a string");
