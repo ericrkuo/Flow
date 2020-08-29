@@ -343,8 +343,9 @@ function sendPOSTRequestToCreatePlaylist(data) {
         let createPlaylistButton = document.getElementById("createPlaylist");
         let cancelPlaylistButton = document.getElementById("cancelPlaylist");
 
+        let url = window.location.origin + "/tracks";
         let request = new XMLHttpRequest();
-        request.open("POST", "http://localhost:3000/tracks", true);
+        request.open("POST", url, true);
         request.setRequestHeader('Content-Type', 'application/json');
 
         request.send(data);
