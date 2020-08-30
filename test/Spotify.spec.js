@@ -8,21 +8,15 @@ let spotifyApi;
 
 describe("unit test for Spotify", function () {
     before(function () {
+        require('dotenv').config();
         spotifyApi = new SpotifyWebApi({
             clientId: process.env.SPOTIFY_API_ID,
             clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
             redirectUri: process.env.CALLBACK_URL,
         });
-        spotify = new Spotify(spotifyApi);
-        require('dotenv').config();
     });
 
     beforeEach(()=> {
-        spotifyApi = new SpotifyWebApi({
-            clientId: process.env.SPOTIFY_API_ID,
-            clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
-            redirectUri: process.env.CALLBACK_URL,
-        });
         spotify = new Spotify(spotifyApi);
     });
 

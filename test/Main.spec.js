@@ -20,7 +20,7 @@ describe("unit test for Main", function () {
     });
 
     it("test static field", function(){
-        chai.assert(Main.tracks === null);
+        chai.assert(Main.tracks === undefined);
         Main.tracks = "x";
         chai.assert(Main.tracks === "x");
     })

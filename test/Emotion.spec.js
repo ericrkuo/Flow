@@ -5,12 +5,11 @@ const sampleDataURL = require("./sampleDataURL");
 const SpotifyWebApi = require('spotify-web-api-node');
 
 let emotion;
-let spotifyApi;
 
 describe("unit test for Spotify", function () {
     before(function () {
         require('dotenv').config();
-        spotifyApi = new SpotifyWebApi({
+        let spotifyApi = new SpotifyWebApi({
             clientId: process.env.SPOTIFY_API_ID,
             clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
             redirectUri: process.env.CALLBACK_URL,

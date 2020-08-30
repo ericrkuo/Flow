@@ -1,5 +1,3 @@
-const SpotifyWebApi = require('spotify-web-api-node');
-
 class Emotion {
 
     /* PLAN: Find the emotion with largest value possible.

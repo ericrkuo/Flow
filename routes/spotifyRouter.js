@@ -15,7 +15,6 @@ scopes = ['user-read-private',
     'user-read-private',
     'playlist-read-collaborative'];
 
-require('dotenv').config();
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -37,7 +36,8 @@ router.get('/callback', async (req, res) => {
     try {
         var data = await spotifyApi.authorizationCodeGrant(code);
         const {access_token, refresh_token} = data.body;
-        req.app.locals.main.spotify = new Spotify(spotifyApi, access_token, refresh_token);
+        spotifyApi.setAccessToken(access_token);
+        spotifyApi.setRefreshToken(refresh_token);
         console.log("SPOTIFY - set access and refresh tokens");
         console.log("ACCESS TOKEN: " + req.app.locals.main.spotify.spotifyApi.getAccessToken());
         console.log("\n");
