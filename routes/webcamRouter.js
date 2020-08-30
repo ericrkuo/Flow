@@ -1,13 +1,19 @@
 var express = require('express');
+const {checkCredentials} = require("./indexRouter");
 var router = express.Router();
 const {Main} =  require("../controllers/Main");
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', async function(req, res, next) {
     // res.sendFile(path.join(__dirname+"/webcam.html"), {json: json});
     // res.sendFile(absolutePath.getAbsolutePath());
-    console.log(req.app.locals.globalString);
-    res.render("webcam");
+
+    let isCredentialValid = await checkCredentials(req);
+    if(isCredentialValid) {
+        res.render("webcam");
+    } else {
+        res.redirect("/spotify/login");
+    }
 });
 
 router.post('/', function (req, res, next) {
@@ -17,8 +23,8 @@ router.post('/', function (req, res, next) {
         .then((tracks)=>{
             // TODO: make POST more semantically correct
             console.log("REACHED HERE");
-            // res.redirect("http://localhost:3000/tracks") // cannot do redirect after HTTP REQ, can only make client redirect
-            return res.status(200).json({link: "http://localhost:3000/tracks", result: req.app.locals.main.result});
+            // res.redirect("/tracks") // cannot do redirect after HTTP REQ, can only make client redirect
+            return res.status(200).json({result: req.app.locals.main.result});
         })
         .catch((err)=>{
             console.log(err);

@@ -1,7 +1,9 @@
 var express = require('express');
+const {checkCredentials} = require("./indexRouter");
 var router = express.Router();
 const {Main} = require("../controllers/Main")
 
+//#region Sample Data For Testing Purposes
 let tracks = {};
 tracks["703Y8dw2MMfEodrw5D6hDd"] = {
     track: {
@@ -1034,12 +1036,12 @@ let sampleData = {
         "display_name": "Eric Kuo",
         "email": "ericrkuo@gmail.com",
         "external_urls": {
-            "spotify": "https://open.spotify.com/user/22ermas6jsnwxmgbenafsy6vi"
+            "spotify": "https://open.spotify.com/"
         },
         "images": [
             {
                 "height": null,
-                "url": "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=875070459255356&height=300&width=300&ext=1594146634&hash=AeRZjHHIaGBlcJmk",
+                "url": "../libraries/pictures/unknownuser.png",
                 "width": null
             }
         ]
@@ -1059,29 +1061,39 @@ let sampleData = {
     },
     test: {"I'm": 2},
 }
-
+//#endregion
 
 // input: dataURL
 // output: returns html rendering of the tracks
-router.get('/', function (req, res, next) {
-    if (req.app.locals.main.result !== null) {
-        res.render("track", req.app.locals.main.result);
+router.get('/', async function (req, res, next) {
+    // use res.render("track", sampleData) for testing purposes
+    let isCredentialValid = await checkCredentials(req);
+    if (isCredentialValid) {
+        if (req.app.locals.main.result) {
+            res.render("track", req.app.locals.main.result);
+        } else {
+            // TODO: at this point, user's credentials are valid, but they do not have custom curated tracks
+            //  display an 'error' page, which tells user they need to take a photo, and has a button prompting to go back to homepage
+            res.render('error', {
+                message: "No custom tracks yet, please take a photo to get curated tracks",
+                error: {status: 400, stack: "no stack"}
+            });
+        }
     } else {
-        res.render("track", sampleData)
+        res.redirect("/spotify/login");
     }
-
 });
 
 // REQUIRES: req.body to contain a list of track URI's in format ["spotify:track:1ue7zm5TVVvmoQV8lK6K2H", ...]
 router.post('/', function (req, res, next) {
     let main = req.app.locals.main;
     return main.createMoodPlaylist(req.body)
-        .then((playlistURL)=>{
+        .then((playlistURL) => {
             return res.status(200).json({link: playlistURL});
         })
-        .catch((err)=> {
+        .catch((err) => {
             console.log(err);
-            return res.status(400).json({"error" : err.message});
+            return res.status(400).json({"error": err.message});
         })
 });
 

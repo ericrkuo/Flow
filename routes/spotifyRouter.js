@@ -30,7 +30,7 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/login', (req, res) => {
-    var html = spotifyApi.createAuthorizeURL(scopes);
+    let html = spotifyApi.createAuthorizeURL(scopes);
     console.log(html);
     res.redirect(html + "&show_dialog=true")
 });
@@ -56,7 +56,7 @@ router.get('/callback', async (req, res) => {
         console.log("ACCESS TOKEN: " + req.app.locals.main.spotify.spotifyApi.getAccessToken());
         console.log("\n");
         console.log("REFRESH TOKEN: " + req.app.locals.main.spotify.spotifyApi.getRefreshToken());
-        res.redirect('http://localhost:3000/webcam');
+        res.redirect('/webcam');
     } catch (err) {
         res.redirect('/#/error/invalid token');
     }
