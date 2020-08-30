@@ -1,4 +1,3 @@
-const SpotifyWebApi = require('spotify-web-api-node');
 
 class Spotify {
 
@@ -27,15 +26,11 @@ class Spotify {
     //     // this.spotifyApi.setRefreshToken(process.env.REFRESH_TOKEN);
     //     this.trackHashMap = new Map();
     // }
-    constructor(accessToken, refreshToken) {
+    constructor(spotifyApi, accessToken, refreshToken) {
         require('dotenv').config();
-        this.spotifyApi = new SpotifyWebApi({
-            clientId: process.env.SPOTIFY_API_ID,
-            clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
-            redirectUri: process.env.CALLBACK_URL,
-        });
+        this.spotifyApi = spotifyApi;
         this.spotifyApi.setAccessToken(accessToken === undefined ? process.env.ACCESS_TOKEN : accessToken);
-        this.spotifyApi.setRefreshToken(refreshToken === undefined ? null : refreshToken);
+        this.spotifyApi.setRefreshToken(refreshToken === undefined ? process.env.REFRESH_TOKEN : refreshToken);
         this.trackHashMap = new Map();
         this.mood = "happiness"; // default
     }

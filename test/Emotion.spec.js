@@ -1,14 +1,20 @@
 var chai = require("chai");
-const request = require('request');
 const {AzureFaceAPI} = require("../controllers/AzureFaceAPI");
 const {Emotion} = require("../controllers/Emotion");
 const sampleDataURL = require("./sampleDataURL");
+const SpotifyWebApi = require('spotify-web-api-node');
 
 let emotion;
+
 describe("unit test for Spotify", function () {
     before(function () {
-        emotion = new Emotion();
         require('dotenv').config();
+        let spotifyApi = new SpotifyWebApi({
+            clientId: process.env.SPOTIFY_API_ID,
+            clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
+            redirectUri: process.env.CALLBACK_URL,
+        });
+        emotion = new Emotion(spotifyApi);
     });
 
     it("test sadness", async function () {

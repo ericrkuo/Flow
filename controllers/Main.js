@@ -2,6 +2,8 @@ const {KMean} = require("./KMean");
 const {AzureFaceAPI} = require("./AzureFaceAPI");
 const {Spotify} = require("./Spotify");
 const {Emotion} = require("./Emotion");
+const SpotifyWebApi = require('spotify-web-api-node');
+
 
 class Main {
     /*
@@ -20,9 +22,14 @@ class Main {
     // TODO: use other Spotify constructor when doing frontEnd that takes in clients access and refresh token
     constructor() {
         this.dataURL = null;
-        this.emotion = new Emotion();
         this.azureFaceAPI = new AzureFaceAPI();
-        this.spotify = new Spotify();
+        this.spotifyApi = new SpotifyWebApi({
+            clientId: process.env.SPOTIFY_API_ID,
+            clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
+            redirectUri: process.env.CALLBACK_URL,
+        });
+        this.emotion = new Emotion(this.spotifyApi);
+        this.spotify = new Spotify(this.spotifyApi);
         this.kMean = new KMean();
         this.result = null;
     }
