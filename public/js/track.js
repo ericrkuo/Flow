@@ -2,6 +2,10 @@ let tracksDiv = document.getElementById("tracks-div");
 let modalAnalytics = document.getElementById("modal-analytics");
 let noImageAvailablePath = "../libraries/pictures/nopreview.png";
 let noUserProfilePath = "../libraries/pictures/unknownuser.png";
+let playlistMap = new Map();
+
+const PLAYLIST_NEED_SONGS_MSG = "Please select some songs first to save";
+const PLAYLIST_CHECK_MSG = "Please confirm your understanding by checking the box below";
 
 let colors = {
     backgroundColor: [
@@ -45,11 +49,15 @@ $('#trackModal').on('hide.bs.modal', function () {
     document.getElementById("modal-content-video").pause();
 })
 
+$('#playlistModal').on('hide.bs.modal', function () {
+    $('#collapsePlaylistMessage').collapse('hide');
+})
+
 initialize();
 initializeUserInfoDiv();
 initializeTracksDiv();
 initializeMoodDiv();
-addPlaylistEventListeners();
+initializePlaylistDiv();
 
 function initialize() {
     let tutorialButton = document.getElementById("tutorial");
@@ -169,70 +177,204 @@ function initializeMoodDiv() {
     })
 }
 
-function addPlaylistEventListeners()
-{
-    let playlistButton = document.getElementById("playlist");
-    let createPlaylistButton = document.getElementById("createPlaylist");
-    let cancelPlaylistButton = document.getElementById("cancelPlaylist");
+function initializePlaylistDiv() {
+    let playlistRowClassName = "row row-cols-2"
+    let counter = 1;
+    let playlistContainer = document.getElementById("playlist-container");
+    let row = document.createElement('div');
+    row.className = playlistRowClassName;
 
-    createPlaylistButton.addEventListener("click", async function(){
-        cancelPlaylistButton.setAttribute('disabled', "");
-        createPlaylistButton.setAttribute('disabled', "");
-        sendPOSTRequestToCreatePlaylist();
-    })
+    for (let id of Object.keys(tracks)) {
+        let column = document.createElement('div');
+        column.className = "col col-6 my-2 p-0";
+        column.appendChild(createPlaylistRow(id));
+        row.appendChild(column);
+
+        if (counter % 2 === 0) {
+            playlistContainer.appendChild(row);
+            row = document.createElement('div');
+            row.className = playlistRowClassName;
+        }
+        counter += 1;
+    }
+
+    // create remaining columns
+    if (--counter % 2 !== 0) {
+        let dummyColumn = document.createElement('div');
+        dummyColumn.className = "col col-6 my-2 p-0";
+        row.appendChild(dummyColumn);
+        playlistContainer.appendChild(row);
+    }
+
+    addPlaylistEventListeners();
 }
 
-function sendPOSTRequestToCreatePlaylist()
-{
+function createPlaylistRow(id) {
+    let row = document.createElement('div');
+    row.className = "row row-cols-2 mx-2 unfill border rounded";
+    row.id = 'playlistRow-' + id;
+
+    let trackColumn = document.createElement('div');
+    trackColumn.className = "col-4 p-1 align-self-center";
+
+    let trackImage = document.createElement('img');
+    trackImage.src = this.getAlbumImageURL(id);
+    trackImage.className = "rounded-circle shadow-lg img-fluid playlist-image";
+
+    trackColumn.appendChild(trackImage);
+
+    let trackInfoColumn = document.createElement('div');
+    trackInfoColumn.className = "col-8 text-left align-self-center";
+
+    let trackSpan = document.createElement('span');
+    trackSpan.className = 'd-block text-left text-truncate font-weight-bold';
+    trackSpan.innerText = tracks[id].track.name
+
+    let artistSpan = document.createElement('span');
+    artistSpan.className = 'd-block text-left text-truncate';
+    artistSpan.innerText = getArtistNames(tracks[id].track.artists);
+
+    trackInfoColumn.append(trackSpan, artistSpan);
+    row.append(trackColumn, trackInfoColumn);
+
+    row.addEventListener('click', () => {
+        if (playlistMap.has(id)) {
+            console.log('removing: ' + id);
+            playlistMap.delete(id);
+
+            row.classList.remove('fill');
+            row.classList.add('unfill');
+        } else {
+            console.log('putting: ' + id);
+            playlistMap.set(id, id);
+
+            row.classList.remove('unfill');
+            row.classList.add('fill');
+
+            // hide message once user selects a song
+            let collapsePlaylistMessageText = document.getElementById('collapsePlaylistMessageText');
+            if (collapsePlaylistMessageText.innerText === PLAYLIST_NEED_SONGS_MSG) {
+                $('#collapsePlaylistMessage').collapse('hide');
+            }
+        }
+    })
+
+    return row;
+}
+
+function addPlaylistEventListeners() {
     let playlistButton = document.getElementById("playlist");
     let createPlaylistButton = document.getElementById("createPlaylist");
     let cancelPlaylistButton = document.getElementById("cancelPlaylist");
-    let data = JSON.stringify(getAllTrackURLs());
-    let request = new XMLHttpRequest();
+    let selectAllInput = document.getElementById('selectAll');
+    let confirmPlaylistInput = document.getElementById('confirmPlaylistInput');
+    let collapsePlaylistMessageText = document.getElementById('collapsePlaylistMessageText');
 
-    request.open("POST", "http://localhost:3000/tracks", true);
-    request.setRequestHeader('Content-Type', 'application/json');
+    // Collapse message if user confirms playlist creation
+    confirmPlaylistInput.addEventListener("click", function() {
+        if (confirmPlaylistInput.checked && collapsePlaylistMessageText.innerText === PLAYLIST_CHECK_MSG) {
+            $('#collapsePlaylistMessage').collapse('hide');
+        }
+    });
 
-    request.onerror = function () {
-        alert("The request failed");
-    };
+    createPlaylistButton.addEventListener("click", async function () {
+        let isConfirmPlaylistChecked = confirmPlaylistInput.checked;
 
-    request.onload = function () {
-        if (request.status !== 200) {
-            alert(`Error ${request.status}: ${request.response}`);
-            $('#playlistModal').modal('hide');
-            cancelPlaylistButton.removeAttribute('disabled');
-            createPlaylistButton.removeAttribute('disabled');
+        if (isConfirmPlaylistChecked) {
+            let data = getAllTrackURLs();
+            if (!data || data.length === 0) {
+                collapsePlaylistMessageText.innerText = PLAYLIST_NEED_SONGS_MSG;
+                $('#collapsePlaylistMessage').collapse('show');
+            } else {
+                cancelPlaylistButton.setAttribute('disabled', "");
+                createPlaylistButton.setAttribute('disabled', "");
+
+                return sendPOSTRequestToCreatePlaylist(JSON.stringify(data))
+                    .then((url)=> {
+                        cancelPlaylistButton.removeAttribute('disabled');
+                        createPlaylistButton.className = createPlaylistButton.className.replace('btn-primary', 'btn-secondary');
+
+                        playlistButton.className = playlistButton.className.replace('btn-success', 'btn-primary');
+                        playlistButton.removeAttribute("data-toggle");
+                        playlistButton.removeAttribute("data-target");
+                        playlistButton.innerText = "Go to playlist"
+                        playlistButton.addEventListener("click", () => {
+                            window.open(url, "_blank");
+                        });
+
+                        $('#collapsePlaylistMessage').collapse('hide');
+                        $('#playlistModal').modal('hide');
+                        window.open(url, "_blank");
+                    })
+                    .catch((errMessage)=> {
+                        alert(errMessage);
+                        cancelPlaylistButton.removeAttribute('disabled');
+                        createPlaylistButton.removeAttribute('disabled');
+                    });
+            }
         } else {
-            let response = JSON.parse(request.response);
-            if (response !== null && response.link !== null) {
-                let url = response.link;
-                console.log("FINISHED POST REQUEST");
+            collapsePlaylistMessageText.innerText = PLAYLIST_CHECK_MSG;
+            $('#collapsePlaylistMessage').collapse('show');
+        }
+    });
 
-                cancelPlaylistButton.removeAttribute('disabled');
-                createPlaylistButton.className = createPlaylistButton.className.replace('btn-primary', 'btn-secondary');
-
-                playlistButton.className = playlistButton.className.replace('btn-success', 'btn-primary');
-                playlistButton.removeAttribute("data-toggle");
-                playlistButton.removeAttribute("data-target");
-                playlistButton.innerText = "Go to playlist"
-                playlistButton.addEventListener("click", () => {
-                    window.open(url, "_blank");
-                });
-                $('#playlistModal').modal('hide');
-                window.open(url, "_blank");
+    selectAllInput.addEventListener('click', function () {
+        let isChecked = selectAllInput.checked;
+        for (let id of Object.keys(tracks)) {
+            let row = document.getElementById('playlistRow-' + id);
+            if (row) {
+                if (isChecked) {
+                    playlistMap.set(id, id);
+                    row.classList.remove('unfill')
+                    row.classList.add('fill')
+                } else {
+                    playlistMap.delete(id);
+                    row.classList.remove('fill')
+                    row.classList.add('unfill')
+                }
             }
         }
-    };
+    });
+}
 
-    request.send(data);
-    console.log("SENT POST REQUEST");
+function sendPOSTRequestToCreatePlaylist(data) {
+    return new Promise(function(resolve, reject) {
+        let playlistButton = document.getElementById("playlist");
+        let createPlaylistButton = document.getElementById("createPlaylist");
+        let cancelPlaylistButton = document.getElementById("cancelPlaylist");
+
+        let url = window.location.origin + "/tracks";
+        let request = new XMLHttpRequest();
+        request.open("POST", url, true);
+        request.setRequestHeader('Content-Type', 'application/json');
+
+        request.send(data);
+
+        request.onload = function () {
+            if (request.status !== 200) {
+                $('#playlistModal').modal('hide');
+                return reject(`Error ${request.status}: ${request.response}`);
+            } else {
+                let response = JSON.parse(request.response);
+                if (response && response.link && typeof response.link === 'string') {
+                    return resolve(response.link);
+                } else {
+                    return reject("response is null or response.link is null or not a string");
+                }
+            }
+        };
+
+        request.onerror = function () {
+            $('#playlistModal').modal('hide');
+            return reject(`Error ${request.status}: ${request.response}`);
+        };
+    })
 }
 
 function getAllTrackURLs() {
     let data = [];
-    for (let track of Object.values(tracks))
-    {
+    for (let id of playlistMap.keys()) {
+        let track = tracks[id];
         if (track !== null && track.track !== null && track.track.uri !== null) {
             data.push(track.track.uri);
         }
@@ -329,6 +471,7 @@ function initializeModalContent(id) {
 function initializeModalImage(id) {
     document.getElementById("modal-image").src = getAlbumImageURL(id);
 }
+
 function getAlbumImageURL(id) {
     let images = tracks[id].track.album.images;
     if (images.length !== 0 && images[0].url !== undefined && images[0].url !== null && images[0].url !== "") {
@@ -350,7 +493,7 @@ function getUserImageURL() {
 function getArtistNames(artists) {
     let artistNames = "";
     let n = artists.length;
-    for (let i=0; i<n-1; i++) {
+    for (let i = 0; i < n - 1; i++) {
         artistNames += artists[i].name + ", ";
     }
     return artistNames + artists[--n].name;
