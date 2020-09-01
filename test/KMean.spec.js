@@ -1,5 +1,4 @@
 var chai = require("chai");
-const request = require('request');
 const {songs, songsClearCluster, songsLargeClearCluster} = require("./sampleSpotifyAudioFeatures");
 const {KMean} = require("../controllers/KMean");
 

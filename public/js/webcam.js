@@ -44,25 +44,26 @@ function turnOffStream() {
 }
 
 function postTracks(dataURL) {
-    let json = JSON.stringify({dataURL: dataURL});
-    let request = new XMLHttpRequest();
-    let url = window.location.origin + "/webcam"
-    request.open("POST", url, true);
-    request.setRequestHeader('Content-Type', 'application/json');
+    let data = JSON.stringify({dataURL: dataURL});
+    let url = window.location.origin + "/webcam";
 
-    request.onload = function () {
-        // let tracks = request.response;
-        if (request.status !== 200) {
-            alert(`Error ${request.status}: ${request.statusText}`);
-        } else {
+    let config = {
+        method: 'post',
+        url: url,
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        data: data
+    };
+
+    return axios(config)
+        .then(() => {
             console.log("SUCCESS - put tracks, now taking to tracks");
             location.href = "/tracks";
-        }
-    };
-    request.onerror = function () {
-        alert("The request failed");
-    };
-    request.send(json);
+        })
+        .catch((error) => {
+            alert(`Error ${error.response.status}: ${error.response.statusText}`);
+        });
 }
 
 getTracksButton.addEventListener("click", ()=>{

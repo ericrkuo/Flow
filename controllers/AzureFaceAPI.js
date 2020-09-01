@@ -1,50 +1,43 @@
-const request = require("request");
-
 class AzureFaceAPI {
 
     getEmotions(dataURI) {
-        let emotionString;
-        const subscriptionKey = process.env.AZUREKEY;
-        const uriBase = 'https://flowapi.cognitiveservices.azure.com/face/v1.0/detect';
+        try {
+            let axios = require('axios');
+            let data = this.convertDataURIToBinary(dataURI);
 
-        // Request parameters.
-        const params = {
-            'returnFaceId': 'true',
-            'returnFaceLandmarks': 'false',
-            'returnFaceAttributes': 'age,gender,smile,' +
-                'emotion'
-            // 'returnFaceAttributes': 'age,gender,headPose,smile,facialHair,glasses,' +
-            //     'emotion,hair,makeup,occlusion,accessories,blur,exposure,noise'
-        };
+            let config = {
+                method: 'post',
+                url: 'https://flowfaceapi.cognitiveservices.azure.com/face/v1.0/detect',
+                headers: {
+                    'Ocp-Apim-Subscription-Key': process.env.AZUREKEY,
+                    'Content-Type': 'application/octet-stream'
+                },
+                params: {
+                    returnFaceID: true,
+                    returnFaceLandmarks: false,
+                    returnFaceAttributes: 'age,gender,headPose,smile,facialHair,emotion',
+                    recognitionModel: 'recognition_03',
+                    detectionModel: 'detection_01'
+                },
+                data: data
+            };
 
-        const options = {
-            uri: uriBase,
-            qs: params,
-            body: this.convertDataURIToBinary(dataURI),
-            headers: {
-                'Content-Type': 'application/octet-stream',
-                'Ocp-Apim-Subscription-Key': subscriptionKey
-            }
-        };
-        return new Promise(function(fullfill, reject) {
-            request.post(options, (error, response, body) => {
-                if (error) {
-                    console.log('Error: ', error);
-                    reject();
-                }
-
-                let json = JSON.parse(body);
-                let jsonResult = JSON.stringify(json, null, " ");
-                // let indexOfEmotions = jsonResult.indexOf("emotion");
-                // let emotionString = jsonResult.substr(indexOfEmotions, jsonResult.length);
-                fullfill(json);
-
-            });
-        });
-
+            return axios(config)
+                .then((response) => {
+                    console.log(JSON.stringify(response.data));
+                    // TODO: figure out what to do if there are multiple faces in the photo and if there are no faces in the photo
+                    return response.data;
+                })
+                .catch((error) => {
+                    console.log(error);
+                    throw error;
+                });
+        } catch (error) {
+            throw error;
+        }
     }
 
-    convertDataURIToBinary(dataURI){
+    convertDataURIToBinary(dataURI) {
         let BASE64_MARKER = ';base64,';
         let base64Index = dataURI.indexOf(BASE64_MARKER) + BASE64_MARKER.length;
         let base64 = dataURI.substring(base64Index);
@@ -57,8 +50,6 @@ class AzureFaceAPI {
         }
         return array;
     }
-
-
 }
 
 module.exports.AzureFaceAPI = AzureFaceAPI;
