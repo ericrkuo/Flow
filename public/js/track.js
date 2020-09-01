@@ -271,7 +271,7 @@ function addPlaylistEventListeners() {
     let collapsePlaylistMessageText = document.getElementById('collapsePlaylistMessageText');
 
     // Collapse message if user confirms playlist creation
-    confirmPlaylistInput.addEventListener("click", function() {
+    confirmPlaylistInput.addEventListener("click", function () {
         if (confirmPlaylistInput.checked && collapsePlaylistMessageText.innerText === PLAYLIST_CHECK_MSG) {
             $('#collapsePlaylistMessage').collapse('hide');
         }
@@ -290,7 +290,7 @@ function addPlaylistEventListeners() {
                 createPlaylistButton.setAttribute('disabled', "");
 
                 return sendPOSTRequestToCreatePlaylist(JSON.stringify(data))
-                    .then((url)=> {
+                    .then((url) => {
                         cancelPlaylistButton.removeAttribute('disabled');
                         createPlaylistButton.className = createPlaylistButton.className.replace('btn-primary', 'btn-secondary');
 
@@ -306,7 +306,7 @@ function addPlaylistEventListeners() {
                         $('#playlistModal').modal('hide');
                         window.open(url, "_blank");
                     })
-                    .catch((errMessage)=> {
+                    .catch((errMessage) => {
                         alert(errMessage);
                         cancelPlaylistButton.removeAttribute('disabled');
                         createPlaylistButton.removeAttribute('disabled');
@@ -338,37 +338,28 @@ function addPlaylistEventListeners() {
 }
 
 function sendPOSTRequestToCreatePlaylist(data) {
-    return new Promise(function(resolve, reject) {
-        let playlistButton = document.getElementById("playlist");
-        let createPlaylistButton = document.getElementById("createPlaylist");
-        let cancelPlaylistButton = document.getElementById("cancelPlaylist");
+    let url = window.location.origin + "/tracks";
 
-        let url = window.location.origin + "/tracks";
-        let request = new XMLHttpRequest();
-        request.open("POST", url, true);
-        request.setRequestHeader('Content-Type', 'application/json');
+    let config = {
+        method: 'post',
+        url: url,
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        data: data
+    };
 
-        request.send(data);
-
-        request.onload = function () {
-            if (request.status !== 200) {
-                $('#playlistModal').modal('hide');
-                return reject(`Error ${request.status}: ${request.response}`);
+    return axios(config)
+        .then((response) => {
+            if (response && response.data && response.data.link && typeof response.data.link === 'string') {
+                return response.data.link;
             } else {
-                let response = JSON.parse(request.response);
-                if (response && response.link && typeof response.link === 'string') {
-                    return resolve(response.link);
-                } else {
-                    return reject("response is null or response.link is null or not a string");
-                }
+                throw new Error("response is null or response.link is null or not a string");
             }
-        };
-
-        request.onerror = function () {
-            $('#playlistModal').modal('hide');
-            return reject(`Error ${request.status}: ${request.response}`);
-        };
-    })
+        })
+        .catch((error) => {
+            throw error;
+        });
 }
 
 function getAllTrackURLs() {

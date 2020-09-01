@@ -1,5 +1,4 @@
 var chai = require("chai");
-const request = require('request');
 const {Main} = require("../controllers/Main");
 var sampleDataURL = require("./sampleDataURL");
 

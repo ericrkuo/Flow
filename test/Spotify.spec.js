@@ -1,5 +1,4 @@
 var chai = require("chai");
-const request = require('request');
 const {Spotify} = require("../controllers/Spotify");
 const SpotifyWebApi = require('spotify-web-api-node');
 

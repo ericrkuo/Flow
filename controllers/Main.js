@@ -36,7 +36,7 @@ class Main {
 
     // REQUIRES. this.dataURL to be set
     getRelevantSongs() {
-        if (this.dataURL === null) {
+        if (!this.dataURL) {
             throw new Error("DATA URL is not set");
         }
         let songX;
