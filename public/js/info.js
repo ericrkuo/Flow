@@ -25,3 +25,4 @@ getStartedButton.addEventListener("click", () => {
 }(jQuery));
 
 $('.modal-content').css("background-color", "#6575F7");
+$('.img-circle').css("border-radius", "50%");
