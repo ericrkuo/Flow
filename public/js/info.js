@@ -23,3 +23,5 @@ getStartedButton.addEventListener("click", () => {
         $('.modal:visible').each(centerModal);
     });
 }(jQuery));
+
+$('.modal-content').css("background-color", "#6575F7");
