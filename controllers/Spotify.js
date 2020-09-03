@@ -1,3 +1,4 @@
+const {RefreshCredential} = require("./RefreshCredential");
 
 class Spotify {
 
@@ -33,20 +34,11 @@ class Spotify {
         this.spotifyApi.setRefreshToken(refreshToken === undefined ? process.env.REFRESH_TOKEN : refreshToken);
         this.trackHashMap = new Map();
         this.mood = "happiness"; // default
+        this.refreshCredential = new RefreshCredential(this.spotifyApi);
     }
 
     sampleFunction() {
         return this.spotifyApi.getArtistAlbums('43ZHCT0cAZBISjO8DG9PnE');
-    }
-
-    checkCredentials() {
-        return this.spotifyApi.getArtist('2hazSY4Ef3aB9ATXW7F5w3')
-            .then((data) => {
-                return true;
-            })
-            .catch((err) => {
-                return false;
-            })
     }
 
     addAllTracksToHashMap() {
@@ -63,9 +55,11 @@ class Spotify {
                 return true;
             })
             .catch((err) => {
-                console.log("ERROR" - err);
-                throw err
-            })
+                let that = this;
+                return this.refreshCredential.handleRefreshCredential(function () {
+                    return that.addAllTracksToHashMap();
+                }, err);
+            });
     }
 
     // get recent history objects
@@ -76,8 +70,10 @@ class Spotify {
                 return true;
             })
             .catch((err) => {
-                console.log(err);
-                throw err;
+                let that = this;
+                return this.refreshCredential.handleRefreshCredential(function () {
+                    return that.addRecentlyPlayedTracks();
+                }, err);
             });
     }
 
@@ -106,8 +102,10 @@ class Spotify {
                 return true;
             })
             .catch((err) => {
-                console.log(err);
-                throw err;
+                let that = this;
+                return this.refreshCredential.handleRefreshCredential(function () {
+                    return that.addTopTracks();
+                }, err);
             });
     }
 
@@ -141,8 +139,10 @@ class Spotify {
                 }
                 return true;
             }).catch((err) => {
-                console.log(err);
-                throw err;
+                let that = this;
+                return this.refreshCredential.handleRefreshCredential(function () {
+                    return that.addSavedTracks();
+                }, err);
             });
     }
 
@@ -167,8 +167,10 @@ class Spotify {
                 return true;
             })
             .catch((err) => {
-                console.log(err);
-                throw err;
+                let that = this;
+                return this.refreshCredential.handleRefreshCredential(function () {
+                    return that.addTopArtistsTracks();
+                }, err);
             });
     }
 
@@ -181,8 +183,10 @@ class Spotify {
                 this.addTracksToHashMap(tracks);
             })
             .catch((err) => {
-                console.log(err);
-                throw err;
+                let that = this;
+                return this.refreshCredential.handleRefreshCredential(function () {
+                    return that.addArtistTopTracks(artist);
+                }, err);
             });
     }
 
@@ -199,8 +203,10 @@ class Spotify {
                 return Promise.all(promises);
             })
             .catch((err) => {
-                console.log(err);
-                throw err;
+                let that = this;
+                return this.refreshCredential.handleRefreshCredential(function () {
+                    return that.addSimilarArtistsTopTracks();
+                }, err);
             });
     }
 
@@ -248,9 +254,11 @@ class Spotify {
                 return data;
             })
             .catch((err) => {
-                console.log(err);
-                throw err;
-            })
+                let that = this;
+                return this.refreshCredential.handleRefreshCredential(function () {
+                    return that.getAllAudioFeatures();
+                }, err);
+            });
     }
 
     getAudioFeatures(tracks) {
@@ -259,8 +267,10 @@ class Spotify {
                 return res;
             })
             .catch((err) => {
-                console.log("COULD NOT GET AUDIO FEATURES");
-                throw err;
+                let that = this;
+                return this.refreshCredential.handleRefreshCredential(function () {
+                    return that.getAudioFeatures(tracks);
+                }, err);
             });
     }
 
@@ -340,9 +350,11 @@ class Spotify {
                 return true;
             })
             .catch((err) => {
-                console.log(err);
-                throw err;
-            })
+                let that = this;
+                return this.refreshCredential.handleRefreshCredential(function () {
+                    return that.addSeedTracks();
+                }, err);
+            });
     }
 
 
@@ -357,8 +369,10 @@ class Spotify {
                 return playlistsIDs;
             })
             .catch((err) => {
-                console.log("COULD NOT GET USER'S PLAYLISTS IDS");
-                throw err;
+                let that = this;
+                return this.refreshCredential.handleRefreshCredential(function () {
+                    return that.getListOfUserPlaylistsIDs();
+                }, err);
             });
     }
 
@@ -390,9 +404,11 @@ class Spotify {
                     })
             })
             .catch((err) => {
-                console.log("COULD NOT GET LIST OF USER PLAYLISTS IDS FROM getListOfUserPlaylistsTracks");
-                throw err;
-            })
+                let that = this;
+                return this.refreshCredential.handleRefreshCredential(function () {
+                    return that.addUserPlaylistsTracks();
+                }, err);
+            });
     }
 
 
@@ -409,9 +425,11 @@ class Spotify {
                 return json;
             })
             .catch((err) => {
-                console.log("ERROR in getting info about user");
-                throw err;
-            })
+                let that = this;
+                return this.refreshCredential.handleRefreshCredential(function () {
+                    return that.getUserInfo();
+                }, err);
+            });
     }
 
     // NOTE: this will create duplicate playlist if playlist already exists, there is no way to delete a playlist through Spotify API
@@ -425,10 +443,12 @@ class Spotify {
                 } else {
                     throw new Error("userInfo or mood is not created correctly");
                 }
-            }).catch((error) => {
-                console.log("Error in creating new playlist: "  + error);
-                throw error;
-            })
+            }).catch((err) => {
+                let that = this;
+                return this.refreshCredential.handleRefreshCredential(function () {
+                    return that.createNewPlaylist();
+                }, err);
+            });
     }
 
     getNewPlaylist(trackURLs) {
@@ -447,24 +467,22 @@ class Spotify {
                     if (link === null || (result.statusCode !== 200 && result.statusCode !== 201)) throw new Error("link is null or tracks did not add correctly");
                     return link;
                 })
-                .catch((error) => {
-                    console.log("Error in adding tracks to newly created playlist: " + error);
-                    throw error;
-                })
-        }
-        else
-        {
+                .catch((err) => {
+                    let that = this;
+                    return this.refreshCredential.handleRefreshCredential(function () {
+                        return that.getNewPlaylist(trackURLs);
+                    }, err);
+                });
+        } else {
             throw new Error("invalid trackURLs input");
         }
     }
 
-    isCreatedPlaylistValid(playlist)
-    {
+    isCreatedPlaylistValid(playlist) {
         return playlist && playlist.body && (playlist.statusCode === 200 || playlist.statusCode === 201) && playlist.body.external_urls && playlist.body.external_urls.spotify && playlist.body.id;
     }
 
-    isTrackURLsValid(trackURLs)
-    {
+    isTrackURLsValid(trackURLs) {
         return trackURLs && Array.isArray(trackURLs) && trackURLs.length !== 0;
     }
 }

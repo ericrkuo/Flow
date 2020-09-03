@@ -5,6 +5,8 @@ const SpotifyWebApi = require('spotify-web-api-node');
 var spotify;
 let spotifyApi;
 
+let expiredAccessToken = "BQAbGNeDb2Dzq_jKEF6HnKbx4LE9e1nmhh8JKLRJYB0bUXjdYyFZXpY0xDbNs5j9CgdsJ4i04uChEQubQUT7Fwx_q-72rqHmlhT-yongaIVtkENGEesDRS4lp7zFv4G1OFSWPa6aHy6_XvAdvqQBVr_1dIoPz7FjVXmVo3yfFMjmwCzxYZvP3bQn2B-lqa56-38DlSSeAhtHZca5Z9V4-MhjR_e2gf_FlfFCsFhVdS71NBCvLwR_Ty1jxg_JDTaWeCByukgP37mmVjnyVFE";
+
 describe("unit test for Spotify", function () {
     before(function () {
         require('dotenv').config();
@@ -29,7 +31,7 @@ describe("unit test for Spotify", function () {
         spotify = new Spotify(spotifyApi, "hello");
         let x = spotify.spotifyApi.getAccessToken();
         chai.expect(x).to.be.equal("hello");
-        let result = await spotify.checkCredentials()
+        let result = await spotify.refreshCredential.checkCredentials()
         console.log(result);
     });
 
@@ -250,5 +252,26 @@ describe("unit test for Spotify", function () {
         catch(e) {}
     })
 
+    it("testing refresh credential with invalid access token", async function() {
+        try {
+            spotify = new Spotify(expiredAccessToken, process.env.REFRESH_TOKEN);
+            await spotify.getAllAudioFeatures();
+            chai.expect(expiredAccessToken).to.not.equal(spotify.spotifyApi.getAccessToken());
+        } catch(e) {
+            console.log(e);
+            chai.expect.fail();
+        }
+    });
+
+    it("testing error throwing with valid access token", async function() {
+       try {
+           spotify = new Spotify(process.env.ACCESS_TOKEN, process.env.REFRESH_TOKEN);
+           await spotify.getAudioFeatures("");
+           chai.expect.fail();
+       } catch(e) {
+           chai.expect(spotify.spotifyApi.getAccessToken()).to.equal(process.env.ACCESS_TOKEN);
+           console.log(e);
+       }
+    });
 
 });
