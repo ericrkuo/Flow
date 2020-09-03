@@ -3,20 +3,20 @@ const request = require("request");
 class RefreshCredential {
 
     constructor(spotifyApi) {
-        if(!spotifyApi) throw new Error("spotifyApi is null or undefined");
+        if (!spotifyApi) throw new Error("spotifyApi is null or undefined");
         this.spotifyApi = spotifyApi;
     }
 
     handleRefreshCredential(fnPtr, err) {
         return this.checkCredentials()
-            .then(isValidCredential => {
+            .then((isValidCredential) => {
                 if (isValidCredential) {
                     console.log(err);
                     throw err;
                 } else {
                     return this.refreshCredential(fnPtr);
                 }
-        });
+            });
     }
 
     checkCredentials() {
@@ -34,16 +34,16 @@ class RefreshCredential {
             .then((access_token) => {
                 this.spotifyApi.setAccessToken(access_token);
                 return fnPtr();
-        }).catch((err) => {
-            console.log("Error in getting new access token " + err);
-            throw err;
-        });
+            }).catch((err) => {
+                console.log("Error in getting new access token " + err);
+                throw err;
+            });
     }
 
     getNewAccessToken() {
         let refresh_token = this.spotifyApi.getRefreshToken();
 
-        if(!refresh_token) {
+        if (!refresh_token) {
             throw new Error("Refresh token is null or undefined");
         }
 

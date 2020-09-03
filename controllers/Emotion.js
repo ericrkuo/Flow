@@ -1,4 +1,5 @@
 const {RefreshCredential} = require("./RefreshCredential");
+
 class Emotion {
 
     /* PLAN: Find the emotion with largest value possible.
@@ -735,7 +736,7 @@ class Emotion {
             })
             .catch((err) => {
                 let that = this;
-                return this.refreshCredential.handleRefreshCredential(function() {
+                return this.refreshCredential.handleRefreshCredential(function () {
                     return that.getFeatures(mood);
                 }, err);
             });
