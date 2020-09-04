@@ -8,6 +8,8 @@ let getTracksButton = document.getElementById('get-tracks');
 let errorMsgElement = document.getElementById('spanErrorMsg');
 let loadingDiv = document.getElementById("loader");
 let webcam = document.getElementById("webcam");
+let errorAlert = document.getElementById("errorAlert");
+
 let stream;
 
 const constraints = {
@@ -26,10 +28,16 @@ video.addEventListener("animationend", ()=> {
 async function init() {
     try {
         hide([canvas, afterCaptureButtons, beforeCaptureButtons, loadingDiv]);
+        $("#errorAlert").hide();
         stream = await navigator.mediaDevices.getUserMedia(constraints);
         handleSuccess(stream);
     } catch (err) {
         errorMsgElement.innerHTML = `navigator.getUserMedia.error:${err.toString()}`;
+        $("#errorAlert").text("Sorry, we're unable to initialize the webcam at this moment. Refreshing page in 3 seconds ...");
+        $("#errorAlert").show();
+        setTimeout(function() {
+            location.href = "/webcam"
+        }, 3000);
     }
 }
 
@@ -53,6 +61,27 @@ function turnOffStream() {
     });
 }
 
+function getTracks() {
+    let url = window.location.origin + "/tracks";
+    let config = {
+        method: 'get',
+        url: url,
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    }
+
+    return axios(config)
+        .then((result) => {
+            location.href = '/tracks';
+        })
+        .catch((error) => {
+            console.log(error.response.status + " " + error.response.statusText);
+            $("#errorAlert").text("No custom tracks yet, please take another photo to get curated tracks");
+            $("#errorAlert").show();
+        });
+}
+
 function postTracks(dataURL) {
     let data = JSON.stringify({dataURL: dataURL});
     let url = window.location.origin + "/webcam";
@@ -69,10 +98,25 @@ function postTracks(dataURL) {
     return axios(config)
         .then(() => {
             console.log("SUCCESS - put tracks, now taking to tracks");
-            location.href = "/tracks";
+            // TODO location
+            getTracks().then(() => {});
         })
         .catch((error) => {
-            alert(`Error ${error.response.status}: ${error.response.statusText}`);
+            // CUSTOMIZE LATER ON ACCORDING TO TYPE OF BACK-END ERRORS
+            // TODO jelly flex
+            console.log(error.response.status + " " + error.response.statusText);
+
+            if(error.response.status === 500) {
+                $("#errorAlert").text("Sorry, we encountered an internal server error. Redirecting you in 3 seconds...");
+                $("#errorAlert").show();
+                setTimeout(function() {
+                    location.href="/"
+                }, 3000);
+            } else if (error.response.status === 502) {
+                $("#errorAlert").text("Sorry, we encountered an internal server error.");
+                $("#errorAlert").show();
+            }
+
         });
 }
 

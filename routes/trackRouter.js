@@ -1075,11 +1075,8 @@ router.get('/', function (req, res, next) {
                 if (req.app.locals.main.result) {
                     return res.render("track", req.app.locals.main.result);
                 } else {
-                    // TODO: at this point, user's credentials are valid, but they do not have custom curated tracks
-                    //  display an 'error' page, which tells user they need to take a photo, and has a button prompting to go back to homepage
-                    return res.render('error', {
-                        message: "No custom tracks yet, please take a photo to get curated tracks",
-                        error: {status: 400, stack: "no stack"}
+                    // TODO ONLY THROUGH BYPASSING
+                    res.status(502).json({error: "No curated tracks available"});
                     });
                 }
             } else {
@@ -1095,14 +1092,18 @@ router.get('/', function (req, res, next) {
 // REQUIRES: req.body to contain a list of track URI's in format ["spotify:track:1ue7zm5TVVvmoQV8lK6K2H", ...]
 router.post('/', trackLimiter, function (req, res, next) {
     let main = req.app.locals.main;
-    return main.createMoodPlaylist(req.body)
-        .then((playlistURL) => {
-            return res.status(200).json({link: playlistURL});
-        })
-        .catch((err) => {
-            console.log(err);
-            return res.status(400).json({"error": err.message});
-        })
+    if(main) {
+        return main.createMoodPlaylist(req.body)
+            .then((playlistURL) => {
+                return res.status(200).json({link: playlistURL});
+            })
+            .catch((err) => {
+                return res.status(502).json({error: err.message});
+            });
+    } else {
+        return res.status(500).json({error: "Null or undefined main"});
+    }
+
 });
 
 module.exports = router;

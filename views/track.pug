@@ -7,6 +7,10 @@ block content
     .container-fluid.bg-gradient-info
         .row.row-cols-2
             .col-9
+                .centered-div.text-center
+                    .alert.alert-danger.alert-dismissible.fade.show#errorAlert(role='alert')
+                        button#errorAlertButton.close(type='button' data-dismiss='alert' aria-label='Close')
+                            span(aria-hidden='true') &times;
                 h3#title.text-center.text-truncate.mt-3.mb-0 Thanks for waiting! Here's your playlist
             .col-3
                 .container.text-center

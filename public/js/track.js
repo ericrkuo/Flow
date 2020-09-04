@@ -63,12 +63,14 @@ function initialize() {
     let tutorialButton = document.getElementById("tutorial");
     let homeButton = document.getElementById("home");
     let aboutUsButton = document.getElementById("info");
+    let errorAlert = document.getElementById("errorAlert");
     let newString = "btn-outline-dark";
     let oldString = "btn-outline-light";
 
     tutorialButton.setAttribute("class", tutorialButton.getAttribute("class").replace(oldString, newString));
     homeButton.setAttribute("class", homeButton.getAttribute("class").replace(oldString, newString));
     aboutUsButton.setAttribute("class", aboutUsButton.getAttribute("class").replace(oldString, newString));
+    $("#errorAlert").hide();
 
 }
 
@@ -306,8 +308,20 @@ function addPlaylistEventListeners() {
                         $('#playlistModal').modal('hide');
                         window.open(url, "_blank");
                     })
-                    .catch((errMessage) => {
-                        alert(errMessage);
+                    .catch((error) => {
+                        console.log(error.response.status + " " + error.response.statusText);
+                        // TODO SHOW IN ROUTER, redirect link inside routers, isTimeout
+                        if(error.response.status === 502) {
+                            $("#errorAlert").text("Unable to create playlist. Please try again later.");
+                            $("#errorAlert").show();
+                        } else if (error.response.status === 500) {
+                            $("#errorAlert").text("Sorry, we encountered an internal server error. Redirecting you in 3 seconds...");
+                            $("#errorAlert").show();
+                            setTimeout(function() {
+                                location.href="/"
+                            }, 3000);
+                        }
+
                         cancelPlaylistButton.removeAttribute('disabled');
                         createPlaylistButton.removeAttribute('disabled');
                     });

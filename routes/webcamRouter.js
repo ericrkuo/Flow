@@ -30,17 +30,15 @@ router.post('/', webcamLimiter, function (req, res, next) {
         return main.getRelevantSongsTestingPurposes()
             .then((tracks) => {
                 console.log("REACHED HERE");
+                // TODO if statement for result
                 // res.redirect("/tracks") // cannot do redirect after HTTP REQ, can only make client redirect
                 return res.status(200).json({result: req.app.locals.main.result});
             })
             .catch((err) => {
-                // TODO: error handling in front end
-                console.log(err);
-                return res.status(400).json({"error": err.message});
+                return res.status(502).json({"error" : err.message});
             });
     } else {
-        // TODO: error handling in front end
-        return res.status(400).json({"error": "Something went wrong"});
+        return res.status(500).json({message: "null or undefined main, data body or URL"});
     }
 });
 
