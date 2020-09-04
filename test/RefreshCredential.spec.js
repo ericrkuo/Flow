@@ -1,5 +1,6 @@
 const chai = require("chai");
 const SpotifyWebApi = require('spotify-web-api-node');
+const {InvalidInputError} = require("../controllers/Error");
 const {Emotion} = require("../controllers/Emotion");
 const {Spotify} = require("../controllers/Spotify");
 const {RefreshCredential} = require("../controllers/RefreshCredential");
@@ -108,6 +109,27 @@ describe("test refreshing with credentials", function () {
         }
     });
 
+    it("testing refreshCredential with no refresh token", async function() {
+        try {
+            spotifyApi.setRefreshToken(undefined);
+            await refreshCredential.getNewAccessToken();
+            chai.expect.fail();
+        } catch(e) {
+            console.log("Caught error" + e);
+            chai.expect(e).to.be.instanceOf(InvalidInputError)
+        }
+    });
+
+    it("testing refreshCredential", async function() {
+        try {
+            let oldAccessToken = await spotifyApi.getAccessToken();
+            let newAccessToken = await refreshCredential.getNewAccessToken();
+            chai.expect(oldAccessToken).to.not.equal(newAccessToken);
+        } catch(e) {
+            console.log("Caught error" + e);
+            chai.expect.fail();
+        }
+    });
 
     it("test refreshing once with invalid credentials for Spotify", async function() {
         let err = new Error("ERROR OCCURRED");

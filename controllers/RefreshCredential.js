@@ -1,8 +1,10 @@
 const request = require("request");
+const {InvalidResponseError, InvalidInputError} = require("./Error");
 
 class RefreshCredential {
 
     constructor(spotifyApi) {
+        require('dotenv').config();
         if (!spotifyApi) throw new Error("spotifyApi is null or undefined");
         this.spotifyApi = spotifyApi;
     }
@@ -42,32 +44,46 @@ class RefreshCredential {
 
     getNewAccessToken() {
         let refresh_token = this.spotifyApi.getRefreshToken();
-
         if (!refresh_token) {
-            throw new Error("Refresh token is null or undefined");
+            throw new InvalidInputError("Refresh token is null or undefined");
         }
 
-        let authOptions = {
-            url: 'https://accounts.spotify.com/api/token',
-            headers: {'Authorization': 'Basic ' + Buffer.from(process.env.SPOTIFY_API_ID + ':' + process.env.SPOTIFY_CLIENT_SECRET).toString("base64")},
-            form: {
+        try {
+            let axios = require('axios');
+            let qs = require('querystring');
+            let data = qs.stringify({
                 grant_type: 'refresh_token',
-                refresh_token: refresh_token
-            },
-            json: true
-        };
-
-        return new Promise(function (fulfill, reject) {
-            request.post(authOptions, function (error, response, body) {
-                if (!error && response.statusCode === 200) {
-                    console.log(body);
-                    return fulfill(body.access_token);
-                } else {
-                    console.log(error);
-                    return reject(error);
-                }
+                refresh_token: refresh_token,
             });
-        });
+
+            let config = {
+                method: 'post',
+                url: 'https://accounts.spotify.com/api/token',
+                headers: {
+                    'Authorization': 'Basic ' + Buffer.from(process.env.SPOTIFY_API_ID + ':' + process.env.SPOTIFY_CLIENT_SECRET).toString("base64"),
+                    'Content-type': "application/x-www-form-urlencoded",
+                },
+                data: data
+            };
+
+            return axios(config)
+                .then((response) => {
+                    if (response && response.data && response.data["access_token"]) {
+                        console.log(response.data);
+                        return response.data["access_token"];
+                    } else {
+                        throw new InvalidResponseError("Response from Azure Face API is invalid")
+                    }
+                })
+                .catch((error) => {
+                    if (error.response && error.response.data && error.response.data.error) {
+                        throw new Error(JSON.stringify(error.response.data.error));
+                    }
+                    throw error;
+                });
+        } catch (error) {
+            throw error;
+        }
     }
 }
 

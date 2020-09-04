@@ -6,11 +6,13 @@ const {InvalidDataURLError, InvalidInputError} = require("../controllers/Error")
 let main;
 describe("unit test for Main", function () {
     before(function () {
-        main = new Main("myDATAURL"); //TODO: fix
         require('dotenv').config();
+        main = new Main();
+        main.spotifyApi.setRefreshToken(process.env.REFRESH_TOKEN);
     });
 
     it("testing Main function", async function(){
+        main.dataURL = "TestDataURL"
         let resp = await main.getRelevantSongsTestingPurposes();
     });
 
