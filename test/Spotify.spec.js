@@ -1,23 +1,32 @@
 var chai = require("chai");
 const {Spotify} = require("../controllers/Spotify");
 const SpotifyWebApi = require('spotify-web-api-node');
+const {RefreshCredential} = require("../controllers/RefreshCredential");
+const {InvalidResponseError, InvalidInputError} = require("../controllers/Error");
 
-var spotify;
+let spotify;
 let spotifyApi;
 
 let expiredAccessToken = "BQAbGNeDb2Dzq_jKEF6HnKbx4LE9e1nmhh8JKLRJYB0bUXjdYyFZXpY0xDbNs5j9CgdsJ4i04uChEQubQUT7Fwx_q-72rqHmlhT-yongaIVtkENGEesDRS4lp7zFv4G1OFSWPa6aHy6_XvAdvqQBVr_1dIoPz7FjVXmVo3yfFMjmwCzxYZvP3bQn2B-lqa56-38DlSSeAhtHZca5Z9V4-MhjR_e2gf_FlfFCsFhVdS71NBCvLwR_Ty1jxg_JDTaWeCByukgP37mmVjnyVFE";
 
 describe("unit test for Spotify", function () {
-    before(function () {
-        require('dotenv').config();
-        spotifyApi = new SpotifyWebApi({
-            clientId: process.env.SPOTIFY_API_ID,
-            clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
-            redirectUri: process.env.CALLBACK_URL,
-        });
+    before(async function () {
+        try {
+            require('dotenv').config();
+            spotifyApi = new SpotifyWebApi({
+                clientId: process.env.SPOTIFY_API_ID,
+                clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
+                redirectUri: process.env.CALLBACK_URL,
+                refreshToken: process.env.REFRESH_TOKEN,
+            });
+            let refreshCredential = new RefreshCredential(spotifyApi);
+            await refreshCredential.handleRefreshCredential(null, null);
+        } catch (e) {
+            console.log(e);
+        }
     });
 
-    beforeEach(()=> {
+    beforeEach(() => {
         spotify = new Spotify(spotifyApi);
     });
 
@@ -27,21 +36,18 @@ describe("unit test for Spotify", function () {
         }
     }
 
-    it("test tokens", async function () {
-        spotify = new Spotify(spotifyApi, "hello");
-        let x = spotify.spotifyApi.getAccessToken();
-        chai.expect(x).to.be.equal("hello");
-        let result = await spotify.refreshCredential.checkCredentials()
-        console.log(result);
+    it("test add unsuccessful tracks to hashmap", function () {
+        spotify.addTracksToHashMap();
+        spotify.addTracksToHashMap(null);
+        spotify.addTracksToHashMap([]);
+        spotify.addTracksToHashMap("Invalid Input");
+        chai.expect(spotify.trackHashMap.size).to.be.equal(0);
     });
 
-    it("test Sample Function", function () {
-        return spotify.sampleFunction().then((res) => {
-            console.log(JSON.stringify(res.body));
-        }).catch((err) => {
-            console.log(err);
-            chai.expect.fail();
-        });
+    it("test add successful tracks to hashmap", function () {
+        let testData = [{id: 123}, {id: 456}];
+        spotify.addTracksToHashMap(testData);
+        chai.expect(spotify.trackHashMap.size).to.be.equal(2);
     });
 
     it("get Recent Songs", async function () {
@@ -51,7 +57,7 @@ describe("unit test for Spotify", function () {
                 chai.assert(res);
             })
             .catch((err) => {
-                console.log("ERROR");
+                console.log(err);
                 chai.expect.fail();
             });
     });
@@ -64,7 +70,7 @@ describe("unit test for Spotify", function () {
                 chai.assert(res);
             })
             .catch((err) => {
-                console.log("ERROR");
+                console.log(err);
                 chai.expect.fail();
             });
 
@@ -77,7 +83,7 @@ describe("unit test for Spotify", function () {
                 chai.assert(res);
             })
             .catch((err) => {
-                console.log("ERROR");
+                console.log(err);
                 chai.expect.fail();
             });
 
@@ -90,7 +96,7 @@ describe("unit test for Spotify", function () {
                 chai.assert(res);
             })
             .catch((err) => {
-                console.log("ERROR");
+                console.log(err);
                 chai.expect.fail();
             });
 
@@ -102,12 +108,11 @@ describe("unit test for Spotify", function () {
                 // console.log(res);
             })
             .catch((err) => {
-                console.log("ERROR");
+                console.log(err);
                 chai.expect.fail();
             });
 
     });
-
 
     // SEED TESTS
 
@@ -120,12 +125,10 @@ describe("unit test for Spotify", function () {
                 printOutSongNames();
             })
             .catch((err) => {
-                console.log("ERROR");
+                console.log(err);
                 chai.expect.fail();
             });
     }
-
-    let emotions = ["anger", "contempt", "disgust", "fear", "happiness", "neutral", "sadness", "surprise"];
 
     it("anger - test seed data", async function () {
         return testSeedFunction("anger");
@@ -166,24 +169,24 @@ describe("unit test for Spotify", function () {
                 chai.assert(res);
             })
             .catch((err) => {
-                console.log("ERROR");
+                console.log(err);
                 chai.expect.fail();
             });
     });
 
-    it("get user's tracks from all playlists", async function() {
+    it("get user's tracks from all playlists", async function () {
         return spotify.addUserPlaylistsTracks()
             .then((res) => {
                 console.log("# PLAYLIST SONGS ADDED: " + spotify.trackHashMap.size);
                 chai.assert(res);
             })
             .catch((err) => {
-                console.log("ERROR");
+                console.log(err);
                 chai.expect.fail();
             })
     })
 
-    it("get user info", async function() {
+    it("get user info", async function () {
         return spotify.getUserInfo()
             .then((res) => {
                 chai.expect(res).hasOwnProperty("display_name");
@@ -193,12 +196,12 @@ describe("unit test for Spotify", function () {
                 console.log(res);
             })
             .catch((err) => {
-                console.log("ERROR");
+                console.log(err);
                 chai.expect.fail();
             })
     })
 
-    it("test createNewPlaylist - WILL CREATE PLAYLIST", async function() {
+    it("test createNewPlaylist - WILL CREATE PLAYLIST", async function () {
         spotify.mood = "happiness";
         try {
             let result = await spotify.createNewPlaylist();
@@ -206,72 +209,75 @@ describe("unit test for Spotify", function () {
             chai.assert.isNotNull(result.body);
             chai.expect(result.body.name).to.be.equal("Flow Playlist: " + spotify.mood);
             chai.assert.isFalse(result.body.public);
-        }
-        catch(e) {
+        } catch (err) {
+            console.log(err);
             chai.expect.fail();
         }
     })
 
-    it("test getNewPlaylist expect success - WILL CREATE PLAYLIST", async function() {
-        let trackURIs = ["spotify:track:1ue7zm5TVVvmoQV8lK6K2H","spotify:track:07ARBxsDbIdAxLwuRCkGJ4","spotify:track:2KoHxhRyWxJzA0VafWd5Nk","spotify:track:7i2DJ88J7jQ8K7zqFX2fW8","spotify:track:3R6dPfF2yBO8mHySW1XDAa","spotify:track:2b8fOow8UzyDFAE27YhOZM","spotify:track:7e6FvCvngX5job1PUYIIIL","spotify:track:2ZTYlnhhV1UAReg7wIGolx","spotify:track:6vzLbfskWigBsCzNdB0kfE","spotify:track:2ktxr00GpTtbMNeBjNeY8D","spotify:track:5HM5Km4Ydmcj9okVC6AxOu","spotify:track:6lruHh1jF7ezgbLv72xYmf","spotify:track:6yHkPtl6UQ7RjtJLBPzbJw","spotify:track:4umIPjkehX1r7uhmGvXiSV","spotify:track:7k6tAZp4m93oswrPqSfBbc","spotify:track:4JuZQeSRYJfLCqBgBIxxrR","spotify:track:0nhVrTiCGiGRCoZOJiWzm1","spotify:track:4TnjEaWOeW0eKTKIEvJyCa","spotify:track:3npvm6Dy5eSZioXJ2KF4xY","spotify:track:2nC3QhMI9reBIOWutbU3Tj","spotify:track:2tnVG71enUj33Ic2nFN6kZ","spotify:track:6Yx181fZzA0YE2EkUsYruq"];
+    it("test createNewPlaylist - mood is not set expect fail", async function () {
+        spotify.mood = null;
+        try {
+            await spotify.createNewPlaylist();
+            chai.expect.fail("should have failed");
+        } catch (err) {
+            console.log(err);
+            chai.expect(err).to.be.instanceOf(InvalidResponseError);
+        }
+    })
+
+    it("test getNewPlaylist expect success - WILL CREATE PLAYLIST", async function () {
+        let trackURIs = ["spotify:track:1ue7zm5TVVvmoQV8lK6K2H", "spotify:track:07ARBxsDbIdAxLwuRCkGJ4", "spotify:track:2KoHxhRyWxJzA0VafWd5Nk", "spotify:track:7i2DJ88J7jQ8K7zqFX2fW8", "spotify:track:3R6dPfF2yBO8mHySW1XDAa", "spotify:track:2b8fOow8UzyDFAE27YhOZM", "spotify:track:7e6FvCvngX5job1PUYIIIL", "spotify:track:2ZTYlnhhV1UAReg7wIGolx", "spotify:track:6vzLbfskWigBsCzNdB0kfE", "spotify:track:2ktxr00GpTtbMNeBjNeY8D", "spotify:track:5HM5Km4Ydmcj9okVC6AxOu", "spotify:track:6lruHh1jF7ezgbLv72xYmf", "spotify:track:6yHkPtl6UQ7RjtJLBPzbJw", "spotify:track:4umIPjkehX1r7uhmGvXiSV", "spotify:track:7k6tAZp4m93oswrPqSfBbc", "spotify:track:4JuZQeSRYJfLCqBgBIxxrR", "spotify:track:0nhVrTiCGiGRCoZOJiWzm1", "spotify:track:4TnjEaWOeW0eKTKIEvJyCa", "spotify:track:3npvm6Dy5eSZioXJ2KF4xY", "spotify:track:2nC3QhMI9reBIOWutbU3Tj", "spotify:track:2tnVG71enUj33Ic2nFN6kZ", "spotify:track:6Yx181fZzA0YE2EkUsYruq"];
         spotify.mood = "happiness";
         try {
             let url = await spotify.getNewPlaylist(trackURIs);
             chai.assert.isNotNull(url);
-            chai.expect(typeof(url)).to.be.equal("string");
-        }
-        catch(e)
-        {
+            chai.expect(typeof (url)).to.be.equal("string");
+        } catch (err) {
+            console.log(err);
             chai.assert.fail();
         }
     })
 
-    it("test getNewPlaylist null input", async function() {
+    it("test getNewPlaylist null input", async function () {
         try {
-            let url = await spotify.getNewPlaylist(null);
+            await spotify.getNewPlaylist(null);
             chai.expect.fail();
-        }
-        catch(e) {
-            console.log();
+        } catch (err) {
+            console.log(err);
+            chai.expect(err).to.be.instanceOf(InvalidInputError);
         }
     })
 
-    it("test getNewPlaylist incorrect input type", async function() {
+    it("test getNewPlaylist incorrect input type", async function () {
         try {
-            let url = await spotify.getNewPlaylist("testString");
+            await spotify.getNewPlaylist("testString");
             chai.expect.fail();
+        } catch (err) {
+            console.log(err);
+            chai.expect(err).to.be.instanceOf(InvalidInputError);
         }
-        catch(e) {}
     })
 
-    it("test getNewPlaylist empty array", async function() {
+    it("test getNewPlaylist empty array", async function () {
         try {
-            let url = await spotify.getNewPlaylist([]);
+            await spotify.getNewPlaylist([]);
             chai.expect.fail();
+        } catch (err) {
+            console.log(err);
+            chai.expect(err).to.be.instanceOf(InvalidInputError);
         }
-        catch(e) {}
     })
 
-    it("testing refresh credential with invalid access token", async function() {
+    it("testing refresh credential with invalid access token", async function () {
         try {
-            spotify = new Spotify(expiredAccessToken, process.env.REFRESH_TOKEN);
+            spotifyApi.setAccessToken(expiredAccessToken);
             await spotify.getAllAudioFeatures();
             chai.expect(expiredAccessToken).to.not.equal(spotify.spotifyApi.getAccessToken());
-        } catch(e) {
+        } catch (e) {
             console.log(e);
             chai.expect.fail();
         }
-    });
-
-    it("testing error throwing with valid access token", async function() {
-       try {
-           spotify = new Spotify(process.env.ACCESS_TOKEN, process.env.REFRESH_TOKEN);
-           await spotify.getAudioFeatures("");
-           chai.expect.fail();
-       } catch(e) {
-           chai.expect(spotify.spotifyApi.getAccessToken()).to.equal(process.env.ACCESS_TOKEN);
-           console.log(e);
-       }
     });
 
 });

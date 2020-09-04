@@ -33,7 +33,7 @@ class RefreshCredential {
         return this.getNewAccessToken()
             .then((access_token) => {
                 this.spotifyApi.setAccessToken(access_token);
-                return fnPtr();
+                if (typeof fnPtr === 'function') return fnPtr();
             }).catch((err) => {
                 console.log("Error in getting new access token " + err);
                 throw err;

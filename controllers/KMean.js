@@ -1,3 +1,5 @@
+const {KMeanIterationError, KMeanClusterError} = require("./Error");
+
 class KMean {
 
     // Object.keys, Object.values, Object.entries
@@ -132,8 +134,7 @@ class KMean {
 
     iterate() {
         if (this.iterations > this.MAX_ITERATIONS) {
-            console.log("kMean - too many iterations");
-            throw new Error();
+            throw new KMeanIterationError(this.iterations, this.MAX_ITERATIONS);
         }
         this.clusters = new Array(this.k);
         let numFeatures = this.features.length;
@@ -160,14 +161,12 @@ class KMean {
         }
         let maxDistance = 0;
         for (let i = 0; i < this.k; i++) {
-            if (this.clusters[i] == null) {
-                console.log("kMean -LESS THAN K CLUSTERS, use another k");
-                throw new Error();
+            if (!this.clusters[i]) {
+                throw new KMeanClusterError("Less than K clusters for cluster: " + i);
             }
             let numTracks = this.clusters[i].length;
             if (numTracks === 0) {
-                console.log("kMean - ZERO TRACKS IN CLUSTER");
-                throw new Error();
+                throw new KMeanClusterError("Zero tracks in cluster: " + i);
             }
             // calculate the mean
             for (let feature of this.features) {

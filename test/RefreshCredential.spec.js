@@ -15,8 +15,6 @@ describe("test checking credentials", async function () {
 
     beforeEach(function () {
         require('dotenv').config();
-        spotify = new Spotify(process.env.ACCESS_TOKEN, process.env.REFRESH_TOKEN);
-        emotion = new Emotion();
         spotifyApi = new SpotifyWebApi({
             clientId: process.env.SPOTIFY_API_ID,
             clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
@@ -24,6 +22,8 @@ describe("test checking credentials", async function () {
         });
         spotifyApi.setAccessToken(process.env.ACCESS_TOKEN);
         spotifyApi.setRefreshToken(process.env.REFRESH_TOKEN);
+        spotify = new Spotify(spotifyApi);
+        emotion = new Emotion(spotifyApi);
         refreshCredential = new RefreshCredential(spotifyApi);
     })
 
@@ -86,15 +86,15 @@ describe("test refreshing with credentials", function () {
 
     beforeEach(function () {
         require('dotenv').config();
-        spotify = new Spotify(expiredAccessToken, process.env.REFRESH_TOKEN);
-        emotion = new Emotion();
         spotifyApi = new SpotifyWebApi({
             clientId: process.env.SPOTIFY_API_ID,
             clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
             redirectUri: process.env.CALLBACK_URL,
         });
-        spotifyApi.setAccessToken(expiredAccessToken);
+        spotifyApi.setAccessToken(process.env.ACCESS_TOKEN);
         spotifyApi.setRefreshToken(process.env.REFRESH_TOKEN);
+        spotify = new Spotify(spotifyApi);
+        emotion = new Emotion(spotifyApi);
         refreshCredential = new RefreshCredential(spotifyApi);
     });
 

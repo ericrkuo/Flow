@@ -3,6 +3,7 @@ const {AzureFaceAPI} = require("./AzureFaceAPI");
 const {Spotify} = require("./Spotify");
 const {Emotion} = require("./Emotion");
 const SpotifyWebApi = require('spotify-web-api-node');
+const {InvalidDataURLError} = require("./Error");
 
 
 class Main {
@@ -21,6 +22,7 @@ class Main {
 
     // TODO: use other Spotify constructor when doing frontEnd that takes in clients access and refresh token
     constructor() {
+        require('dotenv').config();
         this.dataURL = null;
         this.azureFaceAPI = new AzureFaceAPI();
         this.spotifyApi = new SpotifyWebApi({
@@ -37,7 +39,7 @@ class Main {
     // REQUIRES. this.dataURL to be set
     getRelevantSongs() {
         if (!this.dataURL) {
-            throw new Error("DATA URL is not set");
+            throw new InvalidDataURLError();
         }
         let songX;
         return this.azureFaceAPI.getEmotions(this.dataURL)
@@ -68,6 +70,9 @@ class Main {
     }
 
     getRelevantSongsTestingPurposes() {
+        if (!this.dataURL) {
+            throw new InvalidDataURLError();
+        }
         let songX;
         let dominantEmotion = "happiness";
         let newArrayOfSongIDS

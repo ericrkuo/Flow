@@ -15,6 +15,7 @@ class Emotion {
     *
     * */
 
+    //#region Emotion Map
     emotionMap = {
         anger: [
             "4JIo8RztBbELr2gWJ5OGK6",
@@ -700,13 +701,11 @@ class Emotion {
             "2CbgDkfBn29SzmGjsilMrS"
         ],
     };
+    //#endregion
 
-
-    constructor(spotifyApi, accessToken, refreshToken) {
+    constructor(spotifyApi) {
         require('dotenv').config();
         this.spotifyApi = spotifyApi;
-        this.spotifyApi.setAccessToken(accessToken === undefined ? process.env.ACCESS_TOKEN : accessToken);
-        this.spotifyApi.setRefreshToken(refreshToken === undefined ? process.env.REFRESH_TOKEN : refreshToken);
         this.features = ["danceability", "energy", "loudness", "speechiness", "acousticness", "instrumentalness", "liveness", "valence", "tempo"];
         this.refreshCredential = new RefreshCredential(this.spotifyApi);
     }

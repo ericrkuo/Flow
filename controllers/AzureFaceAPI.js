@@ -1,3 +1,5 @@
+const {InvalidResponseError, NoUserDetectedError} = require("./Error");
+
 class AzureFaceAPI {
 
     getEmotions(dataURI) {
@@ -24,12 +26,22 @@ class AzureFaceAPI {
 
             return axios(config)
                 .then((response) => {
-                    console.log(JSON.stringify(response.data));
-                    // TODO: figure out what to do if there are multiple faces in the photo and if there are no faces in the photo
-                    return response.data;
+                    if (response && response.data && Array.isArray(response.data)) {
+                        if (response.data.length > 0) {
+                            let result = response.data;
+                            console.log(JSON.stringify(result));
+                            return result;
+                        } else {
+                            throw new NoUserDetectedError();
+                        }
+                    } else {
+                        throw new InvalidResponseError("Response from Azure Face API is invalid")
+                    }
                 })
                 .catch((error) => {
-                    console.log(error);
+                    if (error.response && error.response.data && error.response.data.error) {
+                        throw new Error(JSON.stringify(error.response.data.error));
+                    }
                     throw error;
                 });
         } catch (error) {

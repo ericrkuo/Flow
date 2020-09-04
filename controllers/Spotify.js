@@ -1,4 +1,5 @@
 const {RefreshCredential} = require("./RefreshCredential");
+const {InvalidInputError, InvalidResponseError, EmptyTracksError} = require("./Error");
 
 class Spotify {
 
@@ -15,23 +16,9 @@ class Spotify {
 
 
     // TODO: turn add___ functions into get___ and then use universal add(get___));
-    // TODO: create new constructor for frontend taking in two parameters (access token and refresh token)
-    // constructor() {
-    //     require('dotenv').config();
-    //     this.spotifyApi = new SpotifyWebApi({
-    //         clientId: process.env.SPOTIFY_API_ID,
-    //         clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
-    //         redirectUri: process.env.CALLBACK_URL,
-    //     });
-    //     this.spotifyApi.setAccessToken(process.env.ACCESS_TOKEN);
-    //     // this.spotifyApi.setRefreshToken(process.env.REFRESH_TOKEN);
-    //     this.trackHashMap = new Map();
-    // }
-    constructor(spotifyApi, accessToken, refreshToken) {
+    constructor(spotifyApi) {
         require('dotenv').config();
         this.spotifyApi = spotifyApi;
-        this.spotifyApi.setAccessToken(accessToken === undefined ? process.env.ACCESS_TOKEN : accessToken);
-        this.spotifyApi.setRefreshToken(refreshToken === undefined ? process.env.REFRESH_TOKEN : refreshToken);
         this.trackHashMap = new Map();
         this.mood = "happiness"; // default
         this.refreshCredential = new RefreshCredential(this.spotifyApi);
@@ -41,32 +28,67 @@ class Spotify {
         return this.spotifyApi.getArtistAlbums('43ZHCT0cAZBISjO8DG9PnE');
     }
 
-    addAllTracksToHashMap() {
-        let promises = [];
-        promises.push(this.addRecentlyPlayedTracks());
-        promises.push(this.addTopTracks());
-        promises.push(this.addSavedTracks());
-        promises.push(this.addSeedTracks());
-        promises.push(this.addTopArtistsTracks());
-        promises.push(this.addUserPlaylistsTracks());
-        return Promise.all(promises)
-            .then((res) => {
-                console.log("SUCCESS - added all " + this.trackHashMap.size + " tracks to hashmap")
-                return true;
-            })
-            .catch((err) => {
-                let that = this;
-                return this.refreshCredential.handleRefreshCredential(function () {
-                    return that.addAllTracksToHashMap();
-                }, err);
-            });
+    // TODO: new version of refreshCredential, refreshes the credentials BEFORE each function
+    //       makes more sense logically, rather than waiting for function to fail and reperforming, refresh the credential beforehand
+    refreshCredentials() {
+        return this.refreshCredential.refreshCredential(null);
     }
 
-    // get recent history objects
+    addAllTracksToHashMap() {
+        return this.refreshCredentials()
+            .then(()=> {
+                let promises = [];
+                promises.push(this.addRecentlyPlayedTracks());
+                promises.push(this.addTopTracks());
+                promises.push(this.addSavedTracks());
+                promises.push(this.addSeedTracks());
+                promises.push(this.addTopArtistsTracks());
+                promises.push(this.addUserPlaylistsTracks());
+                return Promise.all(promises)
+                    .then((res) => {
+                        console.log("SUCCESS - added all " + this.trackHashMap.size + " tracks to hashmap")
+                        return true;
+                    });
+                    // .catch((err) => {
+                    //     let that = this;
+                    //     return this.refreshCredential.handleRefreshCredential(function () {
+                    //         return that.addAllTracksToHashMap();
+                    //     }, err);
+                    // });
+            })
+
+    }
+
+    addTracksToHashMap(tracks) {
+        if (!tracks || tracks.length === 0 || !Array.isArray(tracks)) {
+            console.log("tracks is empty or null");
+            return;
+        }
+        for (let track of tracks) {
+            this.trackHashMap.set(track["id"], track);
+        }
+    }
+
+    isResponseBodyItemsValid(res) {
+        return res && res.body && res.body.items;
+    }
+
+    isResponseBodyTracksValid(res) {
+        return res && res.body && res.body.tracks;
+    }
+
+    // NOTE: if listened to song X 10 times, will return song X 10 times in the array
     addRecentlyPlayedTracks() {
         return this.spotifyApi.getMyRecentlyPlayedTracks({limit: 50})
             .then((res) => {
-                this.addHistoryObjectTracksToHashMap(res.body.items);
+                if (!this.isResponseBodyItemsValid(res)) return false;
+                let tracks = [];
+                for (let item of res.body.items) {
+                    if (item && item.track) {
+                        tracks.push(item.track);
+                    }
+                }
+                this.addTracksToHashMap(tracks);
                 return true;
             })
             .catch((err) => {
@@ -77,17 +99,6 @@ class Spotify {
             });
     }
 
-    addHistoryObjectTracksToHashMap(historyObjects) {
-        if (historyObjects == null || historyObjects.length === 0) {
-            console.log("tracks is empty or null");
-            return;
-        }
-        for (let historyObject of historyObjects) {
-            let track = historyObject["track"];
-            this.trackHashMap.set(track["id"], track);
-        }
-    }
-
     addTopTracks() {
         let options = [{limit: 50}, {limit: 50, offset: 49}];
         let promises = [];
@@ -96,7 +107,9 @@ class Spotify {
         }
         return Promise.all(promises)
             .then((topTracksArray) => {
+                if (!topTracksArray) return false;
                 for (let topTracks of topTracksArray) {
+                    if (!this.isResponseBodyItemsValid(topTracks)) return false;
                     this.addTracksToHashMap(topTracks.body.items);
                 }
                 return true;
@@ -109,17 +122,6 @@ class Spotify {
             });
     }
 
-
-    addTracksToHashMap(tracks) {
-        if (tracks == null || tracks.length === 0) {
-            console.log("tracks is empty or null");
-            return;
-        }
-        for (let track of tracks) {
-            this.trackHashMap.set(track["id"], track);
-        }
-    }
-
     addSavedTracks() {
         let options = [{limit: 50}, {limit: 50, offset: 50}, {limit: 50, offset: 100}];
         let promises = [];
@@ -128,14 +130,16 @@ class Spotify {
         }
         return Promise.all(promises)
             .then((savedTracksArray) => {
+                if (!savedTracksArray) return false;
                 for (let savedTracks of savedTracksArray) {
-                    let arr = [];
+                    if (!this.isResponseBodyItemsValid(savedTracks)) return false;
+                    let tracks = [];
                     for (let item of savedTracks.body.items) {
-                        if (item !== null && item.track !== null) {
-                            arr.push(item.track);
+                        if (item && item.track) {
+                            tracks.push(item.track);
                         }
                     }
-                    this.addTracksToHashMap(arr);
+                    this.addTracksToHashMap(tracks);
                 }
                 return true;
             }).catch((err) => {
@@ -148,21 +152,15 @@ class Spotify {
 
     addTopArtistsTracks() {
         let promises = [];
-        let topArtists;
 
         return this.spotifyApi.getMyTopArtists({limit: 20, time_range: "long_term"})
             .then((res) => {
-                topArtists = res.body.items;
-                for (let topArtist of topArtists) {
-                    promises.push(this.addArtistTopTracks(topArtist));
+                if (!this.isResponseBodyItemsValid(res)) return false;
+                for (let item of res.body.items) {
+                    if (!item || !item.id) return false;
+                    promises.push(this.addArtistTopTracks(item));
                 }
                 return Promise.all(promises);
-                // }).then((res) => {
-                //     promises = [];
-                //     // for (let topArtist of topArtists) {
-                //         promises.push(this.addSimilarArtistsTopTracks(topArtists[0]));
-                //     // }
-                //     return Promise.all(promises);
             }).then((res) => {
                 return true;
             })
@@ -172,15 +170,24 @@ class Spotify {
                     return that.addTopArtistsTracks();
                 }, err);
             });
+
+        // adding similar artists and their top tracks
+        // }).then((res) => {
+        //     promises = [];
+        //     for (let topArtist of topArtists) {
+        //         promises.push(this.addSimilarArtistsTopTracks(topArtists[0]));
+        //     }
+        // return Promise.all(promises);
     }
 
-    // TODO: make function work for other country codes, outer call for loop on possible country codes if none for US
+    // NOTE: currently using US as country code
     addArtistTopTracks(artist) {
         return this.spotifyApi.getArtistTopTracks(artist.id, "US")
             .then((res) => {
                 // MAX returns 10 tracks
-                let tracks = res.body.tracks;
-                this.addTracksToHashMap(tracks);
+                if (this.isResponseBodyTracksValid(res)) {
+                    this.addTracksToHashMap(res.body.tracks);
+                }
             })
             .catch((err) => {
                 let that = this;
@@ -190,6 +197,7 @@ class Spotify {
             });
     }
 
+    // NOTE: no longer used because of rate limiting for spotifyApi
     addSimilarArtistsTopTracks(artist) {
         let promises = [];
         return this.spotifyApi.getArtistRelatedArtists(artist.id)
@@ -210,10 +218,10 @@ class Spotify {
             });
     }
 
-    // TODO: refactor so that doesnt depend on function, make it a // REQUIRES that TrackHashMap cannot be empty, or decide something else
     getAllAudioFeatures() {
         return this.addAllTracksToHashMap()
             .then(() => {
+                if (!this.trackHashMap || this.trackHashMap.size === 0) throw new EmptyTracksError();
                 // get array of array of ids (split into 100)
                 let promises = [];
                 let trackIDS = Array.from(this.trackHashMap.keys());
@@ -274,8 +282,6 @@ class Spotify {
             });
     }
 
-    // TODO: get users saved albums and the tracks inside those albums
-    // TODO: get tracks from playlist (maybe not)
     /*
     * get recommendations based on seeds (browse)
     *   - browse by genres (happy,sad) https://developer.spotify.com/console/get-available-genre-seeds/
@@ -292,9 +298,6 @@ class Spotify {
         //     {limit: 100, seed_genres: "chill"}
         //
         // ];
-
-        // TODO: can remove the array if don't want multiple options
-        // TODO: fill out rest of arrays
         let emotionToSeed = {
             anger: [{
                 limit: 100,
@@ -331,7 +334,7 @@ class Spotify {
             surprise: [{limit: 100, seed_genres: "hardstyle, work-out, edm, party"}]
         };
 
-        if (this.mood === undefined) this.mood = "happiness"; //default mood
+        if (!this.mood) this.mood = "happiness"; //default mood
         let optionsArray = emotionToSeed[this.mood];
         for (let option of optionsArray) {
             promises.push(this.spotifyApi.getRecommendations(option));
@@ -339,14 +342,11 @@ class Spotify {
         return Promise.all(promises)
             .then((resArray) => {
                 for (let res of resArray) {
-                    let tracks = res.body.tracks;
-                    this.addTracksToHashMap(tracks);
+                    if (this.isResponseBodyTracksValid(res)) {
+                        let tracks = res.body.tracks;
+                        this.addTracksToHashMap(tracks);
+                    }
                 }
-                // TODO: comment out
-                // let y = [];
-                // for (let entry of Array.from(this.trackHashMap.entries())) {
-                //     y.push(entry[0]);
-                // }
                 return true;
             })
             .catch((err) => {
@@ -361,9 +361,9 @@ class Spotify {
     getListOfUserPlaylistsIDs() {
         return this.spotifyApi.getUserPlaylists()
             .then((res) => {
-                let playlists = res.body.items;
+                if (!this.isResponseBodyItemsValid(res)) return [];
                 let playlistsIDs = [];
-                for (let playlist of playlists) {
+                for (let playlist of res.body.items) {
                     playlistsIDs.push(playlist.id);
                 }
                 return playlistsIDs;
@@ -378,30 +378,30 @@ class Spotify {
 
 
     addUserPlaylistsTracks() {
-        let allPlaylistTracks = [];
         let NUM_TRACKS_FOR_EACH_PLAYLIST = 100;
         return this.getListOfUserPlaylistsIDs()
             .then((playlistIDs) => {
+                if (!playlistIDs || !Array.isArray(playlistIDs) || playlistIDs.length === 0) return false;
                 let promises = [];
                 let numSongs = Math.floor(NUM_TRACKS_FOR_EACH_PLAYLIST / playlistIDs.length);
                 for (let id of playlistIDs) {
                     promises.push(this.spotifyApi.getPlaylistTracks(id, {limit: numSongs}))
                 }
 
-                return Promise.all(promises)
-                    .then((res) => {
-                        let numPlaylists = res.length;
-
-                        for (let i = 0; i < numPlaylists; i++) {
-                            let tracks = res[i]["body"]["items"];
-                            for (let track of tracks) {
-                                allPlaylistTracks.push(track.track);
-                            }
+                return Promise.all(promises);
+            })
+            .then((res) => {
+                let numPlaylists = res.length;
+                let tracks = [];
+                for (let i = 0; i < numPlaylists; i++) {
+                    if (this.isResponseBodyItemsValid(res[i])) {
+                        for (let track of res[i].body.items) {
+                            tracks.push(track.track);
                         }
-
-                        this.addTracksToHashMap(allPlaylistTracks);
-                        return true;
-                    })
+                    }
+                }
+                this.addTracksToHashMap(tracks);
+                return true;
             })
             .catch((err) => {
                 let that = this;
@@ -437,11 +437,11 @@ class Spotify {
     createNewPlaylist() {
         return this.getUserInfo()
             .then((result) => {
-                if (result && result.id !== null && this.mood) {
+                if (result && result.id && this.mood) {
                     let userId = result.id;
                     return this.spotifyApi.createPlaylist(userId, 'Flow Playlist: ' + this.mood, {public: false});
                 } else {
-                    throw new Error("userInfo or mood is not created correctly");
+                    throw new InvalidResponseError("no user info or mood is currently not set");
                 }
             }).catch((err) => {
                 let that = this;
@@ -460,11 +460,11 @@ class Spotify {
                         link = playlist.body.external_urls.spotify;
                         return this.spotifyApi.addTracksToPlaylist(playlist.body.id, trackURLs)
                     } else {
-                        throw new Error("Error in created playlist");
+                        throw new InvalidResponseError("playlist did not create correctly");
                     }
                 })
                 .then((result) => {
-                    if (link === null || (result.statusCode !== 200 && result.statusCode !== 201)) throw new Error("link is null or tracks did not add correctly");
+                    if (!link || (result.statusCode !== 200 && result.statusCode !== 201)) throw new InvalidResponseError("link is null or tracks did not add correctly");
                     return link;
                 })
                 .catch((err) => {
@@ -474,7 +474,7 @@ class Spotify {
                     }, err);
                 });
         } else {
-            throw new Error("invalid trackURLs input");
+            throw new InvalidInputError("trackURLs is invalid, ensure is a non-empty array");
         }
     }
 
