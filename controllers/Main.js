@@ -20,7 +20,6 @@ class Main {
     * 9. return song titles for now //TODO: decide what to return
     * */
 
-    // TODO: use other Spotify constructor when doing frontEnd that takes in clients access and refresh token
     constructor() {
         require('dotenv').config();
         this.dataURL = null;

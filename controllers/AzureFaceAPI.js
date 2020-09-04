@@ -1,11 +1,11 @@
-const {InvalidResponseError, NoUserDetectedError} = require("./Error");
+const {InvalidResponseError, NoUserDetectedError, InvalidInputError} = require("./Error");
 
 class AzureFaceAPI {
 
     getEmotions(dataURI) {
         try {
-            let axios = require('axios');
             let data = this.convertDataURIToBinary(dataURI);
+            let axios = require('axios');
 
             let config = {
                 method: 'post',
@@ -26,17 +26,7 @@ class AzureFaceAPI {
 
             return axios(config)
                 .then((response) => {
-                    if (response && response.data && Array.isArray(response.data)) {
-                        if (response.data.length > 0) {
-                            let result = response.data;
-                            console.log(JSON.stringify(result));
-                            return result;
-                        } else {
-                            throw new NoUserDetectedError();
-                        }
-                    } else {
-                        throw new InvalidResponseError("Response from Azure Face API is invalid")
-                    }
+                    return this.handleResponse(response);
                 })
                 .catch((error) => {
                     if (error.response && error.response.data && error.response.data.error) {
@@ -44,12 +34,33 @@ class AzureFaceAPI {
                     }
                     throw error;
                 });
-        } catch (error) {
-            throw error;
+        } catch (e) {
+            console.log(e);
+            throw e;
         }
     }
 
+    handleResponse(response) {
+        if (!this.isResponseValid(response)) throw new InvalidResponseError("Response from Azure Face API is invalid - null or not an array");
+        if (response.data.length === 0) throw new NoUserDetectedError();
+        if (!this.isResponseDataValid(response.data)) throw new InvalidResponseError("Response from Azure Face API is invalid - no faceAttributes or emotions");
+
+        let emotionData = response.data[0]["faceAttributes"]["emotion"];
+        console.log(JSON.stringify(response.data));
+        return emotionData;
+    }
+
+    isResponseValid(response) {
+        return response && response.data && Array.isArray(response.data);
+    }
+
+    isResponseDataValid(responseData) {
+        return responseData[0]["faceAttributes"] && responseData[0]["faceAttributes"]["emotion"];
+    }
+
     convertDataURIToBinary(dataURI) {
+        if (!dataURI || typeof dataURI !== 'string') throw new InvalidInputError("dataURI is formatted improperly");
+
         let BASE64_MARKER = ';base64,';
         let base64Index = dataURI.indexOf(BASE64_MARKER) + BASE64_MARKER.length;
         let base64 = dataURI.substring(base64Index);

@@ -241,21 +241,23 @@ class Spotify {
                 let tempoMIN = 0;
                 let tempoMAX = 250; // TODO: maybe disclude tempoMAX because dont know strict upper bound
                 for (let audioFeatures of res) {
-                    audioFeatures = audioFeatures.body["audio_features"];
-                    for (let audioFeature of audioFeatures) {
-                        if (audioFeature !== null) {
-                            let id = audioFeature.id;
-                            data[id] = {
-                                "danceability": audioFeature.danceability,
-                                "energy": audioFeature.energy,
-                                "loudness": (audioFeature.loudness - loudMIN) / (loudMAX - loudMIN),
-                                "speechiness": audioFeature.speechiness,
-                                "acousticness": audioFeature.acousticness,
-                                "instrumentalness": audioFeature.instrumentalness,
-                                "liveness": audioFeature.liveness,
-                                "valence": audioFeature.valence,
-                                "tempo": (audioFeature.tempo - tempoMIN) / (tempoMAX - tempoMIN)
-                            };
+                    if (audioFeatures && audioFeatures.body && audioFeatures.body["audio_features"]) {
+                        audioFeatures = audioFeatures.body["audio_features"];
+                        for (let audioFeature of audioFeatures) {
+                            if (audioFeature !== null) {
+                                let id = audioFeature.id;
+                                data[id] = {
+                                    "danceability": audioFeature.danceability,
+                                    "energy": audioFeature.energy,
+                                    "loudness": (audioFeature.loudness - loudMIN) / (loudMAX - loudMIN),
+                                    "speechiness": audioFeature.speechiness,
+                                    "acousticness": audioFeature.acousticness,
+                                    "instrumentalness": audioFeature.instrumentalness,
+                                    "liveness": audioFeature.liveness,
+                                    "valence": audioFeature.valence,
+                                    "tempo": (audioFeature.tempo - tempoMIN) / (tempoMAX - tempoMIN)
+                                };
+                            }
                         }
                     }
                 }

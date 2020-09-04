@@ -1,4 +1,3 @@
-const request = require("request");
 const {InvalidResponseError, InvalidInputError} = require("./Error");
 
 class RefreshCredential {
