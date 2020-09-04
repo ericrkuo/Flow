@@ -20,9 +20,10 @@ block content
                     .col-lg-6.order-2.order-lg-1
                         h2.font-weight-light WELCOME
                         br
-                        p.font-italic.text-muted.mb-4
-                            | Welcome to Flow, a service designed to curate a playlist based on your current mood and Spotify history. Simply capture a selfie showing how you feel, and we’ll do the work for you!
-                            | Excited to see what results you’ll get?
+                        p.text-muted.mb-4
+                            | Welcome to Flow, a service designed to curate a playlist based on your current mood
+                            | and Spotify history. Simply capture a selfie showing how you feel, and we’ll do
+                            | the work for you! Excited to see what results you’ll get?
                         a#getStarted.btn.btn-light.px-5.rounded-pill.shadow-sm GET STARTED
                         .mt-5
                     .col-lg-5.px-5.mx-auto.order-1.order-lg-2
@@ -35,51 +36,28 @@ block content
                     .col-lg-6
                         h2.font-weight-light OUR MOTIVATION
                         br
-                        p.font-italic.text-muted.mb-4
-                            | We love music and are avid Spotify users, however, we wanted to make it more personalized and we thought this was the perfect opportunity to gain firsthand experience with machine learning as well!
-                            | Flow is inspired by our passion for creating innovative and exciting software projects- specifically our desire to learn new concepts, frameworks, libraries, and tools used in the present tech industry.
+                        p.text-muted.mb-4
+                            | We love music and are avid Spotify users, however, we wanted to make it more personalized
+                            | and we thought this was the perfect opportunity to gain firsthand experience with machine
+                            | learning as well! Flow is also inspired by our passion for creating innovative and exciting
+                            | software projects- specifically our desire to learn new concepts, frameworks, libraries,
+                            | and tools used in the present tech industry.
                 .row.align-items-center.mb-5
                     .col-lg-6.order-2.order-lg-1
                         h2.font-weight-light HOW WE DID IT
                         br
-                        p.font-italic.text-muted.mb-4
-                            | We navigated the software lifecycle, from requirement gathering, to scope-based development and to technical delivery. The technologies we used
-                            | include ...
-                        a.btn.btn-light.px-5.rounded-pill.shadow-sm(type='button' data-toggle="modal" data-target="#howLearnMore") READ MORE
-                        // Modal
-                        #howLearnMore.modal.fade(tabindex='-1' role='dialog' aria-hidden='true')
+                        p.text-muted.mb-4
+                            | We navigated the software lifecycle, from requirement gathering, to scope-based
+                            | development and to technical delivery. The technologies we used include ...
+                        a.btn.btn-light.px-5.rounded-pill.shadow-sm#readHowWeDidIt(type='button' data-toggle="modal") READ MORE
+                        #infoModal.modal.fade(tabindex='-1' role='dialog' aria-hidden='true')
                             .modal-dialog(role='document')
                                 .modal-content.bg
                                     .modal-header
-                                        h5#howModalLabel.modal-title.text-white.font-weight-bold.text-center HOW WE DID IT
+                                        h5#infoModalLabel.modal-title.text-white.font-weight-bold.text-center
                                         button.close(type='button' data-dismiss='modal' aria-label='Close')
                                             span(aria-hidden='true') &times;
-                                    .modal-body.text-left.text-white
-                                        | We navigated the software lifecycle, from requirement gathering, to scope-based development and to technical delivery.
-                                        br
-                                        br
-                                        | The technologies we used include:
-                                        br
-                                        | > Express.JS
-                                        br
-                                        | > Microsoft Azure Cognitive Services
-                                        br
-                                        | > Spotify Web API for Developers
-                                        br
-                                        | > Chart.min.js
-                                        br
-                                        | > Bootstrap
-                                        br
-                                        | > Mocha and Chai
-                                        br
-                                        br
-                                        | One of the biggest challenges of the project was ensuring our code adhered to
-                                        | SOLID design principles as well as ensuring classes were as loosely coupled as possible.
-                                        | By practicing TDD, our classes and implementation were testable to begin with and we were able
-                                        | to minimize the number of bugs when making changes to our code. Finally, another difficult problem
-                                        | was designing the life-cycle of requests travelling from client to server side. We architected
-                                        | the user flow as well as ensured our code was robust to handle unexpected errors.
-
+                                    .modal-body.text-left.text-white#infoModalText
                         .mt-5
                     .col-lg-5.px-5.mx-auto.order-1.order-lg-2
                         img.img-fluid.mb-4.mb-lg-0(src='../libraries/pictures/howWeDidIt.png' alt='')
@@ -91,78 +69,25 @@ block content
                     .col-lg-6
                         h2.font-weight-light THE FUTURE
                         br
-                        p.font-italic.text-muted.mb-4
-                            | As with any outstanding project, application or product- there is always room for improvements! For Flow, in the near future, we hope to be able to execute the following ideas ...
-
-                        a.btn.btn-light.px-5.rounded-pill.shadow-sm(type='button' data-toggle="modal" data-target="#futureLearnMore") READ MORE
-                        // Modal
-                        #futureLearnMore.modal.fade(tabindex='-1' role='dialog' aria-hidden='true')
-                            .modal-dialog(role='document')
-                                .modal-content.bg
-                                    .modal-header
-                                        h5#futureModalLabel.modal-title.text-white.font-weight-bold.text-center THE FUTURE
-                                        button.close(type='button' data-dismiss='modal' aria-label='Close')
-                                            span(aria-hidden='true') &times;
-                                    .modal-body.text-left.text-white
-                                        | As with any outstanding project, application or product- there is always room for improvements! For Flow, in the near future, we hope to be able to execute the following ideas:
-                                        br
-                                        br
-                                        | > Provide more accurate song recommendations for the moods that are subjectively difficult to translate into music (anger, contempt, disgust, fear, surprise).
-                                        br
-                                        | > Further optimization of the kMeans algorithm
-                                        br
-                                        | > Implement other machine learning algorithms in substitution of kMeans
-                                        br
-                                        | > Utilize a database system for more organized data management
-                                        br
-                                        | > Introduce opposite moods as a selection choice for types of recommended tracks
+                        p.text-muted.mb-4
+                            | As with any outstanding project, application or product- there is always room for
+                            | improvements! For Flow, in the near future, we hope to be able to execute the
+                            | following ideas ...
+                        a.btn.btn-light.px-5.rounded-pill.shadow-sm#readFuture(type='button' data-toggle="modal" data-target="#infoModal") READ MORE
                         .mt-5
                 .row.align-items-center.mb-5
                     .col-lg-6.order-2.order-lg-1
                         h2.font-weight-light REFLECTION
                         br
-                        p.font-italic.text-muted.mb-4
-                            | Being able to explore new frameworks, learn machine learning, and experiment with various APIs and libraries, has been extremely fun and eye-opening! Though at times difficult through the hours of debugging and confusion, we are grateful to have been able to dedicate our energy and efforts to this project whole-heartedly ...
-                        a.btn.btn-light.px-5.rounded-pill.shadow-sm(type='button' data-toggle="modal" data-target="#reflectionLearnMore") READ MORE
-                            // Modal
-                            #reflectionLearnMore.modal.fade(tabindex='-1' role='dialog' aria-hidden='true')
-                                .modal-dialog(role='document')
-                                    .modal-content.bg
-                                        .modal-header
-                                            h5.modal-title.text-white.font-weight-bold REFLECTION
-                                            button.close(type='button' data-dismiss='modal' aria-label='Close')
-                                                span(aria-hidden='true') &times;
-                                        .modal-body.text-left.text-white
-                                            | Being able to explore new frameworks, learn machine learning, and experiment with various APIs and libraries, has been extremely fun and eye-opening! Though at times difficult through the hours of debugging and confusion, we are grateful to have been able to dedicate our energy and efforts to this project whole-heartedly. It was also our first time working together as partners on a project!
-                                            br
-                                            br
-                                            | Initially, upon discussion of the structure and functionalities, we had expected the project to be quite simple. However, as we continued to progress through our checkpoints, we recognized the numerous complexities we faced. From figuring out our code structure, to learning how to work with Pug for the first time, we were able to understand the importance of making wise decisions for both major and minor details.
-                                            br
-                                            br
-                                            | Further, we identified the positive effects of weighing out the pros and cons of all our ideas, as we pushed to produce the best version of our application. Thanks to many trials and errors, we are proud of what we have accomplished, both with this service and in terms of our growth as software engineers.
-                                            br
-                                            br
-                                            | This was also our first time working heavily on front-end. Though we took a longer time, we were very happy to have discovered bootstrap!
-
+                        p.text-muted.mb-4
+                            | Being able to explore new frameworks, learn machine learning, and experiment with
+                            | various APIs and libraries, has been extremely fun and eye-opening! Though at times
+                            | difficult through the hours of debugging and confusion, we are grateful to have been
+                            | able to dedicate our energy and efforts to this project whole-heartedly ...
+                        a.btn.btn-light.px-5.rounded-pill.shadow-sm#readReflection(type='button' data-toggle="modal" data-target="#infoModal") READ MORE
                     .col-lg-5.px-5.mx-auto.order-1.order-lg-2
                         img.img-fluid.mb-4.mb-lg-0(src='../libraries/pictures/reflection.png' alt='')
                         .mt-5
-                .row.align-items-center
-                    .col-lg-5.px-5.mx-auto
-                        img.img-fluid.mb-4.mb-lg-0(src='../libraries/pictures/aboutUs.png' alt='')
-                        .mt-5
-                    .col-lg-6
-                        h2.font-weight-light ABOUT US
-                        br
-                        p.font-italic.text-muted.mb-4
-                            | Eric is an incoming third-year Computer Science major at UBC.
-                            br
-                            a(href='//linkedin.com/in/eric-k-1198b6192/') Connect with Eric
-                            br
-                            br
-                            | Lily is an incoming third-year Business and Computer Science major at UBC.
-                            br
-                            a(href='//linkedin.com/in/lilyydu') Connect with Lily
         .bg-light.py-5
             .container.py-5
                 .row.mb-4.d-flex.justify-content-center.align-items-center.h-100.justify-content-md-center
@@ -174,11 +99,20 @@ block content
                         .bg-white.rounded.shadow-sm.py-5.px-4
                             img.img-fluid.rounded-circle.mb-3.img-thumbnail.shadow-sm(src='../libraries/pictures/ericsHeadshot.jpg' alt='' width='98')
                             h5.mb-0 ERIC KUO
-                            span.small.text-uppercase.text-muted Developer
-
+                            br
+                            span.small.text-uppercase.text-muted 3rd year
+                            br
+                            span.small.text-uppercase CS @ UBC
+                            br
+                            a(href='//linkedin.com/in/eric-k-1198b6192/').small Connect with Eric
                     .col-xl-3.col-sm-6.mb-5
                         .bg-white.rounded.shadow-sm.py-5.px-4
                             img.img-fluid.rounded-circle.mb-3.img-thumbnail.shadow-sm(src='../libraries/pictures/lilysHeadshot.png' alt='' width='100')
                             h5.mb-0 LILY DU
-                            span.small.text-uppercase.text-muted Developer
+                            br
+                            span.small.text-uppercase.text-muted 3rd year
+                            br
+                            span.small.text-uppercase CS + Business @ UBC
+                            br
+                            a(href='//linkedin.com/in/lilyydu').small Connect with Lily
         script(src='/js/info.js')
