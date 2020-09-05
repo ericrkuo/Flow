@@ -67,6 +67,16 @@ describe("unit test for Spotify", function () {
         }
     });
 
+    it("test getFeatures - wrong input type", async function () {
+        try {
+            await emotion.getFeatures(2);
+            chai.expect.fail("Should not have reached here");
+        } catch (e) {
+            console.log(e);
+            chai.expect(e).to.be.instanceOf(Error.InvalidInputError);
+        }
+    });
+
     it("test getFeatures - unrecognized input", async function () {
         try {
             await emotion.getFeatures("happpiness");

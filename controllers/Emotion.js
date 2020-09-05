@@ -713,7 +713,7 @@ class Emotion {
     }
 
     getFeatures(mood) {
-        if (!this.emotionMap[mood]) throw new Error.InvalidInputError("Not a recognized mood, cannot get audio Features");
+        if (typeof mood !== 'string' || !this.emotionMap[mood]) throw new Error.InvalidInputError(mood + " is not a recognized mood, cannot get audio Features");
         let numTracks = this.emotionMap[mood].length;
 
         return this.refreshCredential.tryRefreshCredential()
