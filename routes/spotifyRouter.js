@@ -49,7 +49,7 @@ router.get('/callback', async (req, res, next) => {
             console.log("REFRESH TOKEN: " + req.app.locals.main.spotify.spotifyApi.getRefreshToken());
             res.redirect('/webcam');
         } catch (err) {
-            res.redirect('/'); // TODO get back invalid token string
+            res.redirect('/#/error/invalidtoken');
         }
     } else {
         res.redirect('/');

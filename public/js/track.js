@@ -294,6 +294,7 @@ function addPlaylistEventListeners() {
                 return sendPOSTRequestToCreatePlaylist(JSON.stringify(data))
                     .then((url) => {
                         cancelPlaylistButton.removeAttribute('disabled');
+                        $('#errorAlert').hide();
                         createPlaylistButton.className = createPlaylistButton.className.replace('btn-primary', 'btn-secondary');
 
                         playlistButton.className = playlistButton.className.replace('btn-success', 'btn-primary');
@@ -309,21 +310,25 @@ function addPlaylistEventListeners() {
                         window.open(url, "_blank");
                     })
                     .catch((error) => {
-                        console.log(error.response.status + " " + error.response.statusText);
-                        // TODO SHOW IN ROUTER, redirect link inside routers, isTimeout
-                        if(error.response.status === 502) {
-                            $("#errorAlert").text("Unable to create playlist. Please try again later.");
-                            $("#errorAlert").show();
-                        } else if (error.response.status === 500) {
-                            $("#errorAlert").text("Sorry, we encountered an internal server error. Redirecting you in 3 seconds...");
-                            $("#errorAlert").show();
-                            setTimeout(function() {
-                                location.href="/"
-                            }, 3000);
-                        }
-
                         cancelPlaylistButton.removeAttribute('disabled');
                         createPlaylistButton.removeAttribute('disabled');
+
+                        $('#playlistModal').modal('hide');
+                        console.log(error.response.status);
+                        $('#errorAlert').show();
+                        $('#errorAlert').html('Sorry, we encountered an internal server error. ' +
+                            error.response.data.errorMsg);
+
+                        if(error.response.data.redirectLink) {
+                            setTimeout(function() {
+                                location.href= error.response.data.redirectLink
+                            }, 3000);
+                        } else {
+                            setTimeout(function() {
+                                $('#errorAlert').hide();
+                            }, 10000);
+                        }
+
                     });
             }
         } else {

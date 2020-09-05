@@ -2,7 +2,6 @@ var express = require('express');
 const {trackLimiter} = require("./rateLimiter");
 const {checkCredentials} = require("./indexRouter");
 var router = express.Router();
-const {Main} = require("../controllers/Main")
 
 //#region Sample Data For Testing Purposes
 let tracks = {};
@@ -1075,9 +1074,7 @@ router.get('/', function (req, res, next) {
                 if (req.app.locals.main.result) {
                     return res.render("track", req.app.locals.main.result);
                 } else {
-                    // TODO ONLY THROUGH BYPASSING
-                    res.status(502).json({error: "No curated tracks available"});
-                    });
+                    res.redirect('/#/error/emptytracks');
                 }
             } else {
                 return res.redirect("/spotify/login");
@@ -1085,7 +1082,7 @@ router.get('/', function (req, res, next) {
         })
         .catch((err) => {
             // TODO: just in case checkCredentials throws an error (highly unlikely)
-            console.log(err);
+            res.redirect("/spotify/login");
         })
 });
 
@@ -1098,10 +1095,10 @@ router.post('/', trackLimiter, function (req, res, next) {
                 return res.status(200).json({link: playlistURL});
             })
             .catch((err) => {
-                return res.status(502).json({error: err.message});
+                return res.status(502).json({errorMsg: "Please try again later. </br> </br>" + err.message});
             });
     } else {
-        return res.status(500).json({error: "Null or undefined main"});
+        return res.status(500).json({redirectLink: '/', errorMsg: "Redirecting you in 3 seconds..."});
     }
 
 });

@@ -33,7 +33,8 @@ async function init() {
         handleSuccess(stream);
     } catch (err) {
         errorMsgElement.innerHTML = `navigator.getUserMedia.error:${err.toString()}`;
-        $("#errorAlert").text("Sorry, we're unable to initialize the webcam at this moment. Refreshing page in 3 seconds ...");
+        $("#errorAlert").html("Sorry, we encountered an internal server error. </br> </br>"
+            + err.message);
         $("#errorAlert").show();
         setTimeout(function() {
             location.href = "/webcam"
@@ -61,27 +62,6 @@ function turnOffStream() {
     });
 }
 
-function getTracks() {
-    let url = window.location.origin + "/tracks";
-    let config = {
-        method: 'get',
-        url: url,
-        headers: {
-            'Content-Type': 'application/json'
-        },
-    }
-
-    return axios(config)
-        .then((result) => {
-            location.href = '/tracks';
-        })
-        .catch((error) => {
-            console.log(error.response.status + " " + error.response.statusText);
-            $("#errorAlert").text("No custom tracks yet, please take another photo to get curated tracks");
-            $("#errorAlert").show();
-        });
-}
-
 function postTracks(dataURL) {
     let data = JSON.stringify({dataURL: dataURL});
     let url = window.location.origin + "/webcam";
@@ -98,25 +78,24 @@ function postTracks(dataURL) {
     return axios(config)
         .then(() => {
             console.log("SUCCESS - put tracks, now taking to tracks");
-            // TODO location
-            getTracks().then(() => {});
+            location.href = '/tracks';
         })
         .catch((error) => {
-            // CUSTOMIZE LATER ON ACCORDING TO TYPE OF BACK-END ERRORS
-            // TODO jelly flex
-            console.log(error.response.status + " " + error.response.statusText);
+            console.log(error.response.status);
+            console.log(error.response.data.body);
 
-            if(error.response.status === 500) {
-                $("#errorAlert").text("Sorry, we encountered an internal server error. Redirecting you in 3 seconds...");
-                $("#errorAlert").show();
+            webcam.style.display = "flex";
+            loadingDiv.style.display = "none";
+
+            $("#errorAlert").show();
+            $("#errorAlert").html('Sorry, we encountered an internal server error. ' +
+                error.response.data.errorMsg);
+
+            if(error.response.data.redirectLink) {
                 setTimeout(function() {
-                    location.href="/"
+                    location.href= error.response.data.redirectLink
                 }, 3000);
-            } else if (error.response.status === 502) {
-                $("#errorAlert").text("Sorry, we encountered an internal server error.");
-                $("#errorAlert").show();
             }
-
         });
 }
 
@@ -148,6 +127,7 @@ function hideAndShowHTMLElementsForTryAgainButton() {
     video.className = "video-no-animation";
     show([video]);
     hide([afterCaptureButtons, canvas]);
+    $('#errorAlert').hide();
 }
 
 function hideAndShowHTMLElementsForCaptureButton() {

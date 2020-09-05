@@ -7,10 +7,10 @@ block append stylesheets
     link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css')
 block content
     .container-fluid.text-center#webcam
-        .centered-div
-            .alert.alert-danger.alert-dismissible.fade.show#errorAlert(role='alert')
-                button#errorAlertButton.close(type='button' data-dismiss='alert' aria-label='Close')
-                    span(aria-hidden='true') &times;
+        .alert.alert-danger.hide#errorAlert(role='alert')
+            // .alert-dismissible
+            //button.close(type='button' data-dismiss='alert' aria-label='Close' data-target="#errorAlert")#errorAlertButton
+            //    span(aria-hidden='true') &times;
         .breakSpace
         h2.text-white#header How are you feeling right now?
         .container-fluid.d-flex.justify-content-center

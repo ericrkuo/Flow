@@ -2,6 +2,10 @@
     font-size: 4vmin;
 }
 
+#errorAlert {
+    position: absolute;
+}
+
 .video-animation {
     height: 70vmin;
     -webkit-mask-image: url("../libraries/circle.png");
