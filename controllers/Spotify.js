@@ -453,30 +453,27 @@ class Spotify {
 
     getNewPlaylist(trackURLs) {
         let link = null;
-        if (this.isTrackURLsValid(trackURLs)) {
-            return this.refreshCredential.tryRefreshCredential()
-                .then(() => {
-                    return this.createNewPlaylist();
-                })
-                .then((playlist) => {
-                    if (this.isCreatedPlaylistValid(playlist)) {
-                        link = playlist.body.external_urls.spotify;
-                        return this.spotifyApi.addTracksToPlaylist(playlist.body.id, trackURLs)
-                    } else {
-                        throw new Err.InvalidResponseError("playlist did not create correctly");
-                    }
-                })
-                .then((result) => {
-                    if (!link || (result.statusCode !== 200 && result.statusCode !== 201)) throw new Err.InvalidResponseError("link is null or tracks did not add correctly");
-                    return link;
-                })
-                .catch((err) => {
-                    console.log(err);
-                    throw err;
-                });
-        } else {
-            throw new Err.InvalidInputError("trackURLs is invalid, ensure is a non-empty array");
-        }
+        if (!this.isTrackURLsValid(trackURLs)) return Promise.reject(new Err.InvalidInputError("trackURLs is invalid, ensure is a non-empty array"));
+        return this.refreshCredential.tryRefreshCredential()
+            .then(() => {
+                return this.createNewPlaylist();
+            })
+            .then((playlist) => {
+                if (this.isCreatedPlaylistValid(playlist)) {
+                    link = playlist.body.external_urls.spotify;
+                    return this.spotifyApi.addTracksToPlaylist(playlist.body.id, trackURLs)
+                } else {
+                    throw new Err.InvalidResponseError("playlist did not create correctly");
+                }
+            })
+            .then((result) => {
+                if (!link || (result.statusCode !== 200 && result.statusCode !== 201)) throw new Err.InvalidResponseError("link is null or tracks did not add correctly");
+                return link;
+            })
+            .catch((err) => {
+                console.log(err);
+                throw err;
+            });
     }
 
     isCreatedPlaylistValid(playlist) {

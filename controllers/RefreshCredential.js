@@ -37,45 +37,41 @@ class RefreshCredential {
     getNewAccessToken() {
         let refresh_token = this.spotifyApi.getRefreshToken();
         if (!refresh_token) {
-            throw new Err.InvalidInputError("Refresh token is null or undefined");
+            return Promise.reject(new Err.InvalidInputError("Refresh token is null or undefined"));
         }
 
-        try {
-            let axios = require('axios');
-            let qs = require('querystring');
-            let data = qs.stringify({
-                grant_type: 'refresh_token',
-                refresh_token: refresh_token,
+        let axios = require('axios');
+        let qs = require('querystring');
+        let data = qs.stringify({
+            grant_type: 'refresh_token',
+            refresh_token: refresh_token,
+        });
+
+        let config = {
+            method: 'post',
+            url: 'https://accounts.spotify.com/api/token',
+            headers: {
+                'Authorization': 'Basic ' + Buffer.from(process.env.SPOTIFY_API_ID + ':' + process.env.SPOTIFY_CLIENT_SECRET).toString("base64"),
+                'Content-type': "application/x-www-form-urlencoded",
+            },
+            data: data
+        };
+
+        return axios(config)
+            .then((response) => {
+                if (response && response.data && response.data["access_token"]) {
+                    console.log(response.data);
+                    return response.data["access_token"];
+                } else {
+                    throw new Err.InvalidResponseError("Response from Azure Face API is invalid")
+                }
+            })
+            .catch((error) => {
+                if (error.response && error.response.data && error.response.data) {
+                    throw new Error(JSON.stringify(error.response.data));
+                }
+                throw error;
             });
-
-            let config = {
-                method: 'post',
-                url: 'https://accounts.spotify.com/api/token',
-                headers: {
-                    'Authorization': 'Basic ' + Buffer.from(process.env.SPOTIFY_API_ID + ':' + process.env.SPOTIFY_CLIENT_SECRET).toString("base64"),
-                    'Content-type': "application/x-www-form-urlencoded",
-                },
-                data: data
-            };
-
-            return axios(config)
-                .then((response) => {
-                    if (response && response.data && response.data["access_token"]) {
-                        console.log(response.data);
-                        return response.data["access_token"];
-                    } else {
-                        throw new Err.InvalidResponseError("Response from Azure Face API is invalid")
-                    }
-                })
-                .catch((error) => {
-                    if (error.response && error.response.data && error.response.data) {
-                        throw new Error(JSON.stringify(error.response.data));
-                    }
-                    throw error;
-                });
-        } catch (error) {
-            throw error;
-        }
     }
 }
 

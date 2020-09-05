@@ -23,27 +23,23 @@ describe("unit test for dataURL", function () {
     });
 
     it("test getEmotions - null input", function () {
-        try {
-            return azureFaceAPI.getEmotions(null)
-                .then((res) => {
-                    chai.expect.fail();
-                });
-        } catch (err) {
-            console.log(err);
-            chai.expect(err).to.be.instanceOf(Err.InvalidInputError);
-        }
+        return azureFaceAPI.getEmotions(null)
+            .then(() => {
+                chai.expect.fail();
+            }).catch((err) => {
+                console.log(err);
+                chai.expect(err).to.be.instanceOf(Err.InvalidInputError);
+            });
     });
 
     it("test getEmotions - wrong input type", function () {
-        try {
-            return azureFaceAPI.getEmotions(2)
-                .then((res) => {
-                    chai.expect.fail();
-                });
-        } catch (err) {
-            console.log(err);
-            chai.expect(err).to.be.instanceOf(Err.InvalidInputError);
-        }
+        return azureFaceAPI.getEmotions(2)
+            .then(() => {
+                chai.expect.fail();
+            }).catch((err) => {
+                console.log(err);
+                chai.expect(err).to.be.instanceOf(Err.InvalidInputError);
+            });
     });
 
     it("test getEmotions - no user detected in image", function () {

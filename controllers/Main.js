@@ -40,7 +40,7 @@ class Main {
     // REQUIRES. this.dataURL to be set
     getRelevantSongs() {
         if (!this.dataURL) {
-            throw new Err.InvalidDataURLError();
+            return Promise.reject(new Err.InvalidDataURLError());
         }
         let songX;
         let newArrayOfSongIDS;
@@ -76,7 +76,7 @@ class Main {
 
     getRelevantSongsTestingPurposes() {
         if (!this.dataURL) {
-            throw new Err.InvalidDataURLError();
+            return Promise.reject(new Err.InvalidDataURLError());
         }
         let songX;
         let dominantEmotion = "happiness";

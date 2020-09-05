@@ -8,7 +8,7 @@ const Err = require("../controllers/Error");
 let emotion;
 
 describe("unit test for Spotify", function () {
-    before(async function () {
+    before(function () {
         require('dotenv').config();
         let spotifyApi = new SpotifyWebApi({
             clientId: process.env.SPOTIFY_API_ID,
@@ -19,12 +19,17 @@ describe("unit test for Spotify", function () {
         emotion = new Emotion(spotifyApi);
     });
 
-    it("test getFeatures - sadness", async function () {
-        let features = await emotion.getFeatures("sadness");
-        console.log(features);
+    it("test getFeatures - sadness", function () {
+        return emotion.getFeatures("sadness")
+            .then((features) => {
+                console.log(features);
+            })
+            .catch((err) => {
+                chai.expect.fail();
+            })
     });
 
-    it("test getFeatures - integrated with AzureFaceAPI", async function () {
+    it("test getFeatures - integrated with AzureFaceAPI", function () {
         let azureFaceAPI = new AzureFaceAPI();
         return azureFaceAPI.getEmotions(sampleDataURL.dataURL1).then((res) => {
             console.log(emotion.getDominantExpression(res));
@@ -34,60 +39,71 @@ describe("unit test for Spotify", function () {
         })
     });
 
-    it("test getFeatures - multiple emotions", async function () {
-        try {
-            let emotions = ["anger", "contempt", "disgust", "fear", "happiness", "neutral", "sadness", "surprise"];
-            for (let e of emotions) {
-                let features = await emotion.getFeatures(e);
-                console.log(e + " - " + JSON.stringify(features));
-                chai.assert(typeof features === 'object');
-            }
-        } catch (e) {
-            chai.expect.fail("Should not have thrown error");
-        }
+    it("test getFeatures - multiple emotions", function () {
+        let emotions = ["anger", "contempt", "disgust", "fear", "happiness", "neutral", "sadness", "surprise"];
+        return emotion.refreshCredential.tryRefreshCredential()
+            .then(() => {
+                let promises = [];
+                for (let e of emotions) {
+                    promises.push(emotion.getFeatures(e));
+                }
+                return Promise.all(promises);
+            })
+            .then((resArray) => {
+                for (let res of resArray) {
+                    chai.assert(typeof res === 'object');
+                }
+            })
+            .catch((e) => {
+                chai.expect.fail("Should not have thrown error");
+            })
     });
 
-    it("test getFeatures - null input", async function () {
-        try {
-            await emotion.getFeatures(null);
-            chai.expect.fail("Should not have reached here");
-        } catch (e) {
-            console.log(e);
-            chai.expect(e).to.be.instanceOf(Err.InvalidInputError);
-        }
+    it("test getFeatures - null input", function () {
+        return emotion.getFeatures(null)
+            .then(() => {
+                chai.expect.fail("Should not have reached here");
+            })
+            .catch((err) => {
+                console.log(err);
+                chai.expect(err).to.be.instanceOf(Err.InvalidInputError);
+            });
     });
 
-    it("test getFeatures - undefined input", async function () {
-        try {
-            await emotion.getFeatures(undefined);
-            chai.expect.fail("Should not have reached here");
-        } catch (e) {
-            console.log(e);
-            chai.expect(e).to.be.instanceOf(Err.InvalidInputError);
-        }
+    it("test getFeatures - undefined input", function () {
+        return emotion.getFeatures(undefined)
+            .then(() => {
+                chai.expect.fail("Should not have reached here");
+            })
+            .catch((err) => {
+                console.log(err);
+                chai.expect(err).to.be.instanceOf(Err.InvalidInputError);
+            });
     });
 
-    it("test getFeatures - wrong input type", async function () {
-        try {
-            await emotion.getFeatures(2);
-            chai.expect.fail("Should not have reached here");
-        } catch (e) {
-            console.log(e);
-            chai.expect(e).to.be.instanceOf(Err.InvalidInputError);
-        }
+    it("test getFeatures - wrong input type", function () {
+        return emotion.getFeatures(2)
+            .then(() => {
+                chai.expect.fail("Should not have reached here");
+            })
+            .catch((err) => {
+                console.log(err);
+                chai.expect(err).to.be.instanceOf(Err.InvalidInputError);
+            });
     });
 
-    it("test getFeatures - unrecognized input", async function () {
-        try {
-            await emotion.getFeatures("happpiness");
-            chai.expect.fail("Should not have reached here");
-        } catch (e) {
-            console.log(e);
-            chai.expect(e).to.be.instanceOf(Err.InvalidInputError);
-        }
+    it("test getFeatures - unrecognized input", function () {
+        return emotion.getFeatures("happpiness")
+            .then(() => {
+                chai.expect.fail("Should not have reached here");
+            })
+            .catch((err) => {
+                console.log(err);
+                chai.expect(err).to.be.instanceOf(Err.InvalidInputError);
+            });
     });
 
-    it("test getDominantExpressions", async function () {
+    it("test getDominantExpressions", function () {
         try {
             let data = {
                 anger: 0,
@@ -107,7 +123,7 @@ describe("unit test for Spotify", function () {
         }
     });
 
-    it("test getDominantExpressions - invalid input null", async function () {
+    it("test getDominantExpressions - invalid input null", function () {
         try {
             emotion.getDominantExpression(null);
             chai.expect.fail();
@@ -117,7 +133,7 @@ describe("unit test for Spotify", function () {
         }
     });
 
-    it("test getDominantExpressions - invalid input wrong type", async function () {
+    it("test getDominantExpressions - invalid input wrong type", function () {
         try {
             emotion.getDominantExpression("null");
             chai.expect.fail();
@@ -127,7 +143,7 @@ describe("unit test for Spotify", function () {
         }
     });
 
-    it("test getDominantExpressions - invalid input array", async function () {
+    it("test getDominantExpressions - invalid input array", function () {
         try {
             emotion.getDominantExpression([]);
             chai.expect.fail();
