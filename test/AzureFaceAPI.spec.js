@@ -1,6 +1,6 @@
 var chai = require("chai");
 var sampleDataURL = require("./sampleDataURL");
-const Error = require("../controllers/Error");
+const Err = require("../controllers/Error");
 const {AzureFaceAPI} = require("../controllers/AzureFaceAPI");
 
 let azureFaceAPI;
@@ -30,7 +30,7 @@ describe("unit test for dataURL", function () {
                 });
         } catch (err) {
             console.log(err);
-            chai.expect(err).to.be.instanceOf(Error.InvalidInputError);
+            chai.expect(err).to.be.instanceOf(Err.InvalidInputError);
         }
     });
 
@@ -42,7 +42,7 @@ describe("unit test for dataURL", function () {
                 });
         } catch (err) {
             console.log(err);
-            chai.expect(err).to.be.instanceOf(Error.InvalidInputError);
+            chai.expect(err).to.be.instanceOf(Err.InvalidInputError);
         }
     });
 
@@ -52,7 +52,7 @@ describe("unit test for dataURL", function () {
                 chai.expect.fail("Should have failed");
             }).catch((err) => {
                 console.log(err);
-                chai.expect(err).to.be.instanceOf(Error.NoUserDetectedError);
+                chai.expect(err).to.be.instanceOf(Err.NoUserDetectedError);
             });
     });
 
@@ -79,7 +79,7 @@ describe("unit test for dataURL", function () {
             azureFaceAPI.handleResponse(null);
             chai.expect.fail();
         } catch (e) {
-            chai.expect(e).to.be.instanceOf(Error.InvalidResponseError);
+            chai.expect(e).to.be.instanceOf(Err.InvalidResponseError);
         }
     });
 
@@ -88,7 +88,7 @@ describe("unit test for dataURL", function () {
             azureFaceAPI.handleResponse(undefined);
             chai.expect.fail();
         } catch (e) {
-            chai.expect(e).to.be.instanceOf(Error.InvalidResponseError);
+            chai.expect(e).to.be.instanceOf(Err.InvalidResponseError);
         }
     });
 
@@ -97,7 +97,7 @@ describe("unit test for dataURL", function () {
             azureFaceAPI.handleResponse({dataa: 2});
             chai.expect.fail();
         } catch (e) {
-            chai.expect(e).to.be.instanceOf(Error.InvalidResponseError);
+            chai.expect(e).to.be.instanceOf(Err.InvalidResponseError);
         }
     });
 
@@ -106,7 +106,7 @@ describe("unit test for dataURL", function () {
             azureFaceAPI.handleResponse({data: 2});
             chai.expect.fail();
         } catch (e) {
-            chai.expect(e).to.be.instanceOf(Error.InvalidResponseError);
+            chai.expect(e).to.be.instanceOf(Err.InvalidResponseError);
         }
     });
 
@@ -115,7 +115,7 @@ describe("unit test for dataURL", function () {
             azureFaceAPI.handleResponse({data: []});
             chai.expect.fail();
         } catch (e) {
-            chai.expect(e).to.be.instanceOf(Error.NoUserDetectedError);
+            chai.expect(e).to.be.instanceOf(Err.NoUserDetectedError);
         }
     });
 
@@ -124,7 +124,7 @@ describe("unit test for dataURL", function () {
             azureFaceAPI.handleResponse({data: [{faceAttributesMISPELLED: 0}]});
             chai.expect.fail();
         } catch (e) {
-            chai.expect(e).to.be.instanceOf(Error.InvalidResponseError);
+            chai.expect(e).to.be.instanceOf(Err.InvalidResponseError);
         }
     });
 
@@ -133,7 +133,7 @@ describe("unit test for dataURL", function () {
             azureFaceAPI.handleResponse({data: [{faceAttributes: {emotionMISPELLED: 0}}]});
             chai.expect.fail();
         } catch (e) {
-            chai.expect(e).to.be.instanceOf(Error.InvalidResponseError);
+            chai.expect(e).to.be.instanceOf(Err.InvalidResponseError);
         }
     });
 

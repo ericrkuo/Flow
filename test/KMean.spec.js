@@ -1,5 +1,5 @@
 var chai = require("chai");
-const Error = require("../controllers/Error");
+const Err = require("../controllers/Error");
 const {songs, songsClearCluster, songsLargeClearCluster} = require("./sampleSpotifyAudioFeatures");
 const {KMean} = require("../controllers/KMean");
 
@@ -59,7 +59,7 @@ describe("unit test for KMeans", function () {
             kMean.iterate();
         } catch (err) {
             console.log(err);
-            chai.expect(err).to.be.instanceOf(Error.KMeanClusterError);
+            chai.expect(err).to.be.instanceOf(Err.KMeanClusterError);
         }
     });
 
@@ -73,7 +73,7 @@ describe("unit test for KMeans", function () {
             kMean.iterate();
         } catch (err) {
             console.log(err);
-            chai.expect(err).to.be.instanceOf(Error.KMeanIterationError);
+            chai.expect(err).to.be.instanceOf(Err.KMeanIterationError);
         }
     });
 

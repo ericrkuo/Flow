@@ -1,4 +1,4 @@
-const Error = require("./Error");
+const Err = require("./Error");
 
 class AzureFaceAPI {
 
@@ -41,9 +41,9 @@ class AzureFaceAPI {
     }
 
     handleResponse(response) {
-        if (!this.isResponseValid(response)) throw new Error.InvalidResponseError("Response from Azure Face API is invalid - null or not an array");
-        if (response.data.length === 0) throw new Error.NoUserDetectedError();
-        if (!this.isResponseDataValid(response.data)) throw new Error.InvalidResponseError("Response from Azure Face API is invalid - no faceAttributes or emotions");
+        if (!this.isResponseValid(response)) throw new Err.InvalidResponseError("Response from Azure Face API is invalid - null or not an array");
+        if (response.data.length === 0) throw new Err.NoUserDetectedError();
+        if (!this.isResponseDataValid(response.data)) throw new Err.InvalidResponseError("Response from Azure Face API is invalid - no faceAttributes or emotions");
 
         let emotionData = response.data[0]["faceAttributes"]["emotion"];
         console.log(JSON.stringify(response.data));
@@ -59,7 +59,7 @@ class AzureFaceAPI {
     }
 
     convertDataURIToBinary(dataURI) {
-        if (!dataURI || typeof dataURI !== 'string') throw new Error.InvalidInputError("dataURI is formatted improperly");
+        if (!dataURI || typeof dataURI !== 'string') throw new Err.InvalidInputError("dataURI is formatted improperly");
 
         let BASE64_MARKER = ';base64,';
         let base64Index = dataURI.indexOf(BASE64_MARKER) + BASE64_MARKER.length;

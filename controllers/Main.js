@@ -3,7 +3,7 @@ const {AzureFaceAPI} = require("./AzureFaceAPI");
 const {Spotify} = require("./Spotify");
 const {Emotion} = require("./Emotion");
 const SpotifyWebApi = require('spotify-web-api-node');
-const Error = require("./Error");
+const Err = require("./Error");
 const DESIRED_NUM_SONGS = 30;
 
 class Main {
@@ -40,7 +40,7 @@ class Main {
     // REQUIRES. this.dataURL to be set
     getRelevantSongs() {
         if (!this.dataURL) {
-            throw new Error.InvalidDataURLError();
+            throw new Err.InvalidDataURLError();
         }
         let songX;
         let newArrayOfSongIDS;
@@ -76,7 +76,7 @@ class Main {
 
     getRelevantSongsTestingPurposes() {
         if (!this.dataURL) {
-            throw new Error.InvalidDataURLError();
+            throw new Err.InvalidDataURLError();
         }
         let songX;
         let dominantEmotion = "happiness";

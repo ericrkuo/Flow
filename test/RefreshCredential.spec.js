@@ -1,6 +1,6 @@
 const chai = require("chai");
 const SpotifyWebApi = require('spotify-web-api-node');
-const Error = require("../controllers/Error");
+const Err = require("../controllers/Error");
 const {Emotion} = require("../controllers/Emotion");
 const {Spotify} = require("../controllers/Spotify");
 const {RefreshCredential} = require("../controllers/RefreshCredential");
@@ -116,7 +116,7 @@ describe("test refreshing with credentials", function () {
             chai.expect.fail();
         } catch (e) {
             console.log("Caught error" + e);
-            chai.expect(e).to.be.instanceOf(Error.InvalidInputError)
+            chai.expect(e).to.be.instanceOf(Err.InvalidInputError)
         }
     });
 

@@ -3,7 +3,7 @@ const {AzureFaceAPI} = require("../controllers/AzureFaceAPI");
 const {Emotion} = require("../controllers/Emotion");
 const sampleDataURL = require("./sampleDataURL");
 const SpotifyWebApi = require('spotify-web-api-node');
-const Error = require("../controllers/Error");
+const Err = require("../controllers/Error");
 
 let emotion;
 
@@ -53,7 +53,7 @@ describe("unit test for Spotify", function () {
             chai.expect.fail("Should not have reached here");
         } catch (e) {
             console.log(e);
-            chai.expect(e).to.be.instanceOf(Error.InvalidInputError);
+            chai.expect(e).to.be.instanceOf(Err.InvalidInputError);
         }
     });
 
@@ -63,7 +63,7 @@ describe("unit test for Spotify", function () {
             chai.expect.fail("Should not have reached here");
         } catch (e) {
             console.log(e);
-            chai.expect(e).to.be.instanceOf(Error.InvalidInputError);
+            chai.expect(e).to.be.instanceOf(Err.InvalidInputError);
         }
     });
 
@@ -73,7 +73,7 @@ describe("unit test for Spotify", function () {
             chai.expect.fail("Should not have reached here");
         } catch (e) {
             console.log(e);
-            chai.expect(e).to.be.instanceOf(Error.InvalidInputError);
+            chai.expect(e).to.be.instanceOf(Err.InvalidInputError);
         }
     });
 
@@ -83,7 +83,7 @@ describe("unit test for Spotify", function () {
             chai.expect.fail("Should not have reached here");
         } catch (e) {
             console.log(e);
-            chai.expect(e).to.be.instanceOf(Error.InvalidInputError);
+            chai.expect(e).to.be.instanceOf(Err.InvalidInputError);
         }
     });
 
@@ -113,7 +113,7 @@ describe("unit test for Spotify", function () {
             chai.expect.fail();
         } catch (e) {
             console.log(e);
-            chai.expect(e).to.be.instanceOf(Error.InvalidInputError);
+            chai.expect(e).to.be.instanceOf(Err.InvalidInputError);
         }
     });
 
@@ -123,7 +123,7 @@ describe("unit test for Spotify", function () {
             chai.expect.fail();
         } catch (e) {
             console.log(e);
-            chai.expect(e).to.be.instanceOf(Error.InvalidInputError);
+            chai.expect(e).to.be.instanceOf(Err.InvalidInputError);
         }
     });
 
@@ -133,7 +133,7 @@ describe("unit test for Spotify", function () {
             chai.expect.fail();
         } catch (e) {
             console.log(e);
-            chai.expect(e).to.be.instanceOf(Error.InvalidInputError);
+            chai.expect(e).to.be.instanceOf(Err.InvalidInputError);
         }
     });
 });

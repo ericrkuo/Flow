@@ -1,5 +1,5 @@
 const {RefreshCredential} = require("./RefreshCredential");
-const Error = require("./Error");
+const Err = require("./Error");
 
 class Spotify {
 
@@ -218,7 +218,7 @@ class Spotify {
                 return this.addAllTracksToHashMap();
             })
             .then(() => {
-                if (!this.trackHashMap || this.trackHashMap.size === 0) throw new Error.EmptyTracksError();
+                if (!this.trackHashMap || this.trackHashMap.size === 0) throw new Err.EmptyTracksError();
                 // get array of array of ids (split into 100)
                 let promises = [];
                 let trackIDS = Array.from(this.trackHashMap.keys());
@@ -443,7 +443,7 @@ class Spotify {
                     let userId = result.id;
                     return this.spotifyApi.createPlaylist(userId, 'Flow Playlist: ' + this.mood, {public: false});
                 } else {
-                    throw new Error.InvalidResponseError("no user info or mood is currently not set");
+                    throw new Err.InvalidResponseError("no user info or mood is currently not set");
                 }
             }).catch((err) => {
                 console.log(err);
@@ -463,11 +463,11 @@ class Spotify {
                         link = playlist.body.external_urls.spotify;
                         return this.spotifyApi.addTracksToPlaylist(playlist.body.id, trackURLs)
                     } else {
-                        throw new Error.InvalidResponseError("playlist did not create correctly");
+                        throw new Err.InvalidResponseError("playlist did not create correctly");
                     }
                 })
                 .then((result) => {
-                    if (!link || (result.statusCode !== 200 && result.statusCode !== 201)) throw new Error.InvalidResponseError("link is null or tracks did not add correctly");
+                    if (!link || (result.statusCode !== 200 && result.statusCode !== 201)) throw new Err.InvalidResponseError("link is null or tracks did not add correctly");
                     return link;
                 })
                 .catch((err) => {
@@ -475,7 +475,7 @@ class Spotify {
                     throw err;
                 });
         } else {
-            throw new Error.InvalidInputError("trackURLs is invalid, ensure is a non-empty array");
+            throw new Err.InvalidInputError("trackURLs is invalid, ensure is a non-empty array");
         }
     }
 

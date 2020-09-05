@@ -1,4 +1,4 @@
-const Error = require("./Error");
+const Err = require("./Error");
 
 class RefreshCredential {
 
@@ -37,7 +37,7 @@ class RefreshCredential {
     getNewAccessToken() {
         let refresh_token = this.spotifyApi.getRefreshToken();
         if (!refresh_token) {
-            throw new Error.InvalidInputError("Refresh token is null or undefined");
+            throw new Err.InvalidInputError("Refresh token is null or undefined");
         }
 
         try {
@@ -64,7 +64,7 @@ class RefreshCredential {
                         console.log(response.data);
                         return response.data["access_token"];
                     } else {
-                        throw new Error.InvalidResponseError("Response from Azure Face API is invalid")
+                        throw new Err.InvalidResponseError("Response from Azure Face API is invalid")
                     }
                 })
                 .catch((error) => {

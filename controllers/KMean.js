@@ -1,4 +1,4 @@
-const Error = require("./Error");
+const Err = require("./Error");
 
 class KMean {
 
@@ -134,7 +134,7 @@ class KMean {
 
     iterate() {
         if (this.iterations > this.MAX_ITERATIONS) {
-            throw new Error.KMeanIterationError(this.iterations, this.MAX_ITERATIONS);
+            throw new Err.KMeanIterationError(this.iterations, this.MAX_ITERATIONS);
         }
         this.clusters = new Array(this.k);
         let numFeatures = this.features.length;
@@ -162,11 +162,11 @@ class KMean {
         let maxDistance = 0;
         for (let i = 0; i < this.k; i++) {
             if (!this.clusters[i]) {
-                throw new Error.KMeanClusterError("Less than K clusters for cluster: " + i);
+                throw new Err.KMeanClusterError("Less than K clusters for cluster: " + i);
             }
             let numTracks = this.clusters[i].length;
             if (numTracks === 0) {
-                throw new Error.KMeanClusterError("Zero tracks in cluster: " + i);
+                throw new Err.KMeanClusterError("Zero tracks in cluster: " + i);
             }
             // calculate the mean
             for (let feature of this.features) {

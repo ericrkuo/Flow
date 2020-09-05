@@ -1,7 +1,7 @@
 var chai = require("chai");
 const {Spotify} = require("../controllers/Spotify");
 const SpotifyWebApi = require('spotify-web-api-node');
-const Error = require("../controllers/Error");
+const Err = require("../controllers/Error");
 
 let spotify;
 let spotifyApi;
@@ -214,7 +214,7 @@ describe("unit test for Spotify", function () {
             chai.expect.fail("should have failed");
         } catch (err) {
             console.log(err);
-            chai.expect(err).to.be.instanceOf(Error.InvalidResponseError);
+            chai.expect(err).to.be.instanceOf(Err.InvalidResponseError);
         }
     })
 
@@ -237,7 +237,7 @@ describe("unit test for Spotify", function () {
             chai.expect.fail();
         } catch (err) {
             console.log(err);
-            chai.expect(err).to.be.instanceOf(Error.InvalidInputError);
+            chai.expect(err).to.be.instanceOf(Err.InvalidInputError);
         }
     })
 
@@ -247,7 +247,7 @@ describe("unit test for Spotify", function () {
             chai.expect.fail();
         } catch (err) {
             console.log(err);
-            chai.expect(err).to.be.instanceOf(Error.InvalidInputError);
+            chai.expect(err).to.be.instanceOf(Err.InvalidInputError);
         }
     })
 
@@ -257,7 +257,7 @@ describe("unit test for Spotify", function () {
             chai.expect.fail();
         } catch (err) {
             console.log(err);
-            chai.expect(err).to.be.instanceOf(Error.InvalidInputError);
+            chai.expect(err).to.be.instanceOf(Err.InvalidInputError);
         }
     })
 });
