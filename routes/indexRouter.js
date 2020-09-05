@@ -1,4 +1,5 @@
 var express = require('express');
+const {Main} = require("../controllers/Main");
 var router = express.Router();
 
 /* GET home page. */
@@ -6,17 +7,22 @@ router.get('/', function (req, res, next) {
     res.render('index', null);
 });
 
-async function checkCredentials(req) {
+function checkCredentials(req) {
     let main = req.app.locals.main;
-    if (main && main.spotify && main.spotifyApi && main.spotify.refreshCredential) {
-        let accessToken = req.app.locals.main.spotifyApi.getAccessToken();
-        let refreshToken = req.app.locals.main.spotifyApi.getRefreshToken();
-        let result = await main.spotify.refreshCredential.checkCredentials();
-        if (accessToken && refreshToken && typeof accessToken === 'string' && typeof refreshToken === 'string' && result) {
-            return true;
-        }
+    if (!main || !main.spotify || !main.spotifyApi || !main.spotify.refreshCredential) {
+        req.app.locals.main = new Main();
+        return Promise.resolve(false);
     }
-    return false;
+
+    return main.spotify.refreshCredential.checkCredentials()
+        .then((result) => {
+            let accessToken = req.app.locals.main.spotifyApi.getAccessToken();
+            let refreshToken = req.app.locals.main.spotifyApi.getRefreshToken();
+            return (accessToken && refreshToken && typeof accessToken === 'string' && typeof refreshToken === 'string' && result);
+        })
+        .catch((err) => {
+            throw err;
+        })
 }
 
 module.exports = router;
