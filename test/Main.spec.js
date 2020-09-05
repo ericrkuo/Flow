@@ -11,7 +11,7 @@ describe("unit test for Main", function () {
         main.spotifyApi.setRefreshToken(process.env.REFRESH_TOKEN);
     });
 
-    it("test getRelevantSongsTestingPurposes", async function(){
+    it("test getRelevantSongsTestingPurposes", async function () {
         try {
             main.dataURL = "TestDataURL"
             let resp = await main.getRelevantSongsTestingPurposes();
@@ -23,18 +23,18 @@ describe("unit test for Main", function () {
         }
     });
 
-    it("test getRelevantSongs - without valid dataURL set", async function(){
+    it("test getRelevantSongs - without valid dataURL set", async function () {
         main.dataURL = null;
         try {
             await main.getRelevantSongs();
-        } catch(err){
+        } catch (err) {
             console.log(err);
             chai.expect(err).to.be.instanceOf(Error.InvalidDataURLError);
         }
 
     });
 
-    it("test getRelevantSongs - with data URL", async function(){
+    it("test getRelevantSongs - with data URL", async function () {
         try {
             main.dataURL = sampleDataURL.dataURL1;
             let resp = await main.getRelevantSongs();
@@ -46,9 +46,8 @@ describe("unit test for Main", function () {
         }
     });
 
-    it("test createMoodPlaylist with null input", function() {
-        try
-        {
+    it("test createMoodPlaylist with null input", function () {
+        try {
             main.createMoodPlaylist(null)
             chai.assert.fail("expected error to be thrown")
         } catch (e) {
@@ -57,9 +56,8 @@ describe("unit test for Main", function () {
         }
     })
 
-    it("test createMoodPlaylist with undefined input", function() {
-        try
-        {
+    it("test createMoodPlaylist with undefined input", function () {
+        try {
             main.createMoodPlaylist(undefined)
             chai.assert.fail("expected error to be thrown")
         } catch (e) {
@@ -68,9 +66,8 @@ describe("unit test for Main", function () {
         }
     })
 
-    it("test createMoodPlaylist with incorrect input type", function() {
-        try
-        {
+    it("test createMoodPlaylist with incorrect input type", function () {
+        try {
             main.createMoodPlaylist("testString")
             chai.assert.fail("expected error to be thrown")
         } catch (e) {
@@ -79,13 +76,11 @@ describe("unit test for Main", function () {
         }
     })
 
-    it("test createMoodPlaylist with empty array", function() {
-        try
-        {
+    it("test createMoodPlaylist with empty array", function () {
+        try {
             main.createMoodPlaylist([])
             chai.assert.fail("expected error to be thrown")
-        }
-        catch (e) {
+        } catch (e) {
             console.log(e);
             chai.expect(e).to.be.instanceOf(Error.InvalidInputError);
         }

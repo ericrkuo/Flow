@@ -1,4 +1,4 @@
-const Error= require("./Error");
+const Error = require("./Error");
 
 class RefreshCredential {
 

@@ -65,7 +65,7 @@ class Main {
                 newArrayOfSongIDS = this.getDesiredNumberSongs(bestK, arrayOfSongIDS, map);
                 return this.setResults(newArrayOfSongIDS, audioFeatureData, this.spotify.mood, emotions);
             })
-            .then(()=> {
+            .then(() => {
                 return newArrayOfSongIDS;
             })
             .catch((err) => {

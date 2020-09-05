@@ -12,6 +12,7 @@ class InvalidResponseError extends Error {
         this.name = "InvalidResponseError";
     }
 }
+
 //#endregion
 
 //#region AzureFaceApi Errors
@@ -21,6 +22,7 @@ class NoUserDetectedError extends Error {
         this.name = "NoUserDetectedError";
     }
 }
+
 //#endregion
 
 //#region Spotify Errors
@@ -30,6 +32,7 @@ class EmptyTracksError extends Error {
         this.name = "EmptyTracksError";
     }
 }
+
 //#endregion
 
 //#region KMean Errors
@@ -46,6 +49,7 @@ class KMeanClusterError extends Error {
         this.name = "KMeanClusterError";
     }
 }
+
 //#endregion
 
 //#region Main Errors
@@ -55,6 +59,7 @@ class InvalidDataURLError extends Error {
         this.name = "InvalidDataURLError";
     }
 }
+
 //#endregion
 
 module.exports.InvalidInputError = InvalidInputError;

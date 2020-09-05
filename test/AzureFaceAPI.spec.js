@@ -59,7 +59,7 @@ describe("unit test for dataURL", function () {
     it("test getEmotions - multiple face data URL", function () {
         return azureFaceAPI.getEmotions(sampleDataURL.multiFaceDataURL)
             .then((res) => {
-                let maxEmotion, maxVal=-1;
+                let maxEmotion, maxVal = -1;
                 for (const [emotion, val] of Object.entries(res)) {
                     if (val > maxVal) {
                         maxVal = val;
