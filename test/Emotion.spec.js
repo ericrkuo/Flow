@@ -3,28 +3,20 @@ const {AzureFaceAPI} = require("../controllers/AzureFaceAPI");
 const {Emotion} = require("../controllers/Emotion");
 const sampleDataURL = require("./sampleDataURL");
 const SpotifyWebApi = require('spotify-web-api-node');
-const {InvalidInputError} = require("../controllers/Error");
-const {RefreshCredential} = require("../controllers/RefreshCredential");
+const Error = require("../controllers/Error");
 
 let emotion;
-let expiredAccessToken = "BQAbGNeDb2Dzq_jKEF6HnKbx4LE9e1nmhh8JKLRJYB0bUXjdYyFZXpY0xDbNs5j9CgdsJ4i04uChEQubQUT7Fwx_q-72rqHmlhT-yongaIVtkENGEesDRS4lp7zFv4G1OFSWPa6aHy6_XvAdvqQBVr_1dIoPz7FjVXmVo3yfFMjmwCzxYZvP3bQn2B-lqa56-38DlSSeAhtHZca5Z9V4-MhjR_e2gf_FlfFCsFhVdS71NBCvLwR_Ty1jxg_JDTaWeCByukgP37mmVjnyVFE";
 
 describe("unit test for Spotify", function () {
     before(async function () {
-        try {
-            require('dotenv').config();
-            let spotifyApi = new SpotifyWebApi({
-                clientId: process.env.SPOTIFY_API_ID,
-                clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
-                redirectUri: process.env.CALLBACK_URL,
-                refreshToken: process.env.REFRESH_TOKEN,
-            });
-            let refreshCredential = new RefreshCredential(spotifyApi);
-            await refreshCredential.handleRefreshCredential(null, null);
-            emotion = new Emotion(spotifyApi);
-        } catch (e) {
-            console.log(e);
-        }
+        require('dotenv').config();
+        let spotifyApi = new SpotifyWebApi({
+            clientId: process.env.SPOTIFY_API_ID,
+            clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
+            redirectUri: process.env.CALLBACK_URL,
+            refreshToken: process.env.REFRESH_TOKEN,
+        });
+        emotion = new Emotion(spotifyApi);
     });
 
     it("test getFeatures - sadness", async function () {
@@ -61,7 +53,7 @@ describe("unit test for Spotify", function () {
             chai.expect.fail("Should not have reached here");
         } catch (e) {
             console.log(e);
-            chai.expect(e).to.be.instanceOf(InvalidInputError);
+            chai.expect(e).to.be.instanceOf(Error.InvalidInputError);
         }
     });
 
@@ -71,7 +63,7 @@ describe("unit test for Spotify", function () {
             chai.expect.fail("Should not have reached here");
         } catch (e) {
             console.log(e);
-            chai.expect(e).to.be.instanceOf(InvalidInputError);
+            chai.expect(e).to.be.instanceOf(Error.InvalidInputError);
         }
     });
 
@@ -81,19 +73,7 @@ describe("unit test for Spotify", function () {
             chai.expect.fail("Should not have reached here");
         } catch (e) {
             console.log(e);
-            chai.expect(e).to.be.instanceOf(InvalidInputError);
-        }
-    });
-
-    it("test refresh credential with invalid access token", async function () {
-        try {
-            emotion.spotifyApi.setAccessToken(expiredAccessToken);
-            emotion.spotifyApi.setRefreshToken(process.env.REFRESH_TOKEN);
-            await emotion.getFeatures("happiness");
-            chai.expect(expiredAccessToken).to.not.equal(emotion.spotifyApi.getAccessToken());
-        } catch (e) {
-            console.log(e);
-            chai.expect.fail();
+            chai.expect(e).to.be.instanceOf(Error.InvalidInputError);
         }
     });
 
@@ -123,7 +103,7 @@ describe("unit test for Spotify", function () {
             chai.expect.fail();
         } catch (e) {
             console.log(e);
-            chai.expect(e).to.be.instanceOf(InvalidInputError);
+            chai.expect(e).to.be.instanceOf(Error.InvalidInputError);
         }
     });
 
@@ -133,7 +113,7 @@ describe("unit test for Spotify", function () {
             chai.expect.fail();
         } catch (e) {
             console.log(e);
-            chai.expect(e).to.be.instanceOf(InvalidInputError);
+            chai.expect(e).to.be.instanceOf(Error.InvalidInputError);
         }
     });
 
@@ -143,7 +123,7 @@ describe("unit test for Spotify", function () {
             chai.expect.fail();
         } catch (e) {
             console.log(e);
-            chai.expect(e).to.be.instanceOf(InvalidInputError);
+            chai.expect(e).to.be.instanceOf(Error.InvalidInputError);
         }
     });
 });

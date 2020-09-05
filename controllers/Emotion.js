@@ -1,4 +1,4 @@
-const {InvalidInputError, InvalidResponseError} = require("./Error");
+const Error = require("./Error");
 const {RefreshCredential} = require("./RefreshCredential");
 
 class Emotion {
@@ -713,11 +713,15 @@ class Emotion {
     }
 
     getFeatures(mood) {
-        if (!this.emotionMap[mood]) throw new InvalidInputError("Not a recognized mood, cannot get audio Features");
+        if (!this.emotionMap[mood]) throw new Error.InvalidInputError("Not a recognized mood, cannot get audio Features");
         let numTracks = this.emotionMap[mood].length;
-        return this.spotifyApi.getAudioFeaturesForTracks(this.emotionMap[mood])
+
+        return this.refreshCredential.tryRefreshCredential()
+            .then(() => {
+                return this.spotifyApi.getAudioFeaturesForTracks(this.emotionMap[mood]);
+            })
             .then((res) => {
-                if (!res || !res.body || !res.body["audio_features"]) throw new InvalidResponseError("Could not get audio features from Emotion");
+                if (!res || !res.body || !res.body["audio_features"]) throw new Error.InvalidResponseError("Could not get audio features from Emotion");
                 let songFeatures = {};
                 for (let feature of this.features) songFeatures[feature] = 0;
                 for (let audioFeature of res.body["audio_features"]) {
@@ -738,15 +742,13 @@ class Emotion {
                 return songFeatures;
             })
             .catch((err) => {
-                let that = this;
-                return this.refreshCredential.handleRefreshCredential(function () {
-                    return that.getFeatures(mood);
-                }, err);
+                console.log(err);
+                throw err;
             });
     }
 
     getDominantExpression(emotionData) {
-        if (!this.isEmotionDataValid(emotionData)) throw new InvalidInputError("cannot get dominant expression in Emotion, data isn't formatted correctly");
+        if (!this.isEmotionDataValid(emotionData)) throw new Error.InvalidInputError("cannot get dominant expression in Emotion, data isn't formatted correctly");
 
         let dominantEmotion = null;
         let dominantEmotionValue = -1;
@@ -757,7 +759,7 @@ class Emotion {
                 dominantEmotionValue = value;
             }
         }
-        if (dominantEmotionValue === -1) throw new InvalidInputError("no dominant emotion detected");
+        if (dominantEmotionValue === -1) throw new Error.InvalidInputError("no dominant emotion detected");
         return dominantEmotion;
     }
 

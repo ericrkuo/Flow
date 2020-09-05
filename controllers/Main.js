@@ -3,7 +3,7 @@ const {AzureFaceAPI} = require("./AzureFaceAPI");
 const {Spotify} = require("./Spotify");
 const {Emotion} = require("./Emotion");
 const SpotifyWebApi = require('spotify-web-api-node');
-const {InvalidDataURLError} = require("./Error");
+const Error = require("./Error");
 
 
 class Main {
@@ -17,7 +17,9 @@ class Main {
     * 6. add song X to data
     * 7. pass data into KMean to get cluster results
     * 8. find song X in cluster
-    * 9. return song titles for now //TODO: decide what to return
+    * 9. get songs in cluster containing song X
+    * 10. get desired number of songs (currently 30) if cluster has too much or too little
+    * 11. return this.result (see this.setResults)
     * */
 
     constructor() {
@@ -38,7 +40,7 @@ class Main {
     // REQUIRES. this.dataURL to be set
     getRelevantSongs() {
         if (!this.dataURL) {
-            throw new InvalidDataURLError();
+            throw new Error.InvalidDataURLError();
         }
         let songX;
         return this.azureFaceAPI.getEmotions(this.dataURL)
@@ -70,7 +72,7 @@ class Main {
 
     getRelevantSongsTestingPurposes() {
         if (!this.dataURL) {
-            throw new InvalidDataURLError();
+            throw new Error.InvalidDataURLError();
         }
         let songX;
         let dominantEmotion = "happiness";

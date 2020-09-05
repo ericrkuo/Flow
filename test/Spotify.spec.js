@@ -1,29 +1,20 @@
 var chai = require("chai");
 const {Spotify} = require("../controllers/Spotify");
 const SpotifyWebApi = require('spotify-web-api-node');
-const {RefreshCredential} = require("../controllers/RefreshCredential");
-const {InvalidResponseError, InvalidInputError} = require("../controllers/Error");
+const Error = require("../controllers/Error");
 
 let spotify;
 let spotifyApi;
 
-let expiredAccessToken = "BQAbGNeDb2Dzq_jKEF6HnKbx4LE9e1nmhh8JKLRJYB0bUXjdYyFZXpY0xDbNs5j9CgdsJ4i04uChEQubQUT7Fwx_q-72rqHmlhT-yongaIVtkENGEesDRS4lp7zFv4G1OFSWPa6aHy6_XvAdvqQBVr_1dIoPz7FjVXmVo3yfFMjmwCzxYZvP3bQn2B-lqa56-38DlSSeAhtHZca5Z9V4-MhjR_e2gf_FlfFCsFhVdS71NBCvLwR_Ty1jxg_JDTaWeCByukgP37mmVjnyVFE";
-
 describe("unit test for Spotify", function () {
     before(async function () {
-        try {
-            require('dotenv').config();
-            spotifyApi = new SpotifyWebApi({
-                clientId: process.env.SPOTIFY_API_ID,
-                clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
-                redirectUri: process.env.CALLBACK_URL,
-                refreshToken: process.env.REFRESH_TOKEN,
-            });
-            let refreshCredential = new RefreshCredential(spotifyApi);
-            await refreshCredential.handleRefreshCredential(null, null);
-        } catch (e) {
-            console.log(e);
-        }
+        require('dotenv').config();
+        spotifyApi = new SpotifyWebApi({
+            clientId: process.env.SPOTIFY_API_ID,
+            clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
+            redirectUri: process.env.CALLBACK_URL,
+            refreshToken: process.env.REFRESH_TOKEN,
+        });
     });
 
     beforeEach(() => {
@@ -106,6 +97,7 @@ describe("unit test for Spotify", function () {
         return spotify.getAllAudioFeatures()
             .then((res) => {
                 // console.log(res);
+                chai.expect(Object.keys(res).length).to.be.equal(spotify.trackHashMap.size);
             })
             .catch((err) => {
                 console.log(err);
@@ -222,7 +214,7 @@ describe("unit test for Spotify", function () {
             chai.expect.fail("should have failed");
         } catch (err) {
             console.log(err);
-            chai.expect(err).to.be.instanceOf(InvalidResponseError);
+            chai.expect(err).to.be.instanceOf(Error.InvalidResponseError);
         }
     })
 
@@ -245,7 +237,7 @@ describe("unit test for Spotify", function () {
             chai.expect.fail();
         } catch (err) {
             console.log(err);
-            chai.expect(err).to.be.instanceOf(InvalidInputError);
+            chai.expect(err).to.be.instanceOf(Error.InvalidInputError);
         }
     })
 
@@ -255,7 +247,7 @@ describe("unit test for Spotify", function () {
             chai.expect.fail();
         } catch (err) {
             console.log(err);
-            chai.expect(err).to.be.instanceOf(InvalidInputError);
+            chai.expect(err).to.be.instanceOf(Error.InvalidInputError);
         }
     })
 
@@ -265,19 +257,7 @@ describe("unit test for Spotify", function () {
             chai.expect.fail();
         } catch (err) {
             console.log(err);
-            chai.expect(err).to.be.instanceOf(InvalidInputError);
+            chai.expect(err).to.be.instanceOf(Error.InvalidInputError);
         }
     })
-
-    it("testing refresh credential with invalid access token", async function () {
-        try {
-            spotifyApi.setAccessToken(expiredAccessToken);
-            await spotify.getAllAudioFeatures();
-            chai.expect(expiredAccessToken).to.not.equal(spotify.spotifyApi.getAccessToken());
-        } catch (e) {
-            console.log(e);
-            chai.expect.fail();
-        }
-    });
-
 });

@@ -1,5 +1,5 @@
 const {RefreshCredential} = require("./RefreshCredential");
-const {InvalidInputError, InvalidResponseError, EmptyTracksError} = require("./Error");
+const Error = require("./Error");
 
 class Spotify {
 
@@ -15,7 +15,6 @@ class Spotify {
     * */
 
 
-    // TODO: turn add___ functions into get___ and then use universal add(get___));
     constructor(spotifyApi) {
         require('dotenv').config();
         this.spotifyApi = spotifyApi;
@@ -28,15 +27,9 @@ class Spotify {
         return this.spotifyApi.getArtistAlbums('43ZHCT0cAZBISjO8DG9PnE');
     }
 
-    // TODO: new version of refreshCredential, refreshes the credentials BEFORE each function
-    //       makes more sense logically, rather than waiting for function to fail and reperforming, refresh the credential beforehand
-    refreshCredentials() {
-        return this.refreshCredential.refreshCredential(null);
-    }
-
     addAllTracksToHashMap() {
-        return this.refreshCredentials()
-            .then(()=> {
+        return this.refreshCredential.tryRefreshCredential()
+            .then(() => {
                 let promises = [];
                 promises.push(this.addRecentlyPlayedTracks());
                 promises.push(this.addTopTracks());
@@ -44,19 +37,16 @@ class Spotify {
                 promises.push(this.addSeedTracks());
                 promises.push(this.addTopArtistsTracks());
                 promises.push(this.addUserPlaylistsTracks());
-                return Promise.all(promises)
-                    .then((res) => {
-                        console.log("SUCCESS - added all " + this.trackHashMap.size + " tracks to hashmap")
-                        return true;
-                    });
-                    // .catch((err) => {
-                    //     let that = this;
-                    //     return this.refreshCredential.handleRefreshCredential(function () {
-                    //         return that.addAllTracksToHashMap();
-                    //     }, err);
-                    // });
+                return Promise.all(promises);
             })
-
+            .then(() => {
+                console.log("SUCCESS - added all " + this.trackHashMap.size + " tracks to hashmap")
+                return true;
+            })
+            .catch((err) => {
+                console.log(err);
+                throw err;
+            });
     }
 
     addTracksToHashMap(tracks) {
@@ -79,7 +69,10 @@ class Spotify {
 
     // NOTE: if listened to song X 10 times, will return song X 10 times in the array
     addRecentlyPlayedTracks() {
-        return this.spotifyApi.getMyRecentlyPlayedTracks({limit: 50})
+        return this.refreshCredential.tryRefreshCredential()
+            .then(() => {
+                return this.spotifyApi.getMyRecentlyPlayedTracks({limit: 50});
+            })
             .then((res) => {
                 if (!this.isResponseBodyItemsValid(res)) return false;
                 let tracks = [];
@@ -92,20 +85,21 @@ class Spotify {
                 return true;
             })
             .catch((err) => {
-                let that = this;
-                return this.refreshCredential.handleRefreshCredential(function () {
-                    return that.addRecentlyPlayedTracks();
-                }, err);
+                console.log(err);
+                throw err;
             });
     }
 
     addTopTracks() {
-        let options = [{limit: 50}, {limit: 50, offset: 49}];
-        let promises = [];
-        for (let option of options) {
-            promises.push(this.spotifyApi.getMyTopTracks(option));
-        }
-        return Promise.all(promises)
+        return this.refreshCredential.tryRefreshCredential()
+            .then(() => {
+                let options = [{limit: 50}, {limit: 50, offset: 49}];
+                let promises = [];
+                for (let option of options) {
+                    promises.push(this.spotifyApi.getMyTopTracks(option));
+                }
+                return Promise.all(promises);
+            })
             .then((topTracksArray) => {
                 if (!topTracksArray) return false;
                 for (let topTracks of topTracksArray) {
@@ -115,20 +109,21 @@ class Spotify {
                 return true;
             })
             .catch((err) => {
-                let that = this;
-                return this.refreshCredential.handleRefreshCredential(function () {
-                    return that.addTopTracks();
-                }, err);
+                console.log(err);
+                throw err;
             });
     }
 
     addSavedTracks() {
-        let options = [{limit: 50}, {limit: 50, offset: 50}, {limit: 50, offset: 100}];
-        let promises = [];
-        for (let option of options) {
-            promises.push(this.spotifyApi.getMySavedTracks(option));
-        }
-        return Promise.all(promises)
+        return this.refreshCredential.tryRefreshCredential()
+            .then(() => {
+                let options = [{limit: 50}, {limit: 50, offset: 50}, {limit: 50, offset: 100}];
+                let promises = [];
+                for (let option of options) {
+                    promises.push(this.spotifyApi.getMySavedTracks(option));
+                }
+                return Promise.all(promises);
+            })
             .then((savedTracksArray) => {
                 if (!savedTracksArray) return false;
                 for (let savedTracks of savedTracksArray) {
@@ -143,32 +138,29 @@ class Spotify {
                 }
                 return true;
             }).catch((err) => {
-                let that = this;
-                return this.refreshCredential.handleRefreshCredential(function () {
-                    return that.addSavedTracks();
-                }, err);
+                console.log(err);
+                throw err;
             });
     }
 
     addTopArtistsTracks() {
-        let promises = [];
-
-        return this.spotifyApi.getMyTopArtists({limit: 20, time_range: "long_term"})
+        return this.refreshCredential.tryRefreshCredential()
+            .then(() => {
+                return this.spotifyApi.getMyTopArtists({limit: 20, time_range: "long_term"});
+            })
             .then((res) => {
+                let promises = [];
                 if (!this.isResponseBodyItemsValid(res)) return false;
                 for (let item of res.body.items) {
-                    if (!item || !item.id) return false;
-                    promises.push(this.addArtistTopTracks(item));
+                    if (item && item.id) promises.push(this.addArtistTopTracks(item));
                 }
                 return Promise.all(promises);
-            }).then((res) => {
+            }).then(() => {
                 return true;
             })
             .catch((err) => {
-                let that = this;
-                return this.refreshCredential.handleRefreshCredential(function () {
-                    return that.addTopArtistsTracks();
-                }, err);
+                console.log(err);
+                throw err;
             });
 
         // adding similar artists and their top tracks
@@ -182,7 +174,10 @@ class Spotify {
 
     // NOTE: currently using US as country code
     addArtistTopTracks(artist) {
-        return this.spotifyApi.getArtistTopTracks(artist.id, "US")
+        return this.refreshCredential.tryRefreshCredential()
+            .then(() => {
+                return this.spotifyApi.getArtistTopTracks(artist.id, "US");
+            })
             .then((res) => {
                 // MAX returns 10 tracks
                 if (this.isResponseBodyTracksValid(res)) {
@@ -190,19 +185,20 @@ class Spotify {
                 }
             })
             .catch((err) => {
-                let that = this;
-                return this.refreshCredential.handleRefreshCredential(function () {
-                    return that.addArtistTopTracks(artist);
-                }, err);
+                console.log(err);
+                throw err;
             });
     }
 
     // NOTE: no longer used because of rate limiting for spotifyApi
     addSimilarArtistsTopTracks(artist) {
-        let promises = [];
-        return this.spotifyApi.getArtistRelatedArtists(artist.id)
+        return this.refreshCredential.tryRefreshCredential()
+            .then(() => {
+                return this.spotifyApi.getArtistRelatedArtists(artist.id);
+            })
             .then((res) => {
                 // MAX returns 20
+                let promises = [];
                 let similarArtists = res.body.artists;
                 let n = Math.min(similarArtists.length, 1);
                 for (let i = 0; i < n; i++) {
@@ -211,17 +207,18 @@ class Spotify {
                 return Promise.all(promises);
             })
             .catch((err) => {
-                let that = this;
-                return this.refreshCredential.handleRefreshCredential(function () {
-                    return that.addSimilarArtistsTopTracks();
-                }, err);
+                console.log(err);
+                throw err;
             });
     }
 
     getAllAudioFeatures() {
-        return this.addAllTracksToHashMap()
+        return this.refreshCredential.tryRefreshCredential()
             .then(() => {
-                if (!this.trackHashMap || this.trackHashMap.size === 0) throw new EmptyTracksError();
+                return this.addAllTracksToHashMap();
+            })
+            .then(() => {
+                if (!this.trackHashMap || this.trackHashMap.size === 0) throw new Error.EmptyTracksError();
                 // get array of array of ids (split into 100)
                 let promises = [];
                 let trackIDS = Array.from(this.trackHashMap.keys());
@@ -264,23 +261,19 @@ class Spotify {
                 return data;
             })
             .catch((err) => {
-                let that = this;
-                return this.refreshCredential.handleRefreshCredential(function () {
-                    return that.getAllAudioFeatures();
-                }, err);
+                console.log(err);
+                throw err;
             });
     }
 
     getAudioFeatures(tracks) {
-        return this.spotifyApi.getAudioFeaturesForTracks(tracks)
-            .then((res) => {
-                return res;
+        return this.refreshCredential.tryRefreshCredential()
+            .then(() => {
+                return this.spotifyApi.getAudioFeaturesForTracks(tracks);
             })
             .catch((err) => {
-                let that = this;
-                return this.refreshCredential.handleRefreshCredential(function () {
-                    return that.getAudioFeatures(tracks);
-                }, err);
+                console.log(err);
+                throw err;
             });
     }
 
@@ -336,12 +329,15 @@ class Spotify {
             surprise: [{limit: 100, seed_genres: "hardstyle, work-out, edm, party"}]
         };
 
-        if (!this.mood) this.mood = "happiness"; //default mood
-        let optionsArray = emotionToSeed[this.mood];
-        for (let option of optionsArray) {
-            promises.push(this.spotifyApi.getRecommendations(option));
-        }
-        return Promise.all(promises)
+        return this.refreshCredential.tryRefreshCredential()
+            .then(() => {
+                if (!this.mood) this.mood = "happiness"; //default mood
+                let optionsArray = emotionToSeed[this.mood];
+                for (let option of optionsArray) {
+                    promises.push(this.spotifyApi.getRecommendations(option));
+                }
+                return Promise.all(promises);
+            })
             .then((resArray) => {
                 for (let res of resArray) {
                     if (this.isResponseBodyTracksValid(res)) {
@@ -352,16 +348,17 @@ class Spotify {
                 return true;
             })
             .catch((err) => {
-                let that = this;
-                return this.refreshCredential.handleRefreshCredential(function () {
-                    return that.addSeedTracks();
-                }, err);
+                console.log(err);
+                throw err;
             });
     }
 
 
     getListOfUserPlaylistsIDs() {
-        return this.spotifyApi.getUserPlaylists()
+        return this.refreshCredential.tryRefreshCredential()
+            .then(() => {
+                return this.spotifyApi.getUserPlaylists();
+            })
             .then((res) => {
                 if (!this.isResponseBodyItemsValid(res)) return [];
                 let playlistsIDs = [];
@@ -371,17 +368,18 @@ class Spotify {
                 return playlistsIDs;
             })
             .catch((err) => {
-                let that = this;
-                return this.refreshCredential.handleRefreshCredential(function () {
-                    return that.getListOfUserPlaylistsIDs();
-                }, err);
+                console.log(err);
+                throw err;
             });
     }
 
 
     addUserPlaylistsTracks() {
         let NUM_TRACKS_FOR_EACH_PLAYLIST = 100;
-        return this.getListOfUserPlaylistsIDs()
+        return this.refreshCredential.tryRefreshCredential()
+            .then(() => {
+                return this.getListOfUserPlaylistsIDs();
+            })
             .then((playlistIDs) => {
                 if (!playlistIDs || !Array.isArray(playlistIDs) || playlistIDs.length === 0) return false;
                 let promises = [];
@@ -406,17 +404,18 @@ class Spotify {
                 return true;
             })
             .catch((err) => {
-                let that = this;
-                return this.refreshCredential.handleRefreshCredential(function () {
-                    return that.addUserPlaylistsTracks();
-                }, err);
+                console.log(err);
+                throw err;
             });
     }
 
 
     // returns name, email, URL, and image of user
     getUserInfo() {
-        return this.spotifyApi.getMe()
+        return this.refreshCredential.tryRefreshCredential()
+            .then(() => {
+                return this.spotifyApi.getMe();
+            })
             .then((res) => {
                 let json = {};
                 json.display_name = res.body.display_name;
@@ -427,56 +426,56 @@ class Spotify {
                 return json;
             })
             .catch((err) => {
-                let that = this;
-                return this.refreshCredential.handleRefreshCredential(function () {
-                    return that.getUserInfo();
-                }, err);
+                console.log(err);
+                throw err;
             });
     }
 
     // NOTE: this will create duplicate playlist if playlist already exists, there is no way to delete a playlist through Spotify API
     // since deleting a playlist will only make the owner unfollow it, while others can still follow the "deleted" playlist
     createNewPlaylist() {
-        return this.getUserInfo()
+        return this.refreshCredential.tryRefreshCredential()
+            .then(() => {
+                return this.getUserInfo();
+            })
             .then((result) => {
                 if (result && result.id && this.mood) {
                     let userId = result.id;
                     return this.spotifyApi.createPlaylist(userId, 'Flow Playlist: ' + this.mood, {public: false});
                 } else {
-                    throw new InvalidResponseError("no user info or mood is currently not set");
+                    throw new Error.InvalidResponseError("no user info or mood is currently not set");
                 }
             }).catch((err) => {
-                let that = this;
-                return this.refreshCredential.handleRefreshCredential(function () {
-                    return that.createNewPlaylist();
-                }, err);
+                console.log(err);
+                throw err;
             });
     }
 
     getNewPlaylist(trackURLs) {
         let link = null;
         if (this.isTrackURLsValid(trackURLs)) {
-            return this.createNewPlaylist()
+            return this.refreshCredential.tryRefreshCredential()
+                .then(() => {
+                    return this.createNewPlaylist();
+                })
                 .then((playlist) => {
                     if (this.isCreatedPlaylistValid(playlist)) {
                         link = playlist.body.external_urls.spotify;
                         return this.spotifyApi.addTracksToPlaylist(playlist.body.id, trackURLs)
                     } else {
-                        throw new InvalidResponseError("playlist did not create correctly");
+                        throw new Error.InvalidResponseError("playlist did not create correctly");
                     }
                 })
                 .then((result) => {
-                    if (!link || (result.statusCode !== 200 && result.statusCode !== 201)) throw new InvalidResponseError("link is null or tracks did not add correctly");
+                    if (!link || (result.statusCode !== 200 && result.statusCode !== 201)) throw new Error.InvalidResponseError("link is null or tracks did not add correctly");
                     return link;
                 })
                 .catch((err) => {
-                    let that = this;
-                    return this.refreshCredential.handleRefreshCredential(function () {
-                        return that.getNewPlaylist(trackURLs);
-                    }, err);
+                    console.log(err);
+                    throw err;
                 });
         } else {
-            throw new InvalidInputError("trackURLs is invalid, ensure is a non-empty array");
+            throw new Error.InvalidInputError("trackURLs is invalid, ensure is a non-empty array");
         }
     }
 

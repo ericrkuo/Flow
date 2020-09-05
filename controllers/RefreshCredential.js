@@ -1,4 +1,4 @@
-const {InvalidResponseError, InvalidInputError} = require("./Error");
+const Error= require("./Error");
 
 class RefreshCredential {
 
@@ -6,18 +6,6 @@ class RefreshCredential {
         require('dotenv').config();
         if (!spotifyApi) throw new Error("spotifyApi is null or undefined");
         this.spotifyApi = spotifyApi;
-    }
-
-    handleRefreshCredential(fnPtr, err) {
-        return this.checkCredentials()
-            .then((isValidCredential) => {
-                if (isValidCredential) {
-                    console.log(err);
-                    throw err;
-                } else {
-                    return this.refreshCredential(fnPtr);
-                }
-            });
     }
 
     checkCredentials() {
@@ -30,12 +18,17 @@ class RefreshCredential {
             })
     }
 
-    refreshCredential(fnPtr) {
-        return this.getNewAccessToken()
-            .then((access_token) => {
-                this.spotifyApi.setAccessToken(access_token);
-                if (typeof fnPtr === 'function') return fnPtr();
-            }).catch((err) => {
+    tryRefreshCredential() {
+        return this.checkCredentials()
+            .then((isValidCredential) => {
+                if (!isValidCredential) {
+                    return this.getNewAccessToken()
+                        .then((accessToken) => {
+                            this.spotifyApi.setAccessToken(accessToken);
+                        });
+                }
+            })
+            .catch((err) => {
                 console.log("Error in getting new access token " + err);
                 throw err;
             });
@@ -44,7 +37,7 @@ class RefreshCredential {
     getNewAccessToken() {
         let refresh_token = this.spotifyApi.getRefreshToken();
         if (!refresh_token) {
-            throw new InvalidInputError("Refresh token is null or undefined");
+            throw new Error.InvalidInputError("Refresh token is null or undefined");
         }
 
         try {
@@ -71,12 +64,12 @@ class RefreshCredential {
                         console.log(response.data);
                         return response.data["access_token"];
                     } else {
-                        throw new InvalidResponseError("Response from Azure Face API is invalid")
+                        throw new Error.InvalidResponseError("Response from Azure Face API is invalid")
                     }
                 })
                 .catch((error) => {
-                    if (error.response && error.response.data && error.response.data.error) {
-                        throw new Error(JSON.stringify(error.response.data.error));
+                    if (error.response && error.response.data && error.response.data) {
+                        throw new Error(JSON.stringify(error.response.data));
                     }
                     throw error;
                 });

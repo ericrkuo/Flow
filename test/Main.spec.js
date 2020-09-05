@@ -1,7 +1,7 @@
 var chai = require("chai");
 const {Main} = require("../controllers/Main");
 var sampleDataURL = require("./sampleDataURL");
-const {InvalidDataURLError, InvalidInputError} = require("../controllers/Error");
+const Error = require("../controllers/Error");
 
 let main;
 describe("unit test for Main", function () {
@@ -22,7 +22,7 @@ describe("unit test for Main", function () {
             await main.getRelevantSongs();
         } catch(err){
             console.log(err);
-            chai.expect(err).to.be.instanceOf(InvalidDataURLError);
+            chai.expect(err).to.be.instanceOf(Error.InvalidDataURLError);
         }
 
     });
@@ -39,7 +39,7 @@ describe("unit test for Main", function () {
             chai.assert.fail("expected error to be thrown")
         } catch (e) {
             console.log(e);
-            chai.expect(e).to.be.instanceOf(InvalidInputError);
+            chai.expect(e).to.be.instanceOf(Error.InvalidInputError);
         }
     })
 
@@ -50,7 +50,7 @@ describe("unit test for Main", function () {
             chai.assert.fail("expected error to be thrown")
         } catch (e) {
             console.log(e);
-            chai.expect(e).to.be.instanceOf(InvalidInputError);
+            chai.expect(e).to.be.instanceOf(Error.InvalidInputError);
         }
     })
 
@@ -61,7 +61,7 @@ describe("unit test for Main", function () {
             chai.assert.fail("expected error to be thrown")
         } catch (e) {
             console.log(e);
-            chai.expect(e).to.be.instanceOf(InvalidInputError);
+            chai.expect(e).to.be.instanceOf(Error.InvalidInputError);
         }
     })
 
@@ -73,7 +73,7 @@ describe("unit test for Main", function () {
         }
         catch (e) {
             console.log(e);
-            chai.expect(e).to.be.instanceOf(InvalidInputError);
+            chai.expect(e).to.be.instanceOf(Error.InvalidInputError);
         }
     })
 

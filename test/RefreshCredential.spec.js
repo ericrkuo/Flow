@@ -1,6 +1,6 @@
 const chai = require("chai");
 const SpotifyWebApi = require('spotify-web-api-node');
-const {InvalidInputError} = require("../controllers/Error");
+const Error = require("../controllers/Error");
 const {Emotion} = require("../controllers/Emotion");
 const {Spotify} = require("../controllers/Spotify");
 const {RefreshCredential} = require("../controllers/RefreshCredential");
@@ -29,7 +29,7 @@ describe("test checking credentials", async function () {
     })
 
 
-    it("test checking valid credentials for Spotify", async function () {
+    it("test checkCredentials Spotify", async function () {
         return spotify.refreshCredential.checkCredentials().then((result) => {
             chai.assert(result);
         }).catch((err) => {
@@ -37,7 +37,7 @@ describe("test checking credentials", async function () {
         });
     });
 
-    it("test checking valid credentials for Emotion", async function () {
+    it("test checkCredentials Emotion", async function () {
         return emotion.refreshCredential.checkCredentials().then((result) => {
             chai.assert(result);
         }).catch((err) => {
@@ -45,7 +45,7 @@ describe("test checking credentials", async function () {
         });
     });
 
-    it("test checking valid credentials for RefreshCredential", async function () {
+    it("test checkCredentials RefreshCredential", async function () {
         return refreshCredential.checkCredentials().then((result) => {
             chai.assert(result);
         }).catch((err) => {
@@ -53,7 +53,7 @@ describe("test checking credentials", async function () {
         });
     });
 
-    it("test checking invalid credentials for Spotify", async function () {
+    it("test checkCredentials - expired access token for Spotify", async function () {
         spotify.spotifyApi.setAccessToken(expiredAccessToken);
         return spotify.refreshCredential.checkCredentials().then((result) => {
             chai.assert.isFalse(result)
@@ -62,7 +62,7 @@ describe("test checking credentials", async function () {
         });
     });
 
-    it("test checking invalid credentials for Emotion", async function () {
+    it("test checkCredentials - expired access token for Emotion", async function () {
         emotion.spotifyApi.setAccessToken(expiredAccessToken);
         return emotion.refreshCredential.checkCredentials().then((result) => {
             chai.assert.isFalse(result)
@@ -71,7 +71,7 @@ describe("test checking credentials", async function () {
         });
     });
 
-    it("test checking invalid credentials for Refresh Credential", async function () {
+    it("test checkCredentials - expired access token for RefreshCredential", async function () {
         refreshCredential.spotifyApi.setAccessToken(expiredAccessToken);
         return refreshCredential.checkCredentials().then((result) => {
             chai.assert.isFalse(result)
@@ -99,76 +99,57 @@ describe("test refreshing with credentials", function () {
         refreshCredential = new RefreshCredential(spotifyApi);
     });
 
-    it("testing refreshCredential with null spotifyApi", async function() {
+    it("test refreshCredential - null spotifyApi", async function () {
         try {
             let sampleRefreshCredential = new RefreshCredential(null);
             chai.expect.fail();
-        } catch(e) {
+        } catch (e) {
             console.log("Caught error" + e);
             chai.expect(e.message).to.equal("spotifyApi is null or undefined");
         }
     });
 
-    it("testing refreshCredential with no refresh token", async function() {
+    it("test refreshCredential - no refresh token", async function () {
         try {
             spotifyApi.setRefreshToken(undefined);
-            await refreshCredential.getNewAccessToken();
+            await refreshCredential.tryRefreshCredential();
             chai.expect.fail();
-        } catch(e) {
+        } catch (e) {
             console.log("Caught error" + e);
-            chai.expect(e).to.be.instanceOf(InvalidInputError)
+            chai.expect(e).to.be.instanceOf(Error.InvalidInputError)
         }
     });
 
-    it("testing refreshCredential", async function() {
+    it("test refreshCredential - expect success", async function () {
         try {
             let oldAccessToken = await spotifyApi.getAccessToken();
-            let newAccessToken = await refreshCredential.getNewAccessToken();
+            let newAccessToken = await refreshCredential.tryRefreshCredential();
             chai.expect(oldAccessToken).to.not.equal(newAccessToken);
-        } catch(e) {
+        } catch (e) {
             console.log("Caught error" + e);
             chai.expect.fail();
         }
     });
 
-    it("test refreshing once with invalid credentials for Spotify", async function() {
-        let err = new Error("ERROR OCCURRED");
-        return spotify.refreshCredential.refreshCredential(function () {
-            console.log("Reached function pointer!");
-        }, err).then(() => {
-            chai.expect(expiredAccessToken).to.not.equal(spotify.spotifyApi.getAccessToken());
-        }).catch((err) => {
-            console.log(err);
-            chai.expect.fail();
-        })
+    it("test refreshing once with invalid credentials for Spotify", async function () {
+        spotifyApi.setAccessToken(expiredAccessToken);
+        return spotify.addRecentlyPlayedTracks()
+            .then(() => {
+                chai.expect(expiredAccessToken).to.not.equal(spotify.spotifyApi.getAccessToken());
+            }).catch((err) => {
+                console.log(err);
+                chai.expect.fail();
+            })
     });
 
-    it("test refreshing once with invalid credentials for Emotion", async function() {
-        emotion.spotifyApi.setAccessToken(expiredAccessToken);
-        emotion.spotifyApi.setRefreshToken(process.env.REFRESH_TOKEN);
-        let err = new Error("ERROR OCCURRED");
-        return emotion.refreshCredential.refreshCredential(function () {
-            console.log("Reached function pointer!");
-        }, err).then(() => {
-            chai.expect(expiredAccessToken).to.not.equal(spotify.spotifyApi.getAccessToken());
-        }).catch((err) => {
-            console.log(err);
-            chai.expect.fail();
-        })
-    });
-
-    it("test refreshing once with invalid credentials for RefreshCredential", async function() {
-        let err = new Error("ERROR OCCURRED");
-        return refreshCredential.refreshCredential(function () {
-            console.log("Reached function pointer!");
-        }, err).then(() => {
-            chai.expect(expiredAccessToken).to.not.equal(spotify.spotifyApi.getAccessToken());
-        }).catch((err) => {
-            console.log(err);
-            chai.expect.fail();
-        });
+    it("test refreshing once with invalid credentials for Emotion", async function () {
+        spotifyApi.setAccessToken(expiredAccessToken);
+        return emotion.getFeatures("happiness")
+            .then(() => {
+                chai.expect(expiredAccessToken).to.not.equal(emotion.spotifyApi.getAccessToken());
+            }).catch((err) => {
+                console.log(err);
+                chai.expect.fail();
+            })
     });
 });
-
-
-
