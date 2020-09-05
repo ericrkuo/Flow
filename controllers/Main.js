@@ -4,7 +4,7 @@ const {Spotify} = require("./Spotify");
 const {Emotion} = require("./Emotion");
 const SpotifyWebApi = require('spotify-web-api-node');
 const Error = require("./Error");
-
+const DESIRED_NUM_SONGS = 30;
 
 class Main {
     /*
@@ -43,8 +43,11 @@ class Main {
             throw new Error.InvalidDataURLError();
         }
         let songX;
+        let newArrayOfSongIDS;
+        let emotions;
         return this.azureFaceAPI.getEmotions(this.dataURL)
             .then((res) => {
+                emotions = res;
                 let dominantEmotion = this.emotion.getDominantExpression(res);
                 this.spotify.mood = dominantEmotion;
                 return this.emotion.getFeatures(dominantEmotion);
@@ -59,9 +62,10 @@ class Main {
                 let [bestK, clusters, map] = this.kMean.getOptimalKClusters(audioFeatureData);
                 let arrayOfSongIDS = this.getSongIDsOfClusterContainingSongX(clusters);
                 this.printOutAllSongTitles(arrayOfSongIDS);
-                let newArrayOfSongIDS = this.getDesiredNumberSongs(bestK, arrayOfSongIDS, map);
-                // TODO: fix this since setResults is async once fix Azure api
-                this.setResults(newArrayOfSongIDS, audioFeatureData, this.spotify.mood, null); // TODO: add emotions
+                newArrayOfSongIDS = this.getDesiredNumberSongs(bestK, arrayOfSongIDS, map);
+                return this.setResults(newArrayOfSongIDS, audioFeatureData, this.spotify.mood, emotions);
+            })
+            .then(()=> {
                 return newArrayOfSongIDS;
             })
             .catch((err) => {
@@ -154,7 +158,6 @@ class Main {
     }
 
     getDesiredNumberSongs(bestK, arrayOfSongIDS, map) {
-        let DESIRED_NUM_SONGS = 30;
         let n = arrayOfSongIDS.length;
         console.log("ORIGINAL NUMBER OF SONGS: " + n);
 

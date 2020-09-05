@@ -3,7 +3,6 @@ const Error = require("../controllers/Error");
 const {songs, songsClearCluster, songsLargeClearCluster} = require("./sampleSpotifyAudioFeatures");
 const {KMean} = require("../controllers/KMean");
 
-var spotify;
 describe("unit test for KMeans", function () {
     let kMean;
     before(function () {

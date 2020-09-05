@@ -11,12 +11,19 @@ describe("unit test for Main", function () {
         main.spotifyApi.setRefreshToken(process.env.REFRESH_TOKEN);
     });
 
-    it("testing Main function", async function(){
-        main.dataURL = "TestDataURL"
-        let resp = await main.getRelevantSongsTestingPurposes();
+    it("test getRelevantSongsTestingPurposes", async function(){
+        try {
+            main.dataURL = "TestDataURL"
+            let resp = await main.getRelevantSongsTestingPurposes();
+            chai.expect(Object.keys(resp).length).to.be.equal(30);
+            chai.assert(main.result && main.result.tracks && main.result.userInfo && main.result.mood)
+        } catch (err) {
+            console.log(err);
+            chai.expect.fail();
+        }
     });
 
-    it("testing Main function without valid dataURL set", async function(){
+    it("test getRelevantSongs - without valid dataURL set", async function(){
         main.dataURL = null;
         try {
             await main.getRelevantSongs();
@@ -27,9 +34,16 @@ describe("unit test for Main", function () {
 
     });
 
-    it("testing Main function with data URL", async function(){
-        main.dataURL = sampleDataURL.dataURL1;
-        let resp = await main.getRelevantSongs();
+    it("test getRelevantSongs - with data URL", async function(){
+        try {
+            main.dataURL = sampleDataURL.dataURL1;
+            let resp = await main.getRelevantSongs();
+            chai.expect(Object.keys(resp).length).to.be.equal(30);
+            chai.assert(main.result && main.result.tracks && main.result.userInfo && main.result.mood)
+        } catch (err) {
+            console.log(e);
+            chai.expect.fail();
+        }
     });
 
     it("test createMoodPlaylist with null input", function() {
