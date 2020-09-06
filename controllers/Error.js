@@ -23,6 +23,13 @@ class NoUserDetectedError extends Error {
     }
 }
 
+class AzureFaceApiError extends Error {
+    constructor(message) {
+        super(message);
+        this.name = "AzureFaceApiError";
+    }
+}
+
 //#endregion
 
 //#region Spotify Errors
@@ -65,6 +72,7 @@ class InvalidDataURLError extends Error {
 module.exports.InvalidInputError = InvalidInputError;
 module.exports.InvalidResponseError = InvalidResponseError;
 module.exports.NoUserDetectedError = NoUserDetectedError;
+module.exports.AzureFaceApiError = AzureFaceApiError;
 module.exports.EmptyTracksError = EmptyTracksError;
 module.exports.KMeanClusterError = KMeanClusterError;
 module.exports.KMeanIterationError = KMeanIterationError;

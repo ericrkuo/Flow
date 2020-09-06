@@ -33,7 +33,7 @@ describe("test checking credentials", function () {
         return spotify.refreshCredential.checkCredentials().then((result) => {
             chai.assert(result);
         }).catch((err) => {
-            chai.expect.fail("did not expect fail");
+            chai.expect.fail("not supposed to fail");
         });
     });
 
@@ -41,7 +41,7 @@ describe("test checking credentials", function () {
         return emotion.refreshCredential.checkCredentials().then((result) => {
             chai.assert(result);
         }).catch((err) => {
-            chai.expect.fail("did not expect fail");
+            chai.expect.fail("not supposed to fail");
         });
     });
 
@@ -49,7 +49,7 @@ describe("test checking credentials", function () {
         return refreshCredential.checkCredentials().then((result) => {
             chai.assert(result);
         }).catch((err) => {
-            chai.expect.fail();
+            chai.expect.fail("not supposed to fail");
         });
     });
 
@@ -58,7 +58,7 @@ describe("test checking credentials", function () {
         return spotify.refreshCredential.checkCredentials().then((result) => {
             chai.assert.isFalse(result)
         }).catch((err) => {
-            chai.expect.fail();
+            chai.expect.fail("not supposed to fail");
         });
     });
 
@@ -67,7 +67,7 @@ describe("test checking credentials", function () {
         return emotion.refreshCredential.checkCredentials().then((result) => {
             chai.assert.isFalse(result)
         }).catch((err) => {
-            chai.expect.fail();
+            chai.expect.fail("not supposed to fail");
         });
     });
 
@@ -76,7 +76,7 @@ describe("test checking credentials", function () {
         return refreshCredential.checkCredentials().then((result) => {
             chai.assert.isFalse(result)
         }).catch((err) => {
-            chai.expect.fail();
+            chai.expect.fail("not supposed to fail");
         });
     });
 
@@ -102,7 +102,7 @@ describe("test refreshing with credentials", function () {
     it("test refreshCredential - null spotifyApi", function () {
         try {
             let sampleRefreshCredential = new RefreshCredential(null);
-            chai.expect.fail();
+            chai.expect.fail("supposed to fail");
         } catch (e) {
             console.log("Caught error" + e);
             chai.expect(e.message).to.equal("spotifyApi is null or undefined");
@@ -113,7 +113,7 @@ describe("test refreshing with credentials", function () {
         spotifyApi.setRefreshToken(undefined);
         return refreshCredential.tryRefreshCredential()
             .then(() => {
-                chai.expect.fail();
+                chai.expect.fail("supposed to fail");
             })
             .catch((e) => {
                 console.log("Caught error" + e);
@@ -129,7 +129,7 @@ describe("test refreshing with credentials", function () {
             })
             .catch((e) => {
                 console.log("Caught error" + e);
-                chai.expect.fail();
+                chai.expect.fail("not supposed to fail");
             })
     });
 
@@ -140,7 +140,7 @@ describe("test refreshing with credentials", function () {
                 chai.expect(expiredAccessToken).to.not.equal(spotify.spotifyApi.getAccessToken());
             }).catch((err) => {
                 console.log(err);
-                chai.expect.fail();
+                chai.expect.fail("not supposed to fail");
             })
     });
 
@@ -151,7 +151,7 @@ describe("test refreshing with credentials", function () {
                 chai.expect(expiredAccessToken).to.not.equal(emotion.spotifyApi.getAccessToken());
             }).catch((err) => {
                 console.log(err);
-                chai.expect.fail();
+                chai.expect.fail("not supposed to fail");
             })
     });
 });

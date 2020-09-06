@@ -23,20 +23,11 @@ describe("unit test for Spotify", function () {
         return emotion.getFeatures("sadness")
             .then((features) => {
                 console.log(features);
+                chai.assert(typeof features === 'object');
             })
             .catch((err) => {
-                chai.expect.fail();
+                chai.expect.fail("not supposed to fail");
             })
-    });
-
-    it("test getFeatures - integrated with AzureFaceAPI", function () {
-        let azureFaceAPI = new AzureFaceAPI();
-        return azureFaceAPI.getEmotions(sampleDataURL.dataURL1).then((res) => {
-            console.log(emotion.getDominantExpression(res));
-        }).catch((err) => {
-            console.log(err);
-            chai.expect.fail("not supposed to fail");
-        })
     });
 
     it("test getFeatures - multiple emotions", function () {
@@ -50,19 +41,21 @@ describe("unit test for Spotify", function () {
                 return Promise.all(promises);
             })
             .then((resArray) => {
+                chai.expect(resArray.length).to.be.equal(emotions.length);
                 for (let res of resArray) {
+                    console.log(res);
                     chai.assert(typeof res === 'object');
                 }
             })
             .catch((e) => {
-                chai.expect.fail("Should not have thrown error");
+                chai.expect.fail("not supposed to fail");
             })
     });
 
     it("test getFeatures - null input", function () {
         return emotion.getFeatures(null)
             .then(() => {
-                chai.expect.fail("Should not have reached here");
+                chai.expect.fail("supposed to fail");
             })
             .catch((err) => {
                 console.log(err);
@@ -73,7 +66,7 @@ describe("unit test for Spotify", function () {
     it("test getFeatures - undefined input", function () {
         return emotion.getFeatures(undefined)
             .then(() => {
-                chai.expect.fail("Should not have reached here");
+                chai.expect.fail("supposed to fail");
             })
             .catch((err) => {
                 console.log(err);
@@ -84,7 +77,7 @@ describe("unit test for Spotify", function () {
     it("test getFeatures - wrong input type", function () {
         return emotion.getFeatures(2)
             .then(() => {
-                chai.expect.fail("Should not have reached here");
+                chai.expect.fail("supposed to fail");
             })
             .catch((err) => {
                 console.log(err);
@@ -95,12 +88,25 @@ describe("unit test for Spotify", function () {
     it("test getFeatures - unrecognized input", function () {
         return emotion.getFeatures("happpiness")
             .then(() => {
-                chai.expect.fail("Should not have reached here");
+                chai.expect.fail("supposed to fail");
             })
             .catch((err) => {
                 console.log(err);
                 chai.expect(err).to.be.instanceOf(Err.InvalidInputError);
             });
+    });
+
+    it("test getDominantExpression - integrated with AzureFaceAPI", function () {
+        let azureFaceAPI = new AzureFaceAPI();
+        return azureFaceAPI.getEmotions(sampleDataURL.dataURL1)
+            .then((res) => {
+                let dominantExpression = emotion.getDominantExpression(res);
+                chai.expect(dominantExpression).to.be.equal("neutral");
+                console.log(dominantExpression);
+            }).catch((err) => {
+                console.log(err);
+                chai.expect.fail("not supposed to fail");
+            })
     });
 
     it("test getDominantExpressions", function () {
@@ -119,14 +125,14 @@ describe("unit test for Spotify", function () {
             chai.expect(result).to.be.equal("neutral");
         } catch (e) {
             console.log(e);
-            chai.expect.fail();
+            chai.expect.fail("not supposed to fail");
         }
     });
 
     it("test getDominantExpressions - invalid input null", function () {
         try {
             emotion.getDominantExpression(null);
-            chai.expect.fail();
+            chai.expect.fail("supposed to fail");
         } catch (e) {
             console.log(e);
             chai.expect(e).to.be.instanceOf(Err.InvalidInputError);
@@ -136,7 +142,7 @@ describe("unit test for Spotify", function () {
     it("test getDominantExpressions - invalid input wrong type", function () {
         try {
             emotion.getDominantExpression("null");
-            chai.expect.fail();
+            chai.expect.fail("supposed to fail");
         } catch (e) {
             console.log(e);
             chai.expect(e).to.be.instanceOf(Err.InvalidInputError);
@@ -146,7 +152,7 @@ describe("unit test for Spotify", function () {
     it("test getDominantExpressions - invalid input array", function () {
         try {
             emotion.getDominantExpression([]);
-            chai.expect.fail();
+            chai.expect.fail("supposed to fail");
         } catch (e) {
             console.log(e);
             chai.expect(e).to.be.instanceOf(Err.InvalidInputError);

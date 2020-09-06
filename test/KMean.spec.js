@@ -28,7 +28,7 @@ describe("unit test for KMeans", function () {
             chai.assert((silhouetteValue <= 1) && (silhouetteValue >= -1));
         } catch (err) {
             console.log(err);
-            chai.expect.fail();
+            chai.expect.fail("not supposed to fail");
         }
     });
 
@@ -47,7 +47,7 @@ describe("unit test for KMeans", function () {
             }
         } catch (err) {
             console.log(err);
-            chai.expect.fail();
+            chai.expect.fail("not supposed to fail");
         }
     });
 
@@ -91,7 +91,7 @@ describe("unit test for KMeans", function () {
             }
         } catch (err) {
             console.log(err);
-            chai.expect.fail();
+            chai.expect.fail("not supposed to fail");
         }
     });
 
@@ -110,7 +110,7 @@ describe("unit test for KMeans", function () {
             }
         } catch (err) {
             console.log(err);
-            chai.expect.fail();
+            chai.expect.fail("not supposed to fail");
         }
     });
 
@@ -120,7 +120,7 @@ describe("unit test for KMeans", function () {
             console.log();
         } catch (err) {
             console.log(err);
-            chai.expect.fail();
+            chai.expect.fail("not supposed to fail");
         }
     });
 

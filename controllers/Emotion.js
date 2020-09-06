@@ -706,7 +706,6 @@ class Emotion {
     //#endregion
 
     constructor(spotifyApi) {
-        require('dotenv').config();
         this.spotifyApi = spotifyApi;
         this.features = ["danceability", "energy", "loudness", "speechiness", "acousticness", "instrumentalness", "liveness", "valence", "tempo"];
         this.refreshCredential = new RefreshCredential(this.spotifyApi);

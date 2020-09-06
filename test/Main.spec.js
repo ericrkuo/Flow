@@ -20,7 +20,7 @@ describe("unit test for Main", function () {
             })
             .catch((err) => {
                 console.log(err);
-                chai.expect.fail();
+                chai.expect.fail("not supposed to fail");
             })
     });
 
@@ -28,7 +28,7 @@ describe("unit test for Main", function () {
         main.dataURL = null;
         return main.getRelevantSongs()
             .then(() => {
-                chai.expect.fail();
+                chai.expect.fail("supposed to fail");
             })
             .catch((err) => {
                 console.log(err);
@@ -45,7 +45,7 @@ describe("unit test for Main", function () {
             })
             .catch((err) => {
                 console.log(err);
-                chai.expect.fail();
+                chai.expect.fail("not supposed to fail");
             })
     });
 

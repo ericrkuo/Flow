@@ -16,7 +16,6 @@ class Spotify {
 
 
     constructor(spotifyApi) {
-        require('dotenv').config();
         this.spotifyApi = spotifyApi;
         this.trackHashMap = new Map();
         this.mood = "happiness"; // default

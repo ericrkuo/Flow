@@ -2,6 +2,10 @@ const Err = require("./Error");
 
 class AzureFaceAPI {
 
+    constructor() {
+        require('dotenv').config();
+    }
+
     getEmotions(dataURI) {
         return this.convertDataURIToBinary(dataURI)
             .then((data) => {
@@ -25,17 +29,17 @@ class AzureFaceAPI {
                 return axios(config);
             })
             .then((response) => {
-                return this.handleResponse(response);
+                return this.handleAzureFaceAPIResponse(response);
             })
             .catch((error) => {
                 if (error.response && error.response.data && error.response.data.error) {
-                    throw new Error(JSON.stringify(error.response.data.error));
+                    throw new Err.AzureFaceApiError(JSON.stringify(error.response.data.error));
                 }
                 throw error;
             });
     }
 
-    handleResponse(response) {
+    handleAzureFaceAPIResponse(response) {
         if (!this.isResponseValid(response)) throw new Err.InvalidResponseError("Response from Azure Face API is invalid - null or not an array");
         if (response.data.length === 0) throw new Err.NoUserDetectedError();
         if (!this.isResponseDataValid(response.data)) throw new Err.InvalidResponseError("Response from Azure Face API is invalid - no faceAttributes or emotions");

@@ -49,7 +49,7 @@ describe("unit test for Spotify", function () {
             })
             .catch((err) => {
                 console.log(err);
-                chai.expect.fail();
+                chai.expect.fail("not supposed to fail");
             });
     });
 
@@ -62,7 +62,7 @@ describe("unit test for Spotify", function () {
             })
             .catch((err) => {
                 console.log(err);
-                chai.expect.fail();
+                chai.expect.fail("not supposed to fail");
             });
 
     });
@@ -75,7 +75,7 @@ describe("unit test for Spotify", function () {
             })
             .catch((err) => {
                 console.log(err);
-                chai.expect.fail();
+                chai.expect.fail("not supposed to fail");
             });
 
     });
@@ -88,7 +88,7 @@ describe("unit test for Spotify", function () {
             })
             .catch((err) => {
                 console.log(err);
-                chai.expect.fail();
+                chai.expect.fail("not supposed to fail");
             });
 
     });
@@ -101,7 +101,7 @@ describe("unit test for Spotify", function () {
             })
             .catch((err) => {
                 console.log(err);
-                chai.expect.fail();
+                chai.expect.fail("not supposed to fail");
             });
 
     });
@@ -118,7 +118,7 @@ describe("unit test for Spotify", function () {
             })
             .catch((err) => {
                 console.log(err);
-                chai.expect.fail();
+                chai.expect.fail("not supposed to fail");
             });
     }
 
@@ -162,7 +162,7 @@ describe("unit test for Spotify", function () {
             })
             .catch((err) => {
                 console.log(err);
-                chai.expect.fail();
+                chai.expect.fail("not supposed to fail");
             });
     });
 
@@ -174,7 +174,7 @@ describe("unit test for Spotify", function () {
             })
             .catch((err) => {
                 console.log(err);
-                chai.expect.fail();
+                chai.expect.fail("not supposed to fail");
             })
     })
 
@@ -189,7 +189,7 @@ describe("unit test for Spotify", function () {
             })
             .catch((err) => {
                 console.log(err);
-                chai.expect.fail();
+                chai.expect.fail("not supposed to fail");
             })
     })
 
@@ -204,7 +204,7 @@ describe("unit test for Spotify", function () {
             })
             .catch((err) => {
                 console.log(err);
-                chai.expect.fail();
+                chai.expect.fail("not supposed to fail");
             });
     })
 
@@ -212,7 +212,7 @@ describe("unit test for Spotify", function () {
         spotify.mood = null;
         return spotify.createNewPlaylist()
             .then(() => {
-                chai.expect.fail("should have failed");
+                chai.expect.fail("supposed to fail");
             })
             .catch((err) => {
                 console.log(err);
@@ -230,14 +230,14 @@ describe("unit test for Spotify", function () {
                 chai.expect(typeof (url)).to.be.equal("string");
             }).catch((err) => {
                 console.log(err);
-                chai.assert.fail();
+                chai.expect.fail("not supposed to fail");
             });
     })
 
     it("test getNewPlaylist null input", function () {
         return spotify.getNewPlaylist(null)
             .then(() => {
-                chai.expect.fail();
+                chai.expect.fail("supposed to fail");
             })
             .catch((err) => {
                 console.log(err);
@@ -248,7 +248,7 @@ describe("unit test for Spotify", function () {
     it("test getNewPlaylist incorrect input type", function () {
         return spotify.getNewPlaylist("testString")
             .then(() => {
-                chai.expect.fail();
+                chai.expect.fail("supposed to fail");
             })
             .catch((err) => {
                 console.log(err);
@@ -259,7 +259,7 @@ describe("unit test for Spotify", function () {
     it("test getNewPlaylist empty array", function () {
         return spotify.getNewPlaylist([])
             .then(() => {
-                chai.expect.fail();
+                chai.expect.fail("supposed to fail");
             })
             .catch((err) => {
                 console.log(err);
