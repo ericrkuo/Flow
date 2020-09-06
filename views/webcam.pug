@@ -7,6 +7,8 @@ block append stylesheets
     link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css')
 block content
     .container-fluid.text-center#webcam
+        .alert.alert-info.show#infoAlert(role='alert')
+            | Our application only supports one person at the moment. Please make sure your photo is still and clear!
         .alert.alert-danger.hide#errorAlert(role='alert')
             // .alert-dismissible
             //button.close(type='button' data-dismiss='alert' aria-label='Close' data-target="#errorAlert")#errorAlertButton

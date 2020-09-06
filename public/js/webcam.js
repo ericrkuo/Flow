@@ -87,6 +87,7 @@ function postTracks(dataURL) {
             webcam.style.display = "flex";
             loadingDiv.style.display = "none";
 
+            $("#infoAlert").hide();
             $("#errorAlert").show();
             $("#errorAlert").html('Sorry, we encountered an internal server error. ' +
                 error.response.data.errorMsg);
