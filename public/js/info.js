@@ -35,12 +35,15 @@ readMoreForHowWeDidItButton.addEventListener("click", () => {
         'Services to detect the user’s dominant mood and Spotify’s Web API to collect user’s Spotify history such ' +
         'as their favourite songs, recently played, relevant albums/artists and more. Once all the necessary ' +
         'information is collected, the data is passed to a machine learning algorithm we implemented, K-means, ' +
-        'to find clusters of songs relevant to the user’s mood and Spotify history. </br> </br> One of the biggest ' +
-        'challenges of the project was ensuring our code adhered to SOLID design principles as well as ensuring ' +
-        'classes were as loosely coupled as possible.By practicing TDD, our classes and implementation were testable' +
-        ' to begin with and we were able to minimize the number of bugs when making changes to our code. Finally, ' +
-        'another difficult problem was designing the life-cycle of requests travelling from client to server side. ' +
-        'We architected the user flow as well as ensured our code was robust to handle unexpected errors.');
+        'to find clusters of songs relevant to the user’s mood and Spotify history. </br> </br> ' + 'Certain ' +
+        'optimizations made to K-means include using K-means++ to ensure better initialization of the ' +
+        'centroids, as well as implementing the Silhouette method to find the optimal value of k ' +
+        '(number of clusters). </br> </br> One of the biggest challenges of the project was ensuring our code' +
+        ' adhered to SOLID design principles as well as ensuring classes were as loosely coupled as possible. ' +
+        'By practicing TDD, our classes and implementation were testable to begin with and we were able to ' +
+        'minimize the number of bugs when making changes to our code. Finally, another difficult problem ' +
+        'was designing the life-cycle of requests travelling from client to server side. We architected the ' +
+        'user flow as well as ensured our code was robust to handle unexpected errors.');
 });
 
 readMoreFutureButton.addEventListener("click", () => {
