@@ -37,7 +37,7 @@ class RefreshCredential {
     getNewAccessToken() {
         let refresh_token = this.spotifyApi.getRefreshToken();
         if (!refresh_token) {
-            return Promise.reject(new Err.InvalidInputError("Refresh token is null or undefined"));
+            return Promise.reject(new Err.RefreshCredentialError("Refresh token is null or undefined"));
         }
 
         let axios = require('axios');
@@ -68,7 +68,7 @@ class RefreshCredential {
             })
             .catch((error) => {
                 if (error.response && error.response.data && error.response.data) {
-                    throw new Error(JSON.stringify(error.response.data));
+                    throw new Err.RefreshCredentialError(JSON.stringify(error.response.data));
                 }
                 throw error;
             });

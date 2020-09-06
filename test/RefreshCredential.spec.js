@@ -117,7 +117,7 @@ describe("test refreshing with credentials", function () {
             })
             .catch((e) => {
                 console.log("Caught error" + e);
-                chai.expect(e).to.be.instanceOf(Err.InvalidInputError);
+                chai.expect(e).to.be.instanceOf(Err.RefreshCredentialError);
             });
     });
 

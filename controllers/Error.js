@@ -69,6 +69,16 @@ class InvalidDataURLError extends Error {
 
 //#endregion
 
+//#region RefreshCredential Errors
+class RefreshCredentialError extends Error {
+    constructor(message) {
+        super(message);
+        this.name = "RefreshCredentialError";
+    }
+}
+
+//#endregion
+
 module.exports.InvalidInputError = InvalidInputError;
 module.exports.InvalidResponseError = InvalidResponseError;
 module.exports.NoUserDetectedError = NoUserDetectedError;
@@ -77,3 +87,4 @@ module.exports.EmptyTracksError = EmptyTracksError;
 module.exports.KMeanClusterError = KMeanClusterError;
 module.exports.KMeanIterationError = KMeanIterationError;
 module.exports.InvalidDataURLError = InvalidDataURLError;
+module.exports.RefreshCredentialError = RefreshCredentialError;
