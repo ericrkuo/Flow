@@ -63,7 +63,7 @@ class RefreshCredential {
                     console.log(response.data);
                     return response.data["access_token"];
                 } else {
-                    throw new Err.InvalidResponseError("Access token response from Spotify API is invalid")
+                    throw new Err.InvalidResponseError("Access token response from Spotify API is invalid");
                 }
             })
             .catch((error) => {
