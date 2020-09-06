@@ -1,8 +1,8 @@
 var chai = require("chai");
+const Err = require("../controllers/Error");
 const {songs, songsClearCluster, songsLargeClearCluster} = require("./sampleSpotifyAudioFeatures");
 const {KMean} = require("../controllers/KMean");
 
-var spotify;
 describe("unit test for KMeans", function () {
     let kMean;
     before(function () {
@@ -27,7 +27,8 @@ describe("unit test for KMeans", function () {
             console.log("SILHOUETTE VALUE - " + silhouetteValue);
             chai.assert((silhouetteValue <= 1) && (silhouetteValue >= -1));
         } catch (err) {
-            chai.expect.fail();
+            console.log(err);
+            chai.expect.fail("not supposed to fail");
         }
     });
 
@@ -45,7 +46,34 @@ describe("unit test for KMeans", function () {
                 arr.set(k + " = " + silhouetteValue, clusters);
             }
         } catch (err) {
-            chai.expect.fail();
+            console.log(err);
+            chai.expect.fail("not supposed to fail");
+        }
+    });
+
+    it("test kMean, clusters is null", function () {
+        try {
+            kMean.data = [];
+            kMean.k = 2;
+            kMean.features = ["danceability", "energy", "acousticness", "tempo", "valence"];
+            kMean.iterate();
+        } catch (err) {
+            console.log(err);
+            chai.expect(err).to.be.instanceOf(Err.KMeanClusterError);
+        }
+    });
+
+    it("test kMean, exceed MAX_ITERATIONS", function () {
+        try {
+            kMean.data = [];
+            kMean.k = 2;
+            kMean.features = ["danceability", "energy", "acousticness", "tempo", "valence"];
+            kMean.MAX_ITERATIONS = 30;
+            kMean.iterations = kMean.MAX_ITERATIONS + 1;
+            kMean.iterate();
+        } catch (err) {
+            console.log(err);
+            chai.expect(err).to.be.instanceOf(Err.KMeanIterationError);
         }
     });
 
@@ -62,7 +90,8 @@ describe("unit test for KMeans", function () {
                 arr.set(k + " = " + silhouetteValue, clusters);
             }
         } catch (err) {
-            chai.expect.fail();
+            console.log(err);
+            chai.expect.fail("not supposed to fail");
         }
     });
 
@@ -80,7 +109,8 @@ describe("unit test for KMeans", function () {
                 arr.set(k + " = " + silhouetteValue, clusters);
             }
         } catch (err) {
-            chai.expect.fail();
+            console.log(err);
+            chai.expect.fail("not supposed to fail");
         }
     });
 
@@ -89,7 +119,8 @@ describe("unit test for KMeans", function () {
             let [bestK, clusters, map] = kMean.getOptimalKClusters(songsLargeClearCluster);
             console.log();
         } catch (err) {
-            chai.expect.fail();
+            console.log(err);
+            chai.expect.fail("not supposed to fail");
         }
     });
 

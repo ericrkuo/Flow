@@ -3,10 +3,9 @@ const {AzureFaceAPI} = require("../controllers/AzureFaceAPI");
 const {Emotion} = require("../controllers/Emotion");
 const sampleDataURL = require("./sampleDataURL");
 const SpotifyWebApi = require('spotify-web-api-node');
+const Err = require("../controllers/Error");
 
 let emotion;
-
-let expiredAccessToken = "BQAbGNeDb2Dzq_jKEF6HnKbx4LE9e1nmhh8JKLRJYB0bUXjdYyFZXpY0xDbNs5j9CgdsJ4i04uChEQubQUT7Fwx_q-72rqHmlhT-yongaIVtkENGEesDRS4lp7zFv4G1OFSWPa6aHy6_XvAdvqQBVr_1dIoPz7FjVXmVo3yfFMjmwCzxYZvP3bQn2B-lqa56-38DlSSeAhtHZca5Z9V4-MhjR_e2gf_FlfFCsFhVdS71NBCvLwR_Ty1jxg_JDTaWeCByukgP37mmVjnyVFE";
 
 describe("unit test for Spotify", function () {
     before(function () {
@@ -15,53 +14,148 @@ describe("unit test for Spotify", function () {
             clientId: process.env.SPOTIFY_API_ID,
             clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
             redirectUri: process.env.CALLBACK_URL,
+            refreshToken: process.env.REFRESH_TOKEN,
         });
         emotion = new Emotion(spotifyApi);
     });
 
-    it("test sadness", async function () {
-        let features = await emotion.getFeatures("sadness");
-        console.log(features);
+    it("test getFeatures - sadness", function () {
+        return emotion.getFeatures("sadness")
+            .then((features) => {
+                console.log(features);
+                chai.assert(typeof features === 'object');
+            })
+            .catch((err) => {
+                chai.expect.fail("not supposed to fail");
+            })
     });
 
-    it("testing in general", async function () {
+    it("test getFeatures - multiple emotions", function () {
+        let emotions = ["anger", "contempt", "disgust", "fear", "happiness", "neutral", "sadness", "surprise"];
+        return emotion.refreshCredential.tryRefreshCredential()
+            .then(() => {
+                let promises = [];
+                for (let e of emotions) {
+                    promises.push(emotion.getFeatures(e));
+                }
+                return Promise.all(promises);
+            })
+            .then((resArray) => {
+                chai.expect(resArray.length).to.be.equal(emotions.length);
+                for (let res of resArray) {
+                    console.log(res);
+                    chai.assert(typeof res === 'object');
+                }
+            })
+            .catch((e) => {
+                chai.expect.fail("not supposed to fail");
+            })
+    });
+
+    it("test getFeatures - null input", function () {
+        return emotion.getFeatures(null)
+            .then(() => {
+                chai.expect.fail("supposed to fail");
+            })
+            .catch((err) => {
+                console.log(err);
+                chai.expect(err).to.be.instanceOf(Err.InvalidInputError);
+            });
+    });
+
+    it("test getFeatures - undefined input", function () {
+        return emotion.getFeatures(undefined)
+            .then(() => {
+                chai.expect.fail("supposed to fail");
+            })
+            .catch((err) => {
+                console.log(err);
+                chai.expect(err).to.be.instanceOf(Err.InvalidInputError);
+            });
+    });
+
+    it("test getFeatures - wrong input type", function () {
+        return emotion.getFeatures(2)
+            .then(() => {
+                chai.expect.fail("supposed to fail");
+            })
+            .catch((err) => {
+                console.log(err);
+                chai.expect(err).to.be.instanceOf(Err.InvalidInputError);
+            });
+    });
+
+    it("test getFeatures - unrecognized input", function () {
+        return emotion.getFeatures("happpiness")
+            .then(() => {
+                chai.expect.fail("supposed to fail");
+            })
+            .catch((err) => {
+                console.log(err);
+                chai.expect(err).to.be.instanceOf(Err.InvalidInputError);
+            });
+    });
+
+    it("test getDominantExpression - integrated with AzureFaceAPI", function () {
         let azureFaceAPI = new AzureFaceAPI();
-        return azureFaceAPI.getEmotions(sampleDataURL.dataURL2).then((res) => {
-            console.log(emotion.getDominantExpression(res));
-        }).catch((err) => {
+        return azureFaceAPI.getEmotions(sampleDataURL.dataURL1)
+            .then((res) => {
+                let dominantExpression = emotion.getDominantExpression(res);
+                chai.expect(dominantExpression).to.be.equal("neutral");
+                console.log(dominantExpression);
+            }).catch((err) => {
+                console.log(err);
+                chai.expect.fail("not supposed to fail");
+            })
+    });
+
+    it("test getDominantExpressions", function () {
+        try {
+            let data = {
+                anger: 0,
+                contempt: 0,
+                disgust: 0,
+                fear: 0,
+                happiness: 0,
+                neutral: 0.999,
+                sadness: 0,
+                surprise: 0
+            };
+            let result = emotion.getDominantExpression(data);
+            chai.expect(result).to.be.equal("neutral");
+        } catch (e) {
+            console.log(e);
             chai.expect.fail("not supposed to fail");
-        })
-    });
-
-    it("test emotions", async function () {
-        let emotions = ["happiness" , "sadness", "neutral"];
-        for (let e of emotions) {
-            let features = await emotion.getFeatures(e);
-            console.log(features);
         }
     });
 
-    it("testing refresh credential with invalid access token", async function() {
+    it("test getDominantExpressions - invalid input null", function () {
         try {
-            emotion.spotifyApi.setAccessToken(expiredAccessToken);
-            emotion.spotifyApi.setRefreshToken(process.env.REFRESH_TOKEN);
-            await emotion.getFeatures("happiness");
-            chai.expect(expiredAccessToken).to.not.equal(emotion.spotifyApi.getAccessToken());
-        } catch(e) {
+            emotion.getDominantExpression(null);
+            chai.expect.fail("supposed to fail");
+        } catch (e) {
             console.log(e);
-            chai.expect.fail();
+            chai.expect(e).to.be.instanceOf(Err.InvalidInputError);
         }
     });
 
-    it("testing error throwing with valid access token", async function() {
+    it("test getDominantExpressions - invalid input wrong type", function () {
         try {
-            emotion.spotifyApi.setRefreshToken(process.env.REFRESH_TOKEN);
-            await emotion.getFeatures("");
-            chai.expect.fail();
-        } catch(e) {
-            chai.expect(emotion.spotifyApi.getAccessToken()).to.equal(process.env.ACCESS_TOKEN);
+            emotion.getDominantExpression("null");
+            chai.expect.fail("supposed to fail");
+        } catch (e) {
             console.log(e);
+            chai.expect(e).to.be.instanceOf(Err.InvalidInputError);
         }
     });
 
+    it("test getDominantExpressions - invalid input array", function () {
+        try {
+            emotion.getDominantExpression([]);
+            chai.expect.fail("supposed to fail");
+        } catch (e) {
+            console.log(e);
+            chai.expect(e).to.be.instanceOf(Err.InvalidInputError);
+        }
+    });
 });

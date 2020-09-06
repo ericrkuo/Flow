@@ -1,3 +1,4 @@
+const Err = require("./Error");
 const {RefreshCredential} = require("./RefreshCredential");
 
 class Emotion {
@@ -15,6 +16,7 @@ class Emotion {
     *
     * */
 
+    //#region Emotion Map
     emotionMap = {
         anger: [
             "4JIo8RztBbELr2gWJ5OGK6",
@@ -701,25 +703,29 @@ class Emotion {
         ],
     };
 
+    //#endregion
 
-    constructor(spotifyApi, accessToken, refreshToken) {
-        require('dotenv').config();
+    constructor(spotifyApi) {
         this.spotifyApi = spotifyApi;
-        this.spotifyApi.setAccessToken(accessToken === undefined ? process.env.ACCESS_TOKEN : accessToken);
-        this.spotifyApi.setRefreshToken(refreshToken === undefined ? process.env.REFRESH_TOKEN : refreshToken);
         this.features = ["danceability", "energy", "loudness", "speechiness", "acousticness", "instrumentalness", "liveness", "valence", "tempo"];
         this.refreshCredential = new RefreshCredential(this.spotifyApi);
     }
 
     getFeatures(mood) {
+        if (typeof mood !== 'string' || !this.emotionMap[mood]) return Promise.reject(new Err.InvalidInputError(mood + " is not a recognized mood, cannot get audio Features"));
         let numTracks = this.emotionMap[mood].length;
-        return this.spotifyApi.getAudioFeaturesForTracks(this.emotionMap[mood])
+
+        return this.refreshCredential.tryRefreshCredential()
+            .then(() => {
+                return this.spotifyApi.getAudioFeaturesForTracks(this.emotionMap[mood]);
+            })
             .then((res) => {
+                if (!res || !res.body || !res.body["audio_features"]) throw new Err.InvalidResponseError("Could not get audio features from Emotion");
                 let songFeatures = {};
                 for (let feature of this.features) songFeatures[feature] = 0;
                 for (let audioFeature of res.body["audio_features"]) {
                     for (let feature of this.features) {
-                        songFeatures[feature] = songFeatures[feature] + audioFeature[feature];
+                        songFeatures[feature] += audioFeature[feature];
                     }
                 }
                 for (let feature of this.features) {
@@ -735,32 +741,29 @@ class Emotion {
                 return songFeatures;
             })
             .catch((err) => {
-                let that = this;
-                return this.refreshCredential.handleRefreshCredential(function () {
-                    return that.getFeatures(mood);
-                }, err);
+                console.log(err);
+                throw err;
             });
     }
 
-
-    getDominantExpression(emotionsData) {
-        let emotions = ["anger", "contempt", "disgust", "fear", "happiness", "neutral", "sadness", "surprise"];
-
-        let emotionData = emotionsData[0]["faceAttributes"]["emotion"];
+    getDominantExpression(emotionData) {
+        if (!this.isEmotionDataValid(emotionData)) throw new Err.InvalidInputError("cannot get dominant expression in Emotion, data isn't formatted correctly");
 
         let dominantEmotion = null;
         let dominantEmotionValue = -1;
 
-        for (let i = 0; i < emotions.length; i++) {
-            let currEmotion = emotions[i];
-            let currEmotionValue = emotionData[currEmotion];
-
-            if (currEmotionValue > dominantEmotionValue) {
-                dominantEmotion = currEmotion;
-                dominantEmotionValue = currEmotionValue;
+        for (const [emotion, value] of Object.entries(emotionData)) {
+            if (value > dominantEmotionValue) {
+                dominantEmotion = emotion;
+                dominantEmotionValue = value;
             }
         }
+        if (dominantEmotionValue === -1) throw new Err.InvalidInputError("no dominant emotion detected");
         return dominantEmotion;
+    }
+
+    isEmotionDataValid(emotionData) {
+        return emotionData && typeof emotionData === 'object' && !Array.isArray(emotionData);
     }
 
 }

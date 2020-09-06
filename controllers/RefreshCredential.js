@@ -1,22 +1,11 @@
-const request = require("request");
+const Err = require("./Error");
 
 class RefreshCredential {
 
     constructor(spotifyApi) {
+        require('dotenv').config();
         if (!spotifyApi) throw new Error("spotifyApi is null or undefined");
         this.spotifyApi = spotifyApi;
-    }
-
-    handleRefreshCredential(fnPtr, err) {
-        return this.checkCredentials()
-            .then((isValidCredential) => {
-                if (isValidCredential) {
-                    console.log(err);
-                    throw err;
-                } else {
-                    return this.refreshCredential(fnPtr);
-                }
-            });
     }
 
     checkCredentials() {
@@ -29,12 +18,17 @@ class RefreshCredential {
             })
     }
 
-    refreshCredential(fnPtr) {
-        return this.getNewAccessToken()
-            .then((access_token) => {
-                this.spotifyApi.setAccessToken(access_token);
-                return fnPtr();
-            }).catch((err) => {
+    tryRefreshCredential() {
+        return this.checkCredentials()
+            .then((isValidCredential) => {
+                if (!isValidCredential) {
+                    return this.getNewAccessToken()
+                        .then((accessToken) => {
+                            this.spotifyApi.setAccessToken(accessToken);
+                        });
+                }
+            })
+            .catch((err) => {
                 console.log("Error in getting new access token " + err);
                 throw err;
             });
@@ -42,32 +36,42 @@ class RefreshCredential {
 
     getNewAccessToken() {
         let refresh_token = this.spotifyApi.getRefreshToken();
-
         if (!refresh_token) {
-            throw new Error("Refresh token is null or undefined");
+            return Promise.reject(new Err.RefreshCredentialError("Refresh token is null or undefined"));
         }
 
-        let authOptions = {
+        let axios = require('axios');
+        let qs = require('querystring');
+        let data = qs.stringify({
+            grant_type: 'refresh_token',
+            refresh_token: refresh_token,
+        });
+
+        let config = {
+            method: 'post',
             url: 'https://accounts.spotify.com/api/token',
-            headers: {'Authorization': 'Basic ' + Buffer.from(process.env.SPOTIFY_API_ID + ':' + process.env.SPOTIFY_CLIENT_SECRET).toString("base64")},
-            form: {
-                grant_type: 'refresh_token',
-                refresh_token: refresh_token
+            headers: {
+                'Authorization': 'Basic ' + Buffer.from(process.env.SPOTIFY_API_ID + ':' + process.env.SPOTIFY_CLIENT_SECRET).toString("base64"),
+                'Content-type': "application/x-www-form-urlencoded",
             },
-            json: true
+            data: data
         };
 
-        return new Promise(function (fulfill, reject) {
-            request.post(authOptions, function (error, response, body) {
-                if (!error && response.statusCode === 200) {
-                    console.log(body);
-                    return fulfill(body.access_token);
+        return axios(config)
+            .then((response) => {
+                if (response && response.data && response.data["access_token"]) {
+                    console.log(response.data);
+                    return response.data["access_token"];
                 } else {
-                    console.log(error);
-                    return reject(error);
+                    throw new Err.InvalidResponseError("Access token response from Spotify API is invalid");
                 }
+            })
+            .catch((error) => {
+                if (error.response && error.response.data && error.response.data) {
+                    throw new Err.RefreshCredentialError(JSON.stringify(error.response.data));
+                }
+                throw error;
             });
-        });
     }
 }
 

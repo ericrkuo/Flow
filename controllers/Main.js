@@ -3,7 +3,8 @@ const {AzureFaceAPI} = require("./AzureFaceAPI");
 const {Spotify} = require("./Spotify");
 const {Emotion} = require("./Emotion");
 const SpotifyWebApi = require('spotify-web-api-node');
-
+const Err = require("./Error");
+const DESIRED_NUM_SONGS = 30;
 
 class Main {
     /*
@@ -16,11 +17,13 @@ class Main {
     * 6. add song X to data
     * 7. pass data into KMean to get cluster results
     * 8. find song X in cluster
-    * 9. return song titles for now //TODO: decide what to return
+    * 9. get songs in cluster containing song X
+    * 10. get desired number of songs (currently 30) if cluster has too much or too little
+    * 11. return this.result (see this.setResults)
     * */
 
-    // TODO: use other Spotify constructor when doing frontEnd that takes in clients access and refresh token
     constructor() {
+        require('dotenv').config();
         this.dataURL = null;
         this.azureFaceAPI = new AzureFaceAPI();
         this.spotifyApi = new SpotifyWebApi({
@@ -37,11 +40,14 @@ class Main {
     // REQUIRES. this.dataURL to be set
     getRelevantSongs() {
         if (!this.dataURL) {
-            throw new Error("DATA URL is not set");
+            return Promise.reject(new Err.InvalidDataURLError());
         }
         let songX;
+        let newArrayOfSongIDS;
+        let emotions;
         return this.azureFaceAPI.getEmotions(this.dataURL)
             .then((res) => {
+                emotions = res;
                 let dominantEmotion = this.emotion.getDominantExpression(res);
                 this.spotify.mood = dominantEmotion;
                 return this.emotion.getFeatures(dominantEmotion);
@@ -56,9 +62,10 @@ class Main {
                 let [bestK, clusters, map] = this.kMean.getOptimalKClusters(audioFeatureData);
                 let arrayOfSongIDS = this.getSongIDsOfClusterContainingSongX(clusters);
                 this.printOutAllSongTitles(arrayOfSongIDS);
-                let newArrayOfSongIDS = this.getDesiredNumberSongs(bestK, arrayOfSongIDS, map);
-                // TODO: fix this since setResults is async once fix Azure api
-                this.setResults(newArrayOfSongIDS, audioFeatureData, this.spotify.mood, null); // TODO: add emotions
+                newArrayOfSongIDS = this.getDesiredNumberSongs(bestK, arrayOfSongIDS, map);
+                return this.setResults(newArrayOfSongIDS, audioFeatureData, this.spotify.mood, emotions);
+            })
+            .then(() => {
                 return newArrayOfSongIDS;
             })
             .catch((err) => {
@@ -68,6 +75,9 @@ class Main {
     }
 
     getRelevantSongsTestingPurposes() {
+        if (!this.dataURL) {
+            return Promise.reject(new Err.InvalidDataURLError());
+        }
         let songX;
         let dominantEmotion = "happiness";
         let newArrayOfSongIDS
@@ -148,7 +158,6 @@ class Main {
     }
 
     getDesiredNumberSongs(bestK, arrayOfSongIDS, map) {
-        let DESIRED_NUM_SONGS = 30;
         let n = arrayOfSongIDS.length;
         console.log("ORIGINAL NUMBER OF SONGS: " + n);
 

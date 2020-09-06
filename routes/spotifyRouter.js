@@ -1,7 +1,5 @@
 var express = require('express');
 var router = express.Router();
-const {Spotify} = require("../controllers/Spotify");
-const {Emotion} = require("../controllers/Emotion");
 
 scopes = ['user-read-private',
     'user-read-email',

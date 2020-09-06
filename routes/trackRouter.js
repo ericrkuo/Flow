@@ -1065,23 +1065,30 @@ let sampleData = {
 
 // input: dataURL
 // output: returns html rendering of the tracks
-router.get('/', async function (req, res, next) {
+router.get('/', function (req, res, next) {
     // use res.render("track", sampleData) for testing purposes
-    let isCredentialValid = await checkCredentials(req);
-    if (isCredentialValid) {
-        if (req.app.locals.main.result) {
-            res.render("track", req.app.locals.main.result);
-        } else {
-            // TODO: at this point, user's credentials are valid, but they do not have custom curated tracks
-            //  display an 'error' page, which tells user they need to take a photo, and has a button prompting to go back to homepage
-            res.render('error', {
-                message: "No custom tracks yet, please take a photo to get curated tracks",
-                error: {status: 400, stack: "no stack"}
-            });
-        }
-    } else {
-        res.redirect("/spotify/login");
-    }
+
+    return checkCredentials(req)
+        .then((isCredentialValid) => {
+            if (isCredentialValid) {
+                if (req.app.locals.main.result) {
+                    return res.render("track", req.app.locals.main.result);
+                } else {
+                    // TODO: at this point, user's credentials are valid, but they do not have custom curated tracks
+                    //  display an 'error' page, which tells user they need to take a photo, and has a button prompting to go back to homepage
+                    return res.render('error', {
+                        message: "No custom tracks yet, please take a photo to get curated tracks",
+                        error: {status: 400, stack: "no stack"}
+                    });
+                }
+            } else {
+                return res.redirect("/spotify/login");
+            }
+        })
+        .catch((err) => {
+            // TODO: just in case checkCredentials throws an error (highly unlikely)
+            console.log(err);
+        })
 });
 
 // REQUIRES: req.body to contain a list of track URI's in format ["spotify:track:1ue7zm5TVVvmoQV8lK6K2H", ...]
