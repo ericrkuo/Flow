@@ -45,7 +45,7 @@ Welcome to Flow, a service designed to curate a playlist based on your current m
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+![Flow Logo][product-screenshot]
 
 We love music and are avid Spotify users, however, we wanted a more personalized experience and we thought this was the perfect opportunity to gain firsthand experience in machine learning as well! Flow is inspired by our passion for creating innovative and exciting software projects- specifically our desire to learn new concepts, frameworks, libraries, and tools used in the present tech industry. 
 
@@ -189,4 +189,4 @@ Project Link: [https://github.com/ericrkuo/Flow](https://github.com/ericrkuo/Flo
 [issues-url]: https://github.com/ericrkuo/Flow/issues
 [license-shield]: https://img.shields.io/github/license/ericrkuo/Flow?style=flat-square
 [license-url]: https://github.com/ericrkuo/Flow/blob/master/LICENSE.txt
-[product-screenshot]: images/screenshot.png
+[product-screenshot]: https://user-images.githubusercontent.com/54044854/92350204-1d3fd900-f08d-11ea-92e5-05371bf51032.png
