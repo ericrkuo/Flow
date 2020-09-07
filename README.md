@@ -23,9 +23,8 @@
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
 
-<!-- PROJECT LINK -->
-## Project Link
 
+Welcome to Flow, a service designed to curate a playlist based on your current mood and Spotify history. Simply capture a selfie showing how you feel, and we’ll do the work for you!
 
 <!-- TABLE OF CONTENTS -->
 ## Table of Contents
@@ -43,18 +42,22 @@
 * [Acknowledgements](#acknowledgements)
 
 
-
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-Welcome to Flow, a service designed to curate a playlist based on your current mood and Spotify history. Simply capture a selfie showing how you feel, and we’ll do the work for you!
+We love music and are avid Spotify users, however, we wanted a more personalized experience and we thought this was the perfect opportunity to gain firsthand experience in machine learning as well! Flow is inspired by our passion for creating innovative and exciting software projects- specifically our desire to learn new concepts, frameworks, libraries, and tools used in the present tech industry. 
 
-Flow utilizes Azure Cognitive Services to detect the user’s dominant mood and Spotify’s Web API to collect the user’s Spotify history such as their favourite songs, recently played, relevant albums/artists and more. Once all the necessary information is collected, the data is passed to a machine learning algorithm we implemented, K-means, to find clusters of songs relevant to the user’s mood and Spotify history.
+Flow utilizes Azure Cognitive Services to detect the user’s dominant mood and Spotify Developer's Web API to collect the user’s Spotify history such as their favourite songs, recently played, relevant albums/artists and more. Once all the necessary information is collected, the data is passed to a machine learning algorithm we implemented, known as K-means, to find clusters of songs relevant to the user’s mood and Spotify history.
+
+Certain optimizations made to K-means include using K-means++ to ensure better initialization of the centroids, as well as implementing the silhouette method to find the optimal value of k (number of clusters).
+
+
+
 
 ### Built With
-This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
+
 * [Express](https://expressjs.com/)
 * [Azure Cognitive Servces](https://docs.microsoft.com/en-us/azure/cognitive-services/)
 * [Spotify for Developers](https://developer.spotify.com/documentation/web-api/)
@@ -67,12 +70,10 @@ This section should list any major frameworks that you built your project using.
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
 To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
 * npm
 ```sh
 npm install npm@latest -g
@@ -83,6 +84,11 @@ npm install npm@latest -g
 Follow the steps at https://developer.spotify.com/documentation/web-api/quick-start/
 ```
 
+* Spotify User Account
+```sh
+Register here https://www.spotify.com/
+```
+
 * Azure Cognitive Services Face API
 ```sh
 Create an Azure subscription and head to https://portal.azure.com/#create/Microsoft.CognitiveServicesFace in the Azure Portal to get your key and endpoint
@@ -90,35 +96,35 @@ Create an Azure subscription and head to https://portal.azure.com/#create/Micros
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Clone the repo
 ```sh
-git clone https://github.com/your_username_/Project-Name.git
+git clone https://github.com/ericrkuo/Flow.git
 ```
-3. Install NPM packages
+2. Install NPM packages
 ```sh
 npm install
 ```
-4. Enter your API in `config.js`
+4. Enter your Azure Face API key and Spotify credentials in a new file called `.env` in the root directory of the code
 ```JS
-const API_KEY = 'ENTER YOUR API';
+AZUREKEY= 'ENTER YOUR AZURE FACE API KEY';
+SPOTIFY_API_ID= 'ENTER THE API ID ASSOCIATED WITH YOUR SPOTIFY DEVELOPERS ACCOUNT'
+SPOTIFY_CLIENT_SECRET= 'ENTER THE CLIENT SECRET ASSOCIATED WITH YOUR SPOTIFY DEVELOPERS ACCOUNT'
+CALLBACK_URL= '<WEB SERVICE URL>/SPOTIFY/CALLBACK'
+ACCESS_TOKEN='ENTER THE ACCESS TOKEN ASSOCIATED WTIH YOUR SPOTIFY ACCOUNT. THIS IS FOR TESTING PURPOSES'
+REFRESH_TOKEN='ENTER THE REFRESH TOKEN ASSOCIATED WTIH YOUR SPOTIFY ACCOUNT. THIS IS FOR TESTING PURPOSES'
 ```
-
 
 
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
+This section is currently unavailable, please refer to the Tutorial tab in our web service for instructions! 
 
 
 <!-- ROADMAP -->
 ## Roadmap
 
-See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/ericrkuo/Flow/issues) for a list of proposed features (and known issues).
 
 
 
