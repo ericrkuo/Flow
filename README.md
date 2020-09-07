@@ -64,8 +64,6 @@ This section should list any major frameworks that you built your project using.
 * [JQuery](https://jquery.com)
 * [Chart.js](https://www.chartjs.org/)
 
-
-
 <!-- GETTING STARTED -->
 ## Getting Started
 
@@ -78,6 +76,16 @@ This is an example of how to list things you need to use the software and how to
 * npm
 ```sh
 npm install npm@latest -g
+```
+
+* Spotify Developer Account
+```sh
+Follow the steps at https://developer.spotify.com/documentation/web-api/quick-start/
+```
+
+* Azure Cognitive Services Face API
+```sh
+Create an Azure subscription and head to https://portal.azure.com/#create/Microsoft.CognitiveServicesFace in the Azure Portal to get your key and endpoint
 ```
 
 ### Installation
