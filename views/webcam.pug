@@ -6,15 +6,15 @@ block append stylesheets
     link(rel='stylesheet', href='/stylesheets/backgroundCSS.css')
     link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css')
 block content
-    div#webcam
+    .container-fluid.text-center#webcam
         .breakSpace
-        h2.text-white How are you feeling right now?
+        h2.text-white#header How are you feeling right now?
         div#videowrap
             video#video(playsinline='' autoplay='')
             canvas#canvas
         div#controller
             button.btn.btn-outline-light#take-photo CAPTURE
-            button.btn.btn-outline-light#try-again TAKE PHOTO AGAIN
+            button.btn.btn-outline-light.mx-2#try-again TAKE PHOTO AGAIN
             button.btn.btn-outline-light#get-tracks SUBMIT
     div#loader
         div#box

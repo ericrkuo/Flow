@@ -1,19 +1,24 @@
-#webcam {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    align-items: center;
-    width: 100vw;
-    height: 100vh;
+/*#webcam {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    flex-wrap: nowrap;*/
+/*    justify-content: flex-start;*/
+/*    align-items: center;*/
+/*    width: 100%;*/
+/*    height: 100%; */
+/*}*/
+
+#header {
+    font-size: 4vmin;
 }
 
 #videowrap {
     width: 100%;
-    height: 80vmin;
+    height: 70vmin;
     display: flex;
     justify-content: center;
     align-items: center;
+
 }
 
 #video {
@@ -39,8 +44,6 @@
     flex-wrap: nowrap;
     justify-content: center;
     align-items: center;
-    width: inherit;
-    height: 10%;
 }
 
 #take-photo {
