@@ -188,5 +188,5 @@ Project Link: [https://github.com/ericrkuo/Flow](https://github.com/ericrkuo/Flo
 [issues-shield]: https://img.shields.io/github/issues/ericrkuo/Flow?style=flat-square
 [issues-url]: https://github.com/ericrkuo/Flow/issues
 [license-shield]: https://img.shields.io/github/license/ericrkuo/Flow?style=flat-square
-[license-url]: https://github.com/ericrkuo/Flow/blob/master/LICENSE.txt
+[license-url]: https://github.com/ericrkuo/Flow/blob/master/LICENSE
 [product-screenshot]: https://user-images.githubusercontent.com/54044854/92350204-1d3fd900-f08d-11ea-92e5-05371bf51032.png
