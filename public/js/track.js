@@ -310,12 +310,12 @@ function addPlaylistEventListeners() {
                         window.open(url, "_blank");
                     })
                     .catch((error) => {
-                        cancelPlaylistButton.removeAttribute('disabled');
-                        createPlaylistButton.removeAttribute('disabled');
+                        // TODO: Look into dismissible again
 
-                        $('#playlistModal').modal('hide');
-                        console.log(error.response.status);
+                        // $('#playlistModal').modal('hide');
+
                         $('#errorAlert').show();
+                        $('#errorAlertButton').alert();
                         $('#errorAlert').html('Sorry, we encountered an internal server error. ' +
                             error.response.data.errorMsg);
 
@@ -325,7 +325,9 @@ function addPlaylistEventListeners() {
                             }, 3000);
                         } else {
                             setTimeout(function() {
-                                $('#errorAlert').hide();
+                                // $('#errorAlert').hide();
+                                cancelPlaylistButton.removeAttribute('disabled');
+                                createPlaylistButton.removeAttribute('disabled');
                             }, 10000);
                         }
 

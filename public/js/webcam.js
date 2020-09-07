@@ -81,9 +81,6 @@ function postTracks(dataURL) {
             location.href = '/tracks';
         })
         .catch((error) => {
-            console.log(error.response.status);
-            console.log(error.response.data.body);
-
             webcam.style.display = "flex";
             loadingDiv.style.display = "none";
 

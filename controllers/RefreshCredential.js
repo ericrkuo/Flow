@@ -4,7 +4,7 @@ class RefreshCredential {
 
     constructor(spotifyApi) {
         require('dotenv').config();
-        if (!spotifyApi) throw new Error("spotifyApi is null or undefined");
+        if (!spotifyApi) throw new Error("The spotifyApi is null or undefined");
         this.spotifyApi = spotifyApi;
     }
 

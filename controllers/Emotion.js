@@ -712,7 +712,7 @@ class Emotion {
     }
 
     getFeatures(mood) {
-        if (typeof mood !== 'string' || !this.emotionMap[mood]) return Promise.reject(new Err.InvalidInputError(mood + " is not a recognized mood, cannot get audio Features"));
+        if (typeof mood !== 'string' || !this.emotionMap[mood]) return Promise.reject(new Err.InvalidInputError(mood + " is not a recognized mood, cannot get audio features"));
         let numTracks = this.emotionMap[mood].length;
 
         return this.refreshCredential.tryRefreshCredential()
@@ -747,7 +747,7 @@ class Emotion {
     }
 
     getDominantExpression(emotionData) {
-        if (!this.isEmotionDataValid(emotionData)) throw new Err.InvalidInputError("cannot get dominant expression in Emotion, data isn't formatted correctly");
+        if (!this.isEmotionDataValid(emotionData)) throw new Err.InvalidInputError("Cannot get dominant expression in Emotion, data isn't formatted correctly");
 
         let dominantEmotion = null;
         let dominantEmotionValue = -1;
@@ -758,7 +758,7 @@ class Emotion {
                 dominantEmotionValue = value;
             }
         }
-        if (dominantEmotionValue === -1) throw new Err.InvalidInputError("no dominant emotion detected");
+        if (dominantEmotionValue === -1) throw new Err.InvalidInputError("No dominant emotion detected");
         return dominantEmotion;
     }
 

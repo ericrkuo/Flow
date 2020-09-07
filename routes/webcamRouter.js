@@ -18,31 +18,34 @@ router.get('/', function (req, res, next) {
             }
         })
         .catch((err) => {
-            // TODO: just in case checkCredentials throws an error (highly unlikely)
-            console.log(err);
+            res.redirect("/spotify/login");
         })
 });
 
 router.post('/', webcamLimiter, function (req, res, next) {
-    if (req.app.locals.main && req.body && req.body.dataURL) {
+    let main = req.app.locals.main;
+
+    if (main && req.body && req.body.dataURL) {
         let main = req.app.locals.main;
         main.dataURL = req.body.dataURL;
         return main.getRelevantSongsTestingPurposes()
             .then((tracks) => {
                 console.log("REACHED HERE");
-                let result = req.app.locals.main.result;
-                if(result) {
+                let result = main.result;
+                if (result) {
                     return res.status(200).json({result: result});
                 } else {
                     return res.status(502).json({errorMsg: "Please try taking another photo."});
                 }
-
             })
             .catch((err) => {
-                return res.status(502).json({errorMsg: "Please try taking another photo. </br> </br>" +  err.message});
+                return res.status(502).json({errorMsg: "Please try taking another photo. </br> </br>" + err.message});
             });
-    } else {
-        return res.status(500).json({redirectLink: '/', errorMsg: "Redirecting you in 3 seconds..."});
+    } else if(!main) {
+        req.app.locals.main = new Main();
+        return res.status(500).json({redirectLink: '/spotify/login', errorMsg: "Redirecting you in 3 seconds..."});
+    } else if (!req.body || !req.body.dataURL) {
+        return res.status(502).json({errorMsg: "Please try taking another photo."});
     }
 });
 

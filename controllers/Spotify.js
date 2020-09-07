@@ -442,7 +442,7 @@ class Spotify {
                     let userId = result.id;
                     return this.spotifyApi.createPlaylist(userId, 'Flow Playlist: ' + this.mood, {public: false});
                 } else {
-                    throw new Err.InvalidResponseError("no user info or mood is currently not set");
+                    throw new Err.InvalidResponseError("No user info or mood is currently not set");
                 }
             }).catch((err) => {
                 console.log(err);
@@ -452,7 +452,7 @@ class Spotify {
 
     getNewPlaylist(trackURLs) {
         let link = null;
-        if (!this.isTrackURLsValid(trackURLs)) return Promise.reject(new Err.InvalidInputError("trackURLs is invalid, ensure is a non-empty array"));
+        if (!this.isTrackURLsValid(trackURLs)) return Promise.reject(new Err.InvalidInputError("Track URLs are invalid, ensure is a non-empty array"));
         return this.refreshCredential.tryRefreshCredential()
             .then(() => {
                 return this.createNewPlaylist();
@@ -462,11 +462,11 @@ class Spotify {
                     link = playlist.body.external_urls.spotify;
                     return this.spotifyApi.addTracksToPlaylist(playlist.body.id, trackURLs)
                 } else {
-                    throw new Err.InvalidResponseError("playlist did not create correctly");
+                    throw new Err.InvalidResponseError("Playlist was not created correctly");
                 }
             })
             .then((result) => {
-                if (!link || (result.statusCode !== 200 && result.statusCode !== 201)) throw new Err.InvalidResponseError("link is null or tracks did not add correctly");
+                if (!link || (result.statusCode !== 200 && result.statusCode !== 201)) throw new Err.InvalidResponseError("Playlist link is null or tracks were not added correctly");
                 return link;
             })
             .catch((err) => {

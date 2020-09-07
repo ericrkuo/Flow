@@ -16,8 +16,8 @@ function checkCredentials(req) {
 
     return main.spotify.refreshCredential.checkCredentials()
         .then((result) => {
-            let accessToken = req.app.locals.main.spotifyApi.getAccessToken();
-            let refreshToken = req.app.locals.main.spotifyApi.getRefreshToken();
+            let accessToken = main.spotifyApi.getAccessToken();
+            let refreshToken = main.spotifyApi.getRefreshToken();
             return (accessToken && refreshToken && typeof accessToken === 'string' && typeof refreshToken === 'string' && result);
         })
         .catch((err) => {

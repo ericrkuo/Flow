@@ -1,6 +1,7 @@
 var express = require('express');
 const {trackLimiter} = require("./rateLimiter");
 const {checkCredentials} = require("./indexRouter");
+const {Main} = require("../controllers/Main");
 var router = express.Router();
 
 //#region Sample Data For Testing Purposes
@@ -1074,21 +1075,21 @@ router.get('/', function (req, res, next) {
                 if (req.app.locals.main.result) {
                     return res.render("track", req.app.locals.main.result);
                 } else {
-                    res.redirect('/#/error/emptytracks');
+                    return res.redirect("/webcam/#/error/no-photo-submitted");
                 }
             } else {
                 return res.redirect("/spotify/login");
             }
         })
         .catch((err) => {
-            // TODO: just in case checkCredentials throws an error (highly unlikely)
-            res.redirect("/spotify/login");
+            return res.redirect("/spotify/login");
         })
 });
 
 // REQUIRES: req.body to contain a list of track URI's in format ["spotify:track:1ue7zm5TVVvmoQV8lK6K2H", ...]
 router.post('/', trackLimiter, function (req, res, next) {
     let main = req.app.locals.main;
+    return res.status(502).json({errorMsg: "Please try again later. </br> </br>"});
     if(main) {
         return main.createMoodPlaylist(req.body)
             .then((playlistURL) => {
@@ -1098,7 +1099,8 @@ router.post('/', trackLimiter, function (req, res, next) {
                 return res.status(502).json({errorMsg: "Please try again later. </br> </br>" + err.message});
             });
     } else {
-        return res.status(500).json({redirectLink: '/', errorMsg: "Redirecting you in 3 seconds..."});
+        req.app.locals.main = new Main();
+        return res.status(500).json({redirectLink: '/spotify/login', errorMsg: "Redirecting you in 3 seconds..."});
     }
 
 });
