@@ -36,7 +36,7 @@ router.get('/login', (req, res) => {
 
 });
 
-router.get('/callback', async (req, res, next) => {
+router.get('/callback', async (req, res) => {
     // TODO: callback not safe, need to use implement random hash string to encrypt callback, look at Spotify docs
     let main = req.app.locals.main;
 
