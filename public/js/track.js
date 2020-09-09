@@ -67,7 +67,6 @@ function initialize() {
     let tutorialButton = document.getElementById("tutorial");
     let homeButton = document.getElementById("home");
     let aboutUsButton = document.getElementById("info");
-    let errorAlert = document.getElementById("errorAlert");
     let newString = "btn-outline-dark";
     let oldString = "btn-outline-light";
 

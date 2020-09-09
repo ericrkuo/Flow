@@ -8,7 +8,6 @@ let getTracksButton = document.getElementById('get-tracks');
 let errorMsgElement = document.getElementById('spanErrorMsg');
 let loadingDiv = document.getElementById("loader");
 let webcam = document.getElementById("webcam");
-let errorAlert = document.getElementById("errorAlert");
 
 let stream;
 
