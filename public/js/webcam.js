@@ -12,6 +12,11 @@ let errorAlert = document.getElementById("errorAlert");
 
 let stream;
 
+$(document).on('click', '.alert-close', function() {
+    $(this).parent().hide();
+})
+
+
 const constraints = {
     audio: false,
     video: {width: 1280, height: 720},
@@ -29,16 +34,16 @@ async function init() {
     try {
         hide([canvas, afterCaptureButtons, beforeCaptureButtons, loadingDiv]);
         $("#errorAlert").hide();
+        $('#infoAlert').append('<a class="close alert-close">&times</a>');
         stream = await navigator.mediaDevices.getUserMedia(constraints);
         handleSuccess(stream);
     } catch (err) {
         errorMsgElement.innerHTML = `navigator.getUserMedia.error:${err.toString()}`;
-        $("#errorAlert").html("Sorry, we encountered an internal server error. </br> </br>"
-            + err.message);
-        $("#errorAlert").show();
+        $("#errorAlert").show().html("Sorry, we encountered an internal server error. " +
+            "Redirecting you in 5 seconds ... </br> </br>" + err.message);
         setTimeout(function() {
             location.href = "/webcam"
-        }, 3000);
+        }, 5000);
     }
 }
 
@@ -85,14 +90,14 @@ function postTracks(dataURL) {
             loadingDiv.style.display = "none";
 
             $("#infoAlert").hide();
-            $("#errorAlert").show();
-            $("#errorAlert").html('Sorry, we encountered an internal server error. ' +
-                error.response.data.errorMsg);
+            $("#header").hide();
+            $("#errorAlert").show().append('Sorry, we encountered an internal server error. ' +
+                error.response.data.errorMsg +'</span>');
 
             if(error.response.data.redirectLink) {
                 setTimeout(function() {
                     location.href= error.response.data.redirectLink
-                }, 3000);
+                }, 5000);
             }
         });
 }
@@ -101,6 +106,7 @@ getTracksButton.addEventListener("click", () => {
     const dataURL = canvas.toDataURL('image/png', 1);
     hide([webcam]);
     show([loadingDiv]);
+    $("#errorAlert").html("");
     return postTracks(dataURL);
 })
 

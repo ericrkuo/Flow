@@ -53,6 +53,10 @@ $('#playlistModal').on('hide.bs.modal', function () {
     $('#collapsePlaylistMessage').collapse('hide');
 })
 
+$(document).on('click', '.alert-close', function() {
+    $(this).parent().hide();
+})
+
 initialize();
 initializeUserInfoDiv();
 initializeTracksDiv();
@@ -281,6 +285,7 @@ function addPlaylistEventListeners() {
 
     createPlaylistButton.addEventListener("click", async function () {
         let isConfirmPlaylistChecked = confirmPlaylistInput.checked;
+        $("#errorAlert").html("").hide();
 
         if (isConfirmPlaylistChecked) {
             let data = getAllTrackURLs();
@@ -294,7 +299,6 @@ function addPlaylistEventListeners() {
                 return sendPOSTRequestToCreatePlaylist(JSON.stringify(data))
                     .then((url) => {
                         cancelPlaylistButton.removeAttribute('disabled');
-                        $('#errorAlert').hide();
                         createPlaylistButton.className = createPlaylistButton.className.replace('btn-primary', 'btn-secondary');
 
                         playlistButton.className = playlistButton.className.replace('btn-success', 'btn-primary');
@@ -310,25 +314,17 @@ function addPlaylistEventListeners() {
                         window.open(url, "_blank");
                     })
                     .catch((error) => {
-                        // TODO: Look into dismissible again
+                        cancelPlaylistButton.removeAttribute('disabled');
+                        createPlaylistButton.removeAttribute('disabled');
 
-                        // $('#playlistModal').modal('hide');
-
-                        $('#errorAlert').show();
-                        $('#errorAlertButton').alert();
-                        $('#errorAlert').html('Sorry, we encountered an internal server error. ' +
-                            error.response.data.errorMsg);
+                        $('#errorAlert').show().append('<a class="close alert-close">&times</a>' +
+                            '<span>'+'Sorry, we encountered an internal server error. ' +
+                             error.response.data.errorMsg +'</span>');
 
                         if(error.response.data.redirectLink) {
                             setTimeout(function() {
                                 location.href= error.response.data.redirectLink
-                            }, 3000);
-                        } else {
-                            setTimeout(function() {
-                                // $('#errorAlert').hide();
-                                cancelPlaylistButton.removeAttribute('disabled');
-                                createPlaylistButton.removeAttribute('disabled');
-                            }, 10000);
+                            }, 5000);
                         }
 
                     });

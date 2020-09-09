@@ -21,11 +21,15 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/login', (req, res) => {
-    if (!req.app.locals.main || !req.app.locals.main.spotifyApi) {
+
+    let main = req.app.locals.main;
+
+    if (!main || !main.spotifyApi) {
         req.app.locals.main = new Main();
+        main = req.app.locals.main;
     }
 
-    let spotifyApi = req.app.locals.main.spotifyApi
+    let spotifyApi = main.spotifyApi;
     let html = spotifyApi.createAuthorizeURL(scopes);
     console.log(html);
     res.redirect(html + "&show_dialog=true");
@@ -34,14 +38,14 @@ router.get('/login', (req, res) => {
 
 router.get('/callback', async (req, res, next) => {
     // TODO: callback not safe, need to use implement random hash string to encrypt callback, look at Spotify docs
-
     let main = req.app.locals.main;
 
     if (!main || !main.spotifyApi || !main.spotify) {
         req.app.locals.main = new Main();
+        main = req.app.locals.main;
     }
 
-    let spotifyApi = req.app.locals.main.spotifyApi;
+    let spotifyApi = main.spotifyApi;
     const {code} = req.query;
     console.log(code);
 
@@ -56,7 +60,7 @@ router.get('/callback', async (req, res, next) => {
             console.log("REFRESH TOKEN: " + spotifyApi.getRefreshToken());
             return res.redirect('/webcam');
         }).catch((err) => {
-            return res.redirect('#/error/invalid-token');
+            return res.redirect('/#/error/invalid-token');
         });
 
 });

@@ -1089,18 +1089,19 @@ router.get('/', function (req, res, next) {
 // REQUIRES: req.body to contain a list of track URI's in format ["spotify:track:1ue7zm5TVVvmoQV8lK6K2H", ...]
 router.post('/', trackLimiter, function (req, res, next) {
     let main = req.app.locals.main;
-    return res.status(502).json({errorMsg: "Please try again later. </br> </br>"});
+
     if(main) {
         return main.createMoodPlaylist(req.body)
             .then((playlistURL) => {
                 return res.status(200).json({link: playlistURL});
             })
             .catch((err) => {
-                return res.status(502).json({errorMsg: "Please try again later. </br> </br>" + err.message});
+                // TODO: only promise rejects
+                return res.status(500).json({errorMsg: "Please try again later </br> </br>" + err.message});
             });
     } else {
         req.app.locals.main = new Main();
-        return res.status(500).json({redirectLink: '/spotify/login', errorMsg: "Redirecting you in 3 seconds..."});
+        return res.status(404).json({redirectLink: '/spotify/login', errorMsg: "Redirecting you in 5 seconds..."});
     }
 
 });

@@ -2,6 +2,11 @@
     font-size: 4vmin;
 }
 
+.alert {
+    width: 70vmin;
+    display: inline-block;
+}
+
 #errorAlert {
     position: absolute;
 }
