@@ -25,9 +25,6 @@ router.get('/', function (req, res, next) {
 router.post('/', webcamLimiter, function (req, res, next) {
     let main = req.app.locals.main;
 
-    return res.status(404).json({errorMsg: "Please try taking another photo"});
-
-
     if (main && req.body && req.body.dataURL) {
         let main = req.app.locals.main;
         main.dataURL = req.body.dataURL;
@@ -42,7 +39,7 @@ router.post('/', webcamLimiter, function (req, res, next) {
                 }
             })
             .catch((err) => {
-                return res.status(500).json({errorMsg: "Please try taking another photo. </br> </br>" + err.message});
+                return res.status(500).json({errorMsg: "Please try taking another photo </br> </br>" + err.message});
             });
     } else if (!main) {
         req.app.locals.main = new Main();

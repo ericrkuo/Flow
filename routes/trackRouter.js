@@ -1096,7 +1096,6 @@ router.post('/', trackLimiter, function (req, res, next) {
                 return res.status(200).json({link: playlistURL});
             })
             .catch((err) => {
-                // TODO: only promise rejects
                 return res.status(500).json({errorMsg: "Please try again later </br> </br>" + err.message});
             });
     } else {
