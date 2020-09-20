@@ -1,4 +1,5 @@
 var express = require('express');
+const {trackLimiter} = require("./rateLimiter");
 const {checkCredentials} = require("./indexRouter");
 var router = express.Router();
 const {Main} = require("../controllers/Main")
@@ -1092,7 +1093,7 @@ router.get('/', function (req, res, next) {
 });
 
 // REQUIRES: req.body to contain a list of track URI's in format ["spotify:track:1ue7zm5TVVvmoQV8lK6K2H", ...]
-router.post('/', function (req, res, next) {
+router.post('/', trackLimiter, function (req, res, next) {
     let main = req.app.locals.main;
     return main.createMoodPlaylist(req.body)
         .then((playlistURL) => {

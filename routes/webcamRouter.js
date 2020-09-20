@@ -1,4 +1,5 @@
 var express = require('express');
+const {webcamLimiter} = require("./rateLimiter");
 const {checkCredentials} = require("./indexRouter");
 var router = express.Router();
 const {Main} = require("../controllers/Main");
@@ -22,7 +23,7 @@ router.get('/', function (req, res, next) {
         })
 });
 
-router.post('/', function (req, res, next) {
+router.post('/', webcamLimiter, function (req, res, next) {
     if (req.app.locals.main && req.body && req.body.dataURL) {
         let main = req.app.locals.main;
         main.dataURL = req.body.dataURL;
