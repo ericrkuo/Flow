@@ -15,12 +15,13 @@ const constraints = {
     video: {width: 1280, height: 720},
 };
 
+video.addEventListener("animationend", ()=> {
+    show([beforeCaptureGroup]);
+});
+
 async function init() {
     try {
-        canvas.style.setProperty('display', "none");
-        afterCaptureGroup.style.setProperty('display', 'none');
-        beforeCaptureGroup.style.setProperty('display', 'none');
-        loadingDiv.style.setProperty('display', "none");
+        hide([canvas, afterCaptureGroup, beforeCaptureGroup, loadingDiv]);
         stream = await navigator.mediaDevices.getUserMedia(constraints);
         handleSuccess(stream);
     } catch (err) {
@@ -31,16 +32,18 @@ async function init() {
 function handleSuccess(stream) {
     window.stream = stream;
     video.srcObject = stream;
-    beforeCaptureGroup.style.removeProperty('display');
+
+    if (video.className === "video-no-animation") {
+        show([beforeCaptureGroup]);
+    }
 }
 
 // NOTE: if want to execute anything after init, then need a then and catch statement, because cannot just do `await init()` or `return init()`
 init();
-// webcam.style.setProperty('display',"none");
-// loadingDiv.removeProperty('display');
+// hide([webcam]);
+// show([loadingDiv]);
 
 function turnOffStream() {
-    console.log("turning off webcam");
     stream.getTracks().forEach(function (track) {
         track.stop();
     });
@@ -71,8 +74,8 @@ function postTracks(dataURL) {
 
 getTracksButton.addEventListener("click", () => {
     const dataURL = canvas.toDataURL('image/png', 1);
-    webcam.style.setProperty('display', "none");
-    loadingDiv.style.removeProperty('display');
+    hide([webcam]);
+    show([loadingDiv]);
     return postTracks(dataURL);
 })
 
@@ -95,15 +98,23 @@ tryAgainButton.addEventListener("click", () => {
 
 function hideAndShowHTMLElementsForTryAgainButton() {
     video.className = "video-no-animation";
-    video.style.removeProperty('display');
-    beforeCaptureGroup.style.removeProperty('display');
-    afterCaptureGroup.style.setProperty('display', 'none');
-    canvas.style.setProperty('display', "none");
+    show([video, beforeCaptureGroup]);
+    hide([afterCaptureGroup, canvas]);
 }
 
 function hideAndShowHTMLElementsForCaptureButton() {
-    video.style.setProperty('display', "none");
-    beforeCaptureGroup.style.setProperty('display', 'none');
-    afterCaptureGroup.style.removeProperty('display');
-    canvas.style.removeProperty('display');
+    hide([video, beforeCaptureGroup]);
+    show([afterCaptureGroup, canvas]);
+}
+
+function hide(elements) {
+    for (let element of elements) {
+        element.style.setProperty("display", "none");
+    }
+}
+
+function show(elements) {
+    for (let element of elements) {
+        element.style.removeProperty("display");
+    }
 }
