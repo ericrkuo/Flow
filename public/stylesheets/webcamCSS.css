@@ -28,11 +28,6 @@
     -webkit-mask-repeat: no-repeat;
 }
 
-#take-photo {
-    width: 200px;
-    height: 50px;
-}
-
 #loader {
     position: fixed;
     top: 40%;

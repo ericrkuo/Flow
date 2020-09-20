@@ -15,6 +15,10 @@ const constraints = {
     video: {width: 1280, height: 720},
 };
 
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+})
+
 video.addEventListener("animationend", ()=> {
     show([beforeCaptureGroup]);
 });
