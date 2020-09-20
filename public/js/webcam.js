@@ -1,5 +1,7 @@
 let video = document.getElementById('video');
 let canvas = document.getElementById('canvas');
+let beforeCaptureGroup = document.getElementById('beforeCaptureGroup');
+let afterCaptureGroup = document.getElementById('afterCaptureGroup');
 let takePhotoButton = document.getElementById('take-photo');
 let tryAgainButton = document.getElementById('try-again');
 let getTracksButton = document.getElementById('get-tracks');
@@ -10,15 +12,15 @@ let stream;
 
 const constraints = {
     audio: false,
-    video: true
+    video: {width: 1280, height: 720},
 };
 
 async function init() {
     try {
-        canvas.style.display = "none";
-        tryAgainButton.style.display = "none";
-        getTracksButton.style.display = "none";
-        loadingDiv.style.display = "none";
+        canvas.style.setProperty('display', "none");
+        afterCaptureGroup.style.setProperty('display', 'none');
+        beforeCaptureGroup.style.setProperty('display', 'none');
+        loadingDiv.style.setProperty('display', "none");
         stream = await navigator.mediaDevices.getUserMedia(constraints);
         handleSuccess(stream);
     } catch (err) {
@@ -29,12 +31,13 @@ async function init() {
 function handleSuccess(stream) {
     window.stream = stream;
     video.srcObject = stream;
+    beforeCaptureGroup.style.removeProperty('display');
 }
 
-// CHANGE BACK
+// NOTE: if want to execute anything after init, then need a then and catch statement, because cannot just do `await init()` or `return init()`
 init();
-// webcam.style.display = "none";
-// loadingDiv.style.display = "flex";
+// webcam.style.setProperty('display',"none");
+// loadingDiv.removeProperty('display');
 
 function turnOffStream() {
     console.log("turning off webcam");
@@ -66,26 +69,22 @@ function postTracks(dataURL) {
         });
 }
 
-getTracksButton.addEventListener("click", ()=>{
-    console.log("CLICK");
-    const dataURL = canvas.toDataURL();
-    webcam.style.display = "none";
-    loadingDiv.style.display = "flex";
-    postTracks(dataURL);
+getTracksButton.addEventListener("click", () => {
+    const dataURL = canvas.toDataURL('image/png', 1);
+    webcam.style.setProperty('display', "none");
+    loadingDiv.style.removeProperty('display');
+    return postTracks(dataURL);
 })
 
 takePhotoButton.addEventListener("click", () => {
+    // dimension of pixels in canvas
     canvas.width = video.offsetWidth;
     canvas.height = video.offsetHeight;
-    console.log(video.offsetWidth);
-    console.log(video.offsetHeight);
+
     let context = canvas.getContext('2d');
-    // console.log("CLICK");
-    // context.drawImage(video, 0, 0, width, height);
     context.drawImage(video, 0, 0, video.offsetWidth, video.offsetHeight);
+
     hideAndShowHTMLElementsForCaptureButton();
-    // context.drawImage(video, 0, 0);
-    // const dataURL = canvas.toDataURL();
     turnOffStream();
 })
 
@@ -95,17 +94,16 @@ tryAgainButton.addEventListener("click", () => {
 });
 
 function hideAndShowHTMLElementsForTryAgainButton() {
-    video.style.display = "block";
-    takePhotoButton.style.display = "block";
-    tryAgainButton.style.display = "none";
-    getTracksButton.style.display = "none";
-    canvas.style.display = "none";
+    video.className = "video-no-animation";
+    video.style.removeProperty('display');
+    beforeCaptureGroup.style.removeProperty('display');
+    afterCaptureGroup.style.setProperty('display', 'none');
+    canvas.style.setProperty('display', "none");
 }
 
 function hideAndShowHTMLElementsForCaptureButton() {
-    video.style.display = "none";
-    takePhotoButton.style.display = "none";
-    tryAgainButton.style.display = "block";
-    getTracksButton.style.display = "block";
-    canvas.style.display = "block";
+    video.style.setProperty('display', "none");
+    beforeCaptureGroup.style.setProperty('display', 'none');
+    afterCaptureGroup.style.removeProperty('display');
+    canvas.style.removeProperty('display');
 }

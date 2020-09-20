@@ -7,18 +7,18 @@ block append stylesheets
     link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css')
 block content
     .container-fluid.text-center#webcam
-        .breakSpace
         h2.text-white#header How are you feeling right now?
-        div#videowrap
-            video#video(playsinline='' autoplay='')
+        .container-fluid.d-flex.justify-content-center
+            video#video.video-animation(playsinline='' autoplay='')
             canvas#canvas
-        div#controller
-            button.btn.btn-outline-light#take-photo CAPTURE
-            button.btn.btn-outline-light.mx-2#try-again TAKE PHOTO AGAIN
-            button.btn.btn-outline-light#get-tracks SUBMIT
-    div#loader
-        div#box
-        div#shadow
-        .mt-5
-        h1.text-white#loadingtext Curating your playlist
+        .container-fluid.text-center
+            #beforeCaptureGroup.btn-group(role='group')
+                button.btn.btn-outline-light(type='button')#take-photo CAPTURE
+            #afterCaptureGroup.btn-group(role='group')
+                button.btn.btn-outline-light.mx-2(type='button')#try-again TAKE PHOTO AGAIN
+                button.btn.btn-outline-light(type='button')#get-tracks SUBMIT
+    #loader.container-fluid.text-center
+        .container#box
+        .container#shadow
+        h1.mt-5.text-white#loading-text Curating your playlist
     script(src='/js/webcam.js')
