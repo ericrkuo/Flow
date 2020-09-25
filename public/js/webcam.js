@@ -37,7 +37,6 @@ async function init() {
         stream = await navigator.mediaDevices.getUserMedia(constraints);
         handleSuccess(stream);
     } catch (err) {
-        errorMsgElement.innerHTML = `navigator.getUserMedia.error:${err.toString()}`;
         $("#errorAlert").show().html("Sorry, we encountered an internal server error. " +
             "Redirecting you in 5 seconds ... </br> </br>" + err.message);
         setTimeout(function() {
@@ -82,7 +81,7 @@ function postTracks(dataURL) {
     return axios(config)
         .then(() => {
             console.log("SUCCESS - put tracks, now taking to tracks");
-            location.href = '/tracks';
+            location.href = "/tracks";
         })
         .catch((error) => {
             webcam.style.display = "flex";
