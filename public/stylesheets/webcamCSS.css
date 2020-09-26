@@ -1,27 +1,8 @@
-/*#webcam {*/
-/*    display: flex;*/
-/*    flex-direction: column;*/
-/*    flex-wrap: nowrap;*/
-/*    justify-content: flex-start;*/
-/*    align-items: center;*/
-/*    width: 100%;*/
-/*    height: 100%; */
-/*}*/
-
 #header {
     font-size: 4vmin;
 }
 
-#videowrap {
-    width: 100%;
-    height: 70vmin;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-}
-
-#video {
+.video-animation {
     height: 70vmin;
     -webkit-mask-image: url("../libraries/circle.png");
     -webkit-mask-size: 65vmin;
@@ -31,34 +12,25 @@
     animation-duration: 2s;
 }
 
-#canvas {
+.video-no-animation {
+    height: 70vmin;
     -webkit-mask-image: url("../libraries/circle.png");
     -webkit-mask-size: 65vmin;
     -webkit-mask-position: center;
     -webkit-mask-repeat: no-repeat;
 }
 
-#controller {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
-}
-
-#take-photo {
-    width: 200px;
-    height: 50px;
+#canvas {
+    height: 70vmin;
+    -webkit-mask-image: url("../libraries/circle.png");
+    -webkit-mask-size: 65vmin;
+    -webkit-mask-position: center;
+    -webkit-mask-repeat: no-repeat;
 }
 
 #loader {
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
+    position: fixed;
+    top: 40%;
 }
 
 /*makes jello move across*/
@@ -93,7 +65,7 @@
     opacity: 0.1;
     border-radius: 50%;
     animation: shadow .5s linear infinite;
-    margin-top: 1.2vmin;
+    margin-top: 1.5vmin;
 }
 
 @keyframes shadow {
@@ -102,9 +74,9 @@
     }
 }
 
-#loadingtext::after {
+#loading-text::after {
     content: ' .';
-    animation: dots 1s steps(5, end) infinite;
+    animation: dots 1.5s steps(5, end) infinite;
 }
 
 @keyframes dots {
