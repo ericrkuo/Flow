@@ -5,25 +5,31 @@ block append stylesheets
     link(rel='stylesheet', href='/stylesheets/backgroundCSS.css')
 block content
     .container.w-100.text-center
-        .col-sm-auto
-            h2.text-white.mt-5 Curious how this works? Follow our tutorial below!
-                #demo.carousel.slide(data-ride='carousel' data-interval='false')
-
-                    // Indicators
-                    ul.carousel-indicators
-                        li.active(data-target='#demo' data-slide-to='0')
-                        li(data-target='#demo' data-slide-to='1')
-                        li(data-target='#demo' data-slide-to='2')
-                    // The slideshow
-                    .carousel-inner
-                        .carousel-item.active
-                            img(src='https://blog.eurail.com/wp-content/uploads/2013/10/shutterstock_273176609.jpg' alt='Los Angeles')
-                        .carousel-item
-                            img(src='https://files.tripstodiscover.com/files/2014/06/Cinque-Tierre.jpg' alt='Chicago')
-                        .carousel-item
-                            img(src='../libraries/pictures/sanfran.png' alt='New York')
-                    // Left and right controls
-                    carousel-control-prev(href='#demo' data-slide='prev')
-                        span.carousel-control-prev-icon
-                    carousel-control-next(href='#demo' data-slide='next')
-                        span.carousel-control-next-icon
+        h2.text-white.mb-4 Curious how this works? Follow our tutorial below!
+        #demo.carousel.slide(data-ride='carousel' data-interval='false')
+            ol.carousel-indicators
+                li.active(data-target="#demo" data-slide-to="0")
+                li(data-target="#demo" data-slide-to="1")
+                li(data-target="#demo" data-slide-to="2")
+            .carousel-inner
+                .carousel-item.active
+                    img.d-flex.w-100(src='https://cdn.wallpapersafari.com/27/49/pVmbgv.jpg' alt='Los Angeles')
+                    .carousel-caption.d-none.d-md-block
+                        h5 First slide label
+                        p I am some text
+                .carousel-item
+                    img.d-flex.w-100(src='https://odesza.com/wp-content/uploads/2017/08/ODESZA-Backgrounds-Desktop-1440.jpg' alt='Chicago')
+                    .carousel-caption.d-none.d-md-block
+                        h5 Second slide label
+                        p I am some text
+                .carousel-item
+                    img.d-flex.w-100(src='https://cutewallpaper.org/21/wallpaper-720/1080-X-720-Background,-Hd-Wallpapers-and-backgrounds-Download-.jpg' alt='Los Angeles')
+                    .carousel-caption.d-none.d-md-block
+                        h5 Third slide label
+                        p I am some text
+            a.carousel-control-prev(href='#demo' role='button' data-slide='prev')
+                span.carousel-control-prev-icon(aria-hidden='true')
+                span.sr-only Previous
+            a.carousel-control-next(href='#demo' role='button' data-slide='next')
+                span.carousel-control-next-icon(aria-hidden='true')
+                span.sr-only Next
