@@ -1,7 +1,7 @@
 let video = document.getElementById('video');
 let canvas = document.getElementById('canvas');
-let beforeCaptureGroup = document.getElementById('beforeCaptureGroup');
-let afterCaptureGroup = document.getElementById('afterCaptureGroup');
+let beforeCaptureButtons = document.getElementById('beforeCaptureGroup');
+let afterCaptureButtons = document.getElementById('afterCaptureGroup');
 let takePhotoButton = document.getElementById('take-photo');
 let tryAgainButton = document.getElementById('try-again');
 let getTracksButton = document.getElementById('get-tracks');
@@ -20,12 +20,12 @@ $(function () {
 })
 
 video.addEventListener("animationend", ()=> {
-    show([beforeCaptureGroup]);
+    show([beforeCaptureButtons]);
 });
 
 async function init() {
     try {
-        hide([canvas, afterCaptureGroup, beforeCaptureGroup, loadingDiv]);
+        hide([canvas, afterCaptureButtons, beforeCaptureButtons, loadingDiv]);
         stream = await navigator.mediaDevices.getUserMedia(constraints);
         handleSuccess(stream);
     } catch (err) {
@@ -38,7 +38,7 @@ function handleSuccess(stream) {
     video.srcObject = stream;
 
     if (video.className === "video-no-animation") {
-        show([beforeCaptureGroup]);
+        show([beforeCaptureButtons]);
     }
 }
 
@@ -102,13 +102,13 @@ tryAgainButton.addEventListener("click", () => {
 
 function hideAndShowHTMLElementsForTryAgainButton() {
     video.className = "video-no-animation";
-    show([video, beforeCaptureGroup]);
-    hide([afterCaptureGroup, canvas]);
+    show([video]);
+    hide([afterCaptureButtons, canvas]);
 }
 
 function hideAndShowHTMLElementsForCaptureButton() {
-    hide([video, beforeCaptureGroup]);
-    show([afterCaptureGroup, canvas]);
+    hide([video, beforeCaptureButtons]);
+    show([afterCaptureButtons, canvas]);
 }
 
 function hide(elements) {
