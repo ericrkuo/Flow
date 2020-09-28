@@ -13,6 +13,22 @@ scopes = ['user-read-private',
     'user-read-private',
     'playlist-read-collaborative'];
 
+/**
+ * Generates a random string containing numbers and letters
+ * @param  {number} length The length of the string
+ * @return {string} The generated string
+ */
+let generateRandomString = function(length) {
+    var text = '';
+    var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+    for (var i = 0; i < length; i++) {
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+    return text;
+};
+
+let stateKey = 'spotify_auth_state';
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -23,11 +39,27 @@ router.get('/login', (req, res) => {
     let spotifyApi = req.app.locals.main.spotifyApi
     let html = spotifyApi.createAuthorizeURL(scopes);
     console.log(html);
-    res.redirect(html + "&show_dialog=true")
+
+    let state = generateRandomString(16);
+    res.cookie(stateKey, state);
+
+    let qs = require('querystring');
+    res.redirect(html + "&state=" + state + "&show_dialog=true")
 });
 
 router.get('/callback', async (req, res) => {
-    // TODO: callback not safe, need to use implement random hash string to encrypt callback, look at Spotify docs
+    let state = req.query.state || null;
+    let storedState = req.cookies ? req.cookies[stateKey] : null;
+
+    if (state === null || state !== storedState) {
+        let qs = require('querystring');
+        res.redirect('/#' +
+            qs.stringify({
+                error: 'state_mismatch'
+            }));
+        return;
+    }
+
     let spotifyApi = req.app.locals.main.spotifyApi
     const {code} = req.query;
     console.log(code);
