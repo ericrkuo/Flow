@@ -1,4 +1,5 @@
 var express = require('express');
+let qs = require('querystring');
 var router = express.Router();
 
 scopes = ['user-read-private',
@@ -42,8 +43,6 @@ router.get('/login', (req, res) => {
 
     let state = generateRandomString(16);
     res.cookie(stateKey, state);
-
-    let qs = require('querystring');
     res.redirect(html + "&state=" + state + "&show_dialog=true")
 });
 
@@ -52,7 +51,6 @@ router.get('/callback', async (req, res) => {
     let storedState = req.cookies ? req.cookies[stateKey] : null;
 
     if (state === null || state !== storedState) {
-        let qs = require('querystring');
         res.redirect('/#' +
             qs.stringify({
                 error: 'state_mismatch'
