@@ -239,13 +239,11 @@ function createPlaylistRow(id) {
 
     row.addEventListener('click', () => {
         if (playlistMap.has(id)) {
-            console.log('removing: ' + id);
             playlistMap.delete(id);
 
             row.classList.remove('fill');
             row.classList.add('unfill');
         } else {
-            console.log('putting: ' + id);
             playlistMap.set(id, id);
 
             row.classList.remove('unfill');
