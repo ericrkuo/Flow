@@ -1,4 +1,5 @@
 const Err = require("./Error");
+const {executeMethod} = require("../service/SpotifyApiWrapper");
 const {RefreshCredential} = require("./RefreshCredential");
 
 class Emotion {
@@ -708,17 +709,15 @@ class Emotion {
     constructor(spotifyApi) {
         this.spotifyApi = spotifyApi;
         this.features = ["danceability", "energy", "loudness", "speechiness", "acousticness", "instrumentalness", "liveness", "valence", "tempo"];
-        this.refreshCredential = new RefreshCredential(this.spotifyApi);
     }
 
     getFeatures(mood) {
         if (typeof mood !== 'string' || !this.emotionMap[mood]) return Promise.reject(new Err.InvalidInputError(mood + " is not a recognized mood, cannot get audio Features"));
         let numTracks = this.emotionMap[mood].length;
 
-        return this.refreshCredential.tryRefreshCredential()
-            .then(() => {
-                return this.spotifyApi.getAudioFeaturesForTracks(this.emotionMap[mood]);
-            })
+        return executeMethod(() => {
+            return this.spotifyApi.getAudioFeaturesForTracks(this.emotionMap[mood])
+        })
             .then((res) => {
                 if (!res || !res.body || !res.body["audio_features"]) throw new Err.InvalidResponseError("Could not get audio features from Emotion");
                 let songFeatures = {};

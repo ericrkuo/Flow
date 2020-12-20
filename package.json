@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "test": "mocha test/**/AzureFaceAPI.spec.js --timeout 5000",
-    "test2": "mocha test/**/*.js"
+    "test": "mocha test/**/*.js --timeout 20000"
   },
   "dependencies": {
     "3": "^2.1.0",

@@ -4,11 +4,12 @@ const {Emotion} = require("../controllers/Emotion");
 const sampleDataURL = require("./sampleDataURL");
 const SpotifyWebApi = require('spotify-web-api-node');
 const Err = require("../controllers/Error");
+const {RefreshCredential} = require("../controllers/RefreshCredential");
 
 let emotion;
 
-describe("unit test for Spotify", function () {
-    before(function () {
+describe("unit test for Emotion", function () {
+    before(async function () {
         require('dotenv').config();
         let spotifyApi = new SpotifyWebApi({
             clientId: process.env.SPOTIFY_API_ID,
@@ -17,6 +18,8 @@ describe("unit test for Spotify", function () {
             refreshToken: process.env.REFRESH_TOKEN,
         });
         emotion = new Emotion(spotifyApi);
+        let refreshCredential = new RefreshCredential(spotifyApi);
+        await refreshCredential.tryRefreshCredential()
     });
 
     it("test getFeatures - sadness", function () {
@@ -32,14 +35,11 @@ describe("unit test for Spotify", function () {
 
     it("test getFeatures - multiple emotions", function () {
         let emotions = ["anger", "contempt", "disgust", "fear", "happiness", "neutral", "sadness", "surprise"];
-        return emotion.refreshCredential.tryRefreshCredential()
-            .then(() => {
-                let promises = [];
-                for (let e of emotions) {
-                    promises.push(emotion.getFeatures(e));
-                }
-                return Promise.all(promises);
-            })
+        let promises = [];
+        for (let e of emotions) {
+            promises.push(emotion.getFeatures(e));
+        }
+        return Promise.all(promises)
             .then((resArray) => {
                 chai.expect(resArray.length).to.be.equal(emotions.length);
                 for (let res of resArray) {

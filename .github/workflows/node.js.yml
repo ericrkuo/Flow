@@ -30,3 +30,8 @@ jobs:
       env:
         CI: true
         AZUREKEY: ${{secrets.AZUREKEY}}
+        SPOTIFY_API_ID: ${{secrets.SPOTIFY_API_ID}}
+        SPOTIFY_CLIENT_SECRET: ${{secrets.SPOTIFY_CLIENT_SECRET}}
+        CALLBACK_URL: ${{secrets.CALLBACK_URL}}
+        ACCESS_TOKEN: ${{secrets.ACCESS_TOKEN}}
+        REFRESH_TOKEN: ${{secrets.REFRESH_TOKEN}}

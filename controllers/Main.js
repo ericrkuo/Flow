@@ -4,6 +4,7 @@ const {Spotify} = require("./Spotify");
 const {Emotion} = require("./Emotion");
 const SpotifyWebApi = require('spotify-web-api-node');
 const Err = require("./Error");
+const {RefreshCredential} = require("./RefreshCredential");
 const DESIRED_NUM_SONGS = 30;
 
 class Main {
@@ -34,6 +35,7 @@ class Main {
         this.emotion = new Emotion(this.spotifyApi);
         this.spotify = new Spotify(this.spotifyApi);
         this.kMean = new KMean();
+        this.refreshCredential = new RefreshCredential(this.spotifyApi)
         this.result = null;
     }
 
@@ -45,7 +47,10 @@ class Main {
         let songX;
         let newArrayOfSongIDS;
         let emotions;
-        return this.azureFaceAPI.getEmotions(this.dataURL)
+        return this.refreshCredential.tryRefreshCredential()
+            .then(() => {
+                return this.azureFaceAPI.getEmotions(this.dataURL)
+            })
             .then((res) => {
                 emotions = res;
                 let dominantEmotion = this.emotion.getDominantExpression(res);
@@ -61,7 +66,6 @@ class Main {
                 audioFeatureData["X"] = songX[1];
                 let [bestK, clusters, map] = this.kMean.getOptimalKClusters(audioFeatureData);
                 let arrayOfSongIDS = this.getSongIDsOfClusterContainingSongX(clusters);
-                this.printOutAllSongTitles(arrayOfSongIDS);
                 newArrayOfSongIDS = this.getDesiredNumberSongs(bestK, arrayOfSongIDS, map);
                 return this.setResults(newArrayOfSongIDS, audioFeatureData, this.spotify.mood, emotions);
             })
@@ -91,7 +95,10 @@ class Main {
             "sadness": 0,
             "surprise": 0.004
         };
-        return this.emotion.getFeatures(dominantEmotion)
+        return this.refreshCredential.tryRefreshCredential()
+            .then(() => {
+                return this.emotion.getFeatures(dominantEmotion)
+            })
             .then((feature) => {
                 songX = ["X", feature];
                 this.spotify.mood = dominantEmotion;
@@ -101,7 +108,6 @@ class Main {
                 audioFeatureData["X"] = songX[1];
                 let [bestK, clusters, map] = this.kMean.getOptimalKClusters(audioFeatureData);
                 let arrayOfSongIDS = this.getSongIDsOfClusterContainingSongX(clusters);
-                this.printOutAllSongTitles(arrayOfSongIDS);
                 newArrayOfSongIDS = this.getDesiredNumberSongs(bestK, arrayOfSongIDS, map);
                 return this.setResults(newArrayOfSongIDS, audioFeatureData, this.spotify.mood, emotions);
             })

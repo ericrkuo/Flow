@@ -2,12 +2,13 @@ var chai = require("chai");
 const {Spotify} = require("../controllers/Spotify");
 const SpotifyWebApi = require('spotify-web-api-node');
 const Err = require("../controllers/Error");
+const {RefreshCredential} = require("../controllers/RefreshCredential");
 
 let spotify;
 let spotifyApi;
 
 describe("unit test for Spotify", function () {
-    before(function () {
+    before(async function () {
         require('dotenv').config();
         spotifyApi = new SpotifyWebApi({
             clientId: process.env.SPOTIFY_API_ID,
@@ -15,6 +16,8 @@ describe("unit test for Spotify", function () {
             redirectUri: process.env.CALLBACK_URL,
             refreshToken: process.env.REFRESH_TOKEN,
         });
+        let refreshCredential = new RefreshCredential(spotifyApi);
+        await refreshCredential.tryRefreshCredential()
     });
 
     beforeEach(() => {
@@ -57,7 +60,6 @@ describe("unit test for Spotify", function () {
         return spotify.addTopTracks()
             .then((res) => {
                 console.log("# TOP SONGS ADDED: " + spotify.trackHashMap.size);
-                printOutSongNames();
                 chai.assert(res);
             })
             .catch((err) => {
@@ -114,7 +116,6 @@ describe("unit test for Spotify", function () {
             .then((res) => {
                 chai.assert(res);
                 console.log("# RECENT SONGS ADDED: " + spotify.trackHashMap.size);
-                printOutSongNames();
             })
             .catch((err) => {
                 console.log(err);
@@ -193,7 +194,7 @@ describe("unit test for Spotify", function () {
             })
     })
 
-    it("test createNewPlaylist - WILL CREATE PLAYLIST", function () {
+    xit("test createNewPlaylist - WILL CREATE PLAYLIST", function () {
         spotify.mood = "happiness";
         return spotify.createNewPlaylist()
             .then((result) => {
@@ -220,7 +221,7 @@ describe("unit test for Spotify", function () {
             });
     })
 
-    it("test getNewPlaylist expect success - WILL CREATE PLAYLIST", function () {
+    xit("test getNewPlaylist expect success - WILL CREATE PLAYLIST", function () {
         let trackURIs = ["spotify:track:1ue7zm5TVVvmoQV8lK6K2H", "spotify:track:07ARBxsDbIdAxLwuRCkGJ4", "spotify:track:2KoHxhRyWxJzA0VafWd5Nk", "spotify:track:7i2DJ88J7jQ8K7zqFX2fW8", "spotify:track:3R6dPfF2yBO8mHySW1XDAa", "spotify:track:2b8fOow8UzyDFAE27YhOZM", "spotify:track:7e6FvCvngX5job1PUYIIIL", "spotify:track:2ZTYlnhhV1UAReg7wIGolx", "spotify:track:6vzLbfskWigBsCzNdB0kfE", "spotify:track:2ktxr00GpTtbMNeBjNeY8D", "spotify:track:5HM5Km4Ydmcj9okVC6AxOu", "spotify:track:6lruHh1jF7ezgbLv72xYmf", "spotify:track:6yHkPtl6UQ7RjtJLBPzbJw", "spotify:track:4umIPjkehX1r7uhmGvXiSV", "spotify:track:7k6tAZp4m93oswrPqSfBbc", "spotify:track:4JuZQeSRYJfLCqBgBIxxrR", "spotify:track:0nhVrTiCGiGRCoZOJiWzm1", "spotify:track:4TnjEaWOeW0eKTKIEvJyCa", "spotify:track:3npvm6Dy5eSZioXJ2KF4xY", "spotify:track:2nC3QhMI9reBIOWutbU3Tj", "spotify:track:2tnVG71enUj33Ic2nFN6kZ", "spotify:track:6Yx181fZzA0YE2EkUsYruq"];
         spotify.mood = "happiness";
 
