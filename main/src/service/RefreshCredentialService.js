@@ -1,7 +1,7 @@
-const Err = require("./Error");
-const {executeMethod} = require("../service/SpotifyApiWrapper");
+const Err = require("../constant/Error");
+const {executeMethod} = require("./SpotifyApiWrapper");
 
-class RefreshCredential {
+class RefreshCredentialService {
 
     constructor(spotifyApi) {
         require('dotenv').config();
@@ -76,4 +76,4 @@ class RefreshCredential {
     }
 }
 
-module.exports.RefreshCredential = RefreshCredential;
+module.exports.RefreshCredentialService = RefreshCredentialService;

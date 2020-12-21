@@ -1,5 +1,5 @@
 var express = require('express');
-const {Main} = require("../controllers/Main");
+const {Main} = require("../Main");
 var router = express.Router();
 
 /* GET home page. */
@@ -9,12 +9,12 @@ router.get('/', function (req, res, next) {
 
 function checkCredentials(req) {
     let main = req.app.locals.main;
-    if (!main || !main.spotify || !main.spotifyApi || !main.spotify.refreshCredential) {
+    if (!main || !main.spotifyService || !main.spotifyApi || !main.refreshCredentialService) {
         req.app.locals.main = new Main();
         return Promise.resolve(false);
     }
 
-    return main.spotify.refreshCredential.checkCredentials()
+    return main.refreshCredentialService.checkCredentials()
         .then((result) => {
             let accessToken = req.app.locals.main.spotifyApi.getAccessToken();
             let refreshToken = req.app.locals.main.spotifyApi.getRefreshToken();

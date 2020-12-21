@@ -1,20 +1,20 @@
-const {KMean} = require("./KMean");
-const {AzureFaceAPI} = require("./AzureFaceAPI");
-const {Spotify} = require("./Spotify");
-const {Emotion} = require("./Emotion");
+const {KMean} = require("./clustering/KMean");
+const {AzureFaceAPIService} = require("./service/AzureFaceAPIService");
+const {SpotifyService} = require("./service/SpotifyService");
+const {EmotionService} = require("./service/EmotionService");
 const SpotifyWebApi = require('spotify-web-api-node');
-const Err = require("./Error");
-const {RefreshCredential} = require("./RefreshCredential");
+const Err = require("./constant/Error");
+const {RefreshCredentialService} = require("./service/RefreshCredentialService");
 const DESIRED_NUM_SONGS = 30;
 
 class Main {
     /*
     * high level steps
     * 1. receive a dataURL from image
-    * 2. use AzureFaceAPI.js to get the emotions
+    * 2. use AzureFaceAPIService.js to get the emotions
     * 3. decide on dominant emotion
-    * 4. get song features of emotion from Emotion.js
-    * 5. get all user related songs from Spotify.js
+    * 4. get song features of emotion from EmotionService.js
+    * 5. get all user related songs from SpotifyService.js
     * 6. add song X to data
     * 7. pass data into KMean to get cluster results
     * 8. find song X in cluster
@@ -26,16 +26,16 @@ class Main {
     constructor() {
         require('dotenv').config();
         this.dataURL = null;
-        this.azureFaceAPI = new AzureFaceAPI();
+        this.azureFaceAPIService = new AzureFaceAPIService();
         this.spotifyApi = new SpotifyWebApi({
             clientId: process.env.SPOTIFY_API_ID,
             clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
             redirectUri: process.env.CALLBACK_URL,
         });
-        this.emotion = new Emotion(this.spotifyApi);
-        this.spotify = new Spotify(this.spotifyApi);
+        this.emotionService = new EmotionService(this.spotifyApi);
+        this.spotifyService = new SpotifyService(this.spotifyApi);
         this.kMean = new KMean();
-        this.refreshCredential = new RefreshCredential(this.spotifyApi)
+        this.refreshCredentialService = new RefreshCredentialService(this.spotifyApi)
         this.result = null;
     }
 
@@ -47,27 +47,27 @@ class Main {
         let songX;
         let newArrayOfSongIDS;
         let emotions;
-        return this.refreshCredential.tryRefreshCredential()
+        return this.refreshCredentialService.tryRefreshCredential()
             .then(() => {
-                return this.azureFaceAPI.getEmotions(this.dataURL)
+                return this.azureFaceAPIService.getEmotions(this.dataURL)
             })
             .then((res) => {
                 emotions = res;
-                let dominantEmotion = this.emotion.getDominantExpression(res);
-                this.spotify.mood = dominantEmotion;
-                return this.emotion.getFeatures(dominantEmotion);
+                let dominantEmotion = this.emotionService.getDominantExpression(res);
+                this.spotifyService.mood = dominantEmotion;
+                return this.emotionService.getFeatures(dominantEmotion);
             })
             .then((feature) => {
                 songX = ["X", feature];
-                this.spotify.trackHashMap.set("X", feature);
-                return this.spotify.getAllAudioFeatures();
+                this.spotifyService.trackHashMap.set("X", feature);
+                return this.spotifyService.getAllAudioFeatures();
             })
             .then((audioFeatureData) => {
                 audioFeatureData["X"] = songX[1];
                 let [bestK, clusters, map] = this.kMean.getOptimalKClusters(audioFeatureData);
                 let arrayOfSongIDS = this.getSongIDsOfClusterContainingSongX(clusters);
                 newArrayOfSongIDS = this.getDesiredNumberSongs(bestK, arrayOfSongIDS, map);
-                return this.setResults(newArrayOfSongIDS, audioFeatureData, this.spotify.mood, emotions);
+                return this.setResults(newArrayOfSongIDS, audioFeatureData, this.spotifyService.mood, emotions);
             })
             .then(() => {
                 return newArrayOfSongIDS;
@@ -95,21 +95,21 @@ class Main {
             "sadness": 0,
             "surprise": 0.004
         };
-        return this.refreshCredential.tryRefreshCredential()
+        return this.refreshCredentialService.tryRefreshCredential()
             .then(() => {
-                return this.emotion.getFeatures(dominantEmotion)
+                return this.emotionService.getFeatures(dominantEmotion)
             })
             .then((feature) => {
                 songX = ["X", feature];
-                this.spotify.mood = dominantEmotion;
-                return this.spotify.getAllAudioFeatures();
+                this.spotifyService.mood = dominantEmotion;
+                return this.spotifyService.getAllAudioFeatures();
             })
             .then((audioFeatureData) => {
                 audioFeatureData["X"] = songX[1];
                 let [bestK, clusters, map] = this.kMean.getOptimalKClusters(audioFeatureData);
                 let arrayOfSongIDS = this.getSongIDsOfClusterContainingSongX(clusters);
                 newArrayOfSongIDS = this.getDesiredNumberSongs(bestK, arrayOfSongIDS, map);
-                return this.setResults(newArrayOfSongIDS, audioFeatureData, this.spotify.mood, emotions);
+                return this.setResults(newArrayOfSongIDS, audioFeatureData, this.spotifyService.mood, emotions);
             })
             .then((res) => {
                 let self = this;
@@ -128,7 +128,7 @@ class Main {
         this.result = {tracks: {}, userInfo: {}, mood: {}};
         for (let songID of songIDs) {
             this.result.tracks[songID] = {
-                track: this.spotify.trackHashMap.get(songID),
+                track: this.spotifyService.trackHashMap.get(songID),
                 audioFeatures: audioFeatureData[songID]
             };
         }
@@ -136,7 +136,7 @@ class Main {
         this.result.mood.dominantMood = mood;
         this.result.mood.emotions = emotions;
 
-        return this.spotify.getUserInfo()
+        return this.spotifyService.getUserInfo()
             .then((res) => {
                 this.result.userInfo = res;
             }).catch((err) => {
@@ -203,14 +203,14 @@ class Main {
     printOutAllSongTitles(cluster) {
         for (let song of cluster) {
             if (song !== "X") {
-                console.log(this.spotify.trackHashMap.get(song).name);
+                console.log(this.spotifyService.trackHashMap.get(song).name);
             }
         }
     }
 
     // REQUIRES: array of track URIs in format ["spotify:track:1ue7zm5TVVvmoQV8lK6K2H", ...]
     createMoodPlaylist(tracks) {
-        return this.spotify.getNewPlaylist(tracks);
+        return this.spotifyService.getNewPlaylist(tracks);
     }
 }
 

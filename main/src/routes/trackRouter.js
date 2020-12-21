@@ -2,7 +2,7 @@ var express = require('express');
 const {trackLimiter} = require("./rateLimiter");
 const {checkCredentials} = require("./indexRouter");
 var router = express.Router();
-const {Main} = require("../controllers/Main")
+const {Main} = require("../Main")
 
 //#region Sample Data For Testing Purposes
 let tracks = {};

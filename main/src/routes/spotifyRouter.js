@@ -37,9 +37,9 @@ router.get('/callback', async (req, res) => {
         spotifyApi.setAccessToken(access_token);
         spotifyApi.setRefreshToken(refresh_token);
         console.log("SPOTIFY - set access and refresh tokens");
-        console.log("ACCESS TOKEN: " + req.app.locals.main.spotify.spotifyApi.getAccessToken());
+        console.log("ACCESS TOKEN: " + req.app.locals.main.spotifyService.spotifyApi.getAccessToken());
         console.log("\n");
-        console.log("REFRESH TOKEN: " + req.app.locals.main.spotify.spotifyApi.getRefreshToken());
+        console.log("REFRESH TOKEN: " + req.app.locals.main.spotifyService.spotifyApi.getRefreshToken());
         res.redirect('/webcam');
     } catch (err) {
         res.redirect('/#/error/invalid token');

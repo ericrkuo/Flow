@@ -1,7 +1,7 @@
 var chai = require("chai");
-const {Main} = require("../controllers/Main");
-let sampleDataURL = require("./sampleDataURL");
-const Err = require("../controllers/Error");
+const {Main} = require("../src/Main");
+let sampleDataURL = require("./resources/sampleDataURL");
+const Err = require("../src/constant/Error");
 
 let main;
 describe("unit test for Main", function () {

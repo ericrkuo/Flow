@@ -1,7 +1,7 @@
-const Err = require("./Error");
-const {executeMethod} = require("../service/SpotifyApiWrapper");
+const Err = require("../constant/Error");
+const {executeMethod} = require("./SpotifyApiWrapper");
 
-class Spotify {
+class SpotifyService {
 
     /*
     * addRecentlyPlayedTracks()  - 50
@@ -478,4 +478,4 @@ class Spotify {
     }
 }
 
-module.exports.Spotify = Spotify;
+module.exports.SpotifyService = SpotifyService;
