@@ -22,7 +22,9 @@ class SpotifyService {
     }
 
     sampleFunction() {
-        return this.spotifyApi.getArtistAlbums('43ZHCT0cAZBISjO8DG9PnE');
+        return executeMethod( () => {
+            return this.spotifyApi.getArtistAlbums('43ZHCT0cAZBISjO8DG9PnE');
+        });
     }
 
     addAllTracksToHashMap() {
