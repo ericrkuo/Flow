@@ -8,12 +8,19 @@ let getTracksButton = document.getElementById('get-tracks');
 let errorMsgElement = document.getElementById('spanErrorMsg');
 let loadingDiv = document.getElementById("loader");
 let webcam = document.getElementById("webcam");
+let infoAlertClose = document.getElementById("infoAlertClose");
+let infoAlert = document.getElementById("infoAlert");
+let errorAlert = document.getElementById("errorAlert");
+let errorAlertClose = document.getElementById("errorAlertClose");
+let errorAlertSpan = document.getElementById("errorAlertSpan");
 
 let stream;
 
-$(document).on('click', '.alert-close', function() {
-    $(this).parent().hide();
-})
+//  TODO: Change everything to span and hide/show, dismissable, and add animation for fade
+//
+// $(document).on('click', '.alert-close', function() {
+//     $(this).parent().hide();
+// })
 
 
 const constraints = {
@@ -29,16 +36,26 @@ video.addEventListener("animationend", ()=> {
     show([beforeCaptureButtons]);
 });
 
+infoAlertClose.addEventListener("click", () => {
+    hide([infoAlert]);
+});
+
+errorAlertClose.addEventListener("click", () => {
+    hide([errorAlert]);
+});
+
 async function init() {
     try {
         hide([canvas, afterCaptureButtons, beforeCaptureButtons, loadingDiv]);
         $("#errorAlert").hide();
-        $('#infoAlert').append('<a class="close alert-close">&times</a>');
         stream = await navigator.mediaDevices.getUserMedia(constraints);
         handleSuccess(stream);
     } catch (err) {
-        $("#errorAlert").show().html("Sorry, we encountered an internal server error. " +
-            "Redirecting you in 5 seconds ... </br> </br>" + err.message);
+        show([errorAlert, errorAlertClose]);
+        $("#errorAlertSpan").html("Sorry, we encountered an internal server error. " +
+            "Redirecting you in 5 seconds ... </br> </br>" + err.message)
+        // $("#errorAlert").html("Sorry, we encountered an internal server error. " +
+        //     "Redirecting you in 5 seconds ... </br> </br>" + err.message);
         setTimeout(function() {
             location.href = "/webcam"
         }, 5000);
@@ -84,12 +101,12 @@ function postTracks(dataURL) {
             location.href = "/tracks";
         })
         .catch((error) => {
-            webcam.style.display = "flex";
-            loadingDiv.style.display = "none";
+            hide([loadingDiv]);
+            show([webcam]);
 
-            $("#infoAlert").hide();
             $("#header").hide();
-            $("#errorAlert").show().append('Sorry, we encountered an internal server error. ' +
+            show([errorAlert, errorAlertClose]);
+            $("#errorAlert").append('Sorry, we encountered an internal server error. ' +
                 error.response.data.errorMsg +'</span>');
 
             if(error.response.data.redirectLink) {
@@ -122,6 +139,7 @@ takePhotoButton.addEventListener("click", () => {
 
 tryAgainButton.addEventListener("click", () => {
     hideAndShowHTMLElementsForTryAgainButton();
+    show([infoAlert, infoAlertClose]);
     return init();
 });
 
@@ -129,7 +147,7 @@ function hideAndShowHTMLElementsForTryAgainButton() {
     video.className = "video-no-animation";
     show([video]);
     hide([afterCaptureButtons, canvas]);
-    $('#errorAlert').hide();
+    hide([errorAlert, errorAlertClose]);
 }
 
 function hideAndShowHTMLElementsForCaptureButton() {

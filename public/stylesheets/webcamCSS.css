@@ -3,12 +3,8 @@
 }
 
 .alert {
-    width: 70vmin;
+    width: 80vmin;
     display: inline-block;
-}
-
-#errorAlert {
-    position: absolute;
 }
 
 .video-animation {
