@@ -1,29 +1,17 @@
 var express = require('express');
 const {webcamLimiter} = require("./rateLimiter");
-const {checkCredentials} = require("./indexRouter");
+const {checkCredentials, refreshCredentialsIfExpired} = require("./middleware");
 var router = express.Router();
 const {Main} = require("../Main");
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
+router.get('/', checkCredentials, function (req, res, next) {
     // res.sendFile(path.join(__dirname+"/webcam.html"), {json: json});
     // res.sendFile(absolutePath.getAbsolutePath());
-
-    return checkCredentials(req)
-        .then((isCredentialValid) => {
-            if (isCredentialValid) {
-                return res.render("webcam");
-            } else {
-                return res.redirect("/spotify/login");
-            }
-        })
-        .catch((err) => {
-            // TODO: just in case checkCredentials throws an error (highly unlikely)
-            console.log(err);
-        })
+    return res.render("webcam");
 });
 
-router.post('/', webcamLimiter, function (req, res, next) {
+router.post('/', [webcamLimiter, refreshCredentialsIfExpired], function (req, res, next) {
     if (req.app.locals.main && req.body && req.body.dataURL) {
         let main = req.app.locals.main;
         main.dataURL = req.body.dataURL;

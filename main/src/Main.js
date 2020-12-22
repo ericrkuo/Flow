@@ -47,10 +47,7 @@ class Main {
         let songX;
         let newArrayOfSongIDS;
         let emotions;
-        return this.refreshCredentialService.tryRefreshCredential()
-            .then(() => {
-                return this.azureFaceAPIService.getEmotions(this.dataURL)
-            })
+        return this.azureFaceAPIService.getEmotions(this.dataURL)
             .then((res) => {
                 emotions = res;
                 let dominantEmotion = this.emotionService.getDominantExpression(res);
@@ -95,10 +92,7 @@ class Main {
             "sadness": 0,
             "surprise": 0.004
         };
-        return this.refreshCredentialService.tryRefreshCredential()
-            .then(() => {
-                return this.emotionService.getFeatures(dominantEmotion)
-            })
+        return this.emotionService.getFeatures(dominantEmotion)
             .then((feature) => {
                 songX = ["X", feature];
                 this.spotifyService.mood = dominantEmotion;
