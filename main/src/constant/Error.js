@@ -15,7 +15,7 @@ class InvalidResponseError extends Error {
 
 //#endregion
 
-//#region AzureFaceApi Errors
+//#region AzureFaceApiService Errors
 class NoUserDetectedError extends Error {
     constructor() {
         super("No user detected in photo");
@@ -32,7 +32,7 @@ class AzureFaceApiError extends Error {
 
 //#endregion
 
-//#region Spotify Errors
+//#region SpotifyService Errors
 class EmptyTracksError extends Error {
     constructor() {
         super("No tracks detected");
@@ -69,7 +69,7 @@ class InvalidDataURLError extends Error {
 
 //#endregion
 
-//#region RefreshCredential Errors
+//#region RefreshCredentialService Errors
 class RefreshCredentialError extends Error {
     constructor(message) {
         super(message);

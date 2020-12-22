@@ -1,14 +1,15 @@
 var chai = require("chai");
-const {AzureFaceAPI} = require("../controllers/AzureFaceAPI");
-const {Emotion} = require("../controllers/Emotion");
-const sampleDataURL = require("./sampleDataURL");
+const {AzureFaceAPIService} = require("../../src/service/AzureFaceAPIService");
+const {EmotionService} = require("../../src/service/EmotionService");
+const sampleDataURL = require("../resources/sampleDataURL");
 const SpotifyWebApi = require('spotify-web-api-node');
-const Err = require("../controllers/Error");
+const Err = require("../../src/constant/Error");
+const {RefreshCredentialService} = require("../../src/service/RefreshCredentialService");
 
-let emotion;
+let emotionService;
 
-describe("unit test for Spotify", function () {
-    before(function () {
+describe("unit test for EmotionService", function () {
+    before(async function () {
         require('dotenv').config();
         let spotifyApi = new SpotifyWebApi({
             clientId: process.env.SPOTIFY_API_ID,
@@ -16,11 +17,13 @@ describe("unit test for Spotify", function () {
             redirectUri: process.env.CALLBACK_URL,
             refreshToken: process.env.REFRESH_TOKEN,
         });
-        emotion = new Emotion(spotifyApi);
+        emotionService = new EmotionService(spotifyApi);
+        let refreshCredentialService = new RefreshCredentialService(spotifyApi);
+        await refreshCredentialService.tryRefreshCredential()
     });
 
     it("test getFeatures - sadness", function () {
-        return emotion.getFeatures("sadness")
+        return emotionService.getFeatures("sadness")
             .then((features) => {
                 console.log(features);
                 chai.assert(typeof features === 'object');
@@ -32,14 +35,11 @@ describe("unit test for Spotify", function () {
 
     it("test getFeatures - multiple emotions", function () {
         let emotions = ["anger", "contempt", "disgust", "fear", "happiness", "neutral", "sadness", "surprise"];
-        return emotion.refreshCredential.tryRefreshCredential()
-            .then(() => {
-                let promises = [];
-                for (let e of emotions) {
-                    promises.push(emotion.getFeatures(e));
-                }
-                return Promise.all(promises);
-            })
+        let promises = [];
+        for (let e of emotions) {
+            promises.push(emotionService.getFeatures(e));
+        }
+        return Promise.all(promises)
             .then((resArray) => {
                 chai.expect(resArray.length).to.be.equal(emotions.length);
                 for (let res of resArray) {
@@ -53,7 +53,7 @@ describe("unit test for Spotify", function () {
     });
 
     it("test getFeatures - null input", function () {
-        return emotion.getFeatures(null)
+        return emotionService.getFeatures(null)
             .then(() => {
                 chai.expect.fail("supposed to fail");
             })
@@ -64,7 +64,7 @@ describe("unit test for Spotify", function () {
     });
 
     it("test getFeatures - undefined input", function () {
-        return emotion.getFeatures(undefined)
+        return emotionService.getFeatures(undefined)
             .then(() => {
                 chai.expect.fail("supposed to fail");
             })
@@ -75,7 +75,7 @@ describe("unit test for Spotify", function () {
     });
 
     it("test getFeatures - wrong input type", function () {
-        return emotion.getFeatures(2)
+        return emotionService.getFeatures(2)
             .then(() => {
                 chai.expect.fail("supposed to fail");
             })
@@ -86,7 +86,7 @@ describe("unit test for Spotify", function () {
     });
 
     it("test getFeatures - unrecognized input", function () {
-        return emotion.getFeatures("happpiness")
+        return emotionService.getFeatures("happpiness")
             .then(() => {
                 chai.expect.fail("supposed to fail");
             })
@@ -96,11 +96,11 @@ describe("unit test for Spotify", function () {
             });
     });
 
-    it("test getDominantExpression - integrated with AzureFaceAPI", function () {
-        let azureFaceAPI = new AzureFaceAPI();
-        return azureFaceAPI.getEmotions(sampleDataURL.dataURL1)
+    it("test getDominantExpression - integrated with AzureFaceAPIService", function () {
+        let azureFaceAPIService = new AzureFaceAPIService();
+        return azureFaceAPIService.getEmotions(sampleDataURL.dataURL1)
             .then((res) => {
-                let dominantExpression = emotion.getDominantExpression(res);
+                let dominantExpression = emotionService.getDominantExpression(res);
                 chai.expect(dominantExpression).to.be.equal("neutral");
                 console.log(dominantExpression);
             }).catch((err) => {
@@ -121,7 +121,7 @@ describe("unit test for Spotify", function () {
                 sadness: 0,
                 surprise: 0
             };
-            let result = emotion.getDominantExpression(data);
+            let result = emotionService.getDominantExpression(data);
             chai.expect(result).to.be.equal("neutral");
         } catch (e) {
             console.log(e);
@@ -131,7 +131,7 @@ describe("unit test for Spotify", function () {
 
     it("test getDominantExpressions - invalid input null", function () {
         try {
-            emotion.getDominantExpression(null);
+            emotionService.getDominantExpression(null);
             chai.expect.fail("supposed to fail");
         } catch (e) {
             console.log(e);
@@ -141,7 +141,7 @@ describe("unit test for Spotify", function () {
 
     it("test getDominantExpressions - invalid input wrong type", function () {
         try {
-            emotion.getDominantExpression("null");
+            emotionService.getDominantExpression("null");
             chai.expect.fail("supposed to fail");
         } catch (e) {
             console.log(e);
@@ -151,7 +151,7 @@ describe("unit test for Spotify", function () {
 
     it("test getDominantExpressions - invalid input array", function () {
         try {
-            emotion.getDominantExpression([]);
+            emotionService.getDominantExpression([]);
             chai.expect.fail("supposed to fail");
         } catch (e) {
             console.log(e);
