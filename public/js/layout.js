@@ -3,17 +3,14 @@ let homeButton = document.getElementById("home");
 let aboutUsButton = document.getElementById("info");
 
 tutorialButton.addEventListener("click", ()=>{
-    console.log("click");
    location.href = "/tutorial";
 });
 
 homeButton.addEventListener("click", ()=>{
-    console.log("click");
     location.href = "/";
 });
 
 aboutUsButton.addEventListener("click", ()=>{
-    console.log("click");
     location.href = "/info";
 });
 
