@@ -4,7 +4,7 @@
  * */
 function checkCredentials(req, res, next) {
     let main = req.app.locals.main;
-    if (!isMainValid) {
+    if (!isMainAndSpotifyApiAndRefreshCredentialValid) {
         req.app.locals.main = new Main();
         return res.redirect('/spotify/login');
     }
@@ -26,7 +26,7 @@ function checkCredentials(req, res, next) {
  * */
 function refreshCredentialsIfExpired(req, res, next) {
     let main = req.app.locals.main;
-    if (!isMainValid) {
+    if (!isMainAndSpotifyApiAndRefreshCredentialValid) {
         req.app.locals.main = new Main();
         return res.redirect('/spotify/login');
     }
@@ -38,7 +38,7 @@ function refreshCredentialsIfExpired(req, res, next) {
             }
         })
         .then(() => {
-            next()
+            return next()
         })
         .catch((err) => {
             throw err;
@@ -46,9 +46,9 @@ function refreshCredentialsIfExpired(req, res, next) {
 }
 
 /**
- * Checks whether the instance Main is valid
+ * Checks whether the instance Main, spotifyApi, and refreshCredentialService are valid
  * */
-function isMainValid(main) {
+function isMainAndSpotifyApiAndRefreshCredentialValid(main) {
     return main && main.spotifyApi && main.refreshCredentialService && main.spotifyApi.getAccessToken() && main.spotifyApi.getRefreshToken()
 }
 
