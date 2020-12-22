@@ -6,18 +6,18 @@ var logger = require('morgan');
 
 require('dotenv').config();
 
-var indexRouter = require('./routes/indexRouter');
-var usersRouter = require('./routes/users');
-var webcamRouter = require('./routes/webcamRouter');
-var spotifyRouter = require('./routes/spotifyRouter');
-var tracksRouter = require('./routes/trackRouter');
-var tutorialRouter = require('./routes/tutorialRouter')
-var infoRouter = require('./routes/infoRouter')
+var indexRouter = require('./main/src/routes/indexRouter');
+var usersRouter = require('./main/src/routes/users');
+var webcamRouter = require('./main/src/routes/webcamRouter');
+var spotifyRouter = require('./main/src/routes/spotifyRouter');
+var tracksRouter = require('./main/src/routes/trackRouter');
+var tutorialRouter = require('./main/src/routes/tutorialRouter')
+var infoRouter = require('./main/src/routes/infoRouter')
 
 var app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'public/views'));
 app.set('view engine', 'pug');
 
 app.use(logger('dev'));
@@ -52,6 +52,6 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
-const {Main} = require("./controllers/Main")
+const {Main} = require("./main/src/Main")
 app.locals.main = new Main();
 app.locals.globalString = "I am a global string in app.js";

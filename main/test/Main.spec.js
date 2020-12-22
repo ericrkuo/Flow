@@ -1,14 +1,17 @@
 var chai = require("chai");
-const {Main} = require("../controllers/Main");
-let sampleDataURL = require("./sampleDataURL");
-const Err = require("../controllers/Error");
+const {Main} = require("../src/Main");
+let sampleDataURL = require("./resources/sampleDataURL");
+const Err = require("../src/constant/Error");
+const {RefreshCredentialService} = require("../src/service/RefreshCredentialService");
 
 let main;
 describe("unit test for Main", function () {
-    before(function () {
+    before(async function () {
         require('dotenv').config();
         main = new Main();
         main.spotifyApi.setRefreshToken(process.env.REFRESH_TOKEN);
+        let refreshCredentialService = new RefreshCredentialService(main.spotifyApi);
+        await refreshCredentialService.tryRefreshCredential()
     });
 
     it("test getRelevantSongsTestingPurposes", function () {
