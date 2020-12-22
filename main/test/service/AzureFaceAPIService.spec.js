@@ -1,18 +1,18 @@
 var chai = require("chai");
-var sampleDataURL = require("./sampleDataURL");
-const Err = require("../controllers/Error");
-const {AzureFaceAPI} = require("../controllers/AzureFaceAPI");
+var sampleDataURL = require("../resources/sampleDataURL");
+const Err = require("../../src/constant/Error");
+const {AzureFaceAPIService} = require("../../src/service/AzureFaceAPIService");
 
-let azureFaceAPI;
+let azureFaceAPIService;
 describe("unit test for dataURL", function () {
 
     before(function () {
         require('dotenv').config();
-        azureFaceAPI = new AzureFaceAPI();
+        azureFaceAPIService = new AzureFaceAPIService();
     });
 
     it("test getEmotions - call successful Azure Face API", function () {
-        return azureFaceAPI.getEmotions(sampleDataURL.dataURL1)
+        return azureFaceAPIService.getEmotions(sampleDataURL.dataURL1)
             .then((res) => {
                 console.log(res);
                 chai.assert(typeof res === 'object' && !Array.isArray(res));
@@ -23,7 +23,7 @@ describe("unit test for dataURL", function () {
     });
 
     it("test getEmotions - null input", function () {
-        return azureFaceAPI.getEmotions(null)
+        return azureFaceAPIService.getEmotions(null)
             .then(() => {
                 chai.expect.fail("supposed to fail");
             }).catch((err) => {
@@ -33,7 +33,7 @@ describe("unit test for dataURL", function () {
     });
 
     it("test getEmotions - wrong input type", function () {
-        return azureFaceAPI.getEmotions(2)
+        return azureFaceAPIService.getEmotions(2)
             .then(() => {
                 chai.expect.fail("supposed to fail");
             }).catch((err) => {
@@ -43,7 +43,7 @@ describe("unit test for dataURL", function () {
     });
 
     it("test getEmotions - invalid dataURL string", function () {
-        return azureFaceAPI.getEmotions("null")
+        return azureFaceAPIService.getEmotions("null")
             .then(() => {
                 chai.expect.fail("supposed to fail");
             }).catch((err) => {
@@ -53,7 +53,7 @@ describe("unit test for dataURL", function () {
     });
 
     it("test getEmotions - no user detected in image", function () {
-        return azureFaceAPI.getEmotions(sampleDataURL.emptyDataURL)
+        return azureFaceAPIService.getEmotions(sampleDataURL.emptyDataURL)
             .then((res) => {
                 chai.expect.fail("supposed to fail");
             }).catch((err) => {
@@ -63,7 +63,7 @@ describe("unit test for dataURL", function () {
     });
 
     it("test getEmotions - multiple face data URL", function () {
-        return azureFaceAPI.getEmotions(sampleDataURL.multiFaceDataURL)
+        return azureFaceAPIService.getEmotions(sampleDataURL.multiFaceDataURL)
             .then((res) => {
                 let maxEmotion, maxVal = -1;
                 for (const [emotion, val] of Object.entries(res)) {
@@ -82,7 +82,7 @@ describe("unit test for dataURL", function () {
 
     it("test handleAzureFaceAPIResponse - response null input", function () {
         try {
-            azureFaceAPI.handleAzureFaceAPIResponse(null);
+            azureFaceAPIService.handleAzureFaceAPIResponse(null);
             chai.expect.fail("supposed to fail");
         } catch (e) {
             chai.expect(e).to.be.instanceOf(Err.InvalidResponseError);
@@ -91,7 +91,7 @@ describe("unit test for dataURL", function () {
 
     it("test handleAzureFaceAPIResponse - response undefined input", function () {
         try {
-            azureFaceAPI.handleAzureFaceAPIResponse(undefined);
+            azureFaceAPIService.handleAzureFaceAPIResponse(undefined);
             chai.expect.fail("supposed to fail");
         } catch (e) {
             chai.expect(e).to.be.instanceOf(Err.InvalidResponseError);
@@ -100,7 +100,7 @@ describe("unit test for dataURL", function () {
 
     it("test handleAzureFaceAPIResponse - no response.data", function () {
         try {
-            azureFaceAPI.handleAzureFaceAPIResponse({dataa: 2});
+            azureFaceAPIService.handleAzureFaceAPIResponse({dataa: 2});
             chai.expect.fail("supposed to fail");
         } catch (e) {
             chai.expect(e).to.be.instanceOf(Err.InvalidResponseError);
@@ -109,7 +109,7 @@ describe("unit test for dataURL", function () {
 
     it("test handleAzureFaceAPIResponse - response.data invalid type", function () {
         try {
-            azureFaceAPI.handleAzureFaceAPIResponse({data: 2});
+            azureFaceAPIService.handleAzureFaceAPIResponse({data: 2});
             chai.expect.fail("supposed to fail");
         } catch (e) {
             chai.expect(e).to.be.instanceOf(Err.InvalidResponseError);
@@ -118,7 +118,7 @@ describe("unit test for dataURL", function () {
 
     it("test handleAzureFaceAPIResponse - response.data array empty", function () {
         try {
-            azureFaceAPI.handleAzureFaceAPIResponse({data: []});
+            azureFaceAPIService.handleAzureFaceAPIResponse({data: []});
             chai.expect.fail("supposed to fail");
         } catch (e) {
             chai.expect(e).to.be.instanceOf(Err.NoUserDetectedError);
@@ -127,7 +127,7 @@ describe("unit test for dataURL", function () {
 
     it("test handleAzureFaceAPIResponse - response.data[0] no face attributes", function () {
         try {
-            azureFaceAPI.handleAzureFaceAPIResponse({data: [{faceAttributesMISPELLED: 0}]});
+            azureFaceAPIService.handleAzureFaceAPIResponse({data: [{faceAttributesMISPELLED: 0}]});
             chai.expect.fail("supposed to fail");
         } catch (e) {
             chai.expect(e).to.be.instanceOf(Err.InvalidResponseError);
@@ -136,7 +136,7 @@ describe("unit test for dataURL", function () {
 
     it("test handleAzureFaceAPIResponse - response.data[0].faceAttributes no emotion", function () {
         try {
-            azureFaceAPI.handleAzureFaceAPIResponse({data: [{faceAttributes: {emotionMISPELLED: 0}}]});
+            azureFaceAPIService.handleAzureFaceAPIResponse({data: [{faceAttributes: {emotionMISPELLED: 0}}]});
             chai.expect.fail("supposed to fail");
         } catch (e) {
             chai.expect(e).to.be.instanceOf(Err.InvalidResponseError);
@@ -148,7 +148,7 @@ describe("unit test for dataURL", function () {
             let emotion = {
                 anger: 0, contempt: 0, disgust: 0, fear: 0, happiness: 0, neutral: 0.999, sadness: 0, surprise: 0
             };
-            let result = azureFaceAPI.handleAzureFaceAPIResponse({
+            let result = azureFaceAPIService.handleAzureFaceAPIResponse({
                 data: [{faceAttributes: {emotion: emotion}}]
             });
             chai.expect(JSON.stringify(result)).to.be.equal(JSON.stringify(emotion));

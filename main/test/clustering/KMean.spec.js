@@ -1,7 +1,7 @@
 var chai = require("chai");
-const Err = require("../controllers/Error");
-const {songs, songsClearCluster, songsLargeClearCluster} = require("./sampleSpotifyAudioFeatures");
-const {KMean} = require("../controllers/KMean");
+const Err = require("../../src/constant/Error");
+const {songs, songsClearCluster, songsLargeClearCluster} = require("../resources/sampleSpotifyAudioFeatures");
+const {KMean} = require("../../src/clustering/KMean");
 
 describe("unit test for KMeans", function () {
     let kMean;
