@@ -1,4 +1,4 @@
-const Err = require("./Error");
+const Err = require("../constant/Error");
 
 class KMean {
 
