@@ -5,23 +5,12 @@ let afterCaptureButtons = document.getElementById('afterCaptureGroup');
 let takePhotoButton = document.getElementById('take-photo');
 let tryAgainButton = document.getElementById('try-again');
 let getTracksButton = document.getElementById('get-tracks');
-let errorMsgElement = document.getElementById('spanErrorMsg');
 let loadingDiv = document.getElementById("loader");
 let webcam = document.getElementById("webcam");
-let infoAlertClose = document.getElementById("infoAlertClose");
 let infoAlert = document.getElementById("infoAlert");
 let errorAlert = document.getElementById("errorAlert");
-let errorAlertClose = document.getElementById("errorAlertClose");
 let errorAlertSpan = document.getElementById("errorAlertSpan");
-
 let stream;
-
-//  TODO: Change everything to span and hide/show, dismissable, and add animation for fade
-//
-// $(document).on('click', '.alert-close', function() {
-//     $(this).parent().hide();
-// })
-
 
 const constraints = {
     audio: false,
@@ -36,28 +25,18 @@ video.addEventListener("animationend", ()=> {
     show([beforeCaptureButtons]);
 });
 
-infoAlertClose.addEventListener("click", () => {
-    hide([infoAlert]);
-});
-
-errorAlertClose.addEventListener("click", () => {
-    hide([errorAlert]);
-});
-
 async function init() {
     try {
         hide([canvas, afterCaptureButtons, beforeCaptureButtons, loadingDiv]);
-        $("#errorAlert").hide();
+        hide([errorAlert]);
         stream = await navigator.mediaDevices.getUserMedia(constraints);
         handleSuccess(stream);
     } catch (err) {
-        show([errorAlert, errorAlertClose]);
-        $("#errorAlertSpan").html("Sorry, we encountered an internal server error. " +
-            "Redirecting you in 5 seconds ... </br> </br>" + err.message)
-        // $("#errorAlert").html("Sorry, we encountered an internal server error. " +
-        //     "Redirecting you in 5 seconds ... </br> </br>" + err.message);
+        show([errorAlert]);
+        $('#errorAlert').append('<span>'+'Sorry, we encountered an internal server error. Redirecting you in 5 seconds ...' +
+            error.response.data.errorMsg +'</span>');
         setTimeout(function() {
-            location.href = "/webcam"
+            location.href = "/"
         }, 5000);
     }
 }
@@ -101,18 +80,23 @@ function postTracks(dataURL) {
         })
         .catch((error) => {
             hide([loadingDiv]);
-            show([webcam]);
-
+            show([webcam, errorAlert]);
             $("#header").hide();
-            show([errorAlert, errorAlertClose]);
-            $("#errorAlert").append('Sorry, we encountered an internal server error. ' +
-                error.response.data.errorMsg +'</span>');
+            $('#errorAlert').append('<span>'+'Sorry, we encountered an internal server error. ' + '</span>');
 
-            if(error.response.data.redirectLink) {
-                setTimeout(function() {
-                    location.href= error.response.data.redirectLink
-                }, 5000);
+            if(error.response) {
+                $('#errorAlert').append('<span>' + error.response.data.errorMsg +'</span>');
+
+                if(error.response.data.redirectLink) {
+                    setTimeout(function() {
+                        location.href= error.response.data.redirectLink
+                    }, 5000);
+                }
+            } else if (error.message) {
+                $('#errorAlert').append('<span>'+'Sorry, we encountered an internal server error. ' +
+                    error.message +'</span>');
             }
+
         });
 }
 
@@ -120,7 +104,7 @@ getTracksButton.addEventListener("click", () => {
     const dataURL = canvas.toDataURL('image/png', 1);
     hide([webcam]);
     show([loadingDiv]);
-    $("#errorAlert").html("");
+    $("#errorAlert").html("").hide();
     return postTracks(dataURL);
 })
 
@@ -138,7 +122,7 @@ takePhotoButton.addEventListener("click", () => {
 
 tryAgainButton.addEventListener("click", () => {
     hideAndShowHTMLElementsForTryAgainButton();
-    show([infoAlert, infoAlertClose]);
+    show([infoAlert]);
     return init();
 });
 
@@ -146,7 +130,7 @@ function hideAndShowHTMLElementsForTryAgainButton() {
     video.className = "video-no-animation";
     show([video]);
     hide([afterCaptureButtons, canvas]);
-    hide([errorAlert, errorAlertClose]);
+    hide([errorAlert]);
 }
 
 function hideAndShowHTMLElementsForCaptureButton() {

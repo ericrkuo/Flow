@@ -12,8 +12,8 @@ router.get('/', checkCredentials, function (req, res, next) {
 });
 
 router.post('/', [webcamLimiter, refreshCredentialsIfExpired], function (req, res, next) {
-    if (req.app.locals.main && req.body && req.body.dataURL) {
-        let main = req.app.locals.main;
+    let main = req.app.locals.main;
+    if (main && req.body && req.body.dataURL) {
         main.dataURL = req.body.dataURL;
         return main.getRelevantSongsTestingPurposes()
             .then((tracks) => {
@@ -22,17 +22,17 @@ router.post('/', [webcamLimiter, refreshCredentialsIfExpired], function (req, re
                 if (result) {
                     return res.status(200).json({result: result});
                 } else {
-                    return res.status(404).json({errorMsg: "Please try taking another photo"});
+                    return res.status(404).json({errorMsg: "Please try taking another photo!"});
                 }
             })
             .catch((err) => {
-                return res.status(500).json({errorMsg: "Please try taking another photo </br> </br>" + err.message});
+                return res.status(500).json({errorMsg: "Please try taking another photo! </br> </br>" + err.message});
             });
     } else if (!main) {
         req.app.locals.main = new Main();
         return res.status(404).json({errorMsg: "Redirecting you in 5 seconds...", redirectLink: '/spotify/login'});
     } else if (!req.body || !req.body.dataURL) {
-        return res.status(404).json({errorMsg: "Please try taking another photo"});
+        return res.status(404).json({errorMsg: "Please try taking another photo!"});
     }
 });
 

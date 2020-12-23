@@ -1068,20 +1068,17 @@ let sampleData = {
 // output: returns html rendering of the tracks
 router.get('/', checkCredentials, function (req, res, next) {
     // use res.render("track", sampleData) for testing purposes
-
-
-                if (req.app.locals.main.result) {
-                    return res.render("track", req.app.locals.main.result);
-                } else {
-                    return res.redirect("/webcam/#/error/no-photo-submitted");
-                }
+    if (req.app.locals.main.result) {
+        return res.render("track", req.app.locals.main.result);
+    } else {
+        return res.redirect("/webcam/#/error/no-photo-submitted");
+    }
 });
 
 // REQUIRES: req.body to contain a list of track URI's in format ["spotify:track:1ue7zm5TVVvmoQV8lK6K2H", ...]
 router.post('/', [trackLimiter, refreshCredentialsIfExpired], function (req, res, next) {
     let main = req.app.locals.main;
-
-    if(main) {
+    if (main) {
         return main.createMoodPlaylist(req.body)
             .then((playlistURL) => {
                 return res.status(200).json({link: playlistURL});

@@ -20,7 +20,6 @@ $(document).on('click', '.alert-close', function() {
 
 let errorAlert = document.getElementById("errorAlert");
 let errorAlertClose = document.getElementById("errorAlertClose");
-let errorAlertSpan = document.getElementById("errorAlertSpan");
 
 errorAlertClose.addEventListener("click", () => {
     hide([errorAlert]);
@@ -276,19 +275,26 @@ function addPlaylistEventListeners() {
                         window.open(url, "_blank");
                     })
                     .catch((error) => {
+
+                        $('#errorAlert').append('<a class="close alert-close">&times</a>' +
+                            '<span>'+'Sorry, we encountered an internal server error. ' + '</span>');
+
+                        if(error.response) {
+                            $('#errorAlert').append('<span>' + error.response.data.errorMsg +'</span>');
+
+                            if(error.response.data.redirectLink) {
+                                setTimeout(function() {
+                                    location.href= error.response.data.redirectLink
+                                }, 5000);
+                            }
+                        } else if (error.message) {
+                            $('#errorAlert').append('<span>'+'Sorry, we encountered an internal server error. ' +
+                                error.message +'</span>');
+                        }
+
                         cancelPlaylistButton.removeAttribute('disabled');
                         createPlaylistButton.removeAttribute('disabled');
-
                         show([errorAlert, errorAlertClose]);
-                        $('#errorAlert').append('<a class="close alert-close">&times</a>' +
-                            '<span>'+'Sorry, we encountered an internal server error. ' +
-                             error.response.data.errorMsg +'</span>');
-
-                        if(error.response.data.redirectLink) {
-                            setTimeout(function() {
-                                location.href= error.response.data.redirectLink
-                            }, 5000);
-                        }
 
                     });
             }
@@ -334,7 +340,7 @@ function sendPOSTRequestToCreatePlaylist(data) {
             if (response && response.data && response.data.link && typeof response.data.link === 'string') {
                 return response.data.link;
             } else {
-                throw new Error("response is null or response.link is null or not a string");
+                throw new Error("Response is null or response.link is null or not a string");
             }
         })
         .catch((error) => {
@@ -482,5 +488,17 @@ function getTimeInMinutes(totalMs) {
 function removeAllChildren(node) {
     while (node.firstChild) {
         node.removeChild(node.lastChild);
+    }
+}
+
+function hide(elements) {
+    for (let element of elements) {
+        element.style.setProperty("display", "none");
+    }
+}
+
+function show(elements) {
+    for (let element of elements) {
+        element.style.removeProperty("display");
     }
 }

@@ -1,5 +1,4 @@
 var express = require('express');
-const {Main} = require("../Main");
 var router = express.Router();
 
 /* GET home page. */
