@@ -1,7 +1,8 @@
-const Err = require("./Error");
-const {RefreshCredential} = require("./RefreshCredential");
+const Err = require("../constant/Error");
+const {executeMethod} = require("./SpotifyApiWrapper");
+const {RefreshCredentialService} = require("./RefreshCredentialService");
 
-class Emotion {
+class EmotionService {
 
     /* PLAN: Find the emotion with largest value possible.
     * -> (MATCHING OR OPPOSITE) ANGER plays aggressive, harsh music or neutral's
@@ -16,7 +17,7 @@ class Emotion {
     *
     * */
 
-    //#region Emotion Map
+    //#region EmotionService Map
     emotionMap = {
         anger: [
             "4JIo8RztBbELr2gWJ5OGK6",
@@ -708,19 +709,17 @@ class Emotion {
     constructor(spotifyApi) {
         this.spotifyApi = spotifyApi;
         this.features = ["danceability", "energy", "loudness", "speechiness", "acousticness", "instrumentalness", "liveness", "valence", "tempo"];
-        this.refreshCredential = new RefreshCredential(this.spotifyApi);
     }
 
     getFeatures(mood) {
         if (typeof mood !== 'string' || !this.emotionMap[mood]) return Promise.reject(new Err.InvalidInputError(mood.toUpperCase() + " is not a recognized mood, cannot get audio features"));
         let numTracks = this.emotionMap[mood].length;
 
-        return this.refreshCredential.tryRefreshCredential()
-            .then(() => {
-                return this.spotifyApi.getAudioFeaturesForTracks(this.emotionMap[mood]);
-            })
+        return executeMethod(() => {
+            return this.spotifyApi.getAudioFeaturesForTracks(this.emotionMap[mood])
+        })
             .then((res) => {
-                if (!res || !res.body || !res.body["audio_features"]) throw new Err.InvalidResponseError("Could not get audio features from Emotion");
+                if (!res || !res.body || !res.body["audio_features"]) throw new Err.InvalidResponseError("Could not get audio features from EmotionService");
                 let songFeatures = {};
                 for (let feature of this.features) songFeatures[feature] = 0;
                 for (let audioFeature of res.body["audio_features"]) {
@@ -747,7 +746,7 @@ class Emotion {
     }
 
     getDominantExpression(emotionData) {
-        if (!this.isEmotionDataValid(emotionData)) throw new Err.InvalidInputError("Cannot get dominant expression in Emotion, data isn't formatted correctly");
+        if (!this.isEmotionDataValid(emotionData)) throw new Err.InvalidInputError("Cannot get dominant expression in EmotionService, data isn't formatted correctly");
 
         let dominantEmotion = null;
         let dominantEmotionValue = -1;
@@ -768,4 +767,4 @@ class Emotion {
 
 }
 
-module.exports.Emotion = Emotion;
+module.exports.EmotionService = EmotionService;

@@ -97,7 +97,6 @@ function postTracks(dataURL) {
 
     return axios(config)
         .then(() => {
-            console.log("SUCCESS - put tracks, now taking to tracks");
             location.href = "/tracks";
         })
         .catch((error) => {

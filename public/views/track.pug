@@ -5,30 +5,27 @@ block append stylesheets
     script(src='./libraries/Chart.min.js', type="text/javascript")
 block content
     .container-fluid.bg-gradient-info
-        .row.row-cols-2
-            .col-9
-                h3#title.text-center.text-truncate.mt-3.mb-0 Thanks for waiting! Here's your playlist
-            .col-3
-                .container.text-center
-                    button#playlist.btn.btn-success.btn-lg.mt-3.mb-0(type="button" data-toggle="modal" data-target="#playlistModal") Create A Playlist
+        h3#title.text-center.text-truncate.mb-0 Thanks for waiting! Here's your playlist
         .row.row-cols-2
             .col-9
                 #tracks-div.container-fluid
             .col-3
+                .container-fluid.text-center
+                    button#playlist.btn.btn-success.btn-lg.mt-3.mb-0(type="button" data-toggle="modal" data-target="#playlistModal") Create A Playlist
                 .card.shadow-lg.m-5
-                    .card-header MY PROFILE
+                    .card-header.text-truncate MY PROFILE
                     img#user-image.img-fluid.card-img-top
                     .card-body
-                        h1#user-name.card-title
-                        button#user-link.btn.btn-outline-info(type="button") MY SPOTIFY ACCOUNT
+                        h2#user-name.card-title.text-truncate
+                        button#user-link.btn.btn-outline-info(type="button") MY SPOTIFY
                 .card.shadow-lg.m-5
-                    .card-header DETECTED MOOD
+                    .card-header.text-truncate DETECTED MOOD
                     .card-body
-                        h1#mood-string.card-title
+                        h2#mood-string.card-title.text-capitalize.text-truncate
                     #accordion.accordion
                         #headingOne.card-header
                             h2.mb-0
-                                button#see-more(class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne") SEE MORE
+                                button#see-more.btn.btn-link.btn-block.text-left.text-truncate(type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne") SEE MORE
                         #collapseOne.collapse(aria-labelledby="headingOne" data-parent="#accordion")
                             #mood.w-100.text-center.container-fluid
 
@@ -108,5 +105,7 @@ block content
         let tracks = !{JSON.stringify(tracks)};
         let userInfo = !{JSON.stringify(userInfo)};
         let mood = !{JSON.stringify(mood)};
+    script(src='/js/trackConstants.js')
     script(src='/js/track.js')
+
 

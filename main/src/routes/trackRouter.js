@@ -1,8 +1,8 @@
 var express = require('express');
 const {trackLimiter} = require("./rateLimiter");
-const {checkCredentials} = require("./indexRouter");
-const {Main} = require("../controllers/Main");
+const {checkCredentials, refreshCredentialsIfExpired} = require("./middleware");
 var router = express.Router();
+const {Main} = require("../Main")
 
 //#region Sample Data For Testing Purposes
 let tracks = {};
@@ -1066,28 +1066,19 @@ let sampleData = {
 
 // input: dataURL
 // output: returns html rendering of the tracks
-router.get('/', function (req, res, next) {
+router.get('/', checkCredentials, function (req, res, next) {
     // use res.render("track", sampleData) for testing purposes
 
-    return checkCredentials(req)
-        .then((isCredentialValid) => {
-            if (isCredentialValid) {
+
                 if (req.app.locals.main.result) {
                     return res.render("track", req.app.locals.main.result);
                 } else {
                     return res.redirect("/webcam/#/error/no-photo-submitted");
                 }
-            } else {
-                return res.redirect("/spotify/login");
-            }
-        })
-        .catch((err) => {
-            return res.redirect("/spotify/login");
-        })
 });
 
 // REQUIRES: req.body to contain a list of track URI's in format ["spotify:track:1ue7zm5TVVvmoQV8lK6K2H", ...]
-router.post('/', trackLimiter, function (req, res, next) {
+router.post('/', [trackLimiter, refreshCredentialsIfExpired], function (req, res, next) {
     let main = req.app.locals.main;
 
     if(main) {

@@ -1,6 +1,6 @@
-const Err = require("./Error");
+const Err = require("../constant/Error");
 
-class AzureFaceAPI {
+class AzureFaceAPIService {
 
     constructor() {
         require('dotenv').config();
@@ -76,4 +76,4 @@ class AzureFaceAPI {
     }
 }
 
-module.exports.AzureFaceAPI = AzureFaceAPI;
+module.exports.AzureFaceAPIService = AzureFaceAPIService;

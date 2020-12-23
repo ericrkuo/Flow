@@ -1,6 +1,7 @@
-const Err = require("./Error");
+const Err = require("../constant/Error");
+const {executeMethod} = require("./SpotifyApiWrapper");
 
-class RefreshCredential {
+class RefreshCredentialService {
 
     constructor(spotifyApi) {
         require('dotenv').config();
@@ -9,7 +10,9 @@ class RefreshCredential {
     }
 
     checkCredentials() {
-        return this.spotifyApi.getArtist('2hazSY4Ef3aB9ATXW7F5w3')
+        return executeMethod(() => {
+            return this.spotifyApi.getArtist('2hazSY4Ef3aB9ATXW7F5w3')
+        })
             .then((data) => {
                 return true;
             })
@@ -60,7 +63,6 @@ class RefreshCredential {
         return axios(config)
             .then((response) => {
                 if (response && response.data && response.data["access_token"]) {
-                    console.log(response.data);
                     return response.data["access_token"];
                 } else {
                     throw new Err.InvalidResponseError("Access token response from Spotify API is invalid");
@@ -75,4 +77,4 @@ class RefreshCredential {
     }
 }
 
-module.exports.RefreshCredential = RefreshCredential;
+module.exports.RefreshCredentialService = RefreshCredentialService;

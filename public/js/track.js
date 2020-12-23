@@ -1,44 +1,5 @@
-let tracksDiv = document.getElementById("tracks-div");
 let modalAnalytics = document.getElementById("modal-analytics");
-let noImageAvailablePath = "../libraries/pictures/nopreview.png";
-let noUserProfilePath = "../libraries/pictures/unknownuser.png";
-let playlistMap = new Map();
-
-const PLAYLIST_NEED_SONGS_MSG = "Please select some songs first to save";
-const PLAYLIST_CHECK_MSG = "Please confirm your understanding by checking the box below";
-
-let colors = {
-    backgroundColor: [
-        'rgba(255,99,132,0.5)',
-        'rgba(54, 162, 23, 0.5)',
-        'rgba(255, 206, 86, 0.5)',
-        'rgba(75, 192, 192, 0.5)',
-        'rgba(153, 102, 255, 0.5)',
-        'rgb(255,159,64, 0.5)',
-        'rgb(89,11,241, 0.5)',
-        'rgba(0,255,0,0.5)',
-    ],
-    borderColor: [
-        'rgba(255, 99, 132)',
-        'rgba(54, 162, 23)',
-        'rgba(255, 206, 86)',
-        'rgba(75, 192, 192)',
-        'rgba(153, 102, 255)',
-        'rgb(255,159,64)',
-        'rgb(89,11,241)',
-        'rgba(0,255,0)',
-    ],
-    pointHoverBackgroundColor: [
-        'rgba(255, 99, 132, 0.8)',
-        'rgba(54, 162, 23, 0.8)',
-        'rgba(255, 206, 86, 0.8)',
-        'rgba(75, 192, 192, 0.8)',
-        'rgba(153, 102, 255, 0.8)',
-        'rgb(255,159,64, 0.8)',
-        'rgb(89,11,241, 0.8)',
-        'rgba(0,255,0,0.8)',
-    ]
-}
+let playlistMap = new Set();
 
 $(function () {
     $('[data-toggle="tooltip"]').tooltip()
@@ -78,33 +39,30 @@ function initialize() {
 }
 
 function initializeTracksDiv() {
-
+    let tracksDiv = document.getElementById("tracks-div");
     let counter = 1;
-    let rowClassName = "row";
-    let numColumns = 4;
     let row = document.createElement("div");
-    row.className = rowClassName;
-    for (let i = 0; i < 1; i++) {
-        for (let id of Object.keys(tracks)) {
-            let column = document.createElement("div");
-            column.className = "col my-5";
-            column.appendChild(createTrackCard(id));
-            row.appendChild(column);
-            if (counter % numColumns === 0) {
-                tracksDiv.append(row);
-                row = document.createElement("div");
-                row.className = rowClassName;
-            }
-            counter++;
+    row.className = TRACK_ROW;
+
+    for (let id of Object.keys(tracks)) {
+        let column = document.createElement("div");
+        column.className = TRACK_COLUMN;
+        column.appendChild(createTrackCard(id));
+        row.appendChild(column);
+        if (counter % TRACK_NUM_COLUMNS === 0) {
+            tracksDiv.append(row);
+            row = document.createElement("div");
+            row.className = TRACK_ROW;
         }
+        counter++;
     }
 
     // create remaining columns
-    if (--counter % numColumns !== 0) {
-        let remainingColumns = numColumns - (counter % numColumns);
+    if (--counter % TRACK_NUM_COLUMNS !== 0) {
+        let remainingColumns = TRACK_NUM_COLUMNS - (counter % TRACK_NUM_COLUMNS);
         for (let i = 0; i < remainingColumns; i++) {
             let column = document.createElement("div");
-            column.className = "col m-2";
+            column.className = TRACK_COLUMN;
             row.appendChild(column);
         }
         tracksDiv.append(row);
@@ -114,12 +72,12 @@ function initializeTracksDiv() {
 
 function createTrackCard(id) {
     let container = document.createElement("div");
-    container.className = "container-fluid px-5"
+    container.className = TRACK_CARD_CONTAINER
 
     let imageURL = getAlbumImageURL(id);
     let image = document.createElement("img");
     image.src = imageURL;
-    image.className = "track-image rounded-circle shadow-lg img-fluid mb-2";
+    image.className = TRACK_CARD_IMAGE;
     image.setAttribute("data-toggle", "modal");
     image.setAttribute("data-target", "#trackModal");
     image.addEventListener("click", function () {
@@ -127,11 +85,11 @@ function createTrackCard(id) {
     });
 
     let trackTitle = document.createElement("span");
-    trackTitle.className = "track-title font-weight-bold d-block text-center text-truncate";
+    trackTitle.className = TRACK_CARD_TITLE;
     trackTitle.innerText = tracks[id].track.name
 
     let trackArtist = document.createElement("span");
-    trackArtist.className = "d-block text-center text-truncate";
+    trackArtist.className = TRACK_CARD_ARTIST;
     trackArtist.innerText = getArtistNames(tracks[id].track.artists);
 
     container.append(image, trackTitle, trackArtist)
@@ -140,7 +98,7 @@ function createTrackCard(id) {
 
 
 function initializeMoodDiv() {
-    document.getElementById("mood-string").innerText = mood.dominantMood.charAt(0).toUpperCase() + mood.dominantMood.substring(1);
+    document.getElementById("mood-string").innerText = mood.dominantMood;
 
     $('#collapseOne').on('shown.bs.collapse', function () {
         let moodDiv = document.getElementById("mood");
@@ -183,7 +141,7 @@ function initializeMoodDiv() {
 }
 
 function initializePlaylistDiv() {
-    let playlistRowClassName = "row row-cols-2"
+    let playlistRowClassName = PLAYLIST_ROW;
     let counter = 1;
     let playlistContainer = document.getElementById("playlist-container");
     let row = document.createElement('div');
@@ -191,11 +149,11 @@ function initializePlaylistDiv() {
 
     for (let id of Object.keys(tracks)) {
         let column = document.createElement('div');
-        column.className = "col col-6 my-2 p-0";
-        column.appendChild(createPlaylistRow(id));
+        column.className = PLAYLIST_COLUMN;
+        column.appendChild(createPlaylistCard(id));
         row.appendChild(column);
 
-        if (counter % 2 === 0) {
+        if (counter % PLAYLIST_NUM_COLUMNS === 0) {
             playlistContainer.appendChild(row);
             row = document.createElement('div');
             row.className = playlistRowClassName;
@@ -204,9 +162,9 @@ function initializePlaylistDiv() {
     }
 
     // create remaining columns
-    if (--counter % 2 !== 0) {
+    if (--counter % PLAYLIST_NUM_COLUMNS !== 0) {
         let dummyColumn = document.createElement('div');
-        dummyColumn.className = "col col-6 my-2 p-0";
+        dummyColumn.className = PLAYLIST_COLUMN;
         row.appendChild(dummyColumn);
         playlistContainer.appendChild(row);
     }
@@ -214,29 +172,29 @@ function initializePlaylistDiv() {
     addPlaylistEventListeners();
 }
 
-function createPlaylistRow(id) {
+function createPlaylistCard(id) {
     let row = document.createElement('div');
-    row.className = "row row-cols-2 mx-2 unfill border rounded";
+    row.className = PLAYLIST_CARD_ROW;
     row.id = 'playlistRow-' + id;
 
     let trackColumn = document.createElement('div');
-    trackColumn.className = "col-4 p-1 align-self-center";
+    trackColumn.className = PLAYLIST_CARD_TRACK_COLUMN;
 
     let trackImage = document.createElement('img');
     trackImage.src = this.getAlbumImageURL(id);
-    trackImage.className = "rounded-circle shadow-lg img-fluid playlist-image";
+    trackImage.className = PLAYLIST_CARD_TRACK_IMAGE;
 
     trackColumn.appendChild(trackImage);
 
     let trackInfoColumn = document.createElement('div');
-    trackInfoColumn.className = "col-8 text-left align-self-center";
+    trackInfoColumn.className = PLAYLIST_CARD_TRACK_INFO_COLUMN;
 
     let trackSpan = document.createElement('span');
-    trackSpan.className = 'd-block text-left text-truncate font-weight-bold';
+    trackSpan.className = PLAYLIST_CARD_TRACK_NAME_SPAN;
     trackSpan.innerText = tracks[id].track.name
 
     let artistSpan = document.createElement('span');
-    artistSpan.className = 'd-block text-left text-truncate';
+    artistSpan.className = PLAYLIST_CARD_ARTIST_SPAN;
     artistSpan.innerText = getArtistNames(tracks[id].track.artists);
 
     trackInfoColumn.append(trackSpan, artistSpan);
@@ -244,21 +202,19 @@ function createPlaylistRow(id) {
 
     row.addEventListener('click', () => {
         if (playlistMap.has(id)) {
-            console.log('removing: ' + id);
             playlistMap.delete(id);
 
             row.classList.remove('fill');
             row.classList.add('unfill');
         } else {
-            console.log('putting: ' + id);
-            playlistMap.set(id, id);
+            playlistMap.add(id);
 
             row.classList.remove('unfill');
             row.classList.add('fill');
 
             // hide message once user selects a song
             let collapsePlaylistMessageText = document.getElementById('collapsePlaylistMessageText');
-            if (collapsePlaylistMessageText.innerText === PLAYLIST_NEED_SONGS_MSG) {
+            if (collapsePlaylistMessageText.innerText === PLAYLIST_NEED_SONGS_MESSAGE) {
                 $('#collapsePlaylistMessage').collapse('hide');
             }
         }
@@ -277,7 +233,7 @@ function addPlaylistEventListeners() {
 
     // Collapse message if user confirms playlist creation
     confirmPlaylistInput.addEventListener("click", function () {
-        if (confirmPlaylistInput.checked && collapsePlaylistMessageText.innerText === PLAYLIST_CHECK_MSG) {
+        if (confirmPlaylistInput.checked && collapsePlaylistMessageText.innerText === PLAYLIST_CHECK_MESSAGE) {
             $('#collapsePlaylistMessage').collapse('hide');
         }
     });
@@ -289,12 +245,11 @@ function addPlaylistEventListeners() {
         if (isConfirmPlaylistChecked) {
             let data = getAllTrackURLs();
             if (!data || data.length === 0) {
-                collapsePlaylistMessageText.innerText = PLAYLIST_NEED_SONGS_MSG;
+                collapsePlaylistMessageText.innerText = PLAYLIST_NEED_SONGS_MESSAGE;
                 $('#collapsePlaylistMessage').collapse('show');
             } else {
                 cancelPlaylistButton.setAttribute('disabled', "");
                 createPlaylistButton.setAttribute('disabled', "");
-
                 return sendPOSTRequestToCreatePlaylist(JSON.stringify(data))
                     .then((url) => {
                         cancelPlaylistButton.removeAttribute('disabled');
@@ -329,7 +284,7 @@ function addPlaylistEventListeners() {
                     });
             }
         } else {
-            collapsePlaylistMessageText.innerText = PLAYLIST_CHECK_MSG;
+            collapsePlaylistMessageText.innerText = PLAYLIST_CHECK_MESSAGE;
             $('#collapsePlaylistMessage').collapse('show');
         }
     });
@@ -340,7 +295,7 @@ function addPlaylistEventListeners() {
             let row = document.getElementById('playlistRow-' + id);
             if (row) {
                 if (isChecked) {
-                    playlistMap.set(id, id);
+                    playlistMap.add(id);
                     row.classList.remove('unfill')
                     row.classList.add('fill')
                 } else {
@@ -393,7 +348,7 @@ function initializeUserInfoDiv() {
     let img = document.getElementById("user-image");
     img.src = getUserImageURL();
 
-    document.getElementById("user-name").innerText = userInfo.display_name;
+    document.getElementById("user-name").innerText = userInfo.display_name || "Anonymous user";
     document.getElementById("user-link").addEventListener("click", () => {
         window.open(userInfo.external_urls.spotify, "_blank");
     });
@@ -465,7 +420,7 @@ function initializeModalContent(id) {
         video.src = previewURL;
         document.getElementById("modal-content-caption").innerText = "";
     } else {
-        document.getElementById("modal-content-caption").innerText = "Sorry, No Preview Available";
+        document.getElementById("modal-content-caption").innerText = NO_PREVIEW;
         video.src = "";
     }
 
@@ -484,7 +439,7 @@ function getAlbumImageURL(id) {
     if (images.length !== 0 && images[0].url !== undefined && images[0].url !== null && images[0].url !== "") {
         return images[0].url;
     } else {
-        return noImageAvailablePath;
+        return NO_ALBUM_IMAGE_PATH;
     }
 }
 
@@ -493,7 +448,7 @@ function getUserImageURL() {
     if (userImages.length !== 0 && userImages[0].url !== undefined && userImages[0].url !== null && userImages[0].url !== "") {
         return userImages[0].url;
     } else {
-        return noImageAvailablePath;
+        return NO_PROFILE_IMAGE_PATH;
     }
 }
 
