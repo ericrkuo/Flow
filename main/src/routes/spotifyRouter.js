@@ -1,6 +1,6 @@
 var express = require('express');
 let qs = require('querystring');
-const {Main} = require("../controllers/Main");
+const {Main} = require("../Main");
 var router = express.Router();
 
 scopes = ['user-read-private',

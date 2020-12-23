@@ -5,6 +5,7 @@
 .alert {
     width: 80vmin;
     display: inline-block;
+    position: relative;
 }
 
 .video-animation {

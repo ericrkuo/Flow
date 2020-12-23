@@ -18,6 +18,14 @@ $(document).on('click', '.alert-close', function() {
     $(this).parent().hide();
 })
 
+let errorAlert = document.getElementById("errorAlert");
+let errorAlertClose = document.getElementById("errorAlertClose");
+let errorAlertSpan = document.getElementById("errorAlertSpan");
+
+errorAlertClose.addEventListener("click", () => {
+    hide([errorAlert]);
+});
+
 initialize();
 initializeUserInfoDiv();
 initializeTracksDiv();
@@ -34,7 +42,7 @@ function initialize() {
     tutorialButton.setAttribute("class", tutorialButton.getAttribute("class").replace(oldString, newString));
     homeButton.setAttribute("class", homeButton.getAttribute("class").replace(oldString, newString));
     aboutUsButton.setAttribute("class", aboutUsButton.getAttribute("class").replace(oldString, newString));
-    $("#errorAlert").hide();
+    hide([errorAlert]);
 
 }
 
@@ -271,7 +279,8 @@ function addPlaylistEventListeners() {
                         cancelPlaylistButton.removeAttribute('disabled');
                         createPlaylistButton.removeAttribute('disabled');
 
-                        $('#errorAlert').show().append('<a class="close alert-close">&times</a>' +
+                        show([errorAlert, errorAlertClose]);
+                        $('#errorAlert').append('<a class="close alert-close">&times</a>' +
                             '<span>'+'Sorry, we encountered an internal server error. ' +
                              error.response.data.errorMsg +'</span>');
 
