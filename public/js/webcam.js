@@ -38,8 +38,8 @@ async function init() {
 }
 
 /**
- * Handles success of videostream
- * @param stream - current videostream
+ * Handles success of video stream
+ * @param stream - current video stream
  */
 function handleSuccess(stream) {
     window.stream = stream;
@@ -65,7 +65,7 @@ function turnOffStream() {
 }
 
 /**
- * Makes a POST request to /webcam to get tracks
+ * Makes a POST request to /webcam to get personalized tracks
  * @param dataURL - image of the user
  * @returns {Promise<T | void>}
  */
@@ -92,7 +92,7 @@ function postTracks(dataURL) {
 }
 
 /**
- * Adds event listener to getTracks button and calls postTracks
+ * Adds event listener to "Get Tracks" button and calls postTracks
  */
 getTracksButton.addEventListener("click", () => {
     const dataURL = canvas.toDataURL('image/png', 1);
@@ -102,7 +102,7 @@ getTracksButton.addEventListener("click", () => {
 })
 
 /**
- * Adds event listener to takePhoto to capture image of user
+ * Adds event listener to "Take Photo" button to capture image of user
  */
 takePhotoButton.addEventListener("click", () => {
     // dimension of pixels in canvas
@@ -117,7 +117,7 @@ takePhotoButton.addEventListener("click", () => {
 })
 
 /**
- * Adds event listener to tryAgain button to capture another image
+ * Adds event listener to "Try Again" button to capture a better image
  */
 tryAgainButton.addEventListener("click", () => {
     hideAndShowHTMLElementsForTryAgainButton();
@@ -125,7 +125,7 @@ tryAgainButton.addEventListener("click", () => {
 });
 
 /**
- * Hides and shows elements for tryAgain
+ * Hides and shows elements for "Try Again" button
  */
 function hideAndShowHTMLElementsForTryAgainButton() {
     video.className = "video-no-animation";
@@ -134,7 +134,7 @@ function hideAndShowHTMLElementsForTryAgainButton() {
 }
 
 /**
- * Hides and shows elements for capturing image
+ * Hides and shows elements for "Capture" button
  */
 function hideAndShowHTMLElementsForCaptureButton() {
     hide([video, beforeCaptureButtons]);

@@ -11,16 +11,15 @@ getStartedButton.addEventListener("click", () => {
 });
 
 /**
- * Centers the modal
+ * Centers the modal on the page
+ *  Make sure you don't hide the top part of the modal w/ a negative margin if it's longer than the screen height
+ *  and keep the margin equal to the bottom margin of the modal
  */
 function centerModal() {
     $(this).css('display', 'block');
     var $dialog = $(this).find(".modal-dialog"),
         offset = ($(window).height() - $dialog.height()) / 2,
         bottomMargin = parseInt($dialog.css('marginBottom'), 10);
-
-    // Make sure you don't hide the top part of the modal w/ a negative margin if it's longer than the screen height,
-    // and keep the margin equal to the bottom margin of the modal
     if (offset < bottomMargin) offset = bottomMargin;
     $dialog.css("margin-top", offset);
 }
@@ -32,7 +31,7 @@ $(window).on("resize", function () {
 });
 
 /**
- * Upon click of the "How We Did it" button, opens/centers modal and inserts text description
+ * Upon click of the "How We Did it" button, opens/centers modal and inserts title/text description
  */
 readMoreForHowWeDidItButton.addEventListener("click", () => {
     $('#infoModal').modal('show', centerModal);
@@ -56,7 +55,7 @@ readMoreForHowWeDidItButton.addEventListener("click", () => {
 });
 
 /**
- * Upon click of the "Future" button, opens/centers modal and inserts text description
+ * Upon click of the "Future" button, opens/centers modal and inserts title/text description
  */
 readMoreFutureButton.addEventListener("click", () => {
     $('#infoModal').modal('show', centerModal);
@@ -71,7 +70,7 @@ readMoreFutureButton.addEventListener("click", () => {
 })
 
 /**
- * Upon click of the "Reflection" button, opens/centers modal and inserts text description
+ * Upon click of the "Reflection" button, opens/centers modal and inserts title/text description
  */
 readMoreReflectionButton.addEventListener("click", () => {
     $('#infoModal').modal('show', centerModal);

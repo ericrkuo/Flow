@@ -1084,7 +1084,7 @@ router.get('/', checkCredentials, function (req, res, next) {
 });
 
 /**
- *  Handles POST request for tracks page
+ *  Handles POST request for tracks page to create a new playlist
  *  Requires req.body to contain a list of track URI's in format ["spotify:track:1ue7zm5TVVvmoQV8lK6K2H", ...]
  */
 router.post('/', [trackLimiter, refreshCredentialsIfExpired], function (req, res, next) {

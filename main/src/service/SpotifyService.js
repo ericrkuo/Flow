@@ -236,7 +236,7 @@ class SpotifyService {
     }
 
     /**
-     * Adds similiar artists tracks
+     * Adds similar artists tracks
      * Not currently being used because of rate limiting for spotifyApi
      * @returns boolean - true if tracks were successfully added
      */
@@ -413,7 +413,7 @@ class SpotifyService {
 
     /**
      * Gets a list of playlist IDs for current user
-     * @returns {Promise<[] | void>}
+     * @returns {Promise<string[]>}
      */
     getListOfUserPlaylistsIDs() {
         return executeMethod(() => {
@@ -473,7 +473,7 @@ class SpotifyService {
     }
 
     /**
-     * Returns information about current user
+     * Returns information about current Spotify user
      * @returns JSON - name, email, URL, image of user
      */
     getUserInfo() {
@@ -500,7 +500,7 @@ class SpotifyService {
      * Creates new playlist for current user
      * This will create duplicate playlist if playlist already exists, there is no way to delete a playlist through Spotify API
      * since deleting a playlist will only make the owner unfollow it, while others can still follow the "deleted" playlist
-     * @returns {Promise<T | * | undefined | void>}
+     * @returns {Promise<T>}
      */
     createNewPlaylist() {
         return this.getUserInfo()
@@ -521,9 +521,9 @@ class SpotifyService {
     }
 
     /**
-     * Gets a new playlist based on list of track URLs
+     * Creates a new playlist based on list of track URLs
      * @param trackURLs - list of track URLs
-     * @returns {Promise<never>|Promise<T | * | undefined | void>}
+     * @returns {Promise<T>}
      */
     getNewPlaylist(trackURLs) {
         let link = null;

@@ -13,7 +13,7 @@ class RefreshCredentialService {
     }
 
     /**
-     * Checks if credentials are valid and have not expired through a test call
+     * Checks if credentials are valid and have not expired through a call to spotifyApi.getArtist
      * @returns boolean - returns true if credentials are still valid
      */
     checkCredentials() {
@@ -29,7 +29,7 @@ class RefreshCredentialService {
     }
 
     /**
-     * Checks credential and attempts to get a new access token with refresh token
+     * Checks credential and attempts to get/set a new access token with existing refresh token
      * @returns {Promise<T | void>}
      */
     tryRefreshCredential() {

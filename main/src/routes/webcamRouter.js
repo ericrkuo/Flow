@@ -13,7 +13,7 @@ router.get('/', checkCredentials, function (req, res, next) {
 });
 
 /**
- * Handles POST request for webcam page
+ * Handles POST request for webcam page to get relevant songs for user
  */
 router.post('/', [webcamLimiter, refreshCredentialsIfExpired], function (req, res, next) {
     if (req.app.locals.main && req.body && req.body.dataURL) {

@@ -1,4 +1,32 @@
-let modalAnalytics = document.getElementById("modal-analytics");
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: track.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: track.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>let modalAnalytics = document.getElementById("modal-analytics");
 let playlistMap = new Set();
 
 $(function () {
@@ -60,7 +88,7 @@ function initializeTracksDiv() {
     // create remaining columns
     if (--counter % TRACK_NUM_COLUMNS !== 0) {
         let remainingColumns = TRACK_NUM_COLUMNS - (counter % TRACK_NUM_COLUMNS);
-        for (let i = 0; i < remainingColumns; i++) {
+        for (let i = 0; i &lt; remainingColumns; i++) {
             let column = document.createElement("div");
             column.className = TRACK_COLUMN;
             row.appendChild(column);
@@ -248,7 +276,7 @@ function addPlaylistEventListeners() {
 
     // Collapse message if user confirms playlist creation
     confirmPlaylistInput.addEventListener("click", function () {
-        if (confirmPlaylistInput.checked && collapsePlaylistMessageText.innerText === PLAYLIST_CHECK_MESSAGE) {
+        if (confirmPlaylistInput.checked &amp;&amp; collapsePlaylistMessageText.innerText === PLAYLIST_CHECK_MESSAGE) {
             $('#collapsePlaylistMessage').collapse('hide');
         }
     });
@@ -315,7 +343,7 @@ function addPlaylistEventListeners() {
 /**
  * Sends a POST request to /tracks to create a playlist for the user
  * @param data - user's tracks data
- * @returns {Promise<T | void>}
+ * @returns {Promise&lt;T | void>}
  */
 function sendPOSTRequestToCreatePlaylist(data) {
     let url = window.location.origin + "/tracks";
@@ -331,7 +359,7 @@ function sendPOSTRequestToCreatePlaylist(data) {
 
     return axios(config)
         .then((response) => {
-            if (response && response.data && response.data.link && typeof response.data.link === 'string') {
+            if (response &amp;&amp; response.data &amp;&amp; response.data.link &amp;&amp; typeof response.data.link === 'string') {
                 return response.data.link;
             } else {
                 throw new Error("response is null or response.link is null or not a string");
@@ -350,7 +378,7 @@ function getAllTrackURLs() {
     let data = [];
     for (let id of playlistMap.keys()) {
         let track = tracks[id];
-        if (track !== null && track.track !== null && track.track.uri !== null) {
+        if (track !== null &amp;&amp; track.track !== null &amp;&amp; track.track.uri !== null) {
             data.push(track.track.uri);
         }
     }
@@ -472,7 +500,7 @@ function initializeModalImage(id) {
  */
 function getAlbumImageURL(id) {
     let images = tracks[id].track.album.images;
-    if (images.length !== 0 && images[0].url !== undefined && images[0].url !== null && images[0].url !== "") {
+    if (images.length !== 0 &amp;&amp; images[0].url !== undefined &amp;&amp; images[0].url !== null &amp;&amp; images[0].url !== "") {
         return images[0].url;
     } else {
         return NO_ALBUM_IMAGE_PATH;
@@ -485,7 +513,7 @@ function getAlbumImageURL(id) {
  */
 function getUserImageURL() {
     let userImages = userInfo.images;
-    if (userImages.length !== 0 && userImages[0].url !== undefined && userImages[0].url !== null && userImages[0].url !== "") {
+    if (userImages.length !== 0 &amp;&amp; userImages[0].url !== undefined &amp;&amp; userImages[0].url !== null &amp;&amp; userImages[0].url !== "") {
         return userImages[0].url;
     } else {
         return NO_PROFILE_IMAGE_PATH;
@@ -500,7 +528,7 @@ function getUserImageURL() {
 function getArtistNames(artists) {
     let artistNames = "";
     let n = artists.length;
-    for (let i = 0; i < n - 1; i++) {
+    for (let i = 0; i &lt; n - 1; i++) {
         artistNames += artists[i].name + ", ";
     }
     return artistNames + artists[--n].name;
@@ -516,7 +544,7 @@ function getTimeInMinutes(totalMs) {
     let minutes = Math.floor(totalSeconds / 60);
     let seconds = Math.floor(totalSeconds % 60);
 
-    return minutes.toString() + ":" + (seconds < 10 ? ("0" + seconds.toString()) : seconds.toString());
+    return minutes.toString() + ":" + (seconds &lt; 10 ? ("0" + seconds.toString()) : seconds.toString());
 
 }
 
@@ -529,3 +557,26 @@ function removeAllChildren(node) {
         node.removeChild(node.lastChild);
     }
 }
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#createPlaylistCard">createPlaylistCard</a></li><li><a href="global.html#createTrackCard">createTrackCard</a></li><li><a href="global.html#editModalContent">editModalContent</a></li><li><a href="global.html#getAlbumImageURL">getAlbumImageURL</a></li><li><a href="global.html#getAllTrackURLs">getAllTrackURLs</a></li><li><a href="global.html#getArtistNames">getArtistNames</a></li><li><a href="global.html#getTimeInMinutes">getTimeInMinutes</a></li><li><a href="global.html#getUserImageURL">getUserImageURL</a></li><li><a href="global.html#initialize">initialize</a></li><li><a href="global.html#initializeModalAnalytics">initializeModalAnalytics</a></li><li><a href="global.html#initializeModalContent">initializeModalContent</a></li><li><a href="global.html#initializeModalImage">initializeModalImage</a></li><li><a href="global.html#initializeMoodDiv">initializeMoodDiv</a></li><li><a href="global.html#initializePlaylistDiv">initializePlaylistDiv</a></li><li><a href="global.html#initializeTracksDiv">initializeTracksDiv</a></li><li><a href="global.html#initializeUserInfoDiv">initializeUserInfoDiv</a></li><li><a href="global.html#removeAllChildren">removeAllChildren</a></li><li><a href="global.html#sendPOSTRequestToCreatePlaylist">sendPOSTRequestToCreatePlaylist</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Thu Dec 24 2020 12:39:05 GMT-0800 (Pacific Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

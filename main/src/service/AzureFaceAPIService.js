@@ -10,7 +10,7 @@ class AzureFaceAPIService {
     }
 
     /**
-     * Returns emotion of current user
+     * Returns emotion of current user by processing image to binary and issuing POST request to AzureFaceAPI
      * @param dataURI - image encoding of the user's submitted photo
      * @returns {Promise<* | void>} - returns data regarding user's mood
      */
@@ -49,8 +49,8 @@ class AzureFaceAPIService {
 
     /**
      * Handles response from AzureFaceAPI
-     * @param response - returns emotion data from API response
-     * @returns {*} - object with quantities per emotion
+     * @param response - emotion data from API response
+     * @returns {*} - object with quantities per possible mood
      */
     handleAzureFaceAPIResponse(response) {
         if (!this.isResponseValid(response)) throw new Err.InvalidResponseError("Response from Azure Face API is invalid - null or not an array");
@@ -72,7 +72,7 @@ class AzureFaceAPIService {
     }
 
     /**
-     * Checks if respone data is valid
+     * Checks if response data is valid
      * @param responseData - responseData from AzureFaceAPI
      * @returns boolean - returns true if response contains info about faceAttributes and emotions
      */

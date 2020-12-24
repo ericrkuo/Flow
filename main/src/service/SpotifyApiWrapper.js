@@ -3,11 +3,11 @@ const WebapiError = require("spotify-web-api-node/src/webapi-error");
 const TIME_TO_WAIT = 5000; // 5 seconds
 
 /**
- * Executes a callback function.
+ * Executes a callback function
  * If rate limiting error is thrown, pause execution and try again
  *
  * @param callback - callback function to execute upon success
- * @returns {Promise<T | * | undefined>}
+ * @returns {Promise<T>}
  */
 function executeMethod(callback) {
     return callback()
@@ -28,7 +28,7 @@ function executeMethod(callback) {
 /**
  * Sleep function that sets timeout based on inputted ms
  * @param ms - milliseconds for requested timeout
- * @returns {Promise<unknown>}
+ * @returns {Promise<number>}
  */
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));

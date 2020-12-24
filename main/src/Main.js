@@ -11,17 +11,17 @@ class Main {
 
     /**
      * ====== High-level Steps ======
-     * 1. receive a dataURL from image
-     * 2. use AzureFaceAPIService.js to get the emotions
-     * 3. decide on dominant emotion
-     * 4. get song features of emotion from EmotionService.js
-     * 5. get all user related songs from SpotifyService.js
-     * 6. add song X to data
-     * 7. pass data into KMean to get cluster results
-     * 8. find song X in cluster
-     * 9. get songs in cluster containing song X
-     * 10. get desired number of songs (currently 30) if cluster has too much or too little
-     * 11. return this.result (see this.setResults)
+     * 1. Receive a dataURL from image
+     * 2. Use AzureFaceAPIService.js to get the emotions
+     * 3. Decide on dominant emotion
+     * 4. Get song features of emotion from EmotionService.js
+     * 5. Get all user related songs from SpotifyService.js
+     * 6. Add song X to data
+     * 7. Pass data into KMean to get cluster results
+     * 8. Find song X in cluster
+     * 9. Get songs in cluster containing song X
+     * 10. Get desired number of songs (currently 30) if cluster has too much or too little
+     * 11. Return this.result (see this.setResults)
      */
     constructor() {
         require('dotenv').config();
@@ -40,7 +40,7 @@ class Main {
     }
 
     /**
-     * Gets the relevant songs for current user
+     * Gets the relevant songs for current user based on kMeans clustering with dominant mood
      * Requires this.dataURL to be set
      * @returns {Promise<never>|Promise<* | void>}
      */
@@ -80,7 +80,7 @@ class Main {
     }
 
     /**
-     * Gets relevant songs of current user, for testing
+     * Gets relevant songs for current user based on kMeans clustering with dominant mood, for testing purposes
      * @returns {Promise<never>|Promise<* | void>}
      */
     getRelevantSongsTestingPurposes() {
@@ -126,10 +126,10 @@ class Main {
     /**
      * Sets the results for global access inside trackRouter.js
      * trackObjects = {{id: {track, audioFeatures}}, {id: {track, audioFeatures}}, {id: {track, audioFeatures}}, ...}
-     * @param songIDs
-     * @param audioFeatureData
-     * @param mood
-     * @param emotions
+     * @param songIDs - list of track IDs
+     * @param audioFeatureData - audio features for tracks
+     * @param mood - dominant mood
+     * @param emotions - current user's emotions
      * @returns {Promise<T | void>}
      *          of this format {tracks: trackObjects, userInfo: userInfoObject, mood: {dominantMood, {happiness: 0.8, sadness: 0.2}}}
      */
@@ -156,7 +156,7 @@ class Main {
     /**
      * Returns an array of songIDs for the cluster that contains songX
      * @param clusters - current group of clusters
-     * @returns {[]}
+     * @returns {string[]} - list of song IDs
      */
     getSongIDsOfClusterContainingSongX(clusters) {
         for (let cluster of clusters) {
@@ -171,7 +171,7 @@ class Main {
     /**
      * Gets the song IDs of tracks in the cluster
      * @param cluster - current group of clusters
-     * @returns {[]} - array of song IDs
+     * @returns {string[]} - array of song IDs
      */
     getSongIDSFromCluster(cluster) {
         let arr = [];
@@ -185,7 +185,7 @@ class Main {
      * Returns desired number of songs
      * @param bestK - ideal K value
      * @param arrayOfSongIDS - group of song IDs
-     * @param map
+     * @param map - mapping from kMean clustering
      * @returns {any[]|*}
      */
     getDesiredNumberSongs(bestK, arrayOfSongIDS, map) {
@@ -238,6 +238,7 @@ class Main {
     }
 
     /**
+     * Calls for creation of new Spotify playlist based on user's dominant mood
      * Requires array of track URIs in format ["spotify:track:1ue7zm5TVVvmoQV8lK6K2H", ...]
      * @param tracks - tracks in final result for user
      * @returns {Promise<never>} - new playlist body from SpotifyService

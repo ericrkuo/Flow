@@ -708,6 +708,7 @@ class EmotionService {
 
     /**
      * Constructor for EmotionService class
+     * Find the emotion with largest value possible.
      * @param spotifyApi - instance of SpotifyAPI
      */
     constructor(spotifyApi) {
@@ -716,7 +717,7 @@ class EmotionService {
     }
 
     /**
-     * Gets the features associated with the current mood
+     * Gets the song features associated with the dominant mood, based on audio features for tracks
      * @param mood - current mood of user
      * @returns {Promise<never>|Promise<T | void>} - Object of features for this mood
      */
@@ -755,8 +756,8 @@ class EmotionService {
     }
 
     /**
-     * Gets the dominant emotion for the current user
-     * @param emotionData - data with quanitites for eaach emotion
+     * Gets the dominant emotion for the current user based on largest value
+     * @param emotionData - data with quantities for each emotion
      * @returns string - user's most dominant mood
      */
     getDominantExpression(emotionData) {

@@ -3,7 +3,7 @@ let homeButton = document.getElementById("home");
 let aboutUsButton = document.getElementById("info");
 
 /**
- * Adds event listeners to all navigation buttons for tutorial, home button, and about us
+ * Adds event listeners to all navigation buttons for tutorial, home, and about us buttons
  */
 tutorialButton.addEventListener("click", ()=>{
    location.href = "/tutorial";
