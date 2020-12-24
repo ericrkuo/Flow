@@ -8,21 +8,21 @@ const {RefreshCredentialService} = require("./service/RefreshCredentialService")
 const DESIRED_NUM_SONGS = 30;
 
 class Main {
-    /*
-    * high level steps
-    * 1. receive a dataURL from image
-    * 2. use AzureFaceAPIService.js to get the emotions
-    * 3. decide on dominant emotion
-    * 4. get song features of emotion from EmotionService.js
-    * 5. get all user related songs from SpotifyService.js
-    * 6. add song X to data
-    * 7. pass data into KMean to get cluster results
-    * 8. find song X in cluster
-    * 9. get songs in cluster containing song X
-    * 10. get desired number of songs (currently 30) if cluster has too much or too little
-    * 11. return this.result (see this.setResults)
-    * */
 
+    /**
+     * ====== High-level Steps ======
+     * 1. receive a dataURL from image
+     * 2. use AzureFaceAPIService.js to get the emotions
+     * 3. decide on dominant emotion
+     * 4. get song features of emotion from EmotionService.js
+     * 5. get all user related songs from SpotifyService.js
+     * 6. add song X to data
+     * 7. pass data into KMean to get cluster results
+     * 8. find song X in cluster
+     * 9. get songs in cluster containing song X
+     * 10. get desired number of songs (currently 30) if cluster has too much or too little
+     * 11. return this.result (see this.setResults)
+     */
     constructor() {
         require('dotenv').config();
         this.dataURL = null;
@@ -39,7 +39,11 @@ class Main {
         this.result = null;
     }
 
-    // REQUIRES. this.dataURL to be set
+    /**
+     * Gets the relevant songs for current user
+     * Requires this.dataURL to be set
+     * @returns {Promise<never>|Promise<* | void>}
+     */
     getRelevantSongs() {
         if (!this.dataURL) {
             return Promise.reject(new Err.InvalidDataURLError());
@@ -75,6 +79,10 @@ class Main {
             });
     }
 
+    /**
+     * Gets relevant songs of current user, for testing
+     * @returns {Promise<never>|Promise<* | void>}
+     */
     getRelevantSongsTestingPurposes() {
         if (!this.dataURL) {
             return Promise.reject(new Err.InvalidDataURLError());
@@ -115,9 +123,16 @@ class Main {
             })
     }
 
-    // PURPOSE - set the results for global access inside trackRouter.js
-    // result = {tracks: trackObjects, userInfo: userInfoObject, mood: {dominantMood, {happiness: 0.8, sadness: 0.2}}}
-    // trackObjects = {{id: {track, audioFeatures}}, {id: {track, audioFeatures}}, {id: {track, audioFeatures}}, ...}
+    /**
+     * Sets the results for global access inside trackRouter.js
+     * trackObjects = {{id: {track, audioFeatures}}, {id: {track, audioFeatures}}, {id: {track, audioFeatures}}, ...}
+     * @param songIDs
+     * @param audioFeatureData
+     * @param mood
+     * @param emotions
+     * @returns {Promise<T | void>}
+     *          of this format {tracks: trackObjects, userInfo: userInfoObject, mood: {dominantMood, {happiness: 0.8, sadness: 0.2}}}
+     */
     setResults(songIDs, audioFeatureData, mood, emotions) {
         this.result = {tracks: {}, userInfo: {}, mood: {}};
         for (let songID of songIDs) {
@@ -138,7 +153,11 @@ class Main {
             })
     }
 
-    // returns an array of songIDs for the cluster that contains songX
+    /**
+     * Returns an array of songIDs for the cluster that contains songX
+     * @param clusters - current group of clusters
+     * @returns {[]}
+     */
     getSongIDsOfClusterContainingSongX(clusters) {
         for (let cluster of clusters) {
             for (let song of cluster) {
@@ -149,6 +168,11 @@ class Main {
         }
     }
 
+    /**
+     * Gets the song IDs of tracks in the cluster
+     * @param cluster - current group of clusters
+     * @returns {[]} - array of song IDs
+     */
     getSongIDSFromCluster(cluster) {
         let arr = [];
         for (let song of cluster) {
@@ -157,6 +181,13 @@ class Main {
         return arr;
     }
 
+    /**
+     * Returns desired number of songs
+     * @param bestK - ideal K value
+     * @param arrayOfSongIDS - group of song IDs
+     * @param map
+     * @returns {any[]|*}
+     */
     getDesiredNumberSongs(bestK, arrayOfSongIDS, map) {
         let n = arrayOfSongIDS.length;
         console.log("ORIGINAL NUMBER OF SONGS: " + n);
@@ -194,6 +225,10 @@ class Main {
         }
     }
 
+    /**
+     * Prints out all song titles
+     * @param cluster - current group of cluster
+     */
     printOutAllSongTitles(cluster) {
         for (let song of cluster) {
             if (song !== "X") {
@@ -202,7 +237,11 @@ class Main {
         }
     }
 
-    // REQUIRES: array of track URIs in format ["spotify:track:1ue7zm5TVVvmoQV8lK6K2H", ...]
+    /**
+     * Requires array of track URIs in format ["spotify:track:1ue7zm5TVVvmoQV8lK6K2H", ...]
+     * @param tracks - tracks in final result for user
+     * @returns {Promise<never>} - new playlist body from SpotifyService
+     */
     createMoodPlaylist(tracks) {
         return this.spotifyService.getNewPlaylist(tracks);
     }

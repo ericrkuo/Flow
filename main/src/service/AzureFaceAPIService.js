@@ -2,10 +2,18 @@ const Err = require("../constant/Error");
 
 class AzureFaceAPIService {
 
+    /**
+     * Constructor for AzureFaceAPIService
+     */
     constructor() {
         require('dotenv').config();
     }
 
+    /**
+     * Returns emotion of current user
+     * @param dataURI - image encoding of the user's submitted photo
+     * @returns {Promise<* | void>} - returns data regarding user's mood
+     */
     getEmotions(dataURI) {
         return this.convertDataURIToBinary(dataURI)
             .then((data) => {
@@ -39,6 +47,11 @@ class AzureFaceAPIService {
             });
     }
 
+    /**
+     * Handles response from AzureFaceAPI
+     * @param response - returns emotion data from API response
+     * @returns {*} - object with quantities per emotion
+     */
     handleAzureFaceAPIResponse(response) {
         if (!this.isResponseValid(response)) throw new Err.InvalidResponseError("Response from Azure Face API is invalid - null or not an array");
         if (response.data.length === 0) throw new Err.NoUserDetectedError();
@@ -49,14 +62,29 @@ class AzureFaceAPIService {
         return emotionData;
     }
 
+    /**
+     * Checks if response is valid
+     * @param response - response from AzureFaceAPI
+     * @returns boolean - returns true if response is not null/undefined and data is an array
+     */
     isResponseValid(response) {
         return response && response.data && Array.isArray(response.data);
     }
 
+    /**
+     * Checks if respone data is valid
+     * @param responseData - responseData from AzureFaceAPI
+     * @returns boolean - returns true if response contains info about faceAttributes and emotions
+     */
     isResponseDataValid(responseData) {
         return responseData[0]["faceAttributes"] && responseData[0]["faceAttributes"]["emotion"];
     }
 
+    /**
+     * Converts the data URI image of the user to binary
+     * @param dataURI - data URI image of the user
+     * @returns {Promise<unknown>} - binary version of image
+     */
     convertDataURIToBinary(dataURI) {
         return new Promise((resolve, reject) => {
             if (!dataURI || typeof dataURI !== 'string') return reject(new Err.InvalidInputError("dataURI is formatted improperly"));

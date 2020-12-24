@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: info.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: info.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>let getStartedButton = document.getElementById("getStarted");
+let readMoreForHowWeDidItButton = document.getElementById("readHowWeDidIt");
+let readMoreFutureButton = document.getElementById("readFuture");
+let readMoreReflectionButton = document.getElementById("readReflection");
+
+/**
+ * Adds event listener for the "Get Started" button and directs user to /webcam
+ */
+getStartedButton.addEventListener("click", () => {
+    location.href = "/webcam";
+});
+
+/**
+ * Centers the modal
+ */
+function centerModal() {
+    $(this).css('display', 'block');
+    var $dialog = $(this).find(".modal-dialog"),
+        offset = ($(window).height() - $dialog.height()) / 2,
+        bottomMargin = parseInt($dialog.css('marginBottom'), 10);
+
+    // Make sure you don't hide the top part of the modal w/ a negative margin if it's longer than the screen height,
+    // and keep the margin equal to the bottom margin of the modal
+    if (offset &lt; bottomMargin) offset = bottomMargin;
+    $dialog.css("margin-top", offset);
+}
+
+$('.modal-content').css("background-color", "#6575F7");
+$('.img-circle').css("border-radius", "50%");
+$(window).on("resize", function () {
+    $('.modal:visible').each(centerModal);
+});
+
+/**
+ * Upon click of the "How We Did it" button, opens/centers modal and inserts text description
+ */
+readMoreForHowWeDidItButton.addEventListener("click", () => {
+    $('#infoModal').modal('show', centerModal);
+    $('#infoModalLabel').text('HOW WE DID IT');
+    $('#infoModalText').html('We navigated the software lifecycle, from requirement gathering, to scope-based ' +
+        'development and to technical delivery. &lt;/br> &lt;/br> The technologies we used include: &lt;/br> > Express.JS ' +
+        '&lt;/br> > Microsoft Azure Cognitive Services &lt;/br> > Spotify Web API for Developers &lt;/br> ' +
+        '> Chart.min.js &lt;/br> > Bootstrap &lt;/br> > Mocha and Chai &lt;/br> &lt;/br> ' + 'Flow utilizes Azure Cognitive ' +
+        'Services to detect the user’s dominant mood and Spotify’s Web API to collect user’s Spotify history such ' +
+        'as their favourite songs, recently played, relevant albums/artists and more. Once all the necessary ' +
+        'information is collected, the data is passed to a machine learning algorithm we implemented, K-means, ' +
+        'to find clusters of songs relevant to the user’s mood and Spotify history. &lt;/br> &lt;/br> ' + 'Certain ' +
+        'optimizations made to K-means include using K-means++ to ensure better initialization of the ' +
+        'centroids, as well as implementing the Silhouette method to find the optimal value of k ' +
+        '(number of clusters). &lt;/br> &lt;/br> One of the biggest challenges of the project was ensuring our code' +
+        ' adhered to SOLID design principles as well as ensuring classes were as loosely coupled as possible. ' +
+        'By practicing TDD, our classes and implementation were testable to begin with and we were able to ' +
+        'minimize the number of bugs when making changes to our code. Finally, another difficult problem ' +
+        'was designing the life-cycle of requests travelling from client to server side. We architected the ' +
+        'user flow as well as ensured our code was robust to handle unexpected errors.');
+});
+
+/**
+ * Upon click of the "Future" button, opens/centers modal and inserts text description
+ */
+readMoreFutureButton.addEventListener("click", () => {
+    $('#infoModal').modal('show', centerModal);
+    $('#infoModalLabel').text('THE FUTURE');
+    $('#infoModalText').html('As with any outstanding project, application or product- there is always room for ' +
+        'improvements! For Flow, in the near future, we hope to be able to execute the following ideas: &lt;/br> &lt;/br> ' +
+        '> Provide more accurate song recommendations for the moods that are subjectively difficult to translate' +
+        ' into music (anger, contempt, disgust, fear, surprise) &lt;/br> > Further optimization of the kMeans algorithm' +
+        ' &lt;/br> > Implement other machine learning algorithms in substitution of kMeans &lt;/br> > Utilize a database ' +
+        'system for more organized data management &lt;/br> > Introduce opposite moods as a selection choice for types' +
+        ' of recommended tracks');
+})
+
+/**
+ * Upon click of the "Reflection" button, opens/centers modal and inserts text description
+ */
+readMoreReflectionButton.addEventListener("click", () => {
+    $('#infoModal').modal('show', centerModal);
+    $('#infoModalLabel').text('REFLECTION');
+    $('#infoModalText').html('Being able to explore new frameworks, learn machine learning, and experiment with ' +
+        'various APIs and libraries, has been extremely fun and eye-opening! Though at times difficult through ' +
+        'the hours of debugging and confusion, we are grateful to have been able to dedicate our energy and ' +
+        'efforts to this project whole-heartedly. It was also our first time working together as partners on a ' +
+        'project! &lt;/br> &lt;/br> Initially, upon discussion of the structure and functionalities, we had expected the ' +
+        'project to be quite simple. However, as we continued to progress through our checkpoints, we recognized the ' +
+        'numerous complexities we faced. From figuring out our code structure, to learning how to work with Pug ' +
+        'for the first time, we were able to understand the importance of making wise decisions for both major ' +
+        'and minor details. &lt;/br> &lt;/br> Further, we identified the positive effects of weighing out the pros and ' +
+        'cons of all our ideas, as we pushed to produce the best version of our application. &lt;/br> &lt;/br> This ' +
+        'was also our first time working heavily on front-end. Though we took a longer time, we were very ' +
+        'happy to have discovered Bootstrap and JQuery! &lt;/br> &lt;/br> Thanks to many trials and errors, we are ' +
+        'proud of what we have accomplished, both with this service and in terms of our growth as software engineers.');
+});</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#centerModal">centerModal</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Thu Dec 24 2020 12:22:40 GMT-0800 (Pacific Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

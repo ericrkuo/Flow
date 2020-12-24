@@ -2,15 +2,19 @@ var express = require('express');
 const {webcamLimiter} = require("./rateLimiter");
 const {checkCredentials, refreshCredentialsIfExpired} = require("./middleware");
 var router = express.Router();
-const {Main} = require("../Main");
 
-/* GET home page. */
+/**
+ * Handles GET request for webcam page
+ */
 router.get('/', checkCredentials, function (req, res, next) {
     // res.sendFile(path.join(__dirname+"/webcam.html"), {json: json});
     // res.sendFile(absolutePath.getAbsolutePath());
     return res.render("webcam");
 });
 
+/**
+ * Handles POST request for webcam page
+ */
 router.post('/', [webcamLimiter, refreshCredentialsIfExpired], function (req, res, next) {
     if (req.app.locals.main && req.body && req.body.dataURL) {
         let main = req.app.locals.main;

@@ -1064,8 +1064,10 @@ let sampleData = {
 }
 //#endregion
 
-// input: dataURL
-// output: returns html rendering of the tracks
+/**
+ * Handles GET request for tracks page
+ * Takes in a dataURL and returns HTML rendering of tracks
+ */
 router.get('/', checkCredentials, function (req, res, next) {
     // use res.render("track", sampleData) for testing purposes
 
@@ -1081,7 +1083,10 @@ router.get('/', checkCredentials, function (req, res, next) {
     }
 });
 
-// REQUIRES: req.body to contain a list of track URI's in format ["spotify:track:1ue7zm5TVVvmoQV8lK6K2H", ...]
+/**
+ *  Handles POST request for tracks page
+ *  Requires req.body to contain a list of track URI's in format ["spotify:track:1ue7zm5TVVvmoQV8lK6K2H", ...]
+ */
 router.post('/', [trackLimiter, refreshCredentialsIfExpired], function (req, res, next) {
     let main = req.app.locals.main;
     return main.createMoodPlaylist(req.body)

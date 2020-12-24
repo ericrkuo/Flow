@@ -3,11 +3,19 @@ const {executeMethod} = require("./SpotifyApiWrapper");
 
 class RefreshCredentialService {
 
+    /**
+     * Constructor for RefreshCredentialService
+     * @param spotifyApi - current instance of spotifyApi
+     */
     constructor(spotifyApi) {
         require('dotenv').config();
         this.spotifyApi = spotifyApi;
     }
 
+    /**
+     * Checks if credentials are valid and have not expired through a test call
+     * @returns boolean - returns true if credentials are still valid
+     */
     checkCredentials() {
         return executeMethod(() => {
             return this.spotifyApi.getArtist('2hazSY4Ef3aB9ATXW7F5w3')
@@ -20,6 +28,10 @@ class RefreshCredentialService {
             })
     }
 
+    /**
+     * Checks credential and attempts to get a new access token with refresh token
+     * @returns {Promise<T | void>}
+     */
     tryRefreshCredential() {
         return this.checkCredentials()
             .then((isValidCredential) => {
@@ -36,6 +48,10 @@ class RefreshCredentialService {
             });
     }
 
+    /**
+     * Gets the new access token using refresh token by issuing a POST request to spotifyApi
+     * @returns {Promise<never>|Promise<* | void>}
+     */
     getNewAccessToken() {
         let refresh_token = this.spotifyApi.getRefreshToken();
         if (!refresh_token) {

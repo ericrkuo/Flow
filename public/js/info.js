@@ -3,10 +3,16 @@ let readMoreForHowWeDidItButton = document.getElementById("readHowWeDidIt");
 let readMoreFutureButton = document.getElementById("readFuture");
 let readMoreReflectionButton = document.getElementById("readReflection");
 
+/**
+ * Adds event listener for the "Get Started" button and directs user to /webcam
+ */
 getStartedButton.addEventListener("click", () => {
     location.href = "/webcam";
 });
 
+/**
+ * Centers the modal
+ */
 function centerModal() {
     $(this).css('display', 'block');
     var $dialog = $(this).find(".modal-dialog"),
@@ -25,6 +31,9 @@ $(window).on("resize", function () {
     $('.modal:visible').each(centerModal);
 });
 
+/**
+ * Upon click of the "How We Did it" button, opens/centers modal and inserts text description
+ */
 readMoreForHowWeDidItButton.addEventListener("click", () => {
     $('#infoModal').modal('show', centerModal);
     $('#infoModalLabel').text('HOW WE DID IT');
@@ -46,6 +55,9 @@ readMoreForHowWeDidItButton.addEventListener("click", () => {
         'user flow as well as ensured our code was robust to handle unexpected errors.');
 });
 
+/**
+ * Upon click of the "Future" button, opens/centers modal and inserts text description
+ */
 readMoreFutureButton.addEventListener("click", () => {
     $('#infoModal').modal('show', centerModal);
     $('#infoModalLabel').text('THE FUTURE');
@@ -58,6 +70,9 @@ readMoreFutureButton.addEventListener("click", () => {
         ' of recommended tracks');
 })
 
+/**
+ * Upon click of the "Reflection" button, opens/centers modal and inserts text description
+ */
 readMoreReflectionButton.addEventListener("click", () => {
     $('#infoModal').modal('show', centerModal);
     $('#infoModalLabel').text('REFLECTION');

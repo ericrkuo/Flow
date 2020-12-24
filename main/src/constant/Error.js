@@ -1,5 +1,9 @@
 //#region General Errors
 class InvalidInputError extends Error {
+    /**
+     * Constructor for InvalidInputError
+     * @param message - error message
+     */
     constructor(message) {
         super(message);
         this.name = "InvalidInputError";
@@ -7,6 +11,10 @@ class InvalidInputError extends Error {
 }
 
 class InvalidResponseError extends Error {
+    /**
+     * Constructor for InvalidResponseError
+     * @param message - error message
+     */
     constructor(message) {
         super(message);
         this.name = "InvalidResponseError";
@@ -17,6 +25,10 @@ class InvalidResponseError extends Error {
 
 //#region AzureFaceApiService Errors
 class NoUserDetectedError extends Error {
+    /**
+     * Constructor for NoUserDetectedError
+     * @param message - error message
+     */
     constructor() {
         super("No user detected in photo");
         this.name = "NoUserDetectedError";
@@ -24,6 +36,10 @@ class NoUserDetectedError extends Error {
 }
 
 class AzureFaceApiError extends Error {
+    /**
+     * Constructor for AzureFaceApiError
+     * @param message - error message
+     */
     constructor(message) {
         super(message);
         this.name = "AzureFaceApiError";
@@ -34,6 +50,10 @@ class AzureFaceApiError extends Error {
 
 //#region SpotifyService Errors
 class EmptyTracksError extends Error {
+    /**
+     * Constructor for EmptyTracksError
+     * @param message - error message
+     */
     constructor() {
         super("No tracks detected");
         this.name = "EmptyTracksError";
@@ -44,6 +64,11 @@ class EmptyTracksError extends Error {
 
 //#region KMean Errors
 class KMeanIterationError extends Error {
+    /**
+     *  Constructor for KMeanIterationError
+     * @param currIterations - current number of iterations
+     * @param maxIterations - max number of iterations possible
+     */
     constructor(currIterations, maxIterations) {
         super("Too many iterations: " + currIterations + ", maxIterations: " + maxIterations);
         this.name = "KMeanIterationError";
@@ -51,6 +76,10 @@ class KMeanIterationError extends Error {
 }
 
 class KMeanClusterError extends Error {
+    /**
+     * Constructor for KMeanClusterError
+     * @param message - error message
+     */
     constructor(message) {
         super(message);
         this.name = "KMeanClusterError";
@@ -61,6 +90,9 @@ class KMeanClusterError extends Error {
 
 //#region Main Errors
 class InvalidDataURLError extends Error {
+    /**
+     * Constructor for InvalidDataURLError
+     */
     constructor() {
         super("dataURL is not set");
         this.name = "InvalidDataURLError";
@@ -71,6 +103,10 @@ class InvalidDataURLError extends Error {
 
 //#region RefreshCredentialService Errors
 class RefreshCredentialError extends Error {
+    /**
+     * Constructor for RefreshCredentialError
+     * @param message - error message
+     */
     constructor(message) {
         super(message);
         this.name = "RefreshCredentialError";
