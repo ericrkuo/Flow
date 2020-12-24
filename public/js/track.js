@@ -277,7 +277,7 @@ function addPlaylistEventListeners() {
                     .catch((error) => {
 
                         $('#errorAlert').append('<a class="close alert-close">&times</a>' +
-                            '<span>'+'Sorry, we encountered an internal server error. ' + '</span>');
+                            '<span>'+'Sorry, we encountered an error. ' + '</span>');
 
                         if(error.response) {
                             $('#errorAlert').append('<span>' + error.response.data.errorMsg +'</span>');
@@ -288,7 +288,7 @@ function addPlaylistEventListeners() {
                                 }, 5000);
                             }
                         } else if (error.message) {
-                            $('#errorAlert').append('<span>'+'Sorry, we encountered an internal server error. ' +
+                            $('#errorAlert').append('<span>'+'Sorry, we encountered an error. ' +
                                 error.message +'</span>');
                         }
 

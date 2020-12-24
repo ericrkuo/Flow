@@ -33,7 +33,7 @@ async function init() {
         handleSuccess(stream);
     } catch (err) {
         show([errorAlert]);
-        $('#errorAlert').append('<span>'+'Sorry, we encountered an internal server error. Redirecting you in 5 seconds ...' +
+        $('#errorAlert').append('<span>'+'Sorry, we encountered an error. Redirecting you in 5 seconds ...' +
             error.response.data.errorMsg +'</span>');
         setTimeout(function() {
             location.href = "/"
@@ -82,7 +82,7 @@ function postTracks(dataURL) {
             hide([loadingDiv]);
             show([webcam, errorAlert]);
             $("#header").hide();
-            $('#errorAlert').append('<span>'+'Sorry, we encountered an internal server error. ' + '</span>');
+            $('#errorAlert').append('<span>'+'Sorry, we encountered an error. ' + '</span>');
 
             if(error.response) {
                 $('#errorAlert').append('<span>' + error.response.data.errorMsg +'</span>');
@@ -93,7 +93,7 @@ function postTracks(dataURL) {
                     }, 5000);
                 }
             } else if (error.message) {
-                $('#errorAlert').append('<span>'+'Sorry, we encountered an internal server error. ' +
+                $('#errorAlert').append('<span>'+'Sorry, we encountered an error. ' +
                     error.message +'</span>');
             }
 
