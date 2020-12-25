@@ -100,13 +100,14 @@ function postTracks(dataURL) {
         });
 }
 
-getTracksButton.addEventListener("click", () => {
+getTracksButton.onclick = () => {
     const dataURL = canvas.toDataURL('image/png', 1);
     hide([webcam]);
     show([loadingDiv]);
     $("#errorAlert").html("").hide();
     return postTracks(dataURL);
-})
+};
+
 
 takePhotoButton.addEventListener("click", () => {
     // dimension of pixels in canvas

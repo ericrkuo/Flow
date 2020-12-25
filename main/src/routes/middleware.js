@@ -54,5 +54,17 @@ function isMainAndSpotifyApiAndRefreshCredentialValid(main) {
     return main && main.spotifyApi && main.refreshCredentialService && main.spotifyApi.getAccessToken() && main.spotifyApi.getRefreshToken()
 }
 
+/**
+ * Checks if webcam post body and dataURL is null or undefined
+ */
+function checkWebcamPostBody(req, res, next) {
+    if (!req.body || !req.body.dataURL) {
+        return res.status(404).json({errorMsg: "Please try taking another photo!"});
+    } else {
+        return next();
+    }
+}
+
 module.exports.checkCredentials = checkCredentials;
 module.exports.refreshCredentialsIfExpired = refreshCredentialsIfExpired;
+module.exports.checkWebcamPostBody = checkWebcamPostBody;
