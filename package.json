@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node ./bin/www",
     "test": "mocha main/test/**/*.js --timeout 20000",
-    "eslint": "npx eslint ./main ./public",
+    "eslint": "echo running eslint && npx eslint ./main ./public",
     "eslintFix": "npx eslint ./main ./public --fix"
   },
   "dependencies": {
@@ -31,6 +31,12 @@
     "spotify-web-api-node": "^4.0.0"
   },
   "devDependencies": {
-    "eslint": "^7.16.0"
+    "eslint": "^7.16.0",
+    "pre-commit": "^1.2.2"
+  },
+  "pre-commit": {
+    "run": [
+      "eslint"
+    ]
   }
 }
