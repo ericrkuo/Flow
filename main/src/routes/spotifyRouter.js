@@ -1,5 +1,6 @@
 const express = require("express");
 const qs = require("querystring");
+const {Main} = require("../Main");
 const router = express.Router();
 
 const scopes = ["user-read-private",
@@ -42,7 +43,14 @@ router.get("/", function (req, res) {
  * Handles GET request for spotify/login page
  */
 router.get("/login", (req, res) => {
-    const spotifyApi = req.app.locals.main.spotifyApi;
+    let main = req.app.locals.main;
+
+    if (!main || !main.spotifyApi) {
+        req.app.locals.main = new Main();
+        main = req.app.locals.main;
+    }
+
+    const spotifyApi = main.spotifyApi;
     const html = spotifyApi.createAuthorizeURL(scopes);
     console.log(html);
 
@@ -66,22 +74,30 @@ router.get("/callback", async (req, res) => {
         return;
     }
 
-    const spotifyApi = req.app.locals.main.spotifyApi;
+    let main = req.app.locals.main;
+
+    if (!main || !main.spotifyApi || !main.spotify) {
+        req.app.locals.main = new Main();
+        main = req.app.locals.main;
+    }
+
+    const spotifyApi = main.spotifyApi;
     const {code} = req.query;
     console.log(code);
-    try {
-        const data = await spotifyApi.authorizationCodeGrant(code);
-        const {access_token, refresh_token} = data.body;
-        spotifyApi.setAccessToken(access_token);
-        spotifyApi.setRefreshToken(refresh_token);
-        console.log("SPOTIFY - set access and refresh tokens");
-        console.log("ACCESS TOKEN: " + req.app.locals.main.spotifyService.spotifyApi.getAccessToken());
-        console.log("\n");
-        console.log("REFRESH TOKEN: " + req.app.locals.main.spotifyService.spotifyApi.getRefreshToken());
-        res.redirect("/webcam");
-    } catch (err) {
-        res.redirect("/#/error/invalid token");
-    }
+
+    return spotifyApi.authorizationCodeGrant(code)
+        .then((data) => {
+            const {access_token, refresh_token} = data.body;
+            spotifyApi.setAccessToken(access_token);
+            spotifyApi.setRefreshToken(refresh_token);
+            console.log("SPOTIFY - set access and refresh tokens");
+            console.log("ACCESS TOKEN: " + spotifyApi.getAccessToken());
+            console.log("\n");
+            console.log("REFRESH TOKEN: " + spotifyApi.getRefreshToken());
+            return res.redirect("/webcam");
+        }).catch(() => {
+            return res.redirect("/#/error/invalid-token");
+        });
 });
 
 module.exports = router;

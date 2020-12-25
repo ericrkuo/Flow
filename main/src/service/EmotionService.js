@@ -721,7 +721,7 @@ class EmotionService {
      * @returns {Promise<never>|Promise<T | void>} - Object of features for this mood
      */
     getFeatures(mood) {
-        if (typeof mood !== "string" || !emotionMap[mood]) return Promise.reject(new Err.InvalidInputError(mood + " is not a recognized mood, cannot get audio Features"));
+        if (typeof mood !== "string" || !emotionMap[mood]) return Promise.reject(new Err.InvalidInputError(mood + " is not a recognized mood, cannot get audio features"));
         const numTracks = emotionMap[mood].length;
 
         return executeMethod(() => {
@@ -760,7 +760,7 @@ class EmotionService {
      * @returns string - user's most dominant mood
      */
     getDominantExpression(emotionData) {
-        if (!this.isEmotionDataValid(emotionData)) throw new Err.InvalidInputError("cannot get dominant expression in EmotionService, data isn't formatted correctly");
+        if (!this.isEmotionDataValid(emotionData)) throw new Err.InvalidInputError("Cannot get dominant expression in EmotionService, data isn't formatted correctly");
 
         let dominantEmotion = null;
         let dominantEmotionValue = -1;
@@ -771,7 +771,7 @@ class EmotionService {
                 dominantEmotionValue = value;
             }
         }
-        if (dominantEmotionValue === -1) throw new Err.InvalidInputError("no dominant emotion detected");
+        if (dominantEmotionValue === -1) throw new Err.InvalidInputError("No dominant emotion detected");
         return dominantEmotion;
     }
 

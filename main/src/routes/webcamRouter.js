@@ -1,6 +1,6 @@
 const express = require("express");
 const {webcamLimiter} = require("./rateLimiter");
-const {checkCredentials, refreshCredentialsIfExpired} = require("./middleware");
+const {checkCredentials, refreshCredentialsIfExpired, checkWebcamPostBody} = require("./middleware");
 const router = express.Router();
 
 /**
@@ -15,25 +15,22 @@ router.get("/", checkCredentials, function (req, res) {
 /**
  * Handles POST request for webcam page to get relevant songs for user
  */
-router.post("/", [webcamLimiter, refreshCredentialsIfExpired], function (req, res) {
-    if (req.app.locals.main && req.body && req.body.dataURL) {
-        const main = req.app.locals.main;
-        main.dataURL = req.body.dataURL;
-        return main.getRelevantSongsTestingPurposes()
-            .then(() => {
-                console.log("REACHED HERE");
-                // res.redirect("/tracks") // cannot do redirect after HTTP REQ, can only make client redirect
-                return res.status(200).json({result: req.app.locals.main.result});
-            })
-            .catch((err) => {
-                // TODO: error handling in front end
-                console.log(err);
-                return res.status(400).json({"error": err.message});
-            });
-    } else {
-        // TODO: error handling in front end
-        return res.status(400).json({"error": "Something went wrong"});
-    }
+router.post("/", [webcamLimiter, refreshCredentialsIfExpired, checkWebcamPostBody], function (req, res) {
+    const main = req.app.locals.main;
+    main.dataURL = req.body.dataURL;
+    return main.getRelevantSongsTestingPurposes()
+        .then(() => {
+            console.log("REACHED HERE");
+            const result = main.result;
+            if (result) {
+                return res.status(200).json({result: result});
+            } else {
+                return res.status(404).json({errorMsg: "Please try taking another photo!"});
+            }
+        })
+        .catch((err) => {
+            return res.status(500).json({errorMsg: "Please try taking another photo! </br> </br>" + err.message});
+        });
 });
 
 module.exports = router;

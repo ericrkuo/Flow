@@ -30,7 +30,7 @@ class NoUserDetectedError extends Error {
      * @param message - error message
      */
     constructor() {
-        super("No user detected in photo");
+        super("No user detected in the photo");
         this.name = "NoUserDetectedError";
     }
 }
@@ -94,7 +94,7 @@ class InvalidDataURLError extends Error {
      * Constructor for InvalidDataURLError
      */
     constructor() {
-        super("dataURL is not set");
+        super("The dataURL is not set");
         this.name = "InvalidDataURLError";
     }
 }

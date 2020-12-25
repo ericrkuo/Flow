@@ -19,13 +19,13 @@
                 "SwitchCase": 1
             }
         ],
-        "linebreak-style": [
-            "error",
-            "windows"
-        ],
         "quotes": [
             "error",
             "double"
+        ],
+        "eol-last": [
+            "error",
+            "always"
         ],
         "semi": [
             "error",
