@@ -6,7 +6,7 @@ class AzureFaceAPIService {
      * Constructor for AzureFaceAPIService
      */
     constructor() {
-        require('dotenv').config();
+        require("dotenv").config();
     }
 
     /**
@@ -17,22 +17,22 @@ class AzureFaceAPIService {
     getEmotions(dataURI) {
         return this.convertDataURIToBinary(dataURI)
             .then((data) => {
-                let axios = require('axios');
-                let config = {
-                    method: 'post',
-                    url: 'https://flowfaceapi.cognitiveservices.azure.com/face/v1.0/detect',
+                const axios = require("axios");
+                const config = {
+                    method: "post",
+                    url: "https://flowfaceapi.cognitiveservices.azure.com/face/v1.0/detect",
                     headers: {
-                        'Ocp-Apim-Subscription-Key': process.env.AZUREKEY,
-                        'Content-Type': 'application/octet-stream'
+                        "Ocp-Apim-Subscription-Key": process.env.AZUREKEY,
+                        "Content-Type": "application/octet-stream",
                     },
                     params: {
                         returnFaceID: true,
                         returnFaceLandmarks: false,
-                        returnFaceAttributes: 'age,gender,headPose,smile,facialHair,emotion',
-                        recognitionModel: 'recognition_03',
-                        detectionModel: 'detection_01'
+                        returnFaceAttributes: "age,gender,headPose,smile,facialHair,emotion",
+                        recognitionModel: "recognition_03",
+                        detectionModel: "detection_01",
                     },
-                    data: data
+                    data: data,
                 };
                 return axios(config);
             })
@@ -57,7 +57,7 @@ class AzureFaceAPIService {
         if (response.data.length === 0) throw new Err.NoUserDetectedError();
         if (!this.isResponseDataValid(response.data)) throw new Err.InvalidResponseError("Response from Azure Face API is invalid - no faceAttributes or emotions");
 
-        let emotionData = response.data[0]["faceAttributes"]["emotion"];
+        const emotionData = response.data[0]["faceAttributes"]["emotion"];
         console.log(JSON.stringify(response.data));
         return emotionData;
     }
@@ -87,14 +87,14 @@ class AzureFaceAPIService {
      */
     convertDataURIToBinary(dataURI) {
         return new Promise((resolve, reject) => {
-            if (!dataURI || typeof dataURI !== 'string') return reject(new Err.InvalidInputError("dataURI is formatted improperly"));
+            if (!dataURI || typeof dataURI !== "string") return reject(new Err.InvalidInputError("dataURI is formatted improperly"));
 
-            let BASE64_MARKER = ';base64,';
-            let base64Index = dataURI.indexOf(BASE64_MARKER) + BASE64_MARKER.length;
-            let base64 = dataURI.substring(base64Index);
-            let raw = Buffer.from(base64, 'base64').toString("binary");
-            let rawLength = raw.length;
-            let array = new Uint8Array(new ArrayBuffer(rawLength));
+            const BASE64_MARKER = ";base64,";
+            const base64Index = dataURI.indexOf(BASE64_MARKER) + BASE64_MARKER.length;
+            const base64 = dataURI.substring(base64Index);
+            const raw = Buffer.from(base64, "base64").toString("binary");
+            const rawLength = raw.length;
+            const array = new Uint8Array(new ArrayBuffer(rawLength));
 
             for (let i = 0; i < rawLength; i++) {
                 array[i] = raw.charCodeAt(i);

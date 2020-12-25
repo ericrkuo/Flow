@@ -1,12 +1,12 @@
-var express = require('express');
+const express = require("express");
 const {webcamLimiter} = require("./rateLimiter");
 const {checkCredentials, refreshCredentialsIfExpired} = require("./middleware");
-var router = express.Router();
+const router = express.Router();
 
 /**
  * Handles GET request for webcam page
  */
-router.get('/', checkCredentials, function (req, res, next) {
+router.get("/", checkCredentials, function (req, res) {
     // res.sendFile(path.join(__dirname+"/webcam.html"), {json: json});
     // res.sendFile(absolutePath.getAbsolutePath());
     return res.render("webcam");
@@ -15,12 +15,12 @@ router.get('/', checkCredentials, function (req, res, next) {
 /**
  * Handles POST request for webcam page to get relevant songs for user
  */
-router.post('/', [webcamLimiter, refreshCredentialsIfExpired], function (req, res, next) {
+router.post("/", [webcamLimiter, refreshCredentialsIfExpired], function (req, res) {
     if (req.app.locals.main && req.body && req.body.dataURL) {
-        let main = req.app.locals.main;
+        const main = req.app.locals.main;
         main.dataURL = req.body.dataURL;
         return main.getRelevantSongsTestingPurposes()
-            .then((tracks) => {
+            .then(() => {
                 console.log("REACHED HERE");
                 // res.redirect("/tracks") // cannot do redirect after HTTP REQ, can only make client redirect
                 return res.status(200).json({result: req.app.locals.main.result});

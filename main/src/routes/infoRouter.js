@@ -1,11 +1,11 @@
-var express = require('express');
-var router = express.Router();
+const express = require("express");
+const router = express.Router();
 
 /**
  * Handles GET request for info page
  */
-router.get('/', function(req, res, next) {
-    res.render('info');
+router.get("/", function(req, res) {
+    res.render("info");
 });
 
 module.exports = router;
