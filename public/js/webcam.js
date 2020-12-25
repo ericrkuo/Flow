@@ -87,12 +87,6 @@ function postTracks(dataURL) {
 
             if(error.response) {
                 $("#errorAlert").append("<span>" + error.response.data.errorMsg +"</span>");
-
-                if(error.response.data.redirectLink) {
-                    setTimeout(function() {
-                        location.href= error.response.data.redirectLink;
-                    }, 5000);
-                }
             } else if (error.message) {
                 $("#errorAlert").append("<span>"+"Sorry, we encountered an error. " +
                     error.message +"</span>");
