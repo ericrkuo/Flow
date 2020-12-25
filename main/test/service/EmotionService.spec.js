@@ -1,8 +1,8 @@
-var chai = require("chai");
+const chai = require("chai");
 const {AzureFaceAPIService} = require("../../src/service/AzureFaceAPIService");
 const {EmotionService} = require("../../src/service/EmotionService");
 const sampleDataURL = require("../resources/sampleDataURL");
-const SpotifyWebApi = require('spotify-web-api-node');
+const SpotifyWebApi = require("spotify-web-api-node");
 const Err = require("../../src/constant/Error");
 const {RefreshCredentialService} = require("../../src/service/RefreshCredentialService");
 
@@ -10,46 +10,46 @@ let emotionService;
 
 describe("unit test for EmotionService", function () {
     before(async function () {
-        require('dotenv').config();
-        let spotifyApi = new SpotifyWebApi({
+        require("dotenv").config();
+        const spotifyApi = new SpotifyWebApi({
             clientId: process.env.SPOTIFY_API_ID,
             clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
             redirectUri: process.env.CALLBACK_URL,
             refreshToken: process.env.REFRESH_TOKEN,
         });
         emotionService = new EmotionService(spotifyApi);
-        let refreshCredentialService = new RefreshCredentialService(spotifyApi);
-        await refreshCredentialService.tryRefreshCredential()
+        const refreshCredentialService = new RefreshCredentialService(spotifyApi);
+        await refreshCredentialService.tryRefreshCredential();
     });
 
     it("test getFeatures - sadness", function () {
         return emotionService.getFeatures("sadness")
             .then((features) => {
                 console.log(features);
-                chai.assert(typeof features === 'object');
+                chai.assert(typeof features === "object");
             })
             .catch((err) => {
-                chai.expect.fail("not supposed to fail");
-            })
+                chai.expect.fail("not supposed to fail" + err);
+            });
     });
 
     it("test getFeatures - multiple emotions", function () {
-        let emotions = ["anger", "contempt", "disgust", "fear", "happiness", "neutral", "sadness", "surprise"];
-        let promises = [];
-        for (let e of emotions) {
+        const emotions = ["anger", "contempt", "disgust", "fear", "happiness", "neutral", "sadness", "surprise"];
+        const promises = [];
+        for (const e of emotions) {
             promises.push(emotionService.getFeatures(e));
         }
         return Promise.all(promises)
             .then((resArray) => {
                 chai.expect(resArray.length).to.be.equal(emotions.length);
-                for (let res of resArray) {
+                for (const res of resArray) {
                     console.log(res);
-                    chai.assert(typeof res === 'object');
+                    chai.assert(typeof res === "object");
                 }
             })
             .catch((e) => {
-                chai.expect.fail("not supposed to fail");
-            })
+                chai.expect.fail("not supposed to fail" + e);
+            });
     });
 
     it("test getFeatures - null input", function () {
@@ -97,21 +97,21 @@ describe("unit test for EmotionService", function () {
     });
 
     it("test getDominantExpression - integrated with AzureFaceAPIService", function () {
-        let azureFaceAPIService = new AzureFaceAPIService();
+        const azureFaceAPIService = new AzureFaceAPIService();
         return azureFaceAPIService.getEmotions(sampleDataURL.dataURL1)
             .then((res) => {
-                let dominantExpression = emotionService.getDominantExpression(res);
+                const dominantExpression = emotionService.getDominantExpression(res);
                 chai.expect(dominantExpression).to.be.equal("neutral");
                 console.log(dominantExpression);
             }).catch((err) => {
                 console.log(err);
                 chai.expect.fail("not supposed to fail");
-            })
+            });
     });
 
     it("test getDominantExpressions", function () {
         try {
-            let data = {
+            const data = {
                 anger: 0,
                 contempt: 0,
                 disgust: 0,
@@ -119,9 +119,9 @@ describe("unit test for EmotionService", function () {
                 happiness: 0,
                 neutral: 0.999,
                 sadness: 0,
-                surprise: 0
+                surprise: 0,
             };
-            let result = emotionService.getDominantExpression(data);
+            const result = emotionService.getDominantExpression(data);
             chai.expect(result).to.be.equal("neutral");
         } catch (e) {
             console.log(e);

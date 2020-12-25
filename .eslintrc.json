@@ -1,0 +1,89 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true,
+        "node": true,
+        "jquery": true,
+        "mocha": true
+    },
+    "extends": "eslint:recommended",
+    "parserOptions": {
+        "ecmaVersion": 12,
+        "sourceType": "module"
+    },
+    "rules": {
+        "indent": [
+            "error",
+            4,
+            {
+                "SwitchCase": 1
+            }
+        ],
+        "linebreak-style": [
+            "error",
+            "windows"
+        ],
+        "quotes": [
+            "error",
+            "double"
+        ],
+        "semi": [
+            "error",
+            "always"
+        ],
+        // possible errors
+        "prefer-const": "error",
+        "comma-dangle": [2, "always-multiline"],
+        "no-cond-assign": 2,
+        "no-console": 0,
+        "no-constant-condition": 2,
+        "no-control-regex": 2,
+        "no-debugger": 2,
+        "no-dupe-args": 2,
+        "no-dupe-keys": 2,
+        "no-duplicate-case": 2,
+        "no-empty-character-class": 2,
+        "no-empty": 2,
+        "no-ex-assign": 2,
+        "no-extra-boolean-cast": 2,
+        "no-extra-parens": 2,
+        "no-extra-semi": 2,
+        "no-func-assign": 2,
+        "no-inner-declarations": 2,
+        "no-invalid-regexp": 2,
+        "no-irregular-whitespace": 2,
+        "no-negated-in-lhs": 2,
+        "no-obj-calls": 2,
+        "no-regex-spaces": 2,
+        "no-sparse-arrays": 2,
+        "no-unreachable": 2,
+        "use-isnan": 2,
+        "valid-typeof": 2,
+        "no-unexpected-multiline": 2,
+
+        // variables
+        "no-catch-shadow": 0,
+        "no-delete-var": 2,
+        "no-label-var": 0,
+        "no-shadow": 0,
+        "no-shadow-restricted-names": 0,
+        "no-undef": 2,
+        "no-undef-init": 0,
+        "no-undefined": 0,
+        "no-unused-vars": 2,
+        "no-use-before-define": 0,
+
+        // excmascript 6
+        "no-var": 1
+    },
+    "ignorePatterns": ["public/libraries"],
+    "overrides": [
+        {
+            "files": ["public/js/*.js"],
+            "rules": {
+                "no-undef": "off",
+                "no-unused-vars": "off"
+            }
+        }
+    ]
+}

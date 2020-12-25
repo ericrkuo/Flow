@@ -1,4 +1,4 @@
-var chai = require("chai");
+const chai = require("chai");
 const Err = require("../../src/constant/Error");
 const {songs, songsClearCluster, songsLargeClearCluster} = require("../resources/sampleSpotifyAudioFeatures");
 const {KMean} = require("../../src/clustering/KMean");
@@ -10,22 +10,22 @@ describe("unit test for KMeans", function () {
     });
 
     it("sample", function () {
-        let data = songs;
+        const data = songs;
         let maxTempo = 0;
-        for (let feature of Object.values(data)) {
-            maxTempo = Math.max(feature["tempo"], maxTempo)
+        for (const feature of Object.values(data)) {
+            maxTempo = Math.max(feature["tempo"], maxTempo);
         }
         console.log(maxTempo);
     });
 
     it("test K Means and single silhouette", function () {
         try {
-            let k = 8;
-            let clusters = kMean.kMean(songs, k);
+            const k = 8;
+            const clusters = kMean.kMean(songs, k);
             chai.expect(clusters.length).to.be.equal(k);
-            let silhouetteValue = kMean.computeSilhouetteValue(clusters);
+            const silhouetteValue = kMean.computeSilhouetteValue(clusters);
             console.log("SILHOUETTE VALUE - " + silhouetteValue);
-            chai.assert((silhouetteValue <= 1) && (silhouetteValue >= -1));
+            chai.assert(silhouetteValue <= 1 && silhouetteValue >= -1);
         } catch (err) {
             console.log(err);
             chai.expect.fail("not supposed to fail");
@@ -35,14 +35,14 @@ describe("unit test for KMeans", function () {
 
     it("find optimum silhouette value", function () {
         try {
-            let kStart = 4;
-            let kEnd = 20;
-            let arr = new Map();
+            const kStart = 4;
+            const kEnd = 20;
+            const arr = new Map();
             for (let k = kStart; k <= kEnd; k++) {
-                let clusters = kMean.kMean(songs, k);
+                const clusters = kMean.kMean(songs, k);
                 chai.expect(clusters.length).to.be.equal(k);
-                let silhouetteValue = kMean.computeSilhouetteValue(clusters);
-                chai.assert((silhouetteValue <= 1) && (silhouetteValue >= -1));
+                const silhouetteValue = kMean.computeSilhouetteValue(clusters);
+                chai.assert(silhouetteValue <= 1 && silhouetteValue >= -1);
                 arr.set(k + " = " + silhouetteValue, clusters);
             }
         } catch (err) {
@@ -79,14 +79,14 @@ describe("unit test for KMeans", function () {
 
     it("find optimum silhouette value with clear clustered data", function () {
         try {
-            let kStart = 2;
-            let kEnd = 4;
-            let arr = new Map();
+            const kStart = 2;
+            const kEnd = 4;
+            const arr = new Map();
             for (let k = kStart; k <= kEnd; k++) {
-                let clusters = kMean.kMean(songsClearCluster, k);
+                const clusters = kMean.kMean(songsClearCluster, k);
                 chai.expect(clusters.length).to.be.equal(k);
-                let silhouetteValue = kMean.computeSilhouetteValue(clusters);
-                chai.assert((silhouetteValue <= 1) && (silhouetteValue >= -1));
+                const silhouetteValue = kMean.computeSilhouetteValue(clusters);
+                chai.assert(silhouetteValue <= 1 && silhouetteValue >= -1);
                 arr.set(k + " = " + silhouetteValue, clusters);
             }
         } catch (err) {
@@ -97,15 +97,14 @@ describe("unit test for KMeans", function () {
 
     it("find optimum silhouette value with larger clear clustered data", function () {
         try {
-            let kStart = 2;
-            let kEnd = 8;
-            let arr = new Map();
+            const kStart = 2;
+            const kEnd = 8;
+            const arr = new Map();
             for (let k = kStart; k <= kEnd; k++) {
-                let x = songsLargeClearCluster;
-                let clusters = kMean.kMean(songsLargeClearCluster, k);
+                const clusters = kMean.kMean(songsLargeClearCluster, k);
                 chai.expect(clusters.length).to.be.equal(k);
-                let silhouetteValue = kMean.computeSilhouetteValue(clusters);
-                chai.assert((silhouetteValue <= 1) && (silhouetteValue >= -1));
+                const silhouetteValue = kMean.computeSilhouetteValue(clusters);
+                chai.assert(silhouetteValue <= 1 && silhouetteValue >= -1);
                 arr.set(k + " = " + silhouetteValue, clusters);
             }
         } catch (err) {
@@ -116,8 +115,9 @@ describe("unit test for KMeans", function () {
 
     it("test getOptimalKClusters", function () {
         try {
-            let [bestK, clusters, map] = kMean.getOptimalKClusters(songsLargeClearCluster);
-            console.log();
+            const [bestK, clusters, map] = kMean.getOptimalKClusters(songsLargeClearCluster);
+            chai.expect(clusters.length).to.equal(bestK);
+            chai.expect(map.size).to.equal(10);
         } catch (err) {
             console.log(err);
             chai.expect.fail("not supposed to fail");

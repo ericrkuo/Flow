@@ -1,5 +1,5 @@
-let getStartedButton = document.getElementById("getStarted")
+const getStartedButton = document.getElementById("getStarted");
 
 getStartedButton.addEventListener("click", () => {
     location.href = "/webcam";
-})
+});
