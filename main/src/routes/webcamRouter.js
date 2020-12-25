@@ -1,10 +1,10 @@
-var express = require('express');
+const express = require("express");
 const {webcamLimiter} = require("./rateLimiter");
 const {checkCredentials, refreshCredentialsIfExpired, checkWebcamPostBody} = require("./middleware");
 var router = express.Router();
 
 /* GET home page. */
-router.get('/', checkCredentials, function (req, res, next) {
+router.get("/", checkCredentials, function (req, res) {
     // res.sendFile(path.join(__dirname+"/webcam.html"), {json: json});
     // res.sendFile(absolutePath.getAbsolutePath());
     return res.render("webcam");

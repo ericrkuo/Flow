@@ -1,12 +1,13 @@
-let video = document.getElementById('video');
-let canvas = document.getElementById('canvas');
-let beforeCaptureButtons = document.getElementById('beforeCaptureGroup');
-let afterCaptureButtons = document.getElementById('afterCaptureGroup');
-let takePhotoButton = document.getElementById('take-photo');
-let tryAgainButton = document.getElementById('try-again');
-let getTracksButton = document.getElementById('get-tracks');
-let loadingDiv = document.getElementById("loader");
-let webcam = document.getElementById("webcam");
+const video = document.getElementById("video");
+const canvas = document.getElementById("canvas");
+const beforeCaptureButtons = document.getElementById("beforeCaptureGroup");
+const afterCaptureButtons = document.getElementById("afterCaptureGroup");
+const takePhotoButton = document.getElementById("take-photo");
+const tryAgainButton = document.getElementById("try-again");
+const getTracksButton = document.getElementById("get-tracks");
+const errorMsgElement = document.getElementById("spanErrorMsg");
+const loadingDiv = document.getElementById("loader");
+const webcam = document.getElementById("webcam");
 let infoAlert = document.getElementById("infoAlert");
 let errorAlert = document.getElementById("errorAlert");
 let errorAlertSpan = document.getElementById("errorAlertSpan");
@@ -18,8 +19,8 @@ const constraints = {
 };
 
 $(function () {
-    $('[data-toggle="tooltip"]').tooltip()
-})
+    $("[data-toggle=\"tooltip\"]").tooltip();
+});
 
 video.addEventListener("animationend", ()=> {
     show([beforeCaptureButtons]);
@@ -62,16 +63,16 @@ function turnOffStream() {
 }
 
 function postTracks(dataURL) {
-    let data = JSON.stringify({dataURL: dataURL});
-    let url = window.location.origin + "/webcam";
+    const data = JSON.stringify({dataURL: dataURL});
+    const url = window.location.origin + "/webcam";
 
-    let config = {
-        method: 'post',
+    const config = {
+        method: "post",
         url: url,
         headers: {
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json",
         },
-        data: data
+        data: data,
     };
 
     return axios(config)
@@ -114,12 +115,12 @@ takePhotoButton.addEventListener("click", () => {
     canvas.width = video.offsetWidth;
     canvas.height = video.offsetHeight;
 
-    let context = canvas.getContext('2d');
+    const context = canvas.getContext("2d");
     context.drawImage(video, 0, 0, video.offsetWidth, video.offsetHeight);
 
     hideAndShowHTMLElementsForCaptureButton();
     turnOffStream();
-})
+});
 
 tryAgainButton.addEventListener("click", () => {
     hideAndShowHTMLElementsForTryAgainButton();
@@ -140,13 +141,13 @@ function hideAndShowHTMLElementsForCaptureButton() {
 }
 
 function hide(elements) {
-    for (let element of elements) {
+    for (const element of elements) {
         element.style.setProperty("display", "none");
     }
 }
 
 function show(elements) {
-    for (let element of elements) {
+    for (const element of elements) {
         element.style.removeProperty("display");
     }
 }

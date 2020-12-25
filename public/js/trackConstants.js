@@ -3,35 +3,35 @@ const NO_PROFILE_IMAGE_PATH = "../libraries/pictures/unknownuser.png";
 
 const colors = {
     backgroundColor: [
-        'rgba(255,99,132,0.5)',
-        'rgba(54, 162, 23, 0.5)',
-        'rgba(255, 206, 86, 0.5)',
-        'rgba(75, 192, 192, 0.5)',
-        'rgba(153, 102, 255, 0.5)',
-        'rgb(255,159,64, 0.5)',
-        'rgb(89,11,241, 0.5)',
-        'rgba(0,255,0,0.5)',
+        "rgba(255,99,132,0.5)",
+        "rgba(54, 162, 23, 0.5)",
+        "rgba(255, 206, 86, 0.5)",
+        "rgba(75, 192, 192, 0.5)",
+        "rgba(153, 102, 255, 0.5)",
+        "rgb(255,159,64, 0.5)",
+        "rgb(89,11,241, 0.5)",
+        "rgba(0,255,0,0.5)",
     ],
     borderColor: [
-        'rgba(255, 99, 132)',
-        'rgba(54, 162, 23)',
-        'rgba(255, 206, 86)',
-        'rgba(75, 192, 192)',
-        'rgba(153, 102, 255)',
-        'rgb(255,159,64)',
-        'rgb(89,11,241)',
-        'rgba(0,255,0)',
+        "rgba(255, 99, 132)",
+        "rgba(54, 162, 23)",
+        "rgba(255, 206, 86)",
+        "rgba(75, 192, 192)",
+        "rgba(153, 102, 255)",
+        "rgb(255,159,64)",
+        "rgb(89,11,241)",
+        "rgba(0,255,0)",
     ],
     pointHoverBackgroundColor: [
-        'rgba(255, 99, 132, 0.8)',
-        'rgba(54, 162, 23, 0.8)',
-        'rgba(255, 206, 86, 0.8)',
-        'rgba(75, 192, 192, 0.8)',
-        'rgba(153, 102, 255, 0.8)',
-        'rgb(255,159,64, 0.8)',
-        'rgb(89,11,241, 0.8)',
-        'rgba(0,255,0,0.8)',
-    ]
+        "rgba(255, 99, 132, 0.8)",
+        "rgba(54, 162, 23, 0.8)",
+        "rgba(255, 206, 86, 0.8)",
+        "rgba(75, 192, 192, 0.8)",
+        "rgba(153, 102, 255, 0.8)",
+        "rgb(255,159,64, 0.8)",
+        "rgb(89,11,241, 0.8)",
+        "rgba(0,255,0,0.8)",
+    ],
 };
 
 // Track Div Constants
@@ -57,8 +57,8 @@ const PLAYLIST_CARD_ROW = "row row-cols-2 mx-2 unfill border rounded";
 const PLAYLIST_CARD_TRACK_COLUMN = "col-4 p-1 align-self-center";
 const PLAYLIST_CARD_TRACK_IMAGE = "rounded-circle shadow-lg img-fluid playlist-image";
 const PLAYLIST_CARD_TRACK_INFO_COLUMN = "col-8 text-left align-self-center";
-const PLAYLIST_CARD_TRACK_NAME_SPAN = 'd-block text-left text-truncate font-weight-bold';
-const PLAYLIST_CARD_ARTIST_SPAN = 'd-block text-left text-truncate';
+const PLAYLIST_CARD_TRACK_NAME_SPAN = "d-block text-left text-truncate font-weight-bold";
+const PLAYLIST_CARD_ARTIST_SPAN = "d-block text-left text-truncate";
 
 // Modal Constants
 const NO_PREVIEW = "Sorry, No Preview Available";

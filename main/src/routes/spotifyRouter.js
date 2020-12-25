@@ -1,43 +1,43 @@
-var express = require('express');
-let qs = require('querystring');
+const express = require("express");
+const qs = require("querystring");
 const {Main} = require("../Main");
-var router = express.Router();
+const router = express.Router();
 
-scopes = ['user-read-private',
-    'user-read-email',
-    'playlist-modify-public',
-    'playlist-modify-private',
-    'user-read-recently-played',
-    'user-top-read',
-    'user-library-read',
-    'user-follow-read',
-    'playlist-read-private',
-    'user-read-private',
-    'playlist-read-collaborative'];
+const scopes = ["user-read-private",
+    "user-read-email",
+    "playlist-modify-public",
+    "playlist-modify-private",
+    "user-read-recently-played",
+    "user-top-read",
+    "user-library-read",
+    "user-follow-read",
+    "playlist-read-private",
+    "user-read-private",
+    "playlist-read-collaborative"];
 
 /**
  * Generates a random string containing numbers and letters
  * @param  {number} length The length of the string
  * @return {string} The generated string
  */
-let generateRandomString = function(length) {
-    var text = '';
-    var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+const generateRandomString = function(length) {
+    let text = "";
+    const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
-    for (var i = 0; i < length; i++) {
+    for (let i = 0; i < length; i++) {
         text += possible.charAt(Math.floor(Math.random() * possible.length));
     }
     return text;
 };
 
-let stateKey = 'spotify_auth_state';
+const stateKey = "spotify_auth_state";
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
-    res.render('index', {title: 'Express'});
+router.get("/", function (req, res) {
+    res.render("index", {title: "Express"});
 });
 
-router.get('/login', (req, res) => {
+router.get("/login", (req, res) => {
     let main = req.app.locals.main;
 
     if (!main || !main.spotifyApi) {
@@ -49,19 +49,19 @@ router.get('/login', (req, res) => {
     let html = spotifyApi.createAuthorizeURL(scopes);
     console.log(html);
 
-    let state = generateRandomString(16);
+    const state = generateRandomString(16);
     res.cookie(stateKey, state);
-    res.redirect(html + "&state=" + state + "&show_dialog=true")
+    res.redirect(html + "&state=" + state + "&show_dialog=true");
 });
 
-router.get('/callback', async (req, res) => {
-    let state = req.query.state || null;
-    let storedState = req.cookies ? req.cookies[stateKey] : null;
+router.get("/callback", async (req, res) => {
+    const state = req.query.state || null;
+    const storedState = req.cookies ? req.cookies[stateKey] : null;
 
     if (state === null || state !== storedState) {
-        res.redirect('/#' +
+        res.redirect("/#" +
             qs.stringify({
-                error: 'state_mismatch'
+                error: "state_mismatch",
             }));
         return;
     }
