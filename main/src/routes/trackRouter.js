@@ -1067,16 +1067,10 @@ const sampleData = {
 // output: returns html rendering of the tracks
 router.get("/", checkCredentials, function (req, res) {
     // use res.render("track", sampleData) for testing purposes
-
     if (req.app.locals.main.result) {
         return res.render("track", req.app.locals.main.result);
     } else {
-        // TODO: at this point, user's credentials are valid, but they do not have custom curated tracks
-        //  display an 'error' page, which tells user they need to take a photo, and has a button prompting to go back to homepage
-        return res.render("error", {
-            message: "No custom tracks yet, please take a photo to get curated tracks",
-            error: {status: 400, stack: "no stack"},
-        });
+        return res.redirect("/webcam/#/error/no-photo-submitted");
     }
 });
 
@@ -1088,8 +1082,7 @@ router.post("/", [trackLimiter, refreshCredentialsIfExpired], function (req, res
             return res.status(200).json({link: playlistURL});
         })
         .catch((err) => {
-            console.log(err);
-            return res.status(400).json({"error": err.message});
+            return res.status(500).json({errorMsg: "Please try again later </br> </br>" + err.message});
         });
 });
 

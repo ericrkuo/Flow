@@ -1,9 +1,9 @@
+const {Main} = require("../Main");
+
 /**
  * Checks whether user is authenticated and authorized. If so, proceed with next(), otherwise redirect user to login page
  * Used as middle ware function
  * */
-const {Main} = require("../Main");
-
 function checkCredentials(req, res, next) {
     const main = req.app.locals.main;
     if (!isMainAndSpotifyApiAndRefreshCredentialValid) {
@@ -54,5 +54,17 @@ function isMainAndSpotifyApiAndRefreshCredentialValid(main) {
     return main && main.spotifyApi && main.refreshCredentialService && main.spotifyApi.getAccessToken() && main.spotifyApi.getRefreshToken();
 }
 
+/**
+ * Checks if webcam post body and dataURL is null or undefined
+ */
+function checkWebcamPostBody(req, res, next) {
+    if (!req.body || !req.body.dataURL) {
+        return res.status(404).json({errorMsg: "Please try taking another photo!"});
+    } else {
+        return next();
+    }
+}
+
 module.exports.checkCredentials = checkCredentials;
 module.exports.refreshCredentialsIfExpired = refreshCredentialsIfExpired;
+module.exports.checkWebcamPostBody = checkWebcamPostBody;
