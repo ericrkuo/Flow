@@ -21,13 +21,11 @@ initializeMoodDiv();
 initializePlaylistDiv();
 
 function initialize() {
-    let tutorialButton = document.getElementById("tutorial");
     let homeButton = document.getElementById("home");
     let aboutUsButton = document.getElementById("info");
     let newString = "btn-outline-dark";
     let oldString = "btn-outline-light";
 
-    tutorialButton.setAttribute("class", tutorialButton.getAttribute("class").replace(oldString, newString));
     homeButton.setAttribute("class", homeButton.getAttribute("class").replace(oldString, newString));
     aboutUsButton.setAttribute("class", aboutUsButton.getAttribute("class").replace(oldString, newString));
 

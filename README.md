@@ -118,7 +118,7 @@ REFRESH_TOKEN='ENTER THE REFRESH TOKEN ASSOCIATED WTIH YOUR SPOTIFY ACCOUNT. THI
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-This section is currently unavailable, please refer to the Tutorial tab in our web service for instructions! 
+This section is currently unavailable! Check back soon! 
 
 
 <!-- ROADMAP -->
