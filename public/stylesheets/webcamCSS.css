@@ -2,6 +2,12 @@
     font-size: 4vmin;
 }
 
+.alert {
+    width: 80vmin;
+    display: inline-block;
+    position: relative;
+}
+
 .video-animation {
     height: 70vmin;
     -webkit-mask-image: url("../libraries/circle.png");
@@ -98,4 +104,8 @@
         text-shadow:
                 .25em 0 0 white,
                 .5em 0 0 white;}
+}
+
+#webcam {
+    width: 86%
 }

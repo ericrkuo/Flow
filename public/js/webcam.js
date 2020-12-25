@@ -1,13 +1,16 @@
-let video = document.getElementById('video');
-let canvas = document.getElementById('canvas');
-let beforeCaptureButtons = document.getElementById('beforeCaptureGroup');
-let afterCaptureButtons = document.getElementById('afterCaptureGroup');
-let takePhotoButton = document.getElementById('take-photo');
-let tryAgainButton = document.getElementById('try-again');
-let getTracksButton = document.getElementById('get-tracks');
-let errorMsgElement = document.getElementById('spanErrorMsg');
-let loadingDiv = document.getElementById("loader");
-let webcam = document.getElementById("webcam");
+const video = document.getElementById("video");
+const canvas = document.getElementById("canvas");
+const beforeCaptureButtons = document.getElementById("beforeCaptureGroup");
+const afterCaptureButtons = document.getElementById("afterCaptureGroup");
+const takePhotoButton = document.getElementById("take-photo");
+const tryAgainButton = document.getElementById("try-again");
+const getTracksButton = document.getElementById("get-tracks");
+const errorMsgElement = document.getElementById("spanErrorMsg");
+const loadingDiv = document.getElementById("loader");
+const webcam = document.getElementById("webcam");
+const infoAlert = document.getElementById("infoAlert");
+const errorAlert = document.getElementById("errorAlert");
+const errorAlertSpan = document.getElementById("errorAlertSpan");
 let stream;
 
 const constraints = {
@@ -16,8 +19,8 @@ const constraints = {
 };
 
 $(function () {
-    $('[data-toggle="tooltip"]').tooltip()
-})
+    $("[data-toggle=\"tooltip\"]").tooltip();
+});
 
 video.addEventListener("animationend", ()=> {
     show([beforeCaptureButtons]);
@@ -26,10 +29,13 @@ video.addEventListener("animationend", ()=> {
 async function init() {
     try {
         hide([canvas, afterCaptureButtons, beforeCaptureButtons, loadingDiv]);
+        hide([errorAlert]);
         stream = await navigator.mediaDevices.getUserMedia(constraints);
         handleSuccess(stream);
     } catch (err) {
-        errorMsgElement.innerHTML = `navigator.getUserMedia.error:${err.toString()}`;
+        $("#errorAlert").append("<span>"+"Sorry, we encountered an error. " +
+            err.response.data.errorMsg +"</span>");
+        show([errorAlert]);
     }
 }
 
@@ -54,16 +60,16 @@ function turnOffStream() {
 }
 
 function postTracks(dataURL) {
-    let data = JSON.stringify({dataURL: dataURL});
-    let url = window.location.origin + "/webcam";
+    const data = JSON.stringify({dataURL: dataURL});
+    const url = window.location.origin + "/webcam";
 
-    let config = {
-        method: 'post',
+    const config = {
+        method: "post",
         url: url,
         headers: {
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json",
         },
-        data: data
+        data: data,
     };
 
     return axios(config)
@@ -71,28 +77,41 @@ function postTracks(dataURL) {
             location.href = "/tracks";
         })
         .catch((error) => {
-            alert(`Error ${error.response.status}: ${error.response.statusText}`);
+            hide([loadingDiv]);
+            $("#header").hide();
+            $("#errorAlert").append("<span>"+"Sorry, we encountered an error. " + "</span>");
+
+            if(error.response) {
+                $("#errorAlert").append("<span>" + error.response.data.errorMsg +"</span>");
+            } else if (error.message) {
+                $("#errorAlert").append("<span>"+"Sorry, we encountered an error. " +
+                    error.message +"</span>");
+            }
+
+            show([webcam, errorAlert]);
         });
 }
 
-getTracksButton.addEventListener("click", () => {
-    const dataURL = canvas.toDataURL('image/png', 1);
+getTracksButton.onclick = () => {
+    const dataURL = canvas.toDataURL("image/png", 1);
     hide([webcam]);
     show([loadingDiv]);
+    $("#errorAlert").html("").hide();
     return postTracks(dataURL);
-})
+};
+
 
 takePhotoButton.addEventListener("click", () => {
     // dimension of pixels in canvas
     canvas.width = video.offsetWidth;
     canvas.height = video.offsetHeight;
 
-    let context = canvas.getContext('2d');
+    const context = canvas.getContext("2d");
     context.drawImage(video, 0, 0, video.offsetWidth, video.offsetHeight);
 
     hideAndShowHTMLElementsForCaptureButton();
     turnOffStream();
-})
+});
 
 tryAgainButton.addEventListener("click", () => {
     hideAndShowHTMLElementsForTryAgainButton();
@@ -103,6 +122,8 @@ function hideAndShowHTMLElementsForTryAgainButton() {
     video.className = "video-no-animation";
     show([video]);
     hide([afterCaptureButtons, canvas]);
+    hide([errorAlert]);
+    show([infoAlert]);
 }
 
 function hideAndShowHTMLElementsForCaptureButton() {
@@ -111,13 +132,13 @@ function hideAndShowHTMLElementsForCaptureButton() {
 }
 
 function hide(elements) {
-    for (let element of elements) {
+    for (const element of elements) {
         element.style.setProperty("display", "none");
     }
 }
 
 function show(elements) {
-    for (let element of elements) {
+    for (const element of elements) {
         element.style.removeProperty("display");
     }
 }

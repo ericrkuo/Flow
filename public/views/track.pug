@@ -82,6 +82,9 @@ block content
                 .modal-header
                     h5.modal-title Creating a playlist
                 .modal-body
+                    .alert.alert-danger.hide#errorAlert(role='alert')
+                        span#errorAlertSpan
+                        button.close#errorAlertClose(type='button' aria-label='Close')
                     p.text-left.my-0 Select which tracks you would like saved to your own private playlist!
                     .custom-control.custom-switch.text-left.my-1
                         input#selectAll.custom-control-input(type='checkbox' value='option1' name='playlistForm')

@@ -1,18 +1,29 @@
-let modalAnalytics = document.getElementById("modal-analytics");
-let playlistMap = new Set();
+const modalAnalytics = document.getElementById("modal-analytics");
+const playlistMap = new Set();
 
 $(function () {
-    $('[data-toggle="tooltip"]').tooltip()
-})
+    $("[data-toggle=\"tooltip\"]").tooltip();
+});
 
-$('#trackModal').on('hide.bs.modal', function () {
+$("#trackModal").on("hide.bs.modal", function () {
     removeAllChildren(modalAnalytics);
     document.getElementById("modal-content-video").pause();
-})
+});
 
-$('#playlistModal').on('hide.bs.modal', function () {
-    $('#collapsePlaylistMessage').collapse('hide');
-})
+$("#playlistModal").on("hide.bs.modal", function () {
+    $("#collapsePlaylistMessage").collapse("hide");
+});
+
+$(document).on("click", ".alert-close", function() {
+    $(this).parent().hide();
+});
+
+const errorAlert = document.getElementById("errorAlert");
+const errorAlertClose = document.getElementById("errorAlertClose");
+
+errorAlertClose.addEventListener("click", () => {
+    hide([errorAlert]);
+});
 
 initialize();
 initializeUserInfoDiv();
@@ -21,26 +32,25 @@ initializeMoodDiv();
 initializePlaylistDiv();
 
 function initialize() {
-    let tutorialButton = document.getElementById("tutorial");
-    let homeButton = document.getElementById("home");
-    let aboutUsButton = document.getElementById("info");
-    let newString = "btn-outline-dark";
-    let oldString = "btn-outline-light";
+    const homeButton = document.getElementById("home");
+    const aboutUsButton = document.getElementById("info");
+    const newString = "btn-outline-dark";
+    const oldString = "btn-outline-light";
 
-    tutorialButton.setAttribute("class", tutorialButton.getAttribute("class").replace(oldString, newString));
     homeButton.setAttribute("class", homeButton.getAttribute("class").replace(oldString, newString));
     aboutUsButton.setAttribute("class", aboutUsButton.getAttribute("class").replace(oldString, newString));
+    hide([errorAlert]);
 
 }
 
 function initializeTracksDiv() {
-    let tracksDiv = document.getElementById("tracks-div");
+    const tracksDiv = document.getElementById("tracks-div");
     let counter = 1;
     let row = document.createElement("div");
     row.className = TRACK_ROW;
 
-    for (let id of Object.keys(tracks)) {
-        let column = document.createElement("div");
+    for (const id of Object.keys(tracks)) {
+        const column = document.createElement("div");
         column.className = TRACK_COLUMN;
         column.appendChild(createTrackCard(id));
         row.appendChild(column);
@@ -54,9 +64,9 @@ function initializeTracksDiv() {
 
     // create remaining columns
     if (--counter % TRACK_NUM_COLUMNS !== 0) {
-        let remainingColumns = TRACK_NUM_COLUMNS - (counter % TRACK_NUM_COLUMNS);
+        const remainingColumns = TRACK_NUM_COLUMNS - counter % TRACK_NUM_COLUMNS;
         for (let i = 0; i < remainingColumns; i++) {
-            let column = document.createElement("div");
+            const column = document.createElement("div");
             column.className = TRACK_COLUMN;
             row.appendChild(column);
         }
@@ -66,11 +76,11 @@ function initializeTracksDiv() {
 }
 
 function createTrackCard(id) {
-    let container = document.createElement("div");
-    container.className = TRACK_CARD_CONTAINER
+    const container = document.createElement("div");
+    container.className = TRACK_CARD_CONTAINER;
 
-    let imageURL = getAlbumImageURL(id);
-    let image = document.createElement("img");
+    const imageURL = getAlbumImageURL(id);
+    const image = document.createElement("img");
     image.src = imageURL;
     image.className = TRACK_CARD_IMAGE;
     image.setAttribute("data-toggle", "modal");
@@ -79,34 +89,34 @@ function createTrackCard(id) {
         editModalContent(id);
     });
 
-    let trackTitle = document.createElement("span");
+    const trackTitle = document.createElement("span");
     trackTitle.className = TRACK_CARD_TITLE;
-    trackTitle.innerText = tracks[id].track.name
+    trackTitle.innerText = tracks[id].track.name;
 
-    let trackArtist = document.createElement("span");
+    const trackArtist = document.createElement("span");
     trackArtist.className = TRACK_CARD_ARTIST;
     trackArtist.innerText = getArtistNames(tracks[id].track.artists);
 
-    container.append(image, trackTitle, trackArtist)
-    return container
+    container.append(image, trackTitle, trackArtist);
+    return container;
 }
 
 
 function initializeMoodDiv() {
     document.getElementById("mood-string").innerText = mood.dominantMood;
 
-    $('#collapseOne').on('shown.bs.collapse', function () {
-        let moodDiv = document.getElementById("mood");
-        let moodChart = document.createElement("canvas");
+    $("#collapseOne").on("shown.bs.collapse", function () {
+        const moodDiv = document.getElementById("mood");
+        const moodChart = document.createElement("canvas");
         moodDiv.appendChild(moodChart);
-        let labels = Object.keys(mood.emotions);
-        let data = [];
-        for (let val of Object.values(mood.emotions)) {
+        const labels = Object.keys(mood.emotions);
+        const data = [];
+        for (const val of Object.values(mood.emotions)) {
             data.push(val);
         }
-        let ctx = moodChart.getContext('2d');
-        let myDoughnutChart = new Chart(ctx, {
-            type: 'polarArea',
+        const ctx = moodChart.getContext("2d");
+        const myDoughnutChart = new Chart(ctx, {
+            type: "polarArea",
             data: {
                 labels: labels,
                 datasets: [{
@@ -115,7 +125,7 @@ function initializeMoodDiv() {
                     pointHoverBackgroundColor: colors.pointHoverBackgroundColor,
                     borderWidth: 2,
                     data: data,
-                }]
+                }],
             },
             options: {
                 responsive: true,
@@ -125,32 +135,32 @@ function initializeMoodDiv() {
                 },
                 legend: {
                     display: true,
-                    position: 'bottom'
-                }
-            }
+                    position: "bottom",
+                },
+            },
         });
-    }).on('hide.bs.collapse', function () {
-        let moodDiv = document.getElementById("mood");
+    }).on("hide.bs.collapse", function () {
+        const moodDiv = document.getElementById("mood");
         removeAllChildren(moodDiv);
-    })
+    });
 }
 
 function initializePlaylistDiv() {
-    let playlistRowClassName = PLAYLIST_ROW;
+    const playlistRowClassName = PLAYLIST_ROW;
     let counter = 1;
-    let playlistContainer = document.getElementById("playlist-container");
-    let row = document.createElement('div');
+    const playlistContainer = document.getElementById("playlist-container");
+    let row = document.createElement("div");
     row.className = playlistRowClassName;
 
-    for (let id of Object.keys(tracks)) {
-        let column = document.createElement('div');
+    for (const id of Object.keys(tracks)) {
+        const column = document.createElement("div");
         column.className = PLAYLIST_COLUMN;
         column.appendChild(createPlaylistCard(id));
         row.appendChild(column);
 
         if (counter % PLAYLIST_NUM_COLUMNS === 0) {
             playlistContainer.appendChild(row);
-            row = document.createElement('div');
+            row = document.createElement("div");
             row.className = playlistRowClassName;
         }
         counter += 1;
@@ -158,7 +168,7 @@ function initializePlaylistDiv() {
 
     // create remaining columns
     if (--counter % PLAYLIST_NUM_COLUMNS !== 0) {
-        let dummyColumn = document.createElement('div');
+        const dummyColumn = document.createElement("div");
         dummyColumn.className = PLAYLIST_COLUMN;
         row.appendChild(dummyColumn);
         playlistContainer.appendChild(row);
@@ -168,124 +178,135 @@ function initializePlaylistDiv() {
 }
 
 function createPlaylistCard(id) {
-    let row = document.createElement('div');
+    const row = document.createElement("div");
     row.className = PLAYLIST_CARD_ROW;
-    row.id = 'playlistRow-' + id;
+    row.id = "playlistRow-" + id;
 
-    let trackColumn = document.createElement('div');
+    const trackColumn = document.createElement("div");
     trackColumn.className = PLAYLIST_CARD_TRACK_COLUMN;
 
-    let trackImage = document.createElement('img');
+    const trackImage = document.createElement("img");
     trackImage.src = this.getAlbumImageURL(id);
     trackImage.className = PLAYLIST_CARD_TRACK_IMAGE;
 
     trackColumn.appendChild(trackImage);
 
-    let trackInfoColumn = document.createElement('div');
+    const trackInfoColumn = document.createElement("div");
     trackInfoColumn.className = PLAYLIST_CARD_TRACK_INFO_COLUMN;
 
-    let trackSpan = document.createElement('span');
+    const trackSpan = document.createElement("span");
     trackSpan.className = PLAYLIST_CARD_TRACK_NAME_SPAN;
-    trackSpan.innerText = tracks[id].track.name
+    trackSpan.innerText = tracks[id].track.name;
 
-    let artistSpan = document.createElement('span');
+    const artistSpan = document.createElement("span");
     artistSpan.className = PLAYLIST_CARD_ARTIST_SPAN;
     artistSpan.innerText = getArtistNames(tracks[id].track.artists);
 
     trackInfoColumn.append(trackSpan, artistSpan);
     row.append(trackColumn, trackInfoColumn);
 
-    row.addEventListener('click', () => {
+    row.addEventListener("click", () => {
         if (playlistMap.has(id)) {
             playlistMap.delete(id);
 
-            row.classList.remove('fill');
-            row.classList.add('unfill');
+            row.classList.remove("fill");
+            row.classList.add("unfill");
         } else {
             playlistMap.add(id);
 
-            row.classList.remove('unfill');
-            row.classList.add('fill');
+            row.classList.remove("unfill");
+            row.classList.add("fill");
 
             // hide message once user selects a song
-            let collapsePlaylistMessageText = document.getElementById('collapsePlaylistMessageText');
+            const collapsePlaylistMessageText = document.getElementById("collapsePlaylistMessageText");
             if (collapsePlaylistMessageText.innerText === PLAYLIST_NEED_SONGS_MESSAGE) {
-                $('#collapsePlaylistMessage').collapse('hide');
+                $("#collapsePlaylistMessage").collapse("hide");
             }
         }
-    })
+    });
 
     return row;
 }
 
 function addPlaylistEventListeners() {
-    let playlistButton = document.getElementById("playlist");
-    let createPlaylistButton = document.getElementById("createPlaylist");
-    let cancelPlaylistButton = document.getElementById("cancelPlaylist");
-    let selectAllInput = document.getElementById('selectAll');
-    let confirmPlaylistInput = document.getElementById('confirmPlaylistInput');
-    let collapsePlaylistMessageText = document.getElementById('collapsePlaylistMessageText');
+    const playlistButton = document.getElementById("playlist");
+    const createPlaylistButton = document.getElementById("createPlaylist");
+    const cancelPlaylistButton = document.getElementById("cancelPlaylist");
+    const selectAllInput = document.getElementById("selectAll");
+    const confirmPlaylistInput = document.getElementById("confirmPlaylistInput");
+    const collapsePlaylistMessageText = document.getElementById("collapsePlaylistMessageText");
 
     // Collapse message if user confirms playlist creation
     confirmPlaylistInput.addEventListener("click", function () {
         if (confirmPlaylistInput.checked && collapsePlaylistMessageText.innerText === PLAYLIST_CHECK_MESSAGE) {
-            $('#collapsePlaylistMessage').collapse('hide');
+            $("#collapsePlaylistMessage").collapse("hide");
         }
     });
 
     createPlaylistButton.addEventListener("click", async function () {
-        let isConfirmPlaylistChecked = confirmPlaylistInput.checked;
+        const isConfirmPlaylistChecked = confirmPlaylistInput.checked;
+        $("#errorAlert").html("").hide();
 
         if (isConfirmPlaylistChecked) {
-            let data = getAllTrackURLs();
+            const data = getAllTrackURLs();
             if (!data || data.length === 0) {
                 collapsePlaylistMessageText.innerText = PLAYLIST_NEED_SONGS_MESSAGE;
-                $('#collapsePlaylistMessage').collapse('show');
+                $("#collapsePlaylistMessage").collapse("show");
             } else {
-                cancelPlaylistButton.setAttribute('disabled', "");
-                createPlaylistButton.setAttribute('disabled', "");
+                cancelPlaylistButton.setAttribute("disabled", "");
+                createPlaylistButton.setAttribute("disabled", "");
                 return sendPOSTRequestToCreatePlaylist(JSON.stringify(data))
                     .then((url) => {
-                        cancelPlaylistButton.removeAttribute('disabled');
-                        createPlaylistButton.className = createPlaylistButton.className.replace('btn-primary', 'btn-secondary');
+                        cancelPlaylistButton.removeAttribute("disabled");
+                        createPlaylistButton.className = createPlaylistButton.className.replace("btn-primary", "btn-secondary");
 
-                        playlistButton.className = playlistButton.className.replace('btn-success', 'btn-primary');
+                        playlistButton.className = playlistButton.className.replace("btn-success", "btn-primary");
                         playlistButton.removeAttribute("data-toggle");
                         playlistButton.removeAttribute("data-target");
-                        playlistButton.innerText = "Go to playlist"
+                        playlistButton.innerText = "Go to playlist";
                         playlistButton.addEventListener("click", () => {
                             window.open(url, "_blank");
                         });
 
-                        $('#collapsePlaylistMessage').collapse('hide');
-                        $('#playlistModal').modal('hide');
+                        $("#collapsePlaylistMessage").collapse("hide");
+                        $("#playlistModal").modal("hide");
                         window.open(url, "_blank");
                     })
-                    .catch((errMessage) => {
-                        alert(errMessage);
-                        cancelPlaylistButton.removeAttribute('disabled');
-                        createPlaylistButton.removeAttribute('disabled');
+                    .catch((error) => {
+                        $("#errorAlert").append("<a class=\"close alert-close\">&times</a>" +
+                            "<span>"+"Sorry, we encountered an error. " + "</span>");
+
+                        if(error.response) {
+                            $("#errorAlert").append("<span>" + error.response.data.errorMsg +"</span>");
+                        } else if (error.message) {
+                            $("#errorAlert").append("<span>"+"Sorry, we encountered an error. " +
+                                error.message +"</span>");
+                        }
+
+                        cancelPlaylistButton.removeAttribute("disabled");
+                        createPlaylistButton.removeAttribute("disabled");
+                        show([errorAlert, errorAlertClose]);
                     });
             }
         } else {
             collapsePlaylistMessageText.innerText = PLAYLIST_CHECK_MESSAGE;
-            $('#collapsePlaylistMessage').collapse('show');
+            $("#collapsePlaylistMessage").collapse("show");
         }
     });
 
-    selectAllInput.addEventListener('click', function () {
-        let isChecked = selectAllInput.checked;
-        for (let id of Object.keys(tracks)) {
-            let row = document.getElementById('playlistRow-' + id);
+    selectAllInput.addEventListener("click", function () {
+        const isChecked = selectAllInput.checked;
+        for (const id of Object.keys(tracks)) {
+            const row = document.getElementById("playlistRow-" + id);
             if (row) {
                 if (isChecked) {
                     playlistMap.add(id);
-                    row.classList.remove('unfill')
-                    row.classList.add('fill')
+                    row.classList.remove("unfill");
+                    row.classList.add("fill");
                 } else {
                     playlistMap.delete(id);
-                    row.classList.remove('fill')
-                    row.classList.add('unfill')
+                    row.classList.remove("fill");
+                    row.classList.add("unfill");
                 }
             }
         }
@@ -293,23 +314,23 @@ function addPlaylistEventListeners() {
 }
 
 function sendPOSTRequestToCreatePlaylist(data) {
-    let url = window.location.origin + "/tracks";
+    const url = window.location.origin + "/tracks";
 
-    let config = {
-        method: 'post',
+    const config = {
+        method: "post",
         url: url,
         headers: {
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json",
         },
-        data: data
+        data: data,
     };
 
     return axios(config)
         .then((response) => {
-            if (response && response.data && response.data.link && typeof response.data.link === 'string') {
+            if (response && response.data && response.data.link && typeof response.data.link === "string") {
                 return response.data.link;
             } else {
-                throw new Error("response is null or response.link is null or not a string");
+                throw new Error("Response is null or response.link is null or not a string");
             }
         })
         .catch((error) => {
@@ -318,9 +339,9 @@ function sendPOSTRequestToCreatePlaylist(data) {
 }
 
 function getAllTrackURLs() {
-    let data = [];
-    for (let id of playlistMap.keys()) {
-        let track = tracks[id];
+    const data = [];
+    for (const id of playlistMap.keys()) {
+        const track = tracks[id];
         if (track !== null && track.track !== null && track.track.uri !== null) {
             data.push(track.track.uri);
         }
@@ -329,7 +350,7 @@ function getAllTrackURLs() {
 }
 
 function initializeUserInfoDiv() {
-    let img = document.getElementById("user-image");
+    const img = document.getElementById("user-image");
     img.src = getUserImageURL();
 
     document.getElementById("user-name").innerText = userInfo.display_name || "Anonymous user";
@@ -346,21 +367,21 @@ function editModalContent(id) {
 }
 
 function initializeModalAnalytics(id) {
-    let trackChart = document.createElement("canvas");
+    const trackChart = document.createElement("canvas");
     modalAnalytics.appendChild(trackChart);
-    let audioFeatures = tracks[id].audioFeatures;
-    let labels = Object.keys(audioFeatures);
-    let data = [];
-    for (let label of labels) {
+    const audioFeatures = tracks[id].audioFeatures;
+    const labels = Object.keys(audioFeatures);
+    const data = [];
+    for (const label of labels) {
         data.push(audioFeatures[label]);
     }
 
-    let ctx = trackChart.getContext('2d');
-    let chart = new Chart(ctx, {
+    const ctx = trackChart.getContext("2d");
+    const chart = new Chart(ctx, {
         // The type of chart we want to create
-        type: 'bar',
+        type: "bar",
         ticks: {
-            reverse: true
+            reverse: true,
         },
         // The data for our dataset
         data: {
@@ -372,33 +393,33 @@ function initializeModalAnalytics(id) {
                 pointHoverBackgroundColor: colors.pointHoverBackgroundColor,
                 borderWidth: 2,
                 data: data,
-            }]
+            }],
         },
 
         // Configuration options go here
         options: {
             responsive: true,
             maintainAspectRatio: false,
-        }
+        },
     });
 }
 
 function initializeModalContent(id) {
-    let track = tracks[id].track;
-    let previewURL = track.preview_url;
-    let trackName = track.name;
-    let artistNames = getArtistNames(track.artists);
-    let albumName = track.album.name;
-    let trackLength = getTimeInMinutes(track.duration_ms);
-    let trackURL = track.external_urls.spotify
+    const track = tracks[id].track;
+    const previewURL = track.preview_url;
+    const trackName = track.name;
+    const artistNames = getArtistNames(track.artists);
+    const albumName = track.album.name;
+    const trackLength = getTimeInMinutes(track.duration_ms);
+    const trackURL = track.external_urls.spotify;
 
 
-    document.getElementById("modal-track-title").innerText = trackName
-    document.getElementById("modal-track-artist").innerText = artistNames
-    document.getElementById("modal-track-album").innerText = albumName
-    document.getElementById("modal-track-length").innerText = trackLength
+    document.getElementById("modal-track-title").innerText = trackName;
+    document.getElementById("modal-track-artist").innerText = artistNames;
+    document.getElementById("modal-track-album").innerText = albumName;
+    document.getElementById("modal-track-length").innerText = trackLength;
 
-    let video = document.getElementById("modal-content-video");
+    const video = document.getElementById("modal-content-video");
     video.controls = true;
     if (previewURL !== null) {
         video.src = previewURL;
@@ -408,10 +429,8 @@ function initializeModalContent(id) {
         video.src = "";
     }
 
-    let urlButton = document.getElementById("modal-content-button");
-    urlButton.addEventListener("click", () => {
-        window.open(trackURL, "_blank");
-    })
+    const urlButton = document.getElementById("modal-content-button");
+    urlButton.onclick = () => { window.open(trackURL, "_blank"); };
 }
 
 function initializeModalImage(id) {
@@ -419,7 +438,7 @@ function initializeModalImage(id) {
 }
 
 function getAlbumImageURL(id) {
-    let images = tracks[id].track.album.images;
+    const images = tracks[id].track.album.images;
     if (images.length !== 0 && images[0].url !== undefined && images[0].url !== null && images[0].url !== "") {
         return images[0].url;
     } else {
@@ -428,7 +447,7 @@ function getAlbumImageURL(id) {
 }
 
 function getUserImageURL() {
-    let userImages = userInfo.images;
+    const userImages = userInfo.images;
     if (userImages.length !== 0 && userImages[0].url !== undefined && userImages[0].url !== null && userImages[0].url !== "") {
         return userImages[0].url;
     } else {
@@ -446,16 +465,28 @@ function getArtistNames(artists) {
 }
 
 function getTimeInMinutes(totalMs) {
-    let totalSeconds = totalMs / 1000;
-    let minutes = Math.floor(totalSeconds / 60);
-    let seconds = Math.floor(totalSeconds % 60);
+    const totalSeconds = totalMs / 1000;
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = Math.floor(totalSeconds % 60);
 
-    return minutes.toString() + ":" + (seconds < 10 ? ("0" + seconds.toString()) : seconds.toString());
+    return minutes.toString() + ":" + (seconds < 10 ? "0" + seconds.toString() : seconds.toString());
 
 }
 
 function removeAllChildren(node) {
     while (node.firstChild) {
         node.removeChild(node.lastChild);
+    }
+}
+
+function hide(elements) {
+    for (const element of elements) {
+        element.style.setProperty("display", "none");
+    }
+}
+
+function show(elements) {
+    for (const element of elements) {
+        element.style.removeProperty("display");
     }
 }

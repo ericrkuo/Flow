@@ -4,20 +4,21 @@ const {executeMethod} = require("./SpotifyApiWrapper");
 class RefreshCredentialService {
 
     constructor(spotifyApi) {
-        require('dotenv').config();
+        require("dotenv").config();
+        if (!spotifyApi) throw new Error("The spotifyApi is null or undefined");
         this.spotifyApi = spotifyApi;
     }
 
     checkCredentials() {
         return executeMethod(() => {
-            return this.spotifyApi.getArtist('2hazSY4Ef3aB9ATXW7F5w3')
+            return this.spotifyApi.getArtist("2hazSY4Ef3aB9ATXW7F5w3");
         })
-            .then((data) => {
+            .then(() => {
                 return true;
             })
-            .catch((err) => {
+            .catch(() => {
                 return false;
-            })
+            });
     }
 
     tryRefreshCredential() {
@@ -37,26 +38,26 @@ class RefreshCredentialService {
     }
 
     getNewAccessToken() {
-        let refresh_token = this.spotifyApi.getRefreshToken();
+        const refresh_token = this.spotifyApi.getRefreshToken();
         if (!refresh_token) {
             return Promise.reject(new Err.RefreshCredentialError("Refresh token is null or undefined"));
         }
 
-        let axios = require('axios');
-        let qs = require('querystring');
-        let data = qs.stringify({
-            grant_type: 'refresh_token',
+        const axios = require("axios");
+        const qs = require("querystring");
+        const data = qs.stringify({
+            grant_type: "refresh_token",
             refresh_token: refresh_token,
         });
 
-        let config = {
-            method: 'post',
-            url: 'https://accounts.spotify.com/api/token',
+        const config = {
+            method: "post",
+            url: "https://accounts.spotify.com/api/token",
             headers: {
-                'Authorization': 'Basic ' + Buffer.from(process.env.SPOTIFY_API_ID + ':' + process.env.SPOTIFY_CLIENT_SECRET).toString("base64"),
-                'Content-type': "application/x-www-form-urlencoded",
+                "Authorization": "Basic " + Buffer.from(process.env.SPOTIFY_API_ID + ":" + process.env.SPOTIFY_CLIENT_SECRET).toString("base64"),
+                "Content-type": "application/x-www-form-urlencoded",
             },
-            data: data
+            data: data,
         };
 
         return axios(config)

@@ -52,15 +52,15 @@ class KMean {
     * Description. Choose k centroids at random
     */
     initializeKRandomCentroids() {
-        let length = this.data.length - 1;
-        let arr = [];
+        const length = this.data.length - 1;
+        const arr = [];
         while (arr.length < this.k) {
-            let x = Math.floor(Math.random() * length) + 1;
+            const x = Math.floor(Math.random() * length) + 1;
             if (arr.indexOf(x) === -1) arr.push(x);
         }
 
         let index = 0;
-        for (let x of arr) {
+        for (const x of arr) {
             this.centroids[index] = this.data[x][1];
             index++;
         }
@@ -75,18 +75,18 @@ class KMean {
     * 3. choose the next centroid as the data vector that has the largest min distance (furthest from all centroids)
     * */
     initializeKPlusPlusCentroids() {
-        let n = this.data.length;
+        const n = this.data.length;
 
-        let randomIndex = Math.floor(Math.random() * (n - 1)) + 1;
+        const randomIndex = Math.floor(Math.random() * (n - 1)) + 1;
         this.centroids[0] = this.data[randomIndex][1];
 
         for (let currCentroid = 1; currCentroid < this.k; currCentroid++) {
 
-            let minDistanceArray = []; // [[track, distance], [track, distance], ...]
+            const minDistanceArray = []; // [[track, distance], [track, distance], ...]
             for (let track = 0; track < n; track++) {
                 let minDistance = Infinity;
                 for (let j = 0; j < currCentroid; j++) {
-                    let tempDistance = this.distance(this.centroids[j], this.data[track][1]);
+                    const tempDistance = this.distance(this.centroids[j], this.data[track][1]);
                     if (tempDistance < minDistance) {
                         minDistance = tempDistance;
                     }
@@ -96,7 +96,7 @@ class KMean {
 
             let furthestCentroid;
             let maxDistance = -Infinity;
-            for (let entry of minDistanceArray) {
+            for (const entry of minDistanceArray) {
                 if (entry[1] > maxDistance) {
                     maxDistance = entry[1];
                     furthestCentroid = entry[0];
@@ -119,9 +119,9 @@ class KMean {
      *
      */
     initializeKPlusPlusCentroidsOptimized() {
-        let n = this.data.length;
-        let minDistanceMap = new Map();
-        let randomIndex = Math.floor(Math.random() * (n - 1)) + 1;
+        const n = this.data.length;
+        const minDistanceMap = new Map();
+        const randomIndex = Math.floor(Math.random() * (n - 1)) + 1;
         this.centroids[0] = this.data[randomIndex][1];
 
         for (let currCentroid = 1; currCentroid < this.k; currCentroid++) {
@@ -129,12 +129,12 @@ class KMean {
             let furthestCentroid;
             // update the minDistance with last centroid, and also keep track of furthest centroid so far
             for (let track = 0; track < n; track++) {
-                let trackID = this.data[track][0];
-                let tempDistance = this.distance(this.centroids[currCentroid - 1], this.data[track][1]);
+                const trackID = this.data[track][0];
+                const tempDistance = this.distance(this.centroids[currCentroid - 1], this.data[track][1]);
                 if (!minDistanceMap.has(trackID) || minDistanceMap.get(trackID) > tempDistance) {
                     minDistanceMap.set(trackID, tempDistance);
                 }
-                let dist = minDistanceMap.get(trackID);
+                const dist = minDistanceMap.get(trackID);
                 if (dist > maxDistance) {
                     maxDistance = dist;
                     furthestCentroid = this.data[track][1];
@@ -162,25 +162,24 @@ class KMean {
             throw new Err.KMeanIterationError(this.iterations, this.MAX_ITERATIONS);
         }
         this.clusters = new Array(this.k);
-        let numFeatures = this.features.length;
-        let vecArray = []; // vecArray[i] corresponds to cluster[i] and the sum of all the features
+        const vecArray = []; // vecArray[i] corresponds to cluster[i] and the sum of all the features
 
         for (let i = 0; i < this.k; i++) {
             vecArray[i] = {};
-            for (let feature of this.features) {
+            for (const feature of this.features) {
                 vecArray[i][feature] = 0;
             }
         }
 
         // group into clusters
-        for (let track of this.data) {
-            let index = this.findIndexOfNearestCentroid(track);
+        for (const track of this.data) {
+            const index = this.findIndexOfNearestCentroid(track);
 
             if (this.clusters[index] == null || this.clusters[index] === undefined) this.clusters[index] = [];
             this.clusters[index].push(track);
 
             // sum up all features of track in vecArray
-            for (let feature of this.features) {
+            for (const feature of this.features) {
                 vecArray[index][feature] += track[1][feature];
             }
         }
@@ -189,15 +188,15 @@ class KMean {
             if (!this.clusters[i]) {
                 throw new Err.KMeanClusterError("Less than K clusters for cluster: " + i);
             }
-            let numTracks = this.clusters[i].length;
+            const numTracks = this.clusters[i].length;
             if (numTracks === 0) {
                 throw new Err.KMeanClusterError("Zero tracks in cluster: " + i);
             }
             // calculate the mean
-            for (let feature of this.features) {
+            for (const feature of this.features) {
                 vecArray[i][feature] = vecArray[i][feature] / numTracks;
             }
-            let distance = this.distance(vecArray[i], this.centroids[i]);
+            const distance = this.distance(vecArray[i], this.centroids[i]);
             if (distance > maxDistance) maxDistance = distance;
 
         }
@@ -220,7 +219,7 @@ class KMean {
         let index = 0;
 
         for (let i = 0; i < this.k; i++) {
-            let distance = this.distance(track[1], this.centroids[i]);
+            const distance = this.distance(track[1], this.centroids[i]);
             if (distance < minDistance) {
                 minDistance = distance;
                 index = i;
@@ -232,7 +231,7 @@ class KMean {
     // TODO: research other types of distance (manhattan etc)
     distance(track1, track2) {
         let distance = 0;
-        for (let feature of this.features) {
+        for (const feature of this.features) {
             distance += Math.pow(track1[feature] - track2[feature], 2);
         }
         return distance;
@@ -258,19 +257,19 @@ class KMean {
         this.computeAForAllClusters(clusters);
         this.computeBForAllClusters(clusters);
         this.computeSForAllClusters(clusters);
-        let sArray = Array.from(this.s.values());
-        let sSize = sArray.length;
+        const sArray = Array.from(this.s.values());
+        const sSize = sArray.length;
         let silhouetteValue = 0;
-        for (let s of sArray) {
+        for (const s of sArray) {
             silhouetteValue += s;
         }
         return silhouetteValue / sSize;
     }
 
     computeAForAllClusters(clusters) {
-        for (let cluster of clusters) {
+        for (const cluster of clusters) {
             if (cluster.length === 1) {
-                let singleTrack = cluster[0];
+                const singleTrack = cluster[0];
                 this.a.set(singleTrack[0], 0);
             } else {
                 this.computeAForSingleCluster(cluster);
@@ -288,17 +287,17 @@ class KMean {
      * @param cluster
      */
     computeAForSingleCluster(cluster) {
-        let n = cluster.length;
+        const n = cluster.length;
         for (let i = 0; i < n; i++) {
-            let t1 = cluster[i];
+            const t1 = cluster[i];
             let sumDistance = 0;
             for (let j = 0; j < n; j++) {
                 if (i !== j) {
-                    let t2 = cluster[j];
+                    const t2 = cluster[j];
                     sumDistance += this.distance(t1[1], t2[1]);
                 }
             }
-            this.a.set(t1[0], (sumDistance) / (n - 1));
+            this.a.set(t1[0], sumDistance / (n - 1));
         }
     }
 
@@ -314,12 +313,12 @@ class KMean {
      */
     computeBForAllClusters(clusters) {
         for (let i = 0; i < this.k; i++) {
-            let cluster = clusters[i];
+            const cluster = clusters[i];
             if (cluster.length === 1) {
-                let singleTrack = cluster[0];
+                const singleTrack = cluster[0];
                 this.b.set(singleTrack[0], 0);
             } else {
-                for (let track of cluster) {
+                for (const track of cluster) {
                     let minDistance = Infinity;
                     for (let j = 0; j < this.k; j++) {
                         if (i !== j) {
@@ -333,19 +332,19 @@ class KMean {
     }
 
     computeMeanDistanceToCluster(t1, cluster) {
-        let n = cluster.length;
+        const n = cluster.length;
         let sumDistance = 0;
-        for (let t2 of cluster) {
+        for (const t2 of cluster) {
             sumDistance += this.distance(t1[1], t2[1]);
         }
         return sumDistance / n;
     }
 
     computeSForAllClusters(clusters) {
-        for (let cluster of clusters) {
-            for (let track of cluster) {
-                let a = this.a.get(track[0]);
-                let b = this.b.get(track[0]);
+        for (const cluster of clusters) {
+            for (const track of cluster) {
+                const a = this.a.get(track[0]);
+                const b = this.b.get(track[0]);
                 if (a === b) {
                     this.s.set(track[0], 0);
                 } else {
@@ -365,14 +364,14 @@ class KMean {
      * @return Returns array with bestK, clusters of the bestK, and map of all k values and their silhouetteValue's and clusters. map = {k: [silhouetteValue, clusters]} .
      */
     getOptimalKClusters(data) {
-        let k_START = 6;
-        let k_END = 15;
-        let map = new Map();
+        const k_START = 6;
+        const k_END = 15;
+        const map = new Map();
         // used a map for easier debugging
         for (let k = k_START; k <= k_END; k++) {
             try {
-                let clusters = this.kMean(data, k);
-                let silhouetteValue = this.computeSilhouetteValue(clusters);
+                const clusters = this.kMean(data, k);
+                const silhouetteValue = this.computeSilhouetteValue(clusters);
                 map.set(k, [silhouetteValue, clusters]);
             } catch (e) {
                 map.set(k, [-Infinity, null]);
@@ -381,7 +380,7 @@ class KMean {
         let maxSilhouetteValue = -Infinity;
         let clusters = null;
         let bestK = null;
-        for (let entry of map.entries()) {
+        for (const entry of map.entries()) {
             console.log(entry[0] + " - " + entry[1][0]);
             if (entry[1][0] > maxSilhouetteValue) {
                 bestK = entry[0];
