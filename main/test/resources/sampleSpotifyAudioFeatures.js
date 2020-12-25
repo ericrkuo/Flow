@@ -1,4 +1,4 @@
-let songs = {
+const songs = {
     "3g0mEQx3NTanacLseoP0Gw": {
         "danceability": 0.528,
         "energy": 0.511,
@@ -8,7 +8,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.101,
         "valence": 0.351,
-        "tempo": 0.4004
+        "tempo": 0.4004,
     },
     "7BKLCZ1jbUBVqRi2FVlTVw": {
         "danceability": 0.748,
@@ -19,7 +19,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.111,
         "valence": 0.661,
-        "tempo": 0.38004000000000004
+        "tempo": 0.38004000000000004,
     },
     "2oejEp50ZzPuQTQ6v54Evp": {
         "danceability": 0.585,
@@ -30,7 +30,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.344,
         "valence": 0.522,
-        "tempo": 0.41604
+        "tempo": 0.41604,
     },
     "6RUKPb4LETWmmr3iAEQktW": {
         "danceability": 0.617,
@@ -41,7 +41,7 @@ let songs = {
         "instrumentalness": 0.0000144,
         "liveness": 0.164,
         "valence": 0.446,
-        "tempo": 0.412076
+        "tempo": 0.412076,
     },
     "2fVHrSxsQbJUuj9MW9zG1e": {
         "danceability": 0.51,
@@ -52,7 +52,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.208,
         "valence": 0.475,
-        "tempo": 0.559708
+        "tempo": 0.559708,
     },
     "1i1fxkWeaMmKEB4T7zqbzK": {
         "danceability": 0.532,
@@ -63,7 +63,7 @@ let songs = {
         "instrumentalness": 0.00508,
         "liveness": 0.136,
         "valence": 0.422,
-        "tempo": 0.639212
+        "tempo": 0.639212,
     },
     "4NBTZtAt1F13VvlSKe6KTl": {
         "danceability": 0.575,
@@ -74,7 +74,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0912,
         "valence": 0.449,
-        "tempo": 0.420196
+        "tempo": 0.420196,
     },
     "3TKpJrY9q49Mj1JOsM9zGL": {
         "danceability": 0.584,
@@ -85,7 +85,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.101,
         "valence": 0.374,
-        "tempo": 0.47126799999999996
+        "tempo": 0.47126799999999996,
     },
     "3vv9phIu6Y1vX3jcqaGz5Z": {
         "danceability": 0.713,
@@ -96,7 +96,7 @@ let songs = {
         "instrumentalness": 0.00377,
         "liveness": 0.309,
         "valence": 0.343,
-        "tempo": 0.400004
+        "tempo": 0.400004,
     },
     "72jbDTw1piOOj770jWNeaG": {
         "danceability": 0.653,
@@ -107,7 +107,7 @@ let songs = {
         "instrumentalness": 0.00000166,
         "liveness": 0.0939,
         "valence": 0.219,
-        "tempo": 0.39996
+        "tempo": 0.39996,
     },
     "3DGar7krWlmrXRFHBcQF6z": {
         "danceability": 0.734,
@@ -118,7 +118,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.231,
         "valence": 0.518,
-        "tempo": 0.439956
+        "tempo": 0.439956,
     },
     "1mKNyZCNDueEASgBgZuLdA": {
         "danceability": 0.726,
@@ -129,7 +129,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.274,
         "valence": 0.579,
-        "tempo": 0.419904
+        "tempo": 0.419904,
     },
     "2v00WuRHH1WdnXxlHnyURi": {
         "danceability": 0.779,
@@ -140,7 +140,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0862,
         "valence": 0.688,
-        "tempo": 0.42030399999999996
+        "tempo": 0.42030399999999996,
     },
     "4ks6j7JsfJorc1tb4THJo8": {
         "danceability": 0.446,
@@ -151,7 +151,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.126,
         "valence": 0.209,
-        "tempo": 0.43432
+        "tempo": 0.43432,
     },
     "1aCcTh955i82DV6LEe0Igr": {
         "danceability": 0.6,
@@ -162,7 +162,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.105,
         "valence": 0.301,
-        "tempo": 0.376152
+        "tempo": 0.376152,
     },
     "5aQDkvNNDDfwD2XHtW9xjq": {
         "danceability": 0.631,
@@ -173,7 +173,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.124,
         "valence": 0.44,
-        "tempo": 0.439668
+        "tempo": 0.439668,
     },
     "1839RWzPRZCVgvamu4sHSN": {
         "danceability": 0.59,
@@ -184,7 +184,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0739,
         "valence": 0.304,
-        "tempo": 0.539824
+        "tempo": 0.539824,
     },
     "5qJZxVKQ8vz9Rak3t4b2VY": {
         "danceability": 0.632,
@@ -195,7 +195,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0992,
         "valence": 0.588,
-        "tempo": 0.311776
+        "tempo": 0.311776,
     },
     "5YwxSa50wbOB8bw5jIllgk": {
         "danceability": 0.71,
@@ -206,7 +206,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.103,
         "valence": 0.484,
-        "tempo": 0.375832
+        "tempo": 0.375832,
     },
     "0BklIFH6EF5ttfzuAGSYfU": {
         "danceability": 0.608,
@@ -217,7 +217,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.101,
         "valence": 0.569,
-        "tempo": 0.37604000000000004
+        "tempo": 0.37604000000000004,
     },
     "2w0PtMxIYQuv22I11pwi7X": {
         "danceability": 0.61,
@@ -228,7 +228,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.108,
         "valence": 0.118,
-        "tempo": 0.339952
+        "tempo": 0.339952,
     },
     "6Evdojb7T15ltCiuycRaoF": {
         "danceability": 0.671,
@@ -239,7 +239,7 @@ let songs = {
         "instrumentalness": 0.00000195,
         "liveness": 0.0954,
         "valence": 0.311,
-        "tempo": 0.575716
+        "tempo": 0.575716,
     },
     "2Gy8kCRprPyOTqgibBNaDQ": {
         "danceability": 0.882,
@@ -250,7 +250,7 @@ let songs = {
         "instrumentalness": 0.00000329,
         "liveness": 0.117,
         "valence": 0.757,
-        "tempo": 0.64064
+        "tempo": 0.64064,
     },
     "7rcLItrsNUwhe0lkNqJNEo": {
         "danceability": 0.786,
@@ -261,7 +261,7 @@ let songs = {
         "instrumentalness": 0.00774,
         "liveness": 0.115,
         "valence": 0.483,
-        "tempo": 0.54008
+        "tempo": 0.54008,
     },
     "25wVoWlKoDPWMgCPJapfO3": {
         "danceability": 0.742,
@@ -272,7 +272,7 @@ let songs = {
         "instrumentalness": 0.0000804,
         "liveness": 0.431,
         "valence": 0.144,
-        "tempo": 0.43206
+        "tempo": 0.43206,
     },
     "5BWaLBhe6rE44pySHJ80W7": {
         "danceability": 0.656,
@@ -283,7 +283,7 @@ let songs = {
         "instrumentalness": 0.00000201,
         "liveness": 0.0897,
         "valence": 0.312,
-        "tempo": 0.40007600000000004
+        "tempo": 0.40007600000000004,
     },
     "0z3WBJdNH6nMg00nTpaaSh": {
         "danceability": 0.531,
@@ -294,7 +294,7 @@ let songs = {
         "instrumentalness": 0.0068,
         "liveness": 0.0961,
         "valence": 0.322,
-        "tempo": 0.491332
+        "tempo": 0.491332,
     },
     "4eRS0fqdszX4CEyUXWk9oc": {
         "danceability": 0.478,
@@ -305,7 +305,7 @@ let songs = {
         "instrumentalness": 0.00232,
         "liveness": 0.132,
         "valence": 0.614,
-        "tempo": 0.312096
+        "tempo": 0.312096,
     },
     "4YEClpzJT98VMf38gplDLp": {
         "danceability": 0.764,
@@ -316,7 +316,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.185,
         "valence": 0.417,
-        "tempo": 0.64
+        "tempo": 0.64,
     },
     "0j6xTzi6U62RDbasLVIuDo": {
         "danceability": 0.405,
@@ -327,7 +327,7 @@ let songs = {
         "instrumentalness": 0.00209,
         "liveness": 0.108,
         "valence": 0.258,
-        "tempo": 0.391896
+        "tempo": 0.391896,
     },
     "0tgVpDi06FyKpA1z0VMD4v": {
         "danceability": 0.599,
@@ -338,7 +338,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.106,
         "valence": 0.168,
-        "tempo": 0.3802
+        "tempo": 0.3802,
     },
     "0hVXuCcriWRGvwMV1r5Yn9": {
         "danceability": 0.798,
@@ -349,7 +349,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0894,
         "valence": 0.842,
-        "tempo": 0.407824
+        "tempo": 0.407824,
     },
     "7qiZfU4dY1lWllzX7mPBI3": {
         "danceability": 0.825,
@@ -360,7 +360,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0931,
         "valence": 0.931,
-        "tempo": 0.383908
+        "tempo": 0.383908,
     },
     "70eFcWOvlMObDhURTqT4Fv": {
         "danceability": 0.64,
@@ -371,7 +371,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0802,
         "valence": 0.548,
-        "tempo": 0.371908
+        "tempo": 0.371908,
     },
     "4vUmTMuQqjdnvlZmAH61Qk": {
         "danceability": 0.857,
@@ -382,7 +382,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0865,
         "valence": 0.668,
-        "tempo": 0.391944
+        "tempo": 0.391944,
     },
     "6fxVffaTuwjgEk5h9QyRjy": {
         "danceability": 0.614,
@@ -393,7 +393,7 @@ let songs = {
         "instrumentalness": 0.000464,
         "liveness": 0.0986,
         "valence": 0.201,
-        "tempo": 0.431956
+        "tempo": 0.431956,
     },
     "1Slwb6dOYkBlWal1PGtnNg": {
         "danceability": 0.781,
@@ -404,7 +404,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.184,
         "valence": 0.591,
-        "tempo": 0.315992
+        "tempo": 0.315992,
     },
     "2RttW7RAu5nOAfq6YFvApB": {
         "danceability": 0.522,
@@ -415,7 +415,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.135,
         "valence": 0.236,
-        "tempo": 0.359168
+        "tempo": 0.359168,
     },
     "0afhq8XCExXpqazXczTSve": {
         "danceability": 0.624,
@@ -426,7 +426,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.327,
         "valence": 0.781,
-        "tempo": 0.399772
+        "tempo": 0.399772,
     },
     "6PCUP3dWmTjcTtXY02oFdT": {
         "danceability": 0.461,
@@ -437,7 +437,7 @@ let songs = {
         "instrumentalness": 0.0000114,
         "liveness": 0.14,
         "valence": 0.471,
-        "tempo": 0.5400280000000001
+        "tempo": 0.5400280000000001,
     },
     "0PJIbOdMs3bd5AT8liULMQ": {
         "danceability": 0.418,
@@ -448,7 +448,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.112,
         "valence": 0.604,
-        "tempo": 0.31408400000000003
+        "tempo": 0.31408400000000003,
     },
     "3WjyiSbfR74pjWXQ3IaFKJ": {
         "danceability": 0.697,
@@ -459,7 +459,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.102,
         "valence": 0.443,
-        "tempo": 0.716028
+        "tempo": 0.716028,
     },
     "0Dc7J9VPV4eOInoxUiZrsL": {
         "danceability": 0.856,
@@ -470,7 +470,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.11,
         "valence": 0.386,
-        "tempo": 0.392208
+        "tempo": 0.392208,
     },
     "08zJpaUQVi9FrKv2e32Bah": {
         "danceability": 0.688,
@@ -481,7 +481,7 @@ let songs = {
         "instrumentalness": 0.00000187,
         "liveness": 0.108,
         "valence": 0.416,
-        "tempo": 0.517344
+        "tempo": 0.517344,
     },
     "0USZx50eApN045zIIyjePN": {
         "danceability": 0.675,
@@ -492,7 +492,7 @@ let songs = {
         "instrumentalness": 0.00000624,
         "liveness": 0.197,
         "valence": 0.0338,
-        "tempo": 0.43929199999999996
+        "tempo": 0.43929199999999996,
     },
     "0x3TibRgnSqzkcwrqBd4iX": {
         "danceability": 0.7,
@@ -503,7 +503,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.111,
         "valence": 0.594,
-        "tempo": 0.640164
+        "tempo": 0.640164,
     },
     "4NpDZPwSXmL0cCTaJuVrCw": {
         "danceability": 0.679,
@@ -514,7 +514,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.151,
         "valence": 0.445,
-        "tempo": 0.24005600000000002
+        "tempo": 0.24005600000000002,
     },
     "6PmjWl0phNxc0R5OwkDdiZ": {
         "danceability": 0.539,
@@ -525,7 +525,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.108,
         "valence": 0.17,
-        "tempo": 0.472284
+        "tempo": 0.472284,
     },
     "2LkLJhskz3IJZFQHAbmgmt": {
         "danceability": 0.624,
@@ -536,7 +536,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.103,
         "valence": 0.341,
-        "tempo": 0.319952
+        "tempo": 0.319952,
     },
     "0YIfZYYfVytcD1q0Mx57Ey": {
         "danceability": 0.855,
@@ -547,7 +547,7 @@ let songs = {
         "instrumentalness": 0.0000443,
         "liveness": 0.0294,
         "valence": 0.626,
-        "tempo": 0.372116
+        "tempo": 0.372116,
     },
     "0JjM9bKm4wrwohMslcm892": {
         "danceability": 0.803,
@@ -558,7 +558,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0921,
         "valence": 0.284,
-        "tempo": 0.416
+        "tempo": 0.416,
     },
     "1Tfxi7N3DW4zvAuVjt9g8X": {
         "danceability": 0.753,
@@ -569,7 +569,7 @@ let songs = {
         "instrumentalness": 0.00000154,
         "liveness": 0.128,
         "valence": 0.349,
-        "tempo": 0.8235800000000001
+        "tempo": 0.8235800000000001,
     },
     "40YcuQysJ0KlGQTeGUosTC": {
         "danceability": 0.757,
@@ -580,7 +580,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.158,
         "valence": 0.382,
-        "tempo": 0.447984
+        "tempo": 0.447984,
     },
     "57lEOoQ3Szzy1xbF89JBWR": {
         "danceability": 0.972,
@@ -591,7 +591,7 @@ let songs = {
         "instrumentalness": 0.00000591,
         "liveness": 0.115,
         "valence": 0.637,
-        "tempo": 0.50012
+        "tempo": 0.50012,
     },
     "5k38wzpLb15YgncyWdTZE4": {
         "danceability": 0.589,
@@ -602,7 +602,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.308,
         "valence": 0.191,
-        "tempo": 0.351632
+        "tempo": 0.351632,
     },
     "2DQ1ITjI0YoLFzuADN1ZBW": {
         "danceability": 0.838,
@@ -613,7 +613,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0853,
         "valence": 0.405,
-        "tempo": 0.703828
+        "tempo": 0.703828,
     },
     "6jmTHeoWvBaSrwWttr8Xvu": {
         "danceability": 0.712,
@@ -624,7 +624,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.136,
         "valence": 0.142,
-        "tempo": 0.56
+        "tempo": 0.56,
     },
     "5M98ml69pyn28o5XvAUN0r": {
         "danceability": 0.677,
@@ -635,7 +635,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.154,
         "valence": 0.227,
-        "tempo": 0.360192
+        "tempo": 0.360192,
     },
     "794QVQtFNy7hvtjQP1keQd": {
         "danceability": 0.817,
@@ -646,7 +646,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.125,
         "valence": 0.835,
-        "tempo": 0.651592
+        "tempo": 0.651592,
     },
     "1Bqxj0aH5KewYHKUg1IdrF": {
         "danceability": 0.586,
@@ -657,7 +657,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0729,
         "valence": 0.491,
-        "tempo": 0.50604
+        "tempo": 0.50604,
     },
     "4e4fqjx0Izh4svvTef1z7e": {
         "danceability": 0.642,
@@ -668,7 +668,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0646,
         "valence": 0.589,
-        "tempo": 0.61598
+        "tempo": 0.61598,
     },
     "23L5CiUhw2jV1OIMwthR3S": {
         "danceability": 0.501,
@@ -679,7 +679,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.454,
         "valence": 0.168,
-        "tempo": 0.53596
+        "tempo": 0.53596,
     },
     "04ZTP5KsCypmtCmQg5tH9R": {
         "danceability": 0.63,
@@ -690,7 +690,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0719,
         "valence": 0.216,
-        "tempo": 0.38802
+        "tempo": 0.38802,
     },
     "5RgBnDtHKFHgtVdqabjGE3": {
         "danceability": 0.906,
@@ -701,7 +701,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.154,
         "valence": 0.752,
-        "tempo": 0.416068
+        "tempo": 0.416068,
     },
     "1i3z3GR1JtLswOSJNO0BQw": {
         "danceability": 0.394,
@@ -712,7 +712,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.116,
         "valence": 0.247,
-        "tempo": 0.6076480000000001
+        "tempo": 0.6076480000000001,
     },
     "3MoV1UsAJmz64LHqyiRMp0": {
         "danceability": 0.703,
@@ -723,7 +723,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.192,
         "valence": 0.79,
-        "tempo": 0.380124
+        "tempo": 0.380124,
     },
     "0OI7AFifLSoGzpb8bdBLLV": {
         "danceability": 0.653,
@@ -734,7 +734,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0537,
         "valence": 0.216,
-        "tempo": 0.32813600000000004
+        "tempo": 0.32813600000000004,
     },
     "0i0wnv9UoFdZ5MfuFGQzMy": {
         "danceability": 0.514,
@@ -745,7 +745,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.117,
         "valence": 0.401,
-        "tempo": 0.337036
+        "tempo": 0.337036,
     },
     "4HBZA5flZLE435QTztThqH": {
         "danceability": 0.597,
@@ -756,7 +756,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.382,
         "valence": 0.537,
-        "tempo": 0.7150599999999999
+        "tempo": 0.7150599999999999,
     },
     "4umIPjkehX1r7uhmGvXiSV": {
         "danceability": 0.806,
@@ -767,7 +767,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.102,
         "valence": 0.874,
-        "tempo": 0.5919439999999999
+        "tempo": 0.5919439999999999,
     },
     "2wrJq5XKLnmhRXHIAf9xBa": {
         "danceability": 0.654,
@@ -778,7 +778,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.111,
         "valence": 0.43,
-        "tempo": 0.359964
+        "tempo": 0.359964,
     },
     "16wAOAZ2OkqoIDN7TpChjR": {
         "danceability": 0.676,
@@ -789,7 +789,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.118,
         "valence": 0.497,
-        "tempo": 0.583368
+        "tempo": 0.583368,
     },
     "2ZlCGeK30BLRNSPC832pNZ": {
         "danceability": 0.825,
@@ -800,7 +800,7 @@ let songs = {
         "instrumentalness": 0.0000148,
         "liveness": 0.204,
         "valence": 0.892,
-        "tempo": 0.55992
+        "tempo": 0.55992,
     },
     "50kpGaPAhYJ3sGmk6vplg0": {
         "danceability": 0.609,
@@ -811,7 +811,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.28,
         "valence": 0.515,
-        "tempo": 0.40167200000000003
+        "tempo": 0.40167200000000003,
     },
     "09CtPGIpYB4BrO8qb1RGsF": {
         "danceability": 0.654,
@@ -822,7 +822,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.299,
         "valence": 0.41,
-        "tempo": 0.39977999999999997
+        "tempo": 0.39977999999999997,
     },
     "3yNZ5r3LKfdmjoS3gkhUCT": {
         "danceability": 0.67,
@@ -833,7 +833,7 @@ let songs = {
         "instrumentalness": 0.33,
         "liveness": 0.117,
         "valence": 0.68,
-        "tempo": 0.54022
+        "tempo": 0.54022,
     },
     "2o9LAypwGH4ctV0i9boo6d": {
         "danceability": 0.648,
@@ -844,7 +844,7 @@ let songs = {
         "instrumentalness": 0.00783,
         "liveness": 0.0971,
         "valence": 0.767,
-        "tempo": 0.631764
+        "tempo": 0.631764,
     },
     "2P91MQbaiQOfbiz9VqhqKQ": {
         "danceability": 0.752,
@@ -855,7 +855,7 @@ let songs = {
         "instrumentalness": 0.00000255,
         "liveness": 0.104,
         "valence": 0.419,
-        "tempo": 0.36788
+        "tempo": 0.36788,
     },
     "4vjpLMyL3ZO6aphdYr8XYw": {
         "danceability": 0.599,
@@ -866,7 +866,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.242,
         "valence": 0.534,
-        "tempo": 0.408844
+        "tempo": 0.408844,
     },
     "09PGubKAMryhOWv1LHpCYz": {
         "danceability": 0.806,
@@ -877,7 +877,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0618,
         "valence": 0.678,
-        "tempo": 0.380064
+        "tempo": 0.380064,
     },
     "3uc8AGNL0KbvISIrjnfRvN": {
         "danceability": 0.746,
@@ -888,7 +888,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.172,
         "valence": 0.336,
-        "tempo": 0.383992
+        "tempo": 0.383992,
     },
     "2qG81jL9UIP54uS8gYyP4k": {
         "danceability": 0.632,
@@ -899,7 +899,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.104,
         "valence": 0.0818,
-        "tempo": 0.566564
+        "tempo": 0.566564,
     },
     "1eyek0KJEh2v5HQ9uQSybb": {
         "danceability": 0.702,
@@ -910,7 +910,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.108,
         "valence": 0.143,
-        "tempo": 0.328032
+        "tempo": 0.328032,
     },
     "1Srt81FTalOhRw7t7l8Yh8": {
         "danceability": 0.862,
@@ -921,7 +921,7 @@ let songs = {
         "instrumentalness": 0.00000749,
         "liveness": 0.123,
         "valence": 0.596,
-        "tempo": 0.49185199999999996
+        "tempo": 0.49185199999999996,
     },
     "0s26En1JoJhVj32vizElpA": {
         "danceability": 0.694,
@@ -932,7 +932,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.098,
         "valence": 0.246,
-        "tempo": 0.412072
+        "tempo": 0.412072,
     },
     "1ShHhJlzaLuoZbJ3aP4z0m": {
         "danceability": 0.733,
@@ -943,7 +943,7 @@ let songs = {
         "instrumentalness": 0.00000759,
         "liveness": 0.141,
         "valence": 0.279,
-        "tempo": 0.501244
+        "tempo": 0.501244,
     },
     "314ZkcV7oLWG8yWE7LABvH": {
         "danceability": 0.584,
@@ -954,7 +954,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.189,
         "valence": 0.345,
-        "tempo": 0.390204
+        "tempo": 0.390204,
     },
     "21jGcNKet2qwijlDFuPiPb": {
         "danceability": 0.695,
@@ -965,7 +965,7 @@ let songs = {
         "instrumentalness": 0.00244,
         "liveness": 0.0863,
         "valence": 0.553,
-        "tempo": 0.480168
+        "tempo": 0.480168,
     },
     "0e7ipj03S05BNilyu5bRzt": {
         "danceability": 0.585,
@@ -976,7 +976,7 @@ let songs = {
         "instrumentalness": 0.0000701,
         "liveness": 0.131,
         "valence": 0.129,
-        "tempo": 0.639204
+        "tempo": 0.639204,
     },
     "0RiRZpuVRbi7oqRdSMwhQY": {
         "danceability": 0.755,
@@ -987,7 +987,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0685,
         "valence": 0.925,
-        "tempo": 0.35984
+        "tempo": 0.35984,
     },
     "7xQAfvXzm3AkraOtGPWIZg": {
         "danceability": 0.829,
@@ -998,7 +998,7 @@ let songs = {
         "instrumentalness": 0.00000178,
         "liveness": 0.103,
         "valence": 0.388,
-        "tempo": 0.39984
+        "tempo": 0.39984,
     },
     "0t3ZvGKlmYmVsDzBJAXK8C": {
         "danceability": 0.548,
@@ -1009,7 +1009,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.103,
         "valence": 0.163,
-        "tempo": 0.600272
+        "tempo": 0.600272,
     },
     "7dt6x5M1jzdTEt8oCbisTK": {
         "danceability": 0.68,
@@ -1020,7 +1020,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.135,
         "valence": 0.341,
-        "tempo": 0.580152
+        "tempo": 0.580152,
     },
     "75ZvA4QfFiZvzhj2xkaWAh": {
         "danceability": 0.556,
@@ -1031,7 +1031,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.196,
         "valence": 0.291,
-        "tempo": 0.5758
+        "tempo": 0.5758,
     },
     "3a1lNhkSLSkpJE4MSHpDu9": {
         "danceability": 0.63,
@@ -1042,7 +1042,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.253,
         "valence": 0.492,
-        "tempo": 0.492584
+        "tempo": 0.492584,
     },
     "7CZyCXKG6d5ALeq41sLzbw": {
         "danceability": 0.499,
@@ -1053,7 +1053,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.147,
         "valence": 0.272,
-        "tempo": 0.5596760000000001
+        "tempo": 0.5596760000000001,
     },
     "0Xek5rqai2jcOWCYWJfVCF": {
         "danceability": 0.542,
@@ -1064,7 +1064,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0955,
         "valence": 0.667,
-        "tempo": 0.30555200000000005
+        "tempo": 0.30555200000000005,
     },
     "0u2P5u6lvoDfwTYjAADbn4": {
         "danceability": 0.351,
@@ -1075,7 +1075,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.095,
         "valence": 0.12,
-        "tempo": 0.46113600000000005
+        "tempo": 0.46113600000000005,
     },
     "0TrPqhAMoaKUFLR7iYDokf": {
         "danceability": 0.79,
@@ -1086,7 +1086,7 @@ let songs = {
         "instrumentalness": 0.00252,
         "liveness": 0.281,
         "valence": 0.508,
-        "tempo": 0.412028
+        "tempo": 0.412028,
     },
     "7FGq80cy8juXBCD2nrqdWU": {
         "danceability": 0.632,
@@ -1097,7 +1097,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.2,
         "valence": 0.329,
-        "tempo": 0.359796
+        "tempo": 0.359796,
     },
     "5Z3GHaZ6ec9bsiI5BenrbY": {
         "danceability": 0.798,
@@ -1108,7 +1108,7 @@ let songs = {
         "instrumentalness": 0.0000166,
         "liveness": 0.165,
         "valence": 0.394,
-        "tempo": 0.5477960000000001
+        "tempo": 0.5477960000000001,
     },
     "152lZdxL1OR0ZMW6KquMif": {
         "danceability": 0.736,
@@ -1119,7 +1119,7 @@ let songs = {
         "instrumentalness": 0.000162,
         "liveness": 0.0898,
         "valence": 0.326,
-        "tempo": 0.320504
+        "tempo": 0.320504,
     },
     "1mpD5Q8IM32I4bF6eCpU74": {
         "danceability": 0.665,
@@ -1130,7 +1130,7 @@ let songs = {
         "instrumentalness": 0.00342,
         "liveness": 0.102,
         "valence": 0.669,
-        "tempo": 0.375956
+        "tempo": 0.375956,
     },
     "7vGuf3Y35N4wmASOKLUVVU": {
         "danceability": 0.52,
@@ -1141,7 +1141,7 @@ let songs = {
         "instrumentalness": 0.00000496,
         "liveness": 0.17,
         "valence": 0.286,
-        "tempo": 0.567884
+        "tempo": 0.567884,
     },
     "5bgwqaRSS3M8WHWruHgSL5": {
         "danceability": 0.83,
@@ -1152,7 +1152,7 @@ let songs = {
         "instrumentalness": 0.00209,
         "liveness": 0.0576,
         "valence": 0.642,
-        "tempo": 0.42012
+        "tempo": 0.42012,
     },
     "6TqXcAFInzjp0bODyvrWEq": {
         "danceability": 0.901,
@@ -1163,7 +1163,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0599,
         "valence": 0.346,
-        "tempo": 0.5439360000000001
+        "tempo": 0.5439360000000001,
     },
     "2eAZfqOm4EnOF9VvN50Tyc": {
         "danceability": 0.703,
@@ -1174,7 +1174,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.106,
         "valence": 0.696,
-        "tempo": 0.328032
+        "tempo": 0.328032,
     },
     "6Vigp41BietH0WoFZ52JI5": {
         "danceability": 0.59,
@@ -1185,7 +1185,7 @@ let songs = {
         "instrumentalness": 0.000124,
         "liveness": 0.0906,
         "valence": 0.366,
-        "tempo": 0.506884
+        "tempo": 0.506884,
     },
     "0lchLc0vSyRRqKSPIkFtJI": {
         "danceability": 0.578,
@@ -1196,7 +1196,7 @@ let songs = {
         "instrumentalness": 0.000378,
         "liveness": 0.182,
         "valence": 0.64,
-        "tempo": 0.393092
+        "tempo": 0.393092,
     },
     "2kJqNHHGOzLNahukdvlDWN": {
         "danceability": 0.657,
@@ -1207,7 +1207,7 @@ let songs = {
         "instrumentalness": 0.00000884,
         "liveness": 0.084,
         "valence": 0.381,
-        "tempo": 0.56694
+        "tempo": 0.56694,
     },
     "2QgNcjwEn0vGmTommfszQd": {
         "danceability": 0.52,
@@ -1218,7 +1218,7 @@ let songs = {
         "instrumentalness": 0.0000131,
         "liveness": 0.333,
         "valence": 0.171,
-        "tempo": 0.351428
+        "tempo": 0.351428,
     },
     "6UiS2IW9dEZwC6TluY5zSy": {
         "danceability": 0.481,
@@ -1229,7 +1229,7 @@ let songs = {
         "instrumentalness": 0.000347,
         "liveness": 0.105,
         "valence": 0.194,
-        "tempo": 0.33438
+        "tempo": 0.33438,
     },
     "27aQ9yVJ9w1Wzqe0DYSoH0": {
         "danceability": 0.487,
@@ -1240,7 +1240,7 @@ let songs = {
         "instrumentalness": 0.0151,
         "liveness": 0.0857,
         "valence": 0.211,
-        "tempo": 0.336452
+        "tempo": 0.336452,
     },
     "6GNifiuBPrKFpwNBYnooFm": {
         "danceability": 0.749,
@@ -1251,7 +1251,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.167,
         "valence": 0.756,
-        "tempo": 0.327976
+        "tempo": 0.327976,
     },
     "5pLpkaIRobcvPnUmclNv6o": {
         "danceability": 0.597,
@@ -1262,7 +1262,7 @@ let songs = {
         "instrumentalness": 0.0000296,
         "liveness": 0.0848,
         "valence": 0.0785,
-        "tempo": 0.520088
+        "tempo": 0.520088,
     },
     "3sZfQB5uYTJmA4QnB8dv7P": {
         "danceability": 0.477,
@@ -1273,7 +1273,7 @@ let songs = {
         "instrumentalness": 0.000446,
         "liveness": 0.196,
         "valence": 0.0819,
-        "tempo": 0.52512
+        "tempo": 0.52512,
     },
     "7m9OqQk4RVRkw9JJdeAw96": {
         "danceability": 0.872,
@@ -1284,7 +1284,7 @@ let songs = {
         "instrumentalness": 0.00000413,
         "liveness": 0.297,
         "valence": 0.437,
-        "tempo": 0.5360839999999999
+        "tempo": 0.5360839999999999,
     },
     "3ee8Jmje8o58CHK66QrVC2": {
         "danceability": 0.74,
@@ -1295,7 +1295,7 @@ let songs = {
         "instrumentalness": 0.00372,
         "liveness": 0.123,
         "valence": 0.473,
-        "tempo": 0.30009199999999997
+        "tempo": 0.30009199999999997,
     },
     "0JP9xo3adEtGSdUEISiszL": {
         "danceability": 0.921,
@@ -1306,7 +1306,7 @@ let songs = {
         "instrumentalness": 0.00404,
         "liveness": 0.102,
         "valence": 0.711,
-        "tempo": 0.5120359999999999
+        "tempo": 0.5120359999999999,
     },
     "7AFASza1mXqntmGtbxXprO": {
         "danceability": 0.669,
@@ -1317,7 +1317,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0984,
         "valence": 0.52,
-        "tempo": 0.25973599999999997
+        "tempo": 0.25973599999999997,
     },
     "7AQim7LbvFVZJE3O8TYgf2": {
         "danceability": 0.797,
@@ -1328,7 +1328,7 @@ let songs = {
         "instrumentalness": 0.000152,
         "liveness": 0.103,
         "valence": 0.329,
-        "tempo": 0.524144
+        "tempo": 0.524144,
     },
     "3GVkPk8mqxz0itaAriG1L7": {
         "danceability": 0.734,
@@ -1339,7 +1339,7 @@ let songs = {
         "instrumentalness": 0.0000214,
         "liveness": 0.112,
         "valence": 0.689,
-        "tempo": 0.519812
+        "tempo": 0.519812,
     },
     "4jvjzW7Hm0yK4LvvE0Paz9": {
         "danceability": 0.669,
@@ -1350,7 +1350,7 @@ let songs = {
         "instrumentalness": 0.00294,
         "liveness": 0.146,
         "valence": 0.273,
-        "tempo": 0.48005200000000003
+        "tempo": 0.48005200000000003,
     },
     "2ZRo7axmMPeSVUvDbGkJah": {
         "danceability": 0.592,
@@ -1361,7 +1361,7 @@ let songs = {
         "instrumentalness": 0.000331,
         "liveness": 0.146,
         "valence": 0.225,
-        "tempo": 0.58416
+        "tempo": 0.58416,
     },
     "4UKCKdYiLN6IMA5ZESUTL7": {
         "danceability": 0.699,
@@ -1372,7 +1372,7 @@ let songs = {
         "instrumentalness": 0.000993,
         "liveness": 0.137,
         "valence": 0.271,
-        "tempo": 0.47881999999999997
+        "tempo": 0.47881999999999997,
     },
     "7floNISpH8VF4z4459Qo18": {
         "danceability": 0.763,
@@ -1383,7 +1383,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0976,
         "valence": 0.349,
-        "tempo": 0.556236
+        "tempo": 0.556236,
     },
     "3frUvGrmGcay91lvFbOgsN": {
         "danceability": 0.794,
@@ -1394,7 +1394,7 @@ let songs = {
         "instrumentalness": 0.00000882,
         "liveness": 0.227,
         "valence": 0.36,
-        "tempo": 0.420096
+        "tempo": 0.420096,
     },
     "5tAa8Uaqr4VvA3693mbIhU": {
         "danceability": 0.665,
@@ -1405,7 +1405,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0969,
         "valence": 0.585,
-        "tempo": 0.49958400000000003
+        "tempo": 0.49958400000000003,
     },
     "1rIKgCH4H52lrvDcz50hS8": {
         "danceability": 0.694,
@@ -1416,7 +1416,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.211,
         "valence": 0.799,
-        "tempo": 0.39208800000000005
+        "tempo": 0.39208800000000005,
     },
     "6hmhG1b4LEyNuashVvuIAo": {
         "danceability": 0.583,
@@ -1427,7 +1427,7 @@ let songs = {
         "instrumentalness": 0.00000986,
         "liveness": 0.269,
         "valence": 0.276,
-        "tempo": 0.5839679999999999
+        "tempo": 0.5839679999999999,
     },
     "4VPXFi4vFTtS9wHe6oMQaT": {
         "danceability": 0.485,
@@ -1438,7 +1438,7 @@ let songs = {
         "instrumentalness": 0.000122,
         "liveness": 0.146,
         "valence": 0.273,
-        "tempo": 0.5232519999999999
+        "tempo": 0.5232519999999999,
     },
     "3OTSBoYKO7HzGVj8Bu2OH9": {
         "danceability": 0.665,
@@ -1449,7 +1449,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.125,
         "valence": 0.5,
-        "tempo": 0.407904
+        "tempo": 0.407904,
     },
     "1z1Hg7Vb0AhHDiEmnDE79l": {
         "danceability": 0.675,
@@ -1460,7 +1460,7 @@ let songs = {
         "instrumentalness": 0.0000233,
         "liveness": 0.11,
         "valence": 0.613,
-        "tempo": 0.496032
+        "tempo": 0.496032,
     },
     "0ADG9OgdVTL7fgREP75BrZ": {
         "danceability": 0.576,
@@ -1471,7 +1471,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.285,
         "valence": 0.355,
-        "tempo": 0.564612
+        "tempo": 0.564612,
     },
     "507tQXutCPYNFkpOq8tmKF": {
         "danceability": 0.752,
@@ -1482,7 +1482,7 @@ let songs = {
         "instrumentalness": 0.000752,
         "liveness": 0.129,
         "valence": 0.33,
-        "tempo": 0.5001639999999999
+        "tempo": 0.5001639999999999,
     },
     "5XkyZyKMdFungjDb9cUKc3": {
         "danceability": 0.804,
@@ -1493,7 +1493,7 @@ let songs = {
         "instrumentalness": 0.000236,
         "liveness": 0.18,
         "valence": 0.704,
-        "tempo": 0.42003199999999996
+        "tempo": 0.42003199999999996,
     },
     "6l7lX8hJXVIUyPrTaabpqk": {
         "danceability": 0.529,
@@ -1504,7 +1504,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.212,
         "valence": 0.588,
-        "tempo": 0.298476
+        "tempo": 0.298476,
     },
     "0prNGof3XqfTvNDxHonvdK": {
         "danceability": 0.573,
@@ -1515,7 +1515,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.111,
         "valence": 0.451,
-        "tempo": 0.38833999999999996
+        "tempo": 0.38833999999999996,
     },
     "6uBhi9gBXWjanegOb2Phh0": {
         "danceability": 0.69,
@@ -1526,7 +1526,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.116,
         "valence": 0.544,
-        "tempo": 0.40816
+        "tempo": 0.40816,
     },
     "4WzhjxvLP95y7AMDy0Atwb": {
         "danceability": 0.492,
@@ -1537,7 +1537,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.249,
         "valence": 0.137,
-        "tempo": 0.470716
+        "tempo": 0.470716,
     },
     "13QIjo2iGBgl56mNDjJOet": {
         "danceability": 0.66,
@@ -1548,7 +1548,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.16,
         "valence": 0.416,
-        "tempo": 0.5520280000000001
+        "tempo": 0.5520280000000001,
     },
     "2Fn4gZI3MAeWTiv7cSVxZQ": {
         "danceability": 0.685,
@@ -1559,7 +1559,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.185,
         "valence": 0.618,
-        "tempo": 0.460032
+        "tempo": 0.460032,
     },
     "2JtSnwYNKOphDrshYL8n4p": {
         "danceability": 0.524,
@@ -1570,7 +1570,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0598,
         "valence": 0.582,
-        "tempo": 0.351992
+        "tempo": 0.351992,
     },
     "1ehPJRt49h6N0LoryqKZXq": {
         "danceability": 0.31,
@@ -1581,7 +1581,7 @@ let songs = {
         "instrumentalness": 0.000129,
         "liveness": 0.0713,
         "valence": 0.148,
-        "tempo": 0.723976
+        "tempo": 0.723976,
     },
     "6Rf3dWdNQs5LTqFOiavqQr": {
         "danceability": 0.635,
@@ -1592,7 +1592,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.145,
         "valence": 0.352,
-        "tempo": 0.372948
+        "tempo": 0.372948,
     },
     "1spZPzBLYeVTvd0iDWXgC2": {
         "danceability": 0.763,
@@ -1603,7 +1603,7 @@ let songs = {
         "instrumentalness": 0.00384,
         "liveness": 0.0918,
         "valence": 0.493,
-        "tempo": 0.624188
+        "tempo": 0.624188,
     },
     "4RVtBlHFKj51Ipvpfv5ER4": {
         "danceability": 0.573,
@@ -1614,7 +1614,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.175,
         "valence": 0.363,
-        "tempo": 0.480308
+        "tempo": 0.480308,
     },
     "7Feaw9WAEREY0DUOSXJLOM": {
         "danceability": 0.661,
@@ -1625,7 +1625,7 @@ let songs = {
         "instrumentalness": 0.0000123,
         "liveness": 0.14,
         "valence": 0.316,
-        "tempo": 0.455112
+        "tempo": 0.455112,
     },
     "3ebXMykcMXOcLeJ9xZ17XH": {
         "danceability": 0.584,
@@ -1636,7 +1636,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.261,
         "valence": 0.195,
-        "tempo": 0.551888
+        "tempo": 0.551888,
     },
     "7pWK1kMgHy5lNNiIfuRbkP": {
         "danceability": 0.651,
@@ -1647,7 +1647,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.335,
         "valence": 0.392,
-        "tempo": 0.47587999999999997
+        "tempo": 0.47587999999999997,
     },
     "4ut5G4rgB1ClpMTMfjoIuy": {
         "danceability": 0.414,
@@ -1658,7 +1658,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.111,
         "valence": 0.368,
-        "tempo": 0.512152
+        "tempo": 0.512152,
     },
     "0rohJsT6NWsThpukt0Xxdc": {
         "danceability": 0.442,
@@ -1669,7 +1669,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0889,
         "valence": 0.382,
-        "tempo": 0.5132720000000001
+        "tempo": 0.5132720000000001,
     },
     "3nc420PXjTdBV5TN0gCFkS": {
         "danceability": 0.506,
@@ -1680,7 +1680,7 @@ let songs = {
         "instrumentalness": 0.0000958,
         "liveness": 0.0891,
         "valence": 0.221,
-        "tempo": 0.559648
+        "tempo": 0.559648,
     },
     "1ahVFh0ViDZr8LvkEVlq3B": {
         "danceability": 0.44,
@@ -1691,7 +1691,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.121,
         "valence": 0.327,
-        "tempo": 0.512532
+        "tempo": 0.512532,
     },
     "6jA8HL9i4QGzsj6fjoxp8Y": {
         "danceability": 0.611,
@@ -1702,7 +1702,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.124,
         "valence": 0.13,
-        "tempo": 0.423876
+        "tempo": 0.423876,
     },
     "0pqnGHJpmpxLKifKRmU6WP": {
         "danceability": 0.776,
@@ -1713,7 +1713,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.081,
         "valence": 0.666,
-        "tempo": 0.499796
+        "tempo": 0.499796,
     },
     "1zB4vmk8tFRmM9UULNzbLB": {
         "danceability": 0.605,
@@ -1724,7 +1724,7 @@ let songs = {
         "instrumentalness": 0.134,
         "liveness": 0.147,
         "valence": 0.288,
-        "tempo": 0.671988
+        "tempo": 0.671988,
     },
     "2RSHsoi04658QL5xgQVov3": {
         "danceability": 0.383,
@@ -1735,7 +1735,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.368,
         "valence": 0.0827,
-        "tempo": 0.7116520000000001
+        "tempo": 0.7116520000000001,
     },
     "2FY7b99s15jUprqC0M5NCT": {
         "danceability": 0.704,
@@ -1746,7 +1746,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0812,
         "valence": 0.22,
-        "tempo": 0.4
+        "tempo": 0.4,
     },
     "6Qn5zhYkTa37e91HC1D7lb": {
         "danceability": 0.672,
@@ -1757,7 +1757,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.117,
         "valence": 0.556,
-        "tempo": 0.5397799999999999
+        "tempo": 0.5397799999999999,
     },
     "3LlAyCYU26dvFZBDUIMb7a": {
         "danceability": 0.505,
@@ -1768,7 +1768,7 @@ let songs = {
         "instrumentalness": 0.00025,
         "liveness": 0.329,
         "valence": 0.428,
-        "tempo": 0.359752
+        "tempo": 0.359752,
     },
     "4dASQiO1Eoo3RJvt74FtXB": {
         "danceability": 0.502,
@@ -1779,7 +1779,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.65,
         "valence": 0.739,
-        "tempo": 0.6760839999999999
+        "tempo": 0.6760839999999999,
     },
     "4G8gkOterJn0Ywt6uhqbhp": {
         "danceability": 0.448,
@@ -1790,7 +1790,7 @@ let songs = {
         "instrumentalness": 0.000108,
         "liveness": 0.668,
         "valence": 0.236,
-        "tempo": 0.54498
+        "tempo": 0.54498,
     },
     "0WVAQaxrT0wsGEG4BCVSn2": {
         "danceability": 0.688,
@@ -1801,7 +1801,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0982,
         "valence": 0.451,
-        "tempo": 0.456044
+        "tempo": 0.456044,
     },
     "6Tvzf3VEi16JMhAgOwdt2y": {
         "danceability": 0.649,
@@ -1812,7 +1812,7 @@ let songs = {
         "instrumentalness": 0.00000163,
         "liveness": 0.145,
         "valence": 0.35,
-        "tempo": 0.479988
+        "tempo": 0.479988,
     },
     "6v3KW9xbzN5yKLt9YKDYA2": {
         "danceability": 0.759,
@@ -1823,7 +1823,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0828,
         "valence": 0.749,
-        "tempo": 0.467868
+        "tempo": 0.467868,
     },
     "3yOlyBJuViE2YSGn3nVE1K": {
         "danceability": 0.724,
@@ -1834,7 +1834,7 @@ let songs = {
         "instrumentalness": 0.0000129,
         "liveness": 0.0887,
         "valence": 0.383,
-        "tempo": 0.420184
+        "tempo": 0.420184,
     },
     "1rfofaqEpACxVEHIZBJe6W": {
         "danceability": 0.765,
@@ -1845,7 +1845,7 @@ let songs = {
         "instrumentalness": 0.0000356,
         "liveness": 0.132,
         "valence": 0.394,
-        "tempo": 0.419952
+        "tempo": 0.419952,
     },
     "4VUwkH455At9kENOfzTqmF": {
         "danceability": 0.638,
@@ -1856,7 +1856,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.105,
         "valence": 0.249,
-        "tempo": 0.400108
+        "tempo": 0.400108,
     },
     "073ILU1C3APNRGF66VhtyA": {
         "danceability": 0.74,
@@ -1867,7 +1867,7 @@ let songs = {
         "instrumentalness": 0.00282,
         "liveness": 0.319,
         "valence": 0.652,
-        "tempo": 0.392064
+        "tempo": 0.392064,
     },
     "7sTtHHrD0zDpmzQzH3zegz": {
         "danceability": 0.455,
@@ -1878,7 +1878,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.106,
         "valence": 0.43,
-        "tempo": 0.337356
+        "tempo": 0.337356,
     },
     "4eWQlBRaTjPPUlzacqEeoQ": {
         "danceability": 0.637,
@@ -1889,7 +1889,7 @@ let songs = {
         "instrumentalness": 0.000637,
         "liveness": 0.137,
         "valence": 0.243,
-        "tempo": 0.519692
+        "tempo": 0.519692,
     },
     "1PSBzsahR2AKwLJgx8ehBj": {
         "danceability": 0.697,
@@ -1900,7 +1900,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.185,
         "valence": 0.305,
-        "tempo": 0.551412
+        "tempo": 0.551412,
     },
     "7DoNtK2gVFRwJh0hkHe5wQ": {
         "danceability": 0.574,
@@ -1911,7 +1911,7 @@ let songs = {
         "instrumentalness": 0.00000155,
         "liveness": 0.0966,
         "valence": 0.355,
-        "tempo": 0.5122920000000001
+        "tempo": 0.5122920000000001,
     },
     "4a6q8CR2hzLk2plDkSxkfD": {
         "danceability": 0.812,
@@ -1922,7 +1922,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.13,
         "valence": 0.554,
-        "tempo": 0.41981599999999997
+        "tempo": 0.41981599999999997,
     },
     "5RsKelNxucrDxgMbZ3vd3W": {
         "danceability": 0.716,
@@ -1933,7 +1933,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.119,
         "valence": 0.495,
-        "tempo": 0.34402
+        "tempo": 0.34402,
     },
     "0Rx0DJI556Ix5gBny6EWmn": {
         "danceability": 0.844,
@@ -1944,7 +1944,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.113,
         "valence": 0.591,
-        "tempo": 0.488244
+        "tempo": 0.488244,
     },
     "7uzmGiiJyRfuViKKK3lVmR": {
         "danceability": 0.71,
@@ -1955,7 +1955,7 @@ let songs = {
         "instrumentalness": 0.00000277,
         "liveness": 0.451,
         "valence": 0.717,
-        "tempo": 0.571716
+        "tempo": 0.571716,
     },
     "5YLHLxoZsodDWjqSgjhBf3": {
         "danceability": 0.745,
@@ -1966,7 +1966,7 @@ let songs = {
         "instrumentalness": 0.00000112,
         "liveness": 0.0338,
         "valence": 0.902,
-        "tempo": 0.783672
+        "tempo": 0.783672,
     },
     "13iMiwdY7pgE1f7NwYKr1D": {
         "danceability": 0.593,
@@ -1977,7 +1977,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.167,
         "valence": 0.42,
-        "tempo": 0.471292
+        "tempo": 0.471292,
     },
     "7lozLnUfzcgEpMMVQI7yhA": {
         "danceability": 0.676,
@@ -1988,7 +1988,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.103,
         "valence": 0.54,
-        "tempo": 0.45204
+        "tempo": 0.45204,
     },
     "2QNndTbo9mvgOoOKJvpEl2": {
         "danceability": 0.67,
@@ -1999,7 +1999,7 @@ let songs = {
         "instrumentalness": 0.00000569,
         "liveness": 0.109,
         "valence": 0.361,
-        "tempo": 0.6441359999999999
+        "tempo": 0.6441359999999999,
     },
     "6pmZMP2ET1OJi5rKfLO8jD": {
         "danceability": 0.651,
@@ -2010,7 +2010,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.181,
         "valence": 0.539,
-        "tempo": 0.5679
+        "tempo": 0.5679,
     },
     "2k1QpnF58JIaMMIpXcFgeR": {
         "danceability": 0.641,
@@ -2021,7 +2021,7 @@ let songs = {
         "instrumentalness": 0.509,
         "liveness": 0.112,
         "valence": 0.44,
-        "tempo": 0.309928
+        "tempo": 0.309928,
     },
     "2PMNv0H8jIRXmtMw6P6lKD": {
         "danceability": 0.725,
@@ -2032,7 +2032,7 @@ let songs = {
         "instrumentalness": 0.868,
         "liveness": 0.113,
         "valence": 0.265,
-        "tempo": 0.6200800000000001
+        "tempo": 0.6200800000000001,
     },
     "4pMAEtbCiD6TvTrXfAT1n2": {
         "danceability": 0.675,
@@ -2043,7 +2043,7 @@ let songs = {
         "instrumentalness": 0.814,
         "liveness": 0.111,
         "valence": 0.237,
-        "tempo": 0.6204919999999999
+        "tempo": 0.6204919999999999,
     },
     "24qNkQyD9Fo2Gta4qkkukt": {
         "danceability": 0.747,
@@ -2054,7 +2054,7 @@ let songs = {
         "instrumentalness": 0.936,
         "liveness": 0.101,
         "valence": 0.352,
-        "tempo": 0.560468
+        "tempo": 0.560468,
     },
     "301DruRoNZIMY5FDqBntAY": {
         "danceability": 0.659,
@@ -2065,7 +2065,7 @@ let songs = {
         "instrumentalness": 0.501,
         "liveness": 0.132,
         "valence": 0.314,
-        "tempo": 0.700188
+        "tempo": 0.700188,
     },
     "0O6ZBJmSaJFZhwKusChYlm": {
         "danceability": 0.814,
@@ -2076,7 +2076,7 @@ let songs = {
         "instrumentalness": 0.912,
         "liveness": 0.103,
         "valence": 0.9,
-        "tempo": 0.6319
+        "tempo": 0.6319,
     },
     "30Vl4LarZB0HMqSoQ90h4N": {
         "danceability": 0.694,
@@ -2087,7 +2087,7 @@ let songs = {
         "instrumentalness": 0.921,
         "liveness": 0.117,
         "valence": 0.479,
-        "tempo": 0.419932
+        "tempo": 0.419932,
     },
     "27IsJL8014E8wybvDRryBY": {
         "danceability": 0.647,
@@ -2098,7 +2098,7 @@ let songs = {
         "instrumentalness": 0.838,
         "liveness": 0.135,
         "valence": 0.516,
-        "tempo": 0.29200400000000004
+        "tempo": 0.29200400000000004,
     },
     "3LngM95kgfQk39D0BTAjKO": {
         "danceability": 0.693,
@@ -2109,7 +2109,7 @@ let songs = {
         "instrumentalness": 0.925,
         "liveness": 0.112,
         "valence": 0.397,
-        "tempo": 0.591832
+        "tempo": 0.591832,
     },
     "16vcNo3CqpwWRV2yf1XjbT": {
         "danceability": 0.736,
@@ -2120,7 +2120,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0813,
         "valence": 0.213,
-        "tempo": 0.360148
+        "tempo": 0.360148,
     },
     "5Gu0PDLN4YJeW75PpBSg9p": {
         "danceability": 0.663,
@@ -2131,7 +2131,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0841,
         "valence": 0.742,
-        "tempo": 0.412292
+        "tempo": 0.412292,
     },
     "28Tv8zltFDr5wBCG3Pfky4": {
         "danceability": 0.682,
@@ -2142,7 +2142,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.206,
         "valence": 0.323,
-        "tempo": 0.427596
+        "tempo": 0.427596,
     },
     "4Ce37cRWvM1vIGGynKcs22": {
         "danceability": 0.729,
@@ -2153,7 +2153,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.105,
         "valence": 0.508,
-        "tempo": 0.39995600000000003
+        "tempo": 0.39995600000000003,
     },
     "7GCVboEDzfL3NKp1NrAgHR": {
         "danceability": 0.378,
@@ -2164,7 +2164,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.157,
         "valence": 0.188,
-        "tempo": 0.28917200000000004
+        "tempo": 0.28917200000000004,
     },
     "10GJQkjRJcZhGTLagFOC62": {
         "danceability": 0.756,
@@ -2175,7 +2175,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0853,
         "valence": 0.417,
-        "tempo": 0.41194400000000003
+        "tempo": 0.41194400000000003,
     },
     "6l0Ky2PycJV1Bz88kFeVGL": {
         "danceability": 0.661,
@@ -2186,7 +2186,7 @@ let songs = {
         "instrumentalness": 0.00000827,
         "liveness": 0.0518,
         "valence": 0.459,
-        "tempo": 0.399852
+        "tempo": 0.399852,
     },
     "36phXHOKx8rO7CMp2vNX4x": {
         "danceability": 0.617,
@@ -2197,7 +2197,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.419,
         "valence": 0.324,
-        "tempo": 0.49169999999999997
+        "tempo": 0.49169999999999997,
     },
     "04fBskFuMgIx0T0ob7uIhd": {
         "danceability": 0.621,
@@ -2208,7 +2208,7 @@ let songs = {
         "instrumentalness": 0.00000835,
         "liveness": 0.135,
         "valence": 0.408,
-        "tempo": 0.768732
+        "tempo": 0.768732,
     },
     "4oPWkP9zQ5ANBbfdHGOvKF": {
         "danceability": 0.698,
@@ -2219,7 +2219,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.186,
         "valence": 0.351,
-        "tempo": 0.476856
+        "tempo": 0.476856,
     },
     "6W5RmgWh46p9RQ4LDezHKE": {
         "danceability": 0.52,
@@ -2230,7 +2230,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.127,
         "valence": 0.278,
-        "tempo": 0.592912
+        "tempo": 0.592912,
     },
     "1j4kHkkpqZRBwE0A4CN4Yv": {
         "danceability": 0.258,
@@ -2241,7 +2241,7 @@ let songs = {
         "instrumentalness": 0.00000127,
         "liveness": 0.106,
         "valence": 0.0967,
-        "tempo": 0.720172
+        "tempo": 0.720172,
     },
     "2s1sdSqGcKxpPr5lCl7jAV": {
         "danceability": 0.399,
@@ -2252,7 +2252,7 @@ let songs = {
         "instrumentalness": 0.0000607,
         "liveness": 0.0685,
         "valence": 0.572,
-        "tempo": 0.468356
+        "tempo": 0.468356,
     },
     "3IB5qOeMayvpOdHxYCL5tZ": {
         "danceability": 0.591,
@@ -2263,7 +2263,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.372,
         "valence": 0.386,
-        "tempo": 0.423688
+        "tempo": 0.423688,
     },
     "4lJNen4SMTIJMahALc3DcB": {
         "danceability": 0.69,
@@ -2274,7 +2274,7 @@ let songs = {
         "instrumentalness": 0.0000723,
         "liveness": 0.191,
         "valence": 0.489,
-        "tempo": 0.448036
+        "tempo": 0.448036,
     },
     "3S4px9f4lceWdKf0gWciFu": {
         "danceability": 0.628,
@@ -2285,7 +2285,7 @@ let songs = {
         "instrumentalness": 0.00143,
         "liveness": 0.0907,
         "valence": 0.732,
-        "tempo": 0.359904
+        "tempo": 0.359904,
     },
     "5cpw6QKJcoXzpNBLNUJx2i": {
         "danceability": 0.682,
@@ -2296,7 +2296,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0944,
         "valence": 0.382,
-        "tempo": 0.45594799999999996
+        "tempo": 0.45594799999999996,
     },
     "4xigPf2sigSPmuFH3qCelB": {
         "danceability": 0.603,
@@ -2307,7 +2307,7 @@ let songs = {
         "instrumentalness": 0.0000672,
         "liveness": 0.117,
         "valence": 0.561,
-        "tempo": 0.6346280000000001
+        "tempo": 0.6346280000000001,
     },
     "3tTYxjYYcXFqFXA0AZ1Fav": {
         "danceability": 0.609,
@@ -2318,7 +2318,7 @@ let songs = {
         "instrumentalness": 0.00000845,
         "liveness": 0.0895,
         "valence": 0.362,
-        "tempo": 0.375832
+        "tempo": 0.375832,
     },
     "7xHWNBFm6ObGEQPaUxHuKO": {
         "danceability": 0.668,
@@ -2329,7 +2329,7 @@ let songs = {
         "instrumentalness": 0.000479,
         "liveness": 0.0561,
         "valence": 0.729,
-        "tempo": 0.7677759999999999
+        "tempo": 0.7677759999999999,
     },
     "6Dma0t0hOe6Bd6u5YRKF3n": {
         "danceability": 0.725,
@@ -2340,7 +2340,7 @@ let songs = {
         "instrumentalness": 0.000251,
         "liveness": 0.14,
         "valence": 0.638,
-        "tempo": 0.424128
+        "tempo": 0.424128,
     },
     "1NDxZ7cFAo481dtYWdrUnR": {
         "danceability": 0.703,
@@ -2351,7 +2351,7 @@ let songs = {
         "instrumentalness": 0.132,
         "liveness": 0.104,
         "valence": 0.733,
-        "tempo": 0.48412
+        "tempo": 0.48412,
     },
     "5lNuqFVMca4vPupY10cH0J": {
         "danceability": 0.739,
@@ -2362,7 +2362,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.105,
         "valence": 0.58,
-        "tempo": 0.45184399999999997
+        "tempo": 0.45184399999999997,
     },
     "6nnntyJFxLzaCmNnhHe3C1": {
         "danceability": 0.699,
@@ -2373,7 +2373,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.355,
         "valence": 0.676,
-        "tempo": 0.41975599999999996
+        "tempo": 0.41975599999999996,
     },
     "19TOAlTFq0NDHvUPQR0tkr": {
         "danceability": 0.845,
@@ -2384,7 +2384,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.111,
         "valence": 0.782,
-        "tempo": 0.456216
+        "tempo": 0.456216,
     },
     "5EpR6BqAnwR9PPl6sIrzGy": {
         "danceability": 0.704,
@@ -2395,7 +2395,7 @@ let songs = {
         "instrumentalness": 0.0011,
         "liveness": 0.079,
         "valence": 0.531,
-        "tempo": 0.500108
+        "tempo": 0.500108,
     },
     "3aQGknD9CVAtpQFh6Qtalq": {
         "danceability": 0.69,
@@ -2406,7 +2406,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.123,
         "valence": 0.664,
-        "tempo": 0.400092
+        "tempo": 0.400092,
     },
     "2FGh2ref26EwA3Z5st5oHb": {
         "danceability": 0.622,
@@ -2417,7 +2417,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.263,
         "valence": 0.764,
-        "tempo": 0.499436
+        "tempo": 0.499436,
     },
     "0GfS3y8Jd7SHWd9R51s7Fo": {
         "danceability": 0.746,
@@ -2428,7 +2428,7 @@ let songs = {
         "instrumentalness": 0.0036,
         "liveness": 0.138,
         "valence": 0.324,
-        "tempo": 0.447844
+        "tempo": 0.447844,
     },
     "7IZ7S595rr4Q3E1Zga1Jev": {
         "danceability": 0.607,
@@ -2439,7 +2439,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.105,
         "valence": 0.219,
-        "tempo": 0.4322
+        "tempo": 0.4322,
     },
     "4CGGIk81BvfCZiscwFP6t0": {
         "danceability": 0.51,
@@ -2450,7 +2450,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.138,
         "valence": 0.209,
-        "tempo": 0.40968
+        "tempo": 0.40968,
     },
     "1lDuZlSgJFSVw5ZfGTGTys": {
         "danceability": 0.542,
@@ -2461,7 +2461,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0771,
         "valence": 0.333,
-        "tempo": 0.36006
+        "tempo": 0.36006,
     },
     "1WGZjkxK98iupVQ17IBLuA": {
         "danceability": 0.695,
@@ -2472,7 +2472,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.13,
         "valence": 0.513,
-        "tempo": 0.392112
+        "tempo": 0.392112,
     },
     "5riQDXvAHlhI0FgPLHTP2j": {
         "danceability": 0.574,
@@ -2483,7 +2483,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0981,
         "valence": 0.419,
-        "tempo": 0.344308
+        "tempo": 0.344308,
     },
     "5OAnYfG8pePLuqJDLoC5Wo": {
         "danceability": 0.727,
@@ -2494,7 +2494,7 @@ let songs = {
         "instrumentalness": 0.0000438,
         "liveness": 0.307,
         "valence": 0.304,
-        "tempo": 0.527192
+        "tempo": 0.527192,
     },
     "3yKP1odWriztNrwMM2yuko": {
         "danceability": 0.591,
@@ -2505,7 +2505,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0791,
         "valence": 0.526,
-        "tempo": 0.399672
+        "tempo": 0.399672,
     },
     "14lN2fNtLkyiXzhCMXkxsq": {
         "danceability": 0.77,
@@ -2516,7 +2516,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.375,
         "valence": 0.555,
-        "tempo": 0.540004
+        "tempo": 0.540004,
     },
     "1k4r4MQj7mNXz7tzitqGoc": {
         "danceability": 0.759,
@@ -2527,7 +2527,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0936,
         "valence": 0.486,
-        "tempo": 0.6397160000000001
+        "tempo": 0.6397160000000001,
     },
     "5vKR1loFIWIr7doV3hMNzY": {
         "danceability": 0.407,
@@ -2538,7 +2538,7 @@ let songs = {
         "instrumentalness": 0.0000136,
         "liveness": 0.117,
         "valence": 0.341,
-        "tempo": 0.2697
+        "tempo": 0.2697,
     },
     "34MKDgueadmA8vTufodcJN": {
         "danceability": 0.406,
@@ -2549,7 +2549,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.157,
         "valence": 0.378,
-        "tempo": 0.6938479999999999
+        "tempo": 0.6938479999999999,
     },
     "3yu0ddZcTXrLKBIdcrkshl": {
         "danceability": 0.544,
@@ -2560,7 +2560,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.15,
         "valence": 0.487,
-        "tempo": 0.330928
+        "tempo": 0.330928,
     },
     "2ez6qvOTHKeI3ss80NGqnI": {
         "danceability": 0.619,
@@ -2571,7 +2571,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.137,
         "valence": 0.498,
-        "tempo": 0.507212
+        "tempo": 0.507212,
     },
     "0PDUDa38GO8lMxLCRc4lL1": {
         "danceability": 0.584,
@@ -2582,7 +2582,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0939,
         "valence": 0.438,
-        "tempo": 0.499776
+        "tempo": 0.499776,
     },
     "55n9yjI6qqXh5F2mYvUc2y": {
         "danceability": 0.731,
@@ -2593,7 +2593,7 @@ let songs = {
         "instrumentalness": 0.0000196,
         "liveness": 0.14,
         "valence": 0.106,
-        "tempo": 0.47188
+        "tempo": 0.47188,
     },
     "1iWHabUgUuuKLBa0TzTHfk": {
         "danceability": 0.302,
@@ -2604,7 +2604,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0861,
         "valence": 0.105,
-        "tempo": 0.442032
+        "tempo": 0.442032,
     },
     "1V1NpX9DlBb9koXof9nIBF": {
         "danceability": 0.638,
@@ -2615,7 +2615,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.141,
         "valence": 0.158,
-        "tempo": 0.387876
+        "tempo": 0.387876,
     },
     "66dvcPEA06iCYE6Xy4gcnU": {
         "danceability": 0.358,
@@ -2626,7 +2626,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0898,
         "valence": 0.441,
-        "tempo": 0.60834
+        "tempo": 0.60834,
     },
     "155EsNGoXo7XSVF84oTPam": {
         "danceability": 0.452,
@@ -2637,7 +2637,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.11,
         "valence": 0.305,
-        "tempo": 0.307944
+        "tempo": 0.307944,
     },
     "0aVsVsOYDSEEigiwTrIab9": {
         "danceability": 0.46,
@@ -2648,7 +2648,7 @@ let songs = {
         "instrumentalness": 0.00000593,
         "liveness": 0.0967,
         "valence": 0.19,
-        "tempo": 0.673676
+        "tempo": 0.673676,
     },
     "6kjKRa91zikS6ZOL2Rt1QF": {
         "danceability": 0.696,
@@ -2659,7 +2659,7 @@ let songs = {
         "instrumentalness": 0.0000244,
         "liveness": 0.0922,
         "valence": 0.504,
-        "tempo": 0.61572
+        "tempo": 0.61572,
     },
     "104buTcnP2AsxqB7U1FIZ4": {
         "danceability": 0.59,
@@ -2670,7 +2670,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0604,
         "valence": 0.438,
-        "tempo": 0.599928
+        "tempo": 0.599928,
     },
     "6ZSO7kPn8IMJFymyticbJO": {
         "danceability": 0.6,
@@ -2681,7 +2681,7 @@ let songs = {
         "instrumentalness": 0.0025,
         "liveness": 0.134,
         "valence": 0.408,
-        "tempo": 0.45219600000000004
+        "tempo": 0.45219600000000004,
     },
     "6JsfvqClYnc2R5yZ67C2ch": {
         "danceability": 0.632,
@@ -2692,7 +2692,7 @@ let songs = {
         "instrumentalness": 0.0000583,
         "liveness": 0.161,
         "valence": 0.429,
-        "tempo": 0.372036
+        "tempo": 0.372036,
     },
     "3QWjljChcOMkRDYSzF33Qr": {
         "danceability": 0.87,
@@ -2703,7 +2703,7 @@ let songs = {
         "instrumentalness": 0.00356,
         "liveness": 0.0916,
         "valence": 0.673,
-        "tempo": 0.33012
+        "tempo": 0.33012,
     },
     "1agOL1akZePDXe21TBbBM2": {
         "danceability": 0.808,
@@ -2714,7 +2714,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0764,
         "valence": 0.142,
-        "tempo": 0.48
+        "tempo": 0.48,
     },
     "57rOXabUKgkrwHPSqzo4s5": {
         "danceability": 0.556,
@@ -2725,7 +2725,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0957,
         "valence": 0.225,
-        "tempo": 0.540052
+        "tempo": 0.540052,
     },
     "14EgW52HVqnLHd30bgbPxg": {
         "danceability": 0.509,
@@ -2736,7 +2736,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.058,
         "valence": 0.157,
-        "tempo": 0.617436
+        "tempo": 0.617436,
     },
     "0BOEuUKoHdy8in20fG5smd": {
         "danceability": 0.893,
@@ -2747,7 +2747,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.326,
         "valence": 0.681,
-        "tempo": 0.43214800000000003
+        "tempo": 0.43214800000000003,
     },
     "1sx4GRirvsRPocH3W04e5a": {
         "danceability": 0.651,
@@ -2758,7 +2758,7 @@ let songs = {
         "instrumentalness": 0.0000368,
         "liveness": 0.0936,
         "valence": 0.401,
-        "tempo": 0.495996
+        "tempo": 0.495996,
     },
     "3Kvce9qtIAmR4Axtq7mdGl": {
         "danceability": 0.692,
@@ -2769,7 +2769,7 @@ let songs = {
         "instrumentalness": 0.0314,
         "liveness": 0.0928,
         "valence": 0.241,
-        "tempo": 0.33768
+        "tempo": 0.33768,
     },
     "1wJRveJZLSb1rjhnUHQiv6": {
         "danceability": 0.581,
@@ -2780,7 +2780,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.111,
         "valence": 0.434,
-        "tempo": 0.372092
+        "tempo": 0.372092,
     },
     "733c1CWmIGymoQXdp7Us88": {
         "danceability": 0.819,
@@ -2791,7 +2791,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0996,
         "valence": 0.455,
-        "tempo": 0.5340119999999999
+        "tempo": 0.5340119999999999,
     },
     "3Ol2xnObFdKV9pmRD2t9x8": {
         "danceability": 0.791,
@@ -2802,7 +2802,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.148,
         "valence": 0.536,
-        "tempo": 0.384228
+        "tempo": 0.384228,
     },
     "6cZH4rX1KTt1aJ3Ql6Ynja": {
         "danceability": 0.644,
@@ -2813,7 +2813,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0759,
         "valence": 0.68,
-        "tempo": 0.6958880000000001
+        "tempo": 0.6958880000000001,
     },
     "1f5cbQtDrykjarZVrShaDI": {
         "danceability": 0.839,
@@ -2824,7 +2824,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.117,
         "valence": 0.814,
-        "tempo": 0.5160560000000001
+        "tempo": 0.5160560000000001,
     },
     "735RSTb2xbtWbDtKD9XDYi": {
         "danceability": 0.63,
@@ -2835,7 +2835,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.113,
         "valence": 0.333,
-        "tempo": 0.359684
+        "tempo": 0.359684,
     },
     "6MO2bfLHKykUgCChFdw91H": {
         "danceability": 0.815,
@@ -2846,7 +2846,7 @@ let songs = {
         "instrumentalness": 0.000102,
         "liveness": 0.14,
         "valence": 0.17,
-        "tempo": 0.387928
+        "tempo": 0.387928,
     },
     "3L19besdNQzd342qL78xqm": {
         "danceability": 0.81,
@@ -2857,7 +2857,7 @@ let songs = {
         "instrumentalness": 0.00000569,
         "liveness": 0.107,
         "valence": 0.183,
-        "tempo": 0.306012
+        "tempo": 0.306012,
     },
     "5uZm7EFtP5aoTJvx5gv9Xf": {
         "danceability": 0.538,
@@ -2868,7 +2868,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.214,
         "valence": 0.551,
-        "tempo": 0.721096
+        "tempo": 0.721096,
     },
     "2FTeQQ5Rg9tBpgpTF5mnhE": {
         "danceability": 0.946,
@@ -2879,7 +2879,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0643,
         "valence": 0.961,
-        "tempo": 0.5119119999999999
+        "tempo": 0.5119119999999999,
     },
     "7aiClxsDWFRQ0Kzk5KI5ku": {
         "danceability": 0.778,
@@ -2890,7 +2890,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.399,
         "valence": 0.678,
-        "tempo": 0.519956
+        "tempo": 0.519956,
     },
     "6y6jbcPG4Yn3Du4moXaenr": {
         "danceability": 0.63,
@@ -2901,7 +2901,7 @@ let songs = {
         "instrumentalness": 0.0000404,
         "liveness": 0.114,
         "valence": 0.315,
-        "tempo": 0.579484
+        "tempo": 0.579484,
     },
     "4yJiXq86uM56uIfIZgE440": {
         "danceability": 0.755,
@@ -2912,7 +2912,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0929,
         "valence": 0.881,
-        "tempo": 0.40010399999999996
+        "tempo": 0.40010399999999996,
     },
     "3Q3myFA7q4Op95DOpHplaY": {
         "danceability": 0.745,
@@ -2923,7 +2923,7 @@ let songs = {
         "instrumentalness": 0.00000525,
         "liveness": 0.123,
         "valence": 0.17,
-        "tempo": 0.44400799999999996
+        "tempo": 0.44400799999999996,
     },
     "59IUUAdjVbmq80Nkc3Q9Dx": {
         "danceability": 0.803,
@@ -2934,7 +2934,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.092,
         "valence": 0.422,
-        "tempo": 0.50804
+        "tempo": 0.50804,
     },
     "1nMYtxDrONcoGnKRvxTwPv": {
         "danceability": 0.718,
@@ -2945,7 +2945,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.527,
         "valence": 0.36,
-        "tempo": 0.53198
+        "tempo": 0.53198,
     },
     "4JuZQeSRYJfLCqBgBIxxrR": {
         "danceability": 0.661,
@@ -2956,7 +2956,7 @@ let songs = {
         "instrumentalness": 0.0000119,
         "liveness": 0.0848,
         "valence": 0.145,
-        "tempo": 0.57992
+        "tempo": 0.57992,
     },
     "0wsfdPl7p3yKjQBmHQsaDn": {
         "danceability": 0.664,
@@ -2967,7 +2967,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.34,
         "valence": 0.534,
-        "tempo": 0.64754
+        "tempo": 0.64754,
     },
     "39bs2V8huzcmWoeSlHKZeP": {
         "danceability": 0.584,
@@ -2978,7 +2978,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.119,
         "valence": 0.283,
-        "tempo": 0.360204
+        "tempo": 0.360204,
     },
     "7jzldCBnJjpJM3epzJ85KE": {
         "danceability": 0.628,
@@ -2989,7 +2989,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.426,
         "valence": 0.465,
-        "tempo": 0.372004
+        "tempo": 0.372004,
     },
     "0g21KZ1XJuhwexWPLpuEt1": {
         "danceability": 0.752,
@@ -3000,7 +3000,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.211,
         "valence": 0.347,
-        "tempo": 0.5282319999999999
+        "tempo": 0.5282319999999999,
     },
     "4PMLEEYw4mblYsPlDSHKyu": {
         "danceability": 0.843,
@@ -3011,7 +3011,7 @@ let songs = {
         "instrumentalness": 0.000117,
         "liveness": 0.0822,
         "valence": 0.613,
-        "tempo": 0.439892
+        "tempo": 0.439892,
     },
     "5vDCp6yZAikAoJ6NOEEFdp": {
         "danceability": 0.356,
@@ -3022,7 +3022,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.114,
         "valence": 0.551,
-        "tempo": 0.399804
+        "tempo": 0.399804,
     },
     "6ZahaGPhyiXTi1pLEtGM6e": {
         "danceability": 0.648,
@@ -3033,7 +3033,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.17,
         "valence": 0.689,
-        "tempo": 0.640096
+        "tempo": 0.640096,
     },
     "45iMwUi9OBJlEIsTJ4AStR": {
         "danceability": 0.743,
@@ -3044,7 +3044,7 @@ let songs = {
         "instrumentalness": 0.000124,
         "liveness": 0.135,
         "valence": 0.316,
-        "tempo": 0.368024
+        "tempo": 0.368024,
     },
     "4dIPtEnmudhZPD8MsAtzSK": {
         "danceability": 0.498,
@@ -3055,7 +3055,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.113,
         "valence": 0.796,
-        "tempo": 0.760312
+        "tempo": 0.760312,
     },
     "5prADFoX6V0gF4BxWP9xuI": {
         "danceability": 0.602,
@@ -3066,7 +3066,7 @@ let songs = {
         "instrumentalness": 0.00582,
         "liveness": 0.194,
         "valence": 0.455,
-        "tempo": 0.555852
+        "tempo": 0.555852,
     },
     "2CnscesDhDpF7LpURtgBEv": {
         "danceability": 0.699,
@@ -3077,7 +3077,7 @@ let songs = {
         "instrumentalness": 0.0549,
         "liveness": 0.138,
         "valence": 0.243,
-        "tempo": 0.375884
+        "tempo": 0.375884,
     },
     "42Zt5yUL5egUyFtkV1md7t": {
         "danceability": 0.834,
@@ -3088,7 +3088,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.195,
         "valence": 0.412,
-        "tempo": 0.487952
+        "tempo": 0.487952,
     },
     "70exbZDzS34CgTHZv4GMZK": {
         "danceability": 0.645,
@@ -3099,7 +3099,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.226,
         "valence": 0.749,
-        "tempo": 0.639812
+        "tempo": 0.639812,
     },
     "7ejusxgMqURCcMQa0fdOwl": {
         "danceability": 0.54,
@@ -3110,7 +3110,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.151,
         "valence": 0.503,
-        "tempo": 0.30003199999999997
+        "tempo": 0.30003199999999997,
     },
     "6n72bDAxbWOkWaJnlfQfIZ": {
         "danceability": 0.569,
@@ -3121,7 +3121,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0816,
         "valence": 0.254,
-        "tempo": 0.5311760000000001
+        "tempo": 0.5311760000000001,
     },
     "3e5wnsqhAkzlzk9SzdhOzR": {
         "danceability": 0.749,
@@ -3132,7 +3132,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0933,
         "valence": 0.38,
-        "tempo": 0.48798
+        "tempo": 0.48798,
     },
     "1t2W2Gvg9NAKpUT8IGlRCP": {
         "danceability": 0.701,
@@ -3143,7 +3143,7 @@ let songs = {
         "instrumentalness": 0.00000154,
         "liveness": 0.118,
         "valence": 0.747,
-        "tempo": 0.43631200000000003
+        "tempo": 0.43631200000000003,
     },
     "5rcfjj1pQSEhY7D9GxpDSx": {
         "danceability": 0.547,
@@ -3154,7 +3154,7 @@ let songs = {
         "instrumentalness": 0.0000201,
         "liveness": 0.102,
         "valence": 0.357,
-        "tempo": 0.440124
+        "tempo": 0.440124,
     },
     "6cPGMjHhobUV9kF57enrZe": {
         "danceability": 0.702,
@@ -3165,7 +3165,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.252,
         "valence": 0.619,
-        "tempo": 0.472348
+        "tempo": 0.472348,
     },
     "2SqCjZW0fT9rU7k2zSCszg": {
         "danceability": 0.701,
@@ -3176,7 +3176,7 @@ let songs = {
         "instrumentalness": 0.0000254,
         "liveness": 0.319,
         "valence": 0.924,
-        "tempo": 0.451944
+        "tempo": 0.451944,
     },
     "7pyPbzSVKzlP9m3ch8Q3ta": {
         "danceability": 0.563,
@@ -3187,7 +3187,7 @@ let songs = {
         "instrumentalness": 0.000724,
         "liveness": 0.141,
         "valence": 0.357,
-        "tempo": 0.6001000000000001
+        "tempo": 0.6001000000000001,
     },
     "0JF2HOmfBHdMi4lMlLMAVp": {
         "danceability": 0.477,
@@ -3198,7 +3198,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.12,
         "valence": 0.381,
-        "tempo": 0.352008
+        "tempo": 0.352008,
     },
     "6V6fdiUZG82hxJPha9as0x": {
         "danceability": 0.777,
@@ -3209,7 +3209,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.115,
         "valence": 0.666,
-        "tempo": 0.387852
+        "tempo": 0.387852,
     },
     "6ocbgoVGwYJhOv1GgI9NsF": {
         "danceability": 0.778,
@@ -3220,7 +3220,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0881,
         "valence": 0.327,
-        "tempo": 0.560192
+        "tempo": 0.560192,
     },
     "3e9HZxeyfWwjeyPAMmWSSQ": {
         "danceability": 0.717,
@@ -3231,7 +3231,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.101,
         "valence": 0.412,
-        "tempo": 0.42786399999999997
+        "tempo": 0.42786399999999997,
     },
     "07Oz5StQ7GRoygNLaXs2pd": {
         "danceability": 0.668,
@@ -3242,7 +3242,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.735,
         "valence": 0.478,
-        "tempo": 0.38370800000000005
+        "tempo": 0.38370800000000005,
     },
     "0Ryd8975WihbObpp5cPW1t": {
         "danceability": 0.4,
@@ -3253,7 +3253,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.159,
         "valence": 0.702,
-        "tempo": 0.7603880000000001
+        "tempo": 0.7603880000000001,
     },
     "2qT1uLXPVPzGgFOx4jtEuo": {
         "danceability": 0.699,
@@ -3264,7 +3264,7 @@ let songs = {
         "instrumentalness": 0.00000311,
         "liveness": 0.294,
         "valence": 0.354,
-        "tempo": 0.48797199999999996
+        "tempo": 0.48797199999999996,
     },
     "4kV4N9D1iKVxx1KLvtTpjS": {
         "danceability": 0.726,
@@ -3275,7 +3275,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.106,
         "valence": 0.335,
-        "tempo": 0.6799959999999999
+        "tempo": 0.6799959999999999,
     },
     "5OCJzvD7sykQEKHH7qAC3C": {
         "danceability": 0.602,
@@ -3286,7 +3286,7 @@ let songs = {
         "instrumentalness": 0.00006,
         "liveness": 0.237,
         "valence": 0.268,
-        "tempo": 0.580124
+        "tempo": 0.580124,
     },
     "7xoUc6faLbCqZO6fQEYprd": {
         "danceability": 0.628,
@@ -3297,7 +3297,7 @@ let songs = {
         "instrumentalness": 0.00000165,
         "liveness": 0.096,
         "valence": 0.104,
-        "tempo": 0.500104
+        "tempo": 0.500104,
     },
     "2meEiZKWkiN28gITzFwQo5": {
         "danceability": 0.623,
@@ -3308,7 +3308,7 @@ let songs = {
         "instrumentalness": 0.0000019,
         "liveness": 0.145,
         "valence": 0.372,
-        "tempo": 0.43141199999999996
+        "tempo": 0.43141199999999996,
     },
     "5cF0dROlMOK5uNZtivgu50": {
         "danceability": 0.775,
@@ -3319,7 +3319,7 @@ let songs = {
         "instrumentalness": 0.0000233,
         "liveness": 0.134,
         "valence": 0.797,
-        "tempo": 0.400264
+        "tempo": 0.400264,
     },
     "2JzZzZUQj3Qff7wapcbKjc": {
         "danceability": 0.689,
@@ -3330,7 +3330,7 @@ let songs = {
         "instrumentalness": 0.00000103,
         "liveness": 0.0649,
         "valence": 0.283,
-        "tempo": 0.3201
+        "tempo": 0.3201,
     },
     "37FXw5QGFN7uwwsLy8uAc0": {
         "danceability": 0.728,
@@ -3341,7 +3341,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.179,
         "valence": 0.352,
-        "tempo": 0.400068
+        "tempo": 0.400068,
     },
     "49dFIRQCQxPWgoH0m38XQ5": {
         "danceability": 0.696,
@@ -3352,7 +3352,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.174,
         "valence": 0.7,
-        "tempo": 0.463928
+        "tempo": 0.463928,
     },
     "6wmAHw1szh5RCKSRjiXhPe": {
         "danceability": 0.845,
@@ -3363,7 +3363,7 @@ let songs = {
         "instrumentalness": 0.00000349,
         "liveness": 0.0383,
         "valence": 0.811,
-        "tempo": 0.439896
+        "tempo": 0.439896,
     },
     "3707IBa4HnS3zDDoWfeUBl": {
         "danceability": 0.488,
@@ -3374,7 +3374,7 @@ let songs = {
         "instrumentalness": 0.000548,
         "liveness": 0.161,
         "valence": 0.579,
-        "tempo": 0.736448
+        "tempo": 0.736448,
     },
     "0ClPIeT6MSgfSgQ9ZrJbAq": {
         "danceability": 0.749,
@@ -3385,7 +3385,7 @@ let songs = {
         "instrumentalness": 0.0000365,
         "liveness": 0.0982,
         "valence": 0.601,
-        "tempo": 0.492168
+        "tempo": 0.492168,
     },
     "7soJgKhQTO8hLP2JPRkL5O": {
         "danceability": 0.667,
@@ -3396,7 +3396,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.115,
         "valence": 0.47,
-        "tempo": 0.36409600000000003
+        "tempo": 0.36409600000000003,
     },
     "7rl1z4j7MurMDnn9rHh4M2": {
         "danceability": 0.795,
@@ -3407,7 +3407,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.349,
         "valence": 0.815,
-        "tempo": 0.44006
+        "tempo": 0.44006,
     },
     "1lsBTdE6MGsKeZCD6llNu7": {
         "danceability": 0.856,
@@ -3418,7 +3418,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0688,
         "valence": 0.697,
-        "tempo": 0.448036
+        "tempo": 0.448036,
     },
     "4ZLzoOkj0MPWrTLvooIuaa": {
         "danceability": 0.498,
@@ -3429,7 +3429,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.144,
         "valence": 0.0895,
-        "tempo": 0.475668
+        "tempo": 0.475668,
     },
     "58wyJLv6yH1La9NIZPl3ne": {
         "danceability": 0.522,
@@ -3440,7 +3440,7 @@ let songs = {
         "instrumentalness": 0.026,
         "liveness": 0.0941,
         "valence": 0.124,
-        "tempo": 0.439944
+        "tempo": 0.439944,
     },
     "6vJ6FR4WtlKSxe8lmh3F1C": {
         "danceability": 0.695,
@@ -3451,7 +3451,7 @@ let songs = {
         "instrumentalness": 0.14,
         "liveness": 0.105,
         "valence": 0.264,
-        "tempo": 0.480132
+        "tempo": 0.480132,
     },
     "1kAkUHFb7ryeVkVSRD6Nkj": {
         "danceability": 0.732,
@@ -3462,7 +3462,7 @@ let songs = {
         "instrumentalness": 0.0000613,
         "liveness": 0.143,
         "valence": 0.185,
-        "tempo": 0.55986
+        "tempo": 0.55986,
     },
     "4CALLtGlZBwdpfQvMQvhH2": {
         "danceability": 0.657,
@@ -3473,7 +3473,7 @@ let songs = {
         "instrumentalness": 0.73,
         "liveness": 0.279,
         "valence": 0.0833,
-        "tempo": 0.400072
+        "tempo": 0.400072,
     },
     "1fgC2MHbJnPgvDfdTpC62c": {
         "danceability": 0.487,
@@ -3484,7 +3484,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.124,
         "valence": 0.224,
-        "tempo": 0.312552
+        "tempo": 0.312552,
     },
     "4nlry8WISrv04S1E619p3A": {
         "danceability": 0.613,
@@ -3495,7 +3495,7 @@ let songs = {
         "instrumentalness": 0.00087,
         "liveness": 0.35,
         "valence": 0.316,
-        "tempo": 0.479872
+        "tempo": 0.479872,
     },
     "1QM4BTOD0uDagZNUytGZ5z": {
         "danceability": 0.687,
@@ -3506,7 +3506,7 @@ let songs = {
         "instrumentalness": 0.00515,
         "liveness": 0.114,
         "valence": 0.289,
-        "tempo": 0.299964
+        "tempo": 0.299964,
     },
     "6rzXElsp81yWcDmWf9lBTd": {
         "danceability": 0.644,
@@ -3517,7 +3517,7 @@ let songs = {
         "instrumentalness": 0.866,
         "liveness": 0.0813,
         "valence": 0.158,
-        "tempo": 0.439868
+        "tempo": 0.439868,
     },
     "60ydV37Apx9TlyxjLNEZ51": {
         "danceability": 0.459,
@@ -3528,7 +3528,7 @@ let songs = {
         "instrumentalness": 0.0000037,
         "liveness": 0.0607,
         "valence": 0.261,
-        "tempo": 0.487968
+        "tempo": 0.487968,
     },
     "466cKvZn1j45IpxDdYZqdA": {
         "danceability": 0.83,
@@ -3539,7 +3539,7 @@ let songs = {
         "instrumentalness": 0.00000304,
         "liveness": 0.113,
         "valence": 0.845,
-        "tempo": 0.326416
+        "tempo": 0.326416,
     },
     "5yY9lUy8nbvjM1Uyo1Uqoc": {
         "danceability": 0.676,
@@ -3550,7 +3550,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.152,
         "valence": 0.508,
-        "tempo": 0.568148
+        "tempo": 0.568148,
     },
     "6Kj17Afjo1OKJYpf5VzCeo": {
         "danceability": 0.825,
@@ -3561,7 +3561,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.368,
         "valence": 0.12,
-        "tempo": 0.309084
+        "tempo": 0.309084,
     },
     "4wVOKKEHUJxHCFFNUWDn0B": {
         "danceability": 0.735,
@@ -3572,7 +3572,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.113,
         "valence": 0.0397,
-        "tempo": 0.491788
+        "tempo": 0.491788,
     },
     "5ry2OE6R2zPQFDO85XkgRb": {
         "danceability": 0.831,
@@ -3583,7 +3583,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.122,
         "valence": 0.101,
-        "tempo": 0.40216399999999997
+        "tempo": 0.40216399999999997,
     },
     "6DCZcSspjsKoFjzjrWoCdn": {
         "danceability": 0.754,
@@ -3594,7 +3594,7 @@ let songs = {
         "instrumentalness": 0.0000829,
         "liveness": 0.552,
         "valence": 0.357,
-        "tempo": 0.308676
+        "tempo": 0.308676,
     },
     "05aZ9sAU1YXndHv0FMi9iW": {
         "danceability": 0.543,
@@ -3605,7 +3605,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.155,
         "valence": 0.729,
-        "tempo": 0.427476
+        "tempo": 0.427476,
     },
     "5fHrHoJKfCgBd35zwIBmUK": {
         "danceability": 0.718,
@@ -3616,7 +3616,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.352,
         "valence": 0.815,
-        "tempo": 0.680016
+        "tempo": 0.680016,
     },
     "2G7V7zsVDxg1yRsu7Ew9RJ": {
         "danceability": 0.835,
@@ -3627,7 +3627,7 @@ let songs = {
         "instrumentalness": 0.00006,
         "liveness": 0.396,
         "valence": 0.35,
-        "tempo": 0.36412
+        "tempo": 0.36412,
     },
     "0TlLq3lA83rQOYtrqBqSct": {
         "danceability": 0.912,
@@ -3638,7 +3638,7 @@ let songs = {
         "instrumentalness": 0.013,
         "liveness": 0.104,
         "valence": 0.422,
-        "tempo": 0.619932
+        "tempo": 0.619932,
     },
     "7KXjTSCq5nL1LoYtL7XAwS": {
         "danceability": 0.908,
@@ -3649,7 +3649,7 @@ let songs = {
         "instrumentalness": 0.0000539,
         "liveness": 0.0958,
         "valence": 0.421,
-        "tempo": 0.600044
+        "tempo": 0.600044,
     },
     "6PGoSes0D9eUDeeAafB2As": {
         "danceability": 0.8,
@@ -3660,7 +3660,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.153,
         "valence": 0.779,
-        "tempo": 0.504232
+        "tempo": 0.504232,
     },
     "6HZILIRieu8S0iqY8kIKhj": {
         "danceability": 0.638,
@@ -3671,7 +3671,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0842,
         "valence": 0.422,
-        "tempo": 0.559652
+        "tempo": 0.559652,
     },
     "3GCdLUSnKSMJhs4Tj6CV3s": {
         "danceability": 0.698,
@@ -3682,7 +3682,7 @@ let songs = {
         "instrumentalness": 0.000194,
         "liveness": 0.0926,
         "valence": 0.552,
-        "tempo": 0.38769600000000004
+        "tempo": 0.38769600000000004,
     },
     "77UjLW8j5UAGAGVGhR5oUK": {
         "danceability": 0.735,
@@ -3693,7 +3693,7 @@ let songs = {
         "instrumentalness": 0.0000217,
         "liveness": 0.111,
         "valence": 0.188,
-        "tempo": 0.402336
+        "tempo": 0.402336,
     },
     "51rXHuKN8Loc4sUlKPODgH": {
         "danceability": 0.645,
@@ -3704,7 +3704,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.128,
         "valence": 0.376,
-        "tempo": 0.548532
+        "tempo": 0.548532,
     },
     "0N3W5peJUQtI4eyR6GJT5O": {
         "danceability": 0.884,
@@ -3715,7 +3715,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.154,
         "valence": 0.489,
-        "tempo": 0.428236
+        "tempo": 0.428236,
     },
     "6SwRhMLwNqEi6alNPVG00n": {
         "danceability": 0.658,
@@ -3726,7 +3726,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.2,
         "valence": 0.419,
-        "tempo": 0.44273599999999996
+        "tempo": 0.44273599999999996,
     },
     "3iVcZ5G6tvkXZkZKlMpIUs": {
         "danceability": 0.796,
@@ -3737,7 +3737,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0827,
         "valence": 0.558,
-        "tempo": 0.440136
+        "tempo": 0.440136,
     },
     "65ES1qwOB577ZnTkizMXJJ": {
         "danceability": 0.902,
@@ -3748,7 +3748,7 @@ let songs = {
         "instrumentalness": 0.0000823,
         "liveness": 0.194,
         "valence": 0.867,
-        "tempo": 0.600116
+        "tempo": 0.600116,
     },
     "0bMbDctzMmTyK2j74j3nF3": {
         "danceability": 0.67,
@@ -3759,7 +3759,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.133,
         "valence": 0.608,
-        "tempo": 0.352132
+        "tempo": 0.352132,
     },
     "698ItKASDavgwZ3WjaWjtz": {
         "danceability": 0.468,
@@ -3770,7 +3770,7 @@ let songs = {
         "instrumentalness": 0.00000797,
         "liveness": 0.11,
         "valence": 0.159,
-        "tempo": 0.718568
+        "tempo": 0.718568,
     },
     "67O8CWXxPsfz8orZVGMQwf": {
         "danceability": 0.81,
@@ -3781,7 +3781,7 @@ let songs = {
         "instrumentalness": 0.0000669,
         "liveness": 0.137,
         "valence": 0.193,
-        "tempo": 0.46407600000000004
+        "tempo": 0.46407600000000004,
     },
     "4n7jnSxVLd8QioibtTDBDq": {
         "danceability": 0.509,
@@ -3792,7 +3792,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.301,
         "valence": 0.297,
-        "tempo": 0.680348
+        "tempo": 0.680348,
     },
     "22O2Zdfj3jnJZDSzlDMAJp": {
         "danceability": 0.73,
@@ -3803,7 +3803,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.129,
         "valence": 0.106,
-        "tempo": 0.431924
+        "tempo": 0.431924,
     },
     "0lks2Kt9veMOFEAPN0fsqN": {
         "danceability": 0.423,
@@ -3814,7 +3814,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.189,
         "valence": 0.467,
-        "tempo": 0.603912
+        "tempo": 0.603912,
     },
     "4jp4Z02kzzg8gK0NmDGgml": {
         "danceability": 0.52,
@@ -3825,7 +3825,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0932,
         "valence": 0.168,
-        "tempo": 0.407776
+        "tempo": 0.407776,
     },
     "6SRWhUJcD2YKahCwHavz3X": {
         "danceability": 0.43,
@@ -3836,7 +3836,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.173,
         "valence": 0.123,
-        "tempo": 0.679952
+        "tempo": 0.679952,
     },
     "2DGa7iaidT5s0qnINlwMjJ": {
         "danceability": 0.654,
@@ -3847,7 +3847,7 @@ let songs = {
         "instrumentalness": 0.00191,
         "liveness": 0.0903,
         "valence": 0.198,
-        "tempo": 0.511828
+        "tempo": 0.511828,
     },
     "3LlmKSHR3Rs0Y3KHQLAYDk": {
         "danceability": 0.673,
@@ -3858,7 +3858,7 @@ let songs = {
         "instrumentalness": 0.000478,
         "liveness": 0.186,
         "valence": 0.183,
-        "tempo": 0.388084
+        "tempo": 0.388084,
     },
     "6oJ6le65B3SEqPwMRNXWjY": {
         "danceability": 0.693,
@@ -3869,7 +3869,7 @@ let songs = {
         "instrumentalness": 0.00000605,
         "liveness": 0.101,
         "valence": 0.404,
-        "tempo": 0.415808
+        "tempo": 0.415808,
     },
     "6Q3K9gVUZRMZqZKrXovbM2": {
         "danceability": 0.611,
@@ -3880,7 +3880,7 @@ let songs = {
         "instrumentalness": 0.0000184,
         "liveness": 0.105,
         "valence": 0.357,
-        "tempo": 0.49193200000000004
+        "tempo": 0.49193200000000004,
     },
     "7xbWAw3LMgRMn4omR5yVn3": {
         "danceability": 0.58,
@@ -3891,7 +3891,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0755,
         "valence": 0.507,
-        "tempo": 0.591952
+        "tempo": 0.591952,
     },
     "5Gj1wG8b12VQdEd3hUuSwo": {
         "danceability": 0.715,
@@ -3902,7 +3902,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0862,
         "valence": 0.39,
-        "tempo": 0.451548
+        "tempo": 0.451548,
     },
     "14sOS5L36385FJ3OL8hew4": {
         "danceability": 0.693,
@@ -3913,7 +3913,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.252,
         "valence": 0.492,
-        "tempo": 0.47199599999999997
+        "tempo": 0.47199599999999997,
     },
     "3o1CUVeHIid49sabk6A6Nf": {
         "danceability": 0.529,
@@ -3924,7 +3924,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.246,
         "valence": 0.434,
-        "tempo": 0.477088
+        "tempo": 0.477088,
     },
     "12GEpg2XOPyqk03JZEZnJs": {
         "danceability": 0.64,
@@ -3935,7 +3935,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0864,
         "valence": 0.515,
-        "tempo": 0.399872
+        "tempo": 0.399872,
     },
     "1I8tHoNBFTuoJAlh4hfVVE": {
         "danceability": 0.486,
@@ -3946,7 +3946,7 @@ let songs = {
         "instrumentalness": 0.0000663,
         "liveness": 0.077,
         "valence": 0.391,
-        "tempo": 0.45222
+        "tempo": 0.45222,
     },
     "2iUXsYOEPhVqEBwsqP70rE": {
         "danceability": 0.596,
@@ -3957,7 +3957,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.124,
         "valence": 0.152,
-        "tempo": 0.481096
+        "tempo": 0.481096,
     },
     "2txofPPP3lkiNLTUUHeJHS": {
         "danceability": 0.576,
@@ -3968,7 +3968,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.107,
         "valence": 0.625,
-        "tempo": 0.70474
+        "tempo": 0.70474,
     },
     "4POHzEwNTCYaIvqCUp3NnO": {
         "danceability": 0.721,
@@ -3979,7 +3979,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.26,
         "valence": 0.473,
-        "tempo": 0.511916
+        "tempo": 0.511916,
     },
     "26wLOs3ZuHJa2Ihhx6QIE6": {
         "danceability": 0.749,
@@ -3990,7 +3990,7 @@ let songs = {
         "instrumentalness": 0.00000624,
         "liveness": 0.0738,
         "valence": 0.42,
-        "tempo": 0.55608
+        "tempo": 0.55608,
     },
     "353IDEfNzPJmGNRnOi5kJ1": {
         "danceability": 0.643,
@@ -4001,7 +4001,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.469,
         "valence": 0.597,
-        "tempo": 0.435968
+        "tempo": 0.435968,
     },
     "6GzApXoBQiiAjak3tOQfV3": {
         "danceability": 0.611,
@@ -4012,7 +4012,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.105,
         "valence": 0.771,
-        "tempo": 0.6397079999999999
+        "tempo": 0.6397079999999999,
     },
     "1MhXdlCQPnO56T57MfmaRm": {
         "danceability": 0.458,
@@ -4023,7 +4023,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.156,
         "valence": 0.206,
-        "tempo": 0.5995
+        "tempo": 0.5995,
     },
     "4kLm0P01JM1xS94Z4JC3oE": {
         "danceability": 0.576,
@@ -4034,7 +4034,7 @@ let songs = {
         "instrumentalness": 0.00000245,
         "liveness": 0.0963,
         "valence": 0.48,
-        "tempo": 0.363728
+        "tempo": 0.363728,
     },
     "3567eNX2L3RkkMkwspncMH": {
         "danceability": 0.633,
@@ -4045,7 +4045,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.103,
         "valence": 0.692,
-        "tempo": 0.6398039999999999
+        "tempo": 0.6398039999999999,
     },
     "1fipvP2zmef6vN2IwXfJhY": {
         "danceability": 0.501,
@@ -4056,7 +4056,7 @@ let songs = {
         "instrumentalness": 0.0000356,
         "liveness": 0.282,
         "valence": 0.152,
-        "tempo": 0.620204
+        "tempo": 0.620204,
     },
     "6Qs4SXO9dwPj5GKvVOv8Ki": {
         "danceability": 0.741,
@@ -4067,7 +4067,7 @@ let songs = {
         "instrumentalness": 0.00000197,
         "liveness": 0.222,
         "valence": 0.347,
-        "tempo": 0.411992
+        "tempo": 0.411992,
     },
     "6b2RcmUt1g9N9mQ3CbjX2Y": {
         "danceability": 0.477,
@@ -4078,7 +4078,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0763,
         "valence": 0.345,
-        "tempo": 0.442268
+        "tempo": 0.442268,
     },
     "2ZTYlnhhV1UAReg7wIGolx": {
         "danceability": 0.483,
@@ -4089,7 +4089,7 @@ let songs = {
         "instrumentalness": 0.00000466,
         "liveness": 0.098,
         "valence": 0.307,
-        "tempo": 0.686596
+        "tempo": 0.686596,
     },
     "5Nm9ERjJZ5oyfXZTECKmRt": {
         "danceability": 0.418,
@@ -4100,7 +4100,7 @@ let songs = {
         "instrumentalness": 0.0000639,
         "liveness": 0.11,
         "valence": 0.184,
-        "tempo": 0.33637599999999995
+        "tempo": 0.33637599999999995,
     },
     "7795WJLVKJoAyVoOtCWqXN": {
         "danceability": 0.677,
@@ -4111,7 +4111,7 @@ let songs = {
         "instrumentalness": 0.0000204,
         "liveness": 0.0766,
         "valence": 0.493,
-        "tempo": 0.328004
+        "tempo": 0.328004,
     },
     "5N5k9nd479b1xpDZ4usjrg": {
         "danceability": 0.781,
@@ -4122,7 +4122,7 @@ let songs = {
         "instrumentalness": 0.00000491,
         "liveness": 0.325,
         "valence": 0.486,
-        "tempo": 0.49228
+        "tempo": 0.49228,
     },
     "3VlbOrM6nYPprVvzBZllE5": {
         "danceability": 0.681,
@@ -4133,7 +4133,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.169,
         "valence": 0.476,
-        "tempo": 0.36749200000000004
+        "tempo": 0.36749200000000004,
     },
     "5rFj8OzffT0iggSjcBaeND": {
         "danceability": 0.584,
@@ -4144,7 +4144,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.18,
         "valence": 0.341,
-        "tempo": 0.46049599999999996
+        "tempo": 0.46049599999999996,
     },
     "64GRDrL1efgXclrhVCeuA0": {
         "danceability": 0.468,
@@ -4155,7 +4155,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.107,
         "valence": 0.326,
-        "tempo": 0.501276
+        "tempo": 0.501276,
     },
     "0FEk8LwY8h4rAR63ggfhV0": {
         "danceability": 0.647,
@@ -4166,7 +4166,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0844,
         "valence": 0.769,
-        "tempo": 0.459992
+        "tempo": 0.459992,
     },
     "4NSW0Km5ZG60L8FthUebPJ": {
         "danceability": 0.46,
@@ -4177,7 +4177,7 @@ let songs = {
         "instrumentalness": 0.00000616,
         "liveness": 0.121,
         "valence": 0.553,
-        "tempo": 0.40984
+        "tempo": 0.40984,
     },
     "3P3pw6C19j31Rnzgo3JG7o": {
         "danceability": 0.73,
@@ -4188,7 +4188,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.213,
         "valence": 0.704,
-        "tempo": 0.47186
+        "tempo": 0.47186,
     },
     "4D7ERaKgv8NAeck8RzUtRz": {
         "danceability": 0.784,
@@ -4199,7 +4199,7 @@ let songs = {
         "instrumentalness": 0.0000159,
         "liveness": 0.074,
         "valence": 0.888,
-        "tempo": 0.42392399999999997
+        "tempo": 0.42392399999999997,
     },
     "5ZSl6gDoV6bPPxzmLeneV9": {
         "danceability": 0.687,
@@ -4210,7 +4210,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.203,
         "valence": 0.655,
-        "tempo": 0.424184
+        "tempo": 0.424184,
     },
     "49COPp81lGS9Hl9OwKlsKl": {
         "danceability": 0.652,
@@ -4221,7 +4221,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.073,
         "valence": 0.472,
-        "tempo": 0.456172
+        "tempo": 0.456172,
     },
     "1SN1vSPsr4V4tIUTR3s8YW": {
         "danceability": 0.672,
@@ -4232,7 +4232,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.312,
         "valence": 0.548,
-        "tempo": 0.45577999999999996
+        "tempo": 0.45577999999999996,
     },
     "7jEyX4bqaCSdMN4D4JNnVj": {
         "danceability": 0.738,
@@ -4243,7 +4243,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0533,
         "valence": 0.566,
-        "tempo": 0.416056
+        "tempo": 0.416056,
     },
     "4zCEJUxsW73s2sIIoM4SLC": {
         "danceability": 0.814,
@@ -4254,7 +4254,7 @@ let songs = {
         "instrumentalness": 0.000316,
         "liveness": 0.271,
         "valence": 0.513,
-        "tempo": 0.488164
+        "tempo": 0.488164,
     },
     "2ONRkpOJ6X91GMXMthtT0M": {
         "danceability": 0.689,
@@ -4265,7 +4265,7 @@ let songs = {
         "instrumentalness": 0.00189,
         "liveness": 0.262,
         "valence": 0.392,
-        "tempo": 0.500148
+        "tempo": 0.500148,
     },
     "1VbClJ27jcsMNmOxHnXlKV": {
         "danceability": 0.831,
@@ -4276,7 +4276,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.359,
         "valence": 0.534,
-        "tempo": 0.37216000000000005
+        "tempo": 0.37216000000000005,
     },
     "54Yappwod1fELR5zb2gDBn": {
         "danceability": 0.462,
@@ -4287,7 +4287,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.181,
         "valence": 0.342,
-        "tempo": 0.429456
+        "tempo": 0.429456,
     },
     "2QsBAfiNmngcrZsOTznqBG": {
         "danceability": 0.617,
@@ -4298,7 +4298,7 @@ let songs = {
         "instrumentalness": 0.00000102,
         "liveness": 0.164,
         "valence": 0.346,
-        "tempo": 0.6279199999999999
+        "tempo": 0.6279199999999999,
     },
     "7yCqehT9dKACTFy7YugP0J": {
         "danceability": 0.449,
@@ -4309,7 +4309,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.188,
         "valence": 0.608,
-        "tempo": 0.337656
+        "tempo": 0.337656,
     },
     "52rbzvOCmHgprzUaMqZEPK": {
         "danceability": 0.666,
@@ -4320,7 +4320,7 @@ let songs = {
         "instrumentalness": 0.00251,
         "liveness": 0.0316,
         "valence": 0.474,
-        "tempo": 0.36804000000000003
+        "tempo": 0.36804000000000003,
     },
     "21csDNj3WqMPYDzW996UHL": {
         "danceability": 0.692,
@@ -4331,7 +4331,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.336,
         "valence": 0.477,
-        "tempo": 0.559812
+        "tempo": 0.559812,
     },
     "04huldANUuFNnM9tI3TDHP": {
         "danceability": 0.74,
@@ -4342,7 +4342,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.107,
         "valence": 0.571,
-        "tempo": 0.383608
+        "tempo": 0.383608,
     },
     "5wJL4o7k8m02m6ZM9KT0ir": {
         "danceability": 0.543,
@@ -4353,7 +4353,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0733,
         "valence": 0.706,
-        "tempo": 0.38964
+        "tempo": 0.38964,
     },
     "4OK9L5YHE3pVQWJjNqK56k": {
         "danceability": 0.783,
@@ -4364,7 +4364,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0783,
         "valence": 0.37,
-        "tempo": 0.480192
+        "tempo": 0.480192,
     },
     "6uT9XRrPvimLt62FNjMNBv": {
         "danceability": 0.738,
@@ -4375,7 +4375,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.103,
         "valence": 0.687,
-        "tempo": 0.508336
+        "tempo": 0.508336,
     },
     "4eYaDRhiL5iesFp2EuoODr": {
         "danceability": 0.23,
@@ -4386,7 +4386,7 @@ let songs = {
         "instrumentalness": 0.892,
         "liveness": 0.0844,
         "valence": 0.156,
-        "tempo": 0.628336
+        "tempo": 0.628336,
     },
     "0PiNYPMkmHxtDS0EZKK35X": {
         "danceability": 0.27,
@@ -4397,7 +4397,7 @@ let songs = {
         "instrumentalness": 0.94,
         "liveness": 0.107,
         "valence": 0.11,
-        "tempo": 0.397712
+        "tempo": 0.397712,
     },
     "5gMEMaqm74DwNKxZ0RfWM6": {
         "danceability": 0.302,
@@ -4408,7 +4408,7 @@ let songs = {
         "instrumentalness": 0.904,
         "liveness": 0.079,
         "valence": 0.111,
-        "tempo": 0.60114
+        "tempo": 0.60114,
     },
     "3WDjj4qNiMlArMHZFt9WyQ": {
         "danceability": 0.507,
@@ -4419,7 +4419,7 @@ let songs = {
         "instrumentalness": 0.907,
         "liveness": 0.11,
         "valence": 0.118,
-        "tempo": 0.716884
+        "tempo": 0.716884,
     },
     "1t4NUQuv33szmm8jeLzsZW": {
         "danceability": 0.505,
@@ -4430,7 +4430,7 @@ let songs = {
         "instrumentalness": 0.272,
         "liveness": 0.141,
         "valence": 0.173,
-        "tempo": 0.500072
+        "tempo": 0.500072,
     },
     "3wGQULikds23nGCvIJf5G4": {
         "danceability": 0.383,
@@ -4441,7 +4441,7 @@ let songs = {
         "instrumentalness": 0.917,
         "liveness": 0.0811,
         "valence": 0.193,
-        "tempo": 0.362312
+        "tempo": 0.362312,
     },
     "2kR0npzjabSWl3eGy0cSk0": {
         "danceability": 0.466,
@@ -4452,7 +4452,7 @@ let songs = {
         "instrumentalness": 0.911,
         "liveness": 0.183,
         "valence": 0.355,
-        "tempo": 0.452084
+        "tempo": 0.452084,
     },
     "7k0KOplnvXm5GUkw7RXYg0": {
         "danceability": 0.625,
@@ -4463,7 +4463,7 @@ let songs = {
         "instrumentalness": 0.678,
         "liveness": 0.114,
         "valence": 0.255,
-        "tempo": 0.5001
+        "tempo": 0.5001,
     },
     "4v6EUO6tC8RlZDvJ3DBV86": {
         "danceability": 0.576,
@@ -4474,7 +4474,7 @@ let songs = {
         "instrumentalness": 0.913,
         "liveness": 0.11,
         "valence": 0.262,
-        "tempo": 0.55952
+        "tempo": 0.55952,
     },
     "71I9xjigtEcEYcbZgtvG1J": {
         "danceability": 0.318,
@@ -4485,7 +4485,7 @@ let songs = {
         "instrumentalness": 0.828,
         "liveness": 0.0892,
         "valence": 0.0962,
-        "tempo": 0.49542
+        "tempo": 0.49542,
     },
     "6xZ4Q2k2ompmDppyeESIY8": {
         "danceability": 0.754,
@@ -4496,7 +4496,7 @@ let songs = {
         "instrumentalness": 0.00015,
         "liveness": 0.144,
         "valence": 0.77,
-        "tempo": 0.488048
+        "tempo": 0.488048,
     },
     "3CRDbSIZ4r5MsZ0YwxuEkn": {
         "danceability": 0.734,
@@ -4507,7 +4507,7 @@ let songs = {
         "instrumentalness": 0.0000229,
         "liveness": 0.0602,
         "valence": 0.648,
-        "tempo": 0.6799080000000001
+        "tempo": 0.6799080000000001,
     },
     "2Z8WuEywRWYTKe1NybPQEW": {
         "danceability": 0.645,
@@ -4518,7 +4518,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.113,
         "valence": 0.566,
-        "tempo": 0.299956
+        "tempo": 0.299956,
     },
     "6i0V12jOa3mr6uu4WYhUBr": {
         "danceability": 0.732,
@@ -4529,7 +4529,7 @@ let songs = {
         "instrumentalness": 0.0000358,
         "liveness": 0.105,
         "valence": 0.548,
-        "tempo": 0.360096
+        "tempo": 0.360096,
     },
     "23OXdR7YuUBVWh5hSnYJau": {
         "danceability": 0.609,
@@ -4540,7 +4540,7 @@ let songs = {
         "instrumentalness": 0.06,
         "liveness": 0.345,
         "valence": 0.315,
-        "tempo": 0.360036
+        "tempo": 0.360036,
     },
     "3bnVBN67NBEzedqQuWrpP4": {
         "danceability": 0.655,
@@ -4551,7 +4551,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0722,
         "valence": 0.447,
-        "tempo": 0.480452
+        "tempo": 0.480452,
     },
     "5cbpoIu3YjoOwbBDGUEp3P": {
         "danceability": 0.766,
@@ -4562,7 +4562,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0855,
         "valence": 0.612,
-        "tempo": 0.519888
+        "tempo": 0.519888,
     },
     "5HeKOKc4phmLn8e4I7EkzD": {
         "danceability": 0.749,
@@ -4573,7 +4573,7 @@ let songs = {
         "instrumentalness": 0.022,
         "liveness": 0.0977,
         "valence": 0.674,
-        "tempo": 0.435996
+        "tempo": 0.435996,
     },
     "1E1uGhNdBe6Dddbgs2KqtZ": {
         "danceability": 0.62,
@@ -4584,7 +4584,7 @@ let songs = {
         "instrumentalness": 0.162,
         "liveness": 0.205,
         "valence": 0.235,
-        "tempo": 0.508208
+        "tempo": 0.508208,
     },
     "7i9763l5SSfOnqZ35VOcfy": {
         "danceability": 0.613,
@@ -4595,7 +4595,7 @@ let songs = {
         "instrumentalness": 0.00111,
         "liveness": 0.367,
         "valence": 0.392,
-        "tempo": 0.519956
+        "tempo": 0.519956,
     },
     "7BFI9QZPQKgYuR2HhDgwbG": {
         "danceability": 0.674,
@@ -4606,7 +4606,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.132,
         "valence": 0.337,
-        "tempo": 0.339512
+        "tempo": 0.339512,
     },
     "15jRg8Ejs7X3JEHw38TSN3": {
         "danceability": 0.69,
@@ -4617,7 +4617,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.305,
         "valence": 0.416,
-        "tempo": 0.399844
+        "tempo": 0.399844,
     },
     "0TEekvXTomKt3hdXDZxxeW": {
         "danceability": 0.511,
@@ -4628,7 +4628,7 @@ let songs = {
         "instrumentalness": 0.614,
         "liveness": 0.11,
         "valence": 0.0399,
-        "tempo": 0.5119119999999999
+        "tempo": 0.5119119999999999,
     },
     "6ie2Bw3xLj2JcGowOlcMhb": {
         "danceability": 0.594,
@@ -4639,7 +4639,7 @@ let songs = {
         "instrumentalness": 0.00000855,
         "liveness": 0.0879,
         "valence": 0.253,
-        "tempo": 0.515768
+        "tempo": 0.515768,
     },
     "6Kkt27YmFyIFrcX3QXFi2o": {
         "danceability": 0.587,
@@ -4650,7 +4650,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.1,
         "valence": 0.379,
-        "tempo": 0.30268
+        "tempo": 0.30268,
     },
     "6K8VQ84MqhsoakN5MjrnVR": {
         "danceability": 0.562,
@@ -4661,7 +4661,7 @@ let songs = {
         "instrumentalness": 0.0000218,
         "liveness": 0.0806,
         "valence": 0.15,
-        "tempo": 0.499408
+        "tempo": 0.499408,
     },
     "7ARveOiD31w2Nq0n5FsSf8": {
         "danceability": 0.622,
@@ -4672,7 +4672,7 @@ let songs = {
         "instrumentalness": 0.0000295,
         "liveness": 0.112,
         "valence": 0.512,
-        "tempo": 0.41764
+        "tempo": 0.41764,
     },
     "2yrJ1jWo3HLksJFUqUsZE4": {
         "danceability": 0.794,
@@ -4683,7 +4683,7 @@ let songs = {
         "instrumentalness": 0.0133,
         "liveness": 0.13,
         "valence": 0.626,
-        "tempo": 0.368104
+        "tempo": 0.368104,
     },
     "4ivBdCI1s9f6yDWFUvBtZo": {
         "danceability": 0.758,
@@ -4694,7 +4694,7 @@ let songs = {
         "instrumentalness": 0.000194,
         "liveness": 0.237,
         "valence": 0.404,
-        "tempo": 0.360076
+        "tempo": 0.360076,
     },
     "5u64RlrnvvbtNh6R0EMh6o": {
         "danceability": 0.781,
@@ -4705,7 +4705,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.127,
         "valence": 0.175,
-        "tempo": 0.427984
+        "tempo": 0.427984,
     },
     "6RRNNciQGZEXnqk8SQ9yv5": {
         "danceability": 0.771,
@@ -4716,7 +4716,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0637,
         "valence": 0.714,
-        "tempo": 0.34010399999999996
+        "tempo": 0.34010399999999996,
     },
     "2Rk4JlNc2TPmZe2af99d45": {
         "danceability": 0.61,
@@ -4727,7 +4727,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.118,
         "valence": 0.728,
-        "tempo": 0.7286480000000001
+        "tempo": 0.7286480000000001,
     },
     "3RauEVgRgj1IuWdJ9fDs70": {
         "danceability": 0.777,
@@ -4738,7 +4738,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0901,
         "valence": 0.633,
-        "tempo": 0.440192
+        "tempo": 0.440192,
     },
     "1dGr1c8CrMLDpV6mPbImSI": {
         "danceability": 0.359,
@@ -4749,7 +4749,7 @@ let songs = {
         "instrumentalness": 0.0000158,
         "liveness": 0.118,
         "valence": 0.453,
-        "tempo": 0.27413600000000005
+        "tempo": 0.27413600000000005,
     },
     "3i9UVldZOE0aD0JnyfAZZ0": {
         "danceability": 0.448,
@@ -4760,7 +4760,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0862,
         "valence": 0.422,
-        "tempo": 0.8210879999999999
+        "tempo": 0.8210879999999999,
     },
     "1p80LdxRV74UKvL8gnD7ky": {
         "danceability": 0.752,
@@ -4771,7 +4771,7 @@ let songs = {
         "instrumentalness": 0.00000164,
         "liveness": 0.13,
         "valence": 0.583,
-        "tempo": 0.384036
+        "tempo": 0.384036,
     },
     "43rA71bccXFGD4C8GOpIlN": {
         "danceability": 0.664,
@@ -4782,7 +4782,7 @@ let songs = {
         "instrumentalness": 0.00000203,
         "liveness": 0.0812,
         "valence": 0.541,
-        "tempo": 0.3715
+        "tempo": 0.3715,
     },
     "5xTtaWoae3wi06K5WfVUUH": {
         "danceability": 0.648,
@@ -4793,7 +4793,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.148,
         "valence": 0.943,
-        "tempo": 0.6400800000000001
+        "tempo": 0.6400800000000001,
     },
     "6FB3v4YcR57y4tXFcdxI1E": {
         "danceability": 0.622,
@@ -4804,7 +4804,7 @@ let songs = {
         "instrumentalness": 0.00000225,
         "liveness": 0.0335,
         "valence": 0.679,
-        "tempo": 0.308076
+        "tempo": 0.308076,
     },
     "3PfIrDoz19wz7qK7tYeu62": {
         "danceability": 0.794,
@@ -4815,7 +4815,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0952,
         "valence": 0.677,
-        "tempo": 0.495764
+        "tempo": 0.495764,
     },
     "017PF4Q3l4DBUiWoXk4OWT": {
         "danceability": 0.73,
@@ -4826,7 +4826,7 @@ let songs = {
         "instrumentalness": 0.00000139,
         "liveness": 0.349,
         "valence": 0.467,
-        "tempo": 0.452048
+        "tempo": 0.452048,
     },
     "3AzjcOeAmA57TIOr9zF1ZW": {
         "danceability": 0.647,
@@ -4837,7 +4837,7 @@ let songs = {
         "instrumentalness": 0.000658,
         "liveness": 0.102,
         "valence": 0.746,
-        "tempo": 0.5878479999999999
+        "tempo": 0.5878479999999999,
     },
     "7ef4DlsgrMEH11cDZd32M6": {
         "danceability": 0.791,
@@ -4848,7 +4848,7 @@ let songs = {
         "instrumentalness": 0.0000219,
         "liveness": 0.0814,
         "valence": 0.592,
-        "tempo": 0.495976
+        "tempo": 0.495976,
     },
     "2ekn2ttSfGqwhhate0LSR0": {
         "danceability": 0.762,
@@ -4859,7 +4859,7 @@ let songs = {
         "instrumentalness": 0.0000156,
         "liveness": 0.153,
         "valence": 0.608,
-        "tempo": 0.464292
+        "tempo": 0.464292,
     },
     "76cy1WJvNGJTj78UqeA5zr": {
         "danceability": 0.836,
@@ -4870,7 +4870,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0824,
         "valence": 0.51,
-        "tempo": 0.388112
+        "tempo": 0.388112,
     },
     "39LLxExYz6ewLAcYrzQQyP": {
         "danceability": 0.695,
@@ -4881,7 +4881,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.213,
         "valence": 0.907,
-        "tempo": 0.412056
+        "tempo": 0.412056,
     },
     "1nYeVF5vIBxMxfPoL0SIWg": {
         "danceability": 0.627,
@@ -4892,7 +4892,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0742,
         "valence": 0.628,
-        "tempo": 0.488216
+        "tempo": 0.488216,
     },
     "6DXZiYUbrYgrVIhfX3U9Z2": {
         "danceability": 0.906,
@@ -4903,7 +4903,7 @@ let songs = {
         "instrumentalness": 0.00000541,
         "liveness": 0.286,
         "valence": 0.654,
-        "tempo": 0.427908
+        "tempo": 0.427908,
     },
     "3mRLHiSHYtC8Hk7bzZdUs1": {
         "danceability": 0.733,
@@ -4914,7 +4914,7 @@ let songs = {
         "instrumentalness": 0.00000297,
         "liveness": 0.0579,
         "valence": 0.545,
-        "tempo": 0.250028
+        "tempo": 0.250028,
     },
     "2ph6BRhGcUzc2W9wIulG5k": {
         "danceability": 0.524,
@@ -4925,7 +4925,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.209,
         "valence": 0.354,
-        "tempo": 0.608176
+        "tempo": 0.608176,
     },
     "0zdzgfhY18Au7dD1hOrTrX": {
         "danceability": 0.372,
@@ -4936,7 +4936,7 @@ let songs = {
         "instrumentalness": 0.0000337,
         "liveness": 0.139,
         "valence": 0.0753,
-        "tempo": 0.7558400000000001
+        "tempo": 0.7558400000000001,
     },
     "3UmBgQiJhbNMmyPVceuH4d": {
         "danceability": 0.596,
@@ -4947,7 +4947,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0821,
         "valence": 0.613,
-        "tempo": 0.468072
+        "tempo": 0.468072,
     },
     "14oFxKTXuTpYgKe2vy0Cih": {
         "danceability": 0.612,
@@ -4958,7 +4958,7 @@ let songs = {
         "instrumentalness": 0.00000582,
         "liveness": 0.186,
         "valence": 0.354,
-        "tempo": 0.391884
+        "tempo": 0.391884,
     },
     "6FFrva3VXMwabDvuHkX4ZU": {
         "danceability": 0.714,
@@ -4969,7 +4969,7 @@ let songs = {
         "instrumentalness": 0.00000118,
         "liveness": 0.0887,
         "valence": 0.132,
-        "tempo": 0.55228
+        "tempo": 0.55228,
     },
     "1Taq7PrHRF7dLCcHTRh2aj": {
         "danceability": 0.693,
@@ -4980,7 +4980,7 @@ let songs = {
         "instrumentalness": 0.000127,
         "liveness": 0.722,
         "valence": 0.137,
-        "tempo": 0.5198200000000001
+        "tempo": 0.5198200000000001,
     },
     "4HXmYG1IR5xduvxTnr7fAp": {
         "danceability": 0.331,
@@ -4991,7 +4991,7 @@ let songs = {
         "instrumentalness": 0.0000159,
         "liveness": 0.23,
         "valence": 0.118,
-        "tempo": 0.634948
+        "tempo": 0.634948,
     },
     "1vHyZsydQf4h2yDhujnqvQ": {
         "danceability": 0.745,
@@ -5002,7 +5002,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.154,
         "valence": 0.203,
-        "tempo": 0.560276
+        "tempo": 0.560276,
     },
     "3fHZJOvXmyHeFLFS1sDE30": {
         "danceability": 0.592,
@@ -5013,7 +5013,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.331,
         "valence": 0.338,
-        "tempo": 0.313816
+        "tempo": 0.313816,
     },
     "2bT1PH7Cw3J9p3t7nlXCdh": {
         "danceability": 0.691,
@@ -5024,7 +5024,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.134,
         "valence": 0.87,
-        "tempo": 0.49574
+        "tempo": 0.49574,
     },
     "3QGsuHI8jO1Rx4JWLUh9jd": {
         "danceability": 0.444,
@@ -5035,7 +5035,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.107,
         "valence": 0.747,
-        "tempo": 0.33077999999999996
+        "tempo": 0.33077999999999996,
     },
     "7JJmb5XwzOO8jgpou264Ml": {
         "danceability": 0.866,
@@ -5046,7 +5046,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0779,
         "valence": 0.969,
-        "tempo": 0.48799200000000004
+        "tempo": 0.48799200000000004,
     },
     "2QZ7WLBE8h2y1Y5Fb8RYbH": {
         "danceability": 0.622,
@@ -5057,7 +5057,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.13,
         "valence": 0.487,
-        "tempo": 0.5601
+        "tempo": 0.5601,
     },
     "0AS63m1wHv9n4VVRizK6Hc": {
         "danceability": 0.555,
@@ -5068,7 +5068,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.111,
         "valence": 0.356,
-        "tempo": 0.5925119999999999
+        "tempo": 0.5925119999999999,
     },
     "79esEXlqqmq0GPz0xQSZTV": {
         "danceability": 0.713,
@@ -5079,7 +5079,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.106,
         "valence": 0.425,
-        "tempo": 0.420108
+        "tempo": 0.420108,
     },
     "5jsw9uXEGuKyJzs0boZ1bT": {
         "danceability": 0.746,
@@ -5090,7 +5090,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0486,
         "valence": 0.764,
-        "tempo": 0.5995280000000001
+        "tempo": 0.5995280000000001,
     },
     "5EYBryPOgIEPB7r5QIy6eG": {
         "danceability": 0.853,
@@ -5101,7 +5101,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.111,
         "valence": 0.796,
-        "tempo": 0.368152
+        "tempo": 0.368152,
     },
     "21TcDbGosp7w9YhTjOszgA": {
         "danceability": 0.481,
@@ -5112,7 +5112,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0694,
         "valence": 0.333,
-        "tempo": 0.717872
+        "tempo": 0.717872,
     },
     "3Z8FwOEN59mRMxDCtb8N0A": {
         "danceability": 0.63,
@@ -5123,7 +5123,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0541,
         "valence": 0.452,
-        "tempo": 0.37598000000000004
+        "tempo": 0.37598000000000004,
     },
     "2dpaYNEQHiRxtZbfNsse99": {
         "danceability": 0.687,
@@ -5134,7 +5134,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.167,
         "valence": 0.671,
-        "tempo": 0.40006
+        "tempo": 0.40006,
     },
     "08bNPGLD8AhKpnnERrAc6G": {
         "danceability": 0.626,
@@ -5145,7 +5145,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.128,
         "valence": 0.534,
-        "tempo": 0.380316
+        "tempo": 0.380316,
     },
     "5icOoE6VgqFKohjWWNp0Ac": {
         "danceability": 0.791,
@@ -5156,7 +5156,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.156,
         "valence": 0.181,
-        "tempo": 0.399844
+        "tempo": 0.399844,
     },
     "4hPpVbbakQNv8YTHYaOJP4": {
         "danceability": 0.659,
@@ -5167,7 +5167,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.582,
         "valence": 0.439,
-        "tempo": 0.352168
+        "tempo": 0.352168,
     },
     "0tBbt8CrmxbjRP0pueQkyU": {
         "danceability": 0.724,
@@ -5178,7 +5178,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.204,
         "valence": 0.306,
-        "tempo": 0.499948
+        "tempo": 0.499948,
     },
     "3MEYFivt6bilQ9q9mFWZ4g": {
         "danceability": 0.631,
@@ -5189,7 +5189,7 @@ let songs = {
         "instrumentalness": 0.0155,
         "liveness": 0.108,
         "valence": 0.422,
-        "tempo": 0.56796
+        "tempo": 0.56796,
     },
     "6GSkLS2y4ZnnZsuRAj975K": {
         "danceability": 0.78,
@@ -5200,7 +5200,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.104,
         "valence": 0.786,
-        "tempo": 0.640452
+        "tempo": 0.640452,
     },
     "6VrCmhRBFnuGKmtNfk4jDs": {
         "danceability": 0.546,
@@ -5211,7 +5211,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.742,
         "valence": 0.615,
-        "tempo": 0.60024
+        "tempo": 0.60024,
     },
     "1H47LILEj9nGb74EPcZKWw": {
         "danceability": 0.568,
@@ -5222,7 +5222,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.269,
         "valence": 0.566,
-        "tempo": 0.438988
+        "tempo": 0.438988,
     },
     "296mmTJOJ904FwHQsSBdDr": {
         "danceability": 0.607,
@@ -5233,7 +5233,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0909,
         "valence": 0.265,
-        "tempo": 0.439844
+        "tempo": 0.439844,
     },
     "2Dsk7tdA833NKFC20IZJ8O": {
         "danceability": 0.718,
@@ -5244,7 +5244,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0588,
         "valence": 0.732,
-        "tempo": 0.35994400000000004
+        "tempo": 0.35994400000000004,
     },
     "0QyjOJoLVY3ENNtvuNF7fl": {
         "danceability": 0.694,
@@ -5255,7 +5255,7 @@ let songs = {
         "instrumentalness": 0.0000161,
         "liveness": 0.115,
         "valence": 0.597,
-        "tempo": 0.687156
+        "tempo": 0.687156,
     },
     "6TJopB7B3ho7mr1Qm5X7Hf": {
         "danceability": 0.77,
@@ -5266,7 +5266,7 @@ let songs = {
         "instrumentalness": 0.0000215,
         "liveness": 0.073,
         "valence": 0.52,
-        "tempo": 0.511848
+        "tempo": 0.511848,
     },
     "5gtCccOXlRreG0Tytgwe5G": {
         "danceability": 0.607,
@@ -5277,7 +5277,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0827,
         "valence": 0.289,
-        "tempo": 0.728472
+        "tempo": 0.728472,
     },
     "7fKrt0pyMfRDfqtl0amXBp": {
         "danceability": 0.775,
@@ -5288,7 +5288,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.0937,
         "valence": 0.753,
-        "tempo": 0.40002
+        "tempo": 0.40002,
     },
     "5t1bfbRFnYPnQ0SQxF0uUy": {
         "danceability": 0.61,
@@ -5299,7 +5299,7 @@ let songs = {
         "instrumentalness": 0.00000317,
         "liveness": 0.27,
         "valence": 0.221,
-        "tempo": 0.44024
+        "tempo": 0.44024,
     },
     "0p3CUiQ6WB5dHRgfxfKIpX": {
         "danceability": 0.706,
@@ -5310,7 +5310,7 @@ let songs = {
         "instrumentalness": 0,
         "liveness": 0.117,
         "valence": 0.489,
-        "tempo": 0.5600080000000001
+        "tempo": 0.5600080000000001,
     },
     "2Nd4clWVCGv3GvAJBQFTqH": {
         "danceability": 0.75,
@@ -5321,11 +5321,11 @@ let songs = {
         "instrumentalness": 0.00000398,
         "liveness": 0.505,
         "valence": 0.555,
-        "tempo": 0.480104
-    }
+        "tempo": 0.480104,
+    },
 };
 
-let songsClearCluster = {
+const songsClearCluster = {
     "A": {
         "danceability": 0.748,
         "energy": 0.0,
@@ -5335,7 +5335,7 @@ let songsClearCluster = {
         "instrumentalness": 0.0,
         "liveness": 0.0,
         "valence": 0.0,
-        "tempo": 0.0
+        "tempo": 0.0,
     }, "B": {
         "danceability": 0.748,
         "energy": 0.0,
@@ -5345,7 +5345,7 @@ let songsClearCluster = {
         "instrumentalness": 0.0,
         "liveness": 0.0,
         "valence": 0.0,
-        "tempo": 0.0
+        "tempo": 0.0,
     }, "C": {
         "danceability": 0.748,
         "energy": 0.0,
@@ -5355,7 +5355,7 @@ let songsClearCluster = {
         "instrumentalness": 0.0,
         "liveness": 0.0,
         "valence": 0.0,
-        "tempo": 0.0
+        "tempo": 0.0,
     }, "D": {
         "danceability": 0.748,
         "energy": 0.0,
@@ -5365,7 +5365,7 @@ let songsClearCluster = {
         "instrumentalness": 0.0,
         "liveness": 0.0,
         "valence": 0.0,
-        "tempo": 0.0
+        "tempo": 0.0,
     }, "E": {
         "danceability": 0.748,
         "energy": 0.0,
@@ -5375,7 +5375,7 @@ let songsClearCluster = {
         "instrumentalness": 0.0,
         "liveness": 0.0,
         "valence": 0.0,
-        "tempo": 0.0
+        "tempo": 0.0,
     }, "F": {
         "danceability": 0.0,
         "energy": 0.0,
@@ -5385,7 +5385,7 @@ let songsClearCluster = {
         "instrumentalness": 0.0,
         "liveness": 0.0,
         "valence": 0.0,
-        "tempo": 0.0
+        "tempo": 0.0,
     }, "G": {
         "danceability": 0.0,
         "energy": 0.0,
@@ -5395,7 +5395,7 @@ let songsClearCluster = {
         "instrumentalness": 0.0,
         "liveness": 0.0,
         "valence": 0.0,
-        "tempo": 0.0
+        "tempo": 0.0,
     }, "H": {
         "danceability": 0.0,
         "energy": 0.0,
@@ -5405,7 +5405,7 @@ let songsClearCluster = {
         "instrumentalness": 0.0,
         "liveness": 0.0,
         "valence": 0.0,
-        "tempo": 0.0
+        "tempo": 0.0,
     }, "I": {
         "danceability": 0.0,
         "energy": 0.0,
@@ -5415,7 +5415,7 @@ let songsClearCluster = {
         "instrumentalness": 0.0,
         "liveness": 0.0,
         "valence": 0.0,
-        "tempo": 0.0
+        "tempo": 0.0,
     },
     "J": {
         "danceability": 0.0,
@@ -5426,7 +5426,7 @@ let songsClearCluster = {
         "instrumentalness": 0.0,
         "liveness": 0.0,
         "valence": 0.0,
-        "tempo": 0.2
+        "tempo": 0.2,
     }, "K": {
         "danceability": 0.0,
         "energy": 0.0,
@@ -5436,7 +5436,7 @@ let songsClearCluster = {
         "instrumentalness": 0.0,
         "liveness": 0.0,
         "valence": 0.0,
-        "tempo": 0.2
+        "tempo": 0.2,
     }, "L": {
         "danceability": 0.0,
         "energy": 0.0,
@@ -5446,7 +5446,7 @@ let songsClearCluster = {
         "instrumentalness": 0.0,
         "liveness": 0.0,
         "valence": 0.0,
-        "tempo": 0.2
+        "tempo": 0.2,
     }, "M": {
         "danceability": 0.0,
         "energy": 0.0,
@@ -5456,7 +5456,7 @@ let songsClearCluster = {
         "instrumentalness": 0.0,
         "liveness": 0.0,
         "valence": 0.0,
-        "tempo": 0.2
+        "tempo": 0.2,
     }, "N": {
         "danceability": 0.0,
         "energy": 0.0,
@@ -5466,7 +5466,7 @@ let songsClearCluster = {
         "instrumentalness": 0.0,
         "liveness": 0.0,
         "valence": 0.0,
-        "tempo": 0.2
+        "tempo": 0.2,
     }, "O": {
         "danceability": 0.0,
         "energy": 0.0,
@@ -5476,7 +5476,7 @@ let songsClearCluster = {
         "instrumentalness": 0.0,
         "liveness": 0.0,
         "valence": 0.0,
-        "tempo": 0.2
+        "tempo": 0.2,
     }, "P": {
         "danceability": 0.0,
         "energy": 0.0,
@@ -5486,7 +5486,7 @@ let songsClearCluster = {
         "instrumentalness": 0.0,
         "liveness": 0.0,
         "valence": 0.0,
-        "tempo": 0.2
+        "tempo": 0.2,
     },
     "Q": {
         "danceability": 0.0,
@@ -5497,7 +5497,7 @@ let songsClearCluster = {
         "instrumentalness": 0.0,
         "liveness": 0.0,
         "valence": 0.0,
-        "tempo": 0.0
+        "tempo": 0.0,
     },
     "R": {
         "danceability": 0.0,
@@ -5508,7 +5508,7 @@ let songsClearCluster = {
         "instrumentalness": 0.0,
         "liveness": 0.0,
         "valence": 0.0,
-        "tempo": 0.0
+        "tempo": 0.0,
     }, "S": {
         "danceability": 0.0,
         "energy": 0.9,
@@ -5518,7 +5518,7 @@ let songsClearCluster = {
         "instrumentalness": 0.0,
         "liveness": 0.0,
         "valence": 0.0,
-        "tempo": 0.0
+        "tempo": 0.0,
     }, "T": {
         "danceability": 0.0,
         "energy": 0.9,
@@ -5528,7 +5528,7 @@ let songsClearCluster = {
         "instrumentalness": 0.0,
         "liveness": 0.0,
         "valence": 0.0,
-        "tempo": 0.0
+        "tempo": 0.0,
     }, "U": {
         "danceability": 0.0,
         "energy": 0.9,
@@ -5538,7 +5538,7 @@ let songsClearCluster = {
         "instrumentalness": 0.0,
         "liveness": 0.0,
         "valence": 0.0,
-        "tempo": 0.0
+        "tempo": 0.0,
     }, "V": {
         "danceability": 0.0,
         "energy": 0.9,
@@ -5548,11 +5548,11 @@ let songsClearCluster = {
         "instrumentalness": 0.0,
         "liveness": 0.0,
         "valence": 0.0,
-        "tempo": 0.0
+        "tempo": 0.0,
     },
 };
 
-let songsLargeClearCluster = {
+const songsLargeClearCluster = {
     "57uX2vR9j9DNiANDYfXw1i": {
         "danceability": 0.23,
         "energy": 0.492,
@@ -5562,7 +5562,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00000818,
         "liveness": 0.176,
         "valence": 0.262,
-        "tempo": 0.640556
+        "tempo": 0.640556,
     },
     "3JvKfv6T31zO0ini8iNItO": {
         "danceability": 0.445,
@@ -5573,7 +5573,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.000016,
         "liveness": 0.0944,
         "valence": 0.131,
-        "tempo": 0.491056
+        "tempo": 0.491056,
     },
     "2GDWfM3NQoD0UeCwI1qbvh": {
         "danceability": 0.499,
@@ -5584,7 +5584,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.0991,
         "valence": 0.422,
-        "tempo": 0.5395760000000001
+        "tempo": 0.5395760000000001,
     },
     "64XaqRfp8sxAWM5qd6t7jG": {
         "danceability": 0.657,
@@ -5595,7 +5595,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.108,
         "valence": 0.166,
-        "tempo": 0.455872
+        "tempo": 0.455872,
     },
     "32Z4ioCoKKsKMFS9vhzkJJ": {
         "danceability": 0.547,
@@ -5606,7 +5606,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0004,
         "liveness": 0.0661,
         "valence": 0.783,
-        "tempo": 0.6876559999999999
+        "tempo": 0.6876559999999999,
     },
     "1dABxUeyaNyq7RbKbT3ndo": {
         "danceability": 0.514,
@@ -5617,7 +5617,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00000873,
         "liveness": 0.119,
         "valence": 0.34,
-        "tempo": 0.496032
+        "tempo": 0.496032,
     },
     "0Tel1fmuCxEFV6wBLXsEdk": {
         "danceability": 0.589,
@@ -5628,7 +5628,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00469,
         "liveness": 0.0248,
         "valence": 0.182,
-        "tempo": 0.29997199999999996
+        "tempo": 0.29997199999999996,
     },
     "02wWugZopNahlikfX5vm3F": {
         "danceability": 0.544,
@@ -5639,7 +5639,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0095,
         "liveness": 0.0615,
         "valence": 0.219,
-        "tempo": 0.495848
+        "tempo": 0.495848,
     },
     "47hs3xNT3iOGvgmC4eXBAi": {
         "danceability": 0.353,
@@ -5650,7 +5650,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.217,
         "valence": 0.245,
-        "tempo": 0.671884
+        "tempo": 0.671884,
     },
     "4o2iDZT9GRbYZrm4Iie93Y": {
         "danceability": 0.386,
@@ -5661,7 +5661,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.225,
         "valence": 0.59,
-        "tempo": 0.6855800000000001
+        "tempo": 0.6855800000000001,
     },
     "3ShCJTrnhjvUpL234S4QbJ": {
         "danceability": 0.594,
@@ -5672,7 +5672,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.111,
         "valence": 0.32,
-        "tempo": 0.44694
+        "tempo": 0.44694,
     },
     "2Y115i0IhELJhyyftvoSFt": {
         "danceability": 0.6,
@@ -5683,7 +5683,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.122,
         "valence": 0.43,
-        "tempo": 0.479976
+        "tempo": 0.479976,
     },
     "4wCmqSrbyCgxEXROQE6vtV": {
         "danceability": 0.864,
@@ -5694,7 +5694,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.000133,
         "liveness": 0.0992,
         "valence": 0.72,
-        "tempo": 0.516248
+        "tempo": 0.516248,
     },
     "05lBuZWQ2OhQuzoCSIkvUF": {
         "danceability": 0.379,
@@ -5705,7 +5705,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.323,
         "liveness": 0.123,
         "valence": 0.157,
-        "tempo": 0.5916079999999999
+        "tempo": 0.5916079999999999,
     },
     "3N2vr4m44BBZiVCZ0O4bnf": {
         "danceability": 0.67,
@@ -5716,7 +5716,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.215,
         "valence": 0.36,
-        "tempo": 0.267896
+        "tempo": 0.267896,
     },
     "67ByPZWH3E3peoesXrY3Nx": {
         "danceability": 0.415,
@@ -5727,7 +5727,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00000105,
         "liveness": 0.183,
         "valence": 0.284,
-        "tempo": 0.552316
+        "tempo": 0.552316,
     },
     "3HfB5hBU0dmBt8T0iCmH42": {
         "danceability": 0.532,
@@ -5738,7 +5738,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.000473,
         "liveness": 0.115,
         "valence": 0.126,
-        "tempo": 0.367336
+        "tempo": 0.367336,
     },
     "4ABua0yuWcpTotImEEJTaw": {
         "danceability": 0.485,
@@ -5749,7 +5749,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0000175,
         "liveness": 0.225,
         "valence": 0.288,
-        "tempo": 0.5631240000000001
+        "tempo": 0.5631240000000001,
     },
     "4He7bzKBaiu7CRz4wGkZzx": {
         "danceability": 0.641,
@@ -5760,7 +5760,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00000171,
         "liveness": 0.629,
         "valence": 0.612,
-        "tempo": 0.7198680000000001
+        "tempo": 0.7198680000000001,
     },
     "161DnLWsx1i3u1JT05lzqU": {
         "danceability": 0.523,
@@ -5771,7 +5771,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.106,
         "valence": 0.065,
-        "tempo": 0.583348
+        "tempo": 0.583348,
     },
     "6gxycjJNMgmAyfzUXBN80P": {
         "danceability": 0.432,
@@ -5782,7 +5782,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00342,
         "liveness": 0.0903,
         "valence": 0.273,
-        "tempo": 0.358268
+        "tempo": 0.358268,
     },
     "4kxND2rbPDrdb7Sgoo1Fbh": {
         "danceability": 0.458,
@@ -5793,7 +5793,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.228,
         "valence": 0.168,
-        "tempo": 0.5681280000000001
+        "tempo": 0.5681280000000001,
     },
     "72iNjNcripCtyG8AZEPVBo": {
         "danceability": 0.251,
@@ -5804,7 +5804,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0000122,
         "liveness": 0.0847,
         "valence": 0.0691,
-        "tempo": 0.38877999999999996
+        "tempo": 0.38877999999999996,
     },
     "3xZMPZQYETEn4hjor3TR1A": {
         "danceability": 0.532,
@@ -5815,7 +5815,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0000122,
         "liveness": 0.106,
         "valence": 0.125,
-        "tempo": 0.468524
+        "tempo": 0.468524,
     },
     "3APayTEWiUl9Ssep4BOXR2": {
         "danceability": 0.559,
@@ -5826,7 +5826,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0000556,
         "liveness": 0.696,
         "valence": 0.599,
-        "tempo": 0.38526
+        "tempo": 0.38526,
     },
     "5auMzVHFr5Zfw6IbKarZ56": {
         "danceability": 0.386,
@@ -5837,7 +5837,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.0881,
         "valence": 0.287,
-        "tempo": 0.679348
+        "tempo": 0.679348,
     },
     "4nhWET56c4jPScMGnivGwz": {
         "danceability": 0.684,
@@ -5848,7 +5848,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00197,
         "liveness": 0.113,
         "valence": 0.25,
-        "tempo": 0.719996
+        "tempo": 0.719996,
     },
     "0Bp5CYx4yUIrpU08C55IF9": {
         "danceability": 0.449,
@@ -5859,7 +5859,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.141,
         "valence": 0.32,
-        "tempo": 0.68016
+        "tempo": 0.68016,
     },
     "3aBCzb2R7mZMCUS4q5kfJM": {
         "danceability": 0.388,
@@ -5870,7 +5870,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.111,
         "valence": 0.183,
-        "tempo": 0.353356
+        "tempo": 0.353356,
     },
     "5dhQCqONiQji7k4RkhIcjq": {
         "danceability": 0.653,
@@ -5881,7 +5881,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00000698,
         "liveness": 0.0835,
         "valence": 0.611,
-        "tempo": 0.439988
+        "tempo": 0.439988,
     },
     "3vvBMjyD7ZesKHe1k00gxO": {
         "danceability": 0.517,
@@ -5892,7 +5892,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.104,
         "valence": 0.319,
-        "tempo": 0.309984
+        "tempo": 0.309984,
     },
     "0TuTx2Gwtfrt769k4sJRgh": {
         "danceability": 0.634,
@@ -5903,7 +5903,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.333,
         "valence": 0.461,
-        "tempo": 0.359976
+        "tempo": 0.359976,
     },
     "6nek1Nin9q48AVZcWs9e9D": {
         "danceability": 0.449,
@@ -5914,7 +5914,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0000849,
         "liveness": 0.0833,
         "valence": 0.203,
-        "tempo": 0.558508
+        "tempo": 0.558508,
     },
     "11EX5yhxr9Ihl3IN1asrfK": {
         "danceability": 0.587,
@@ -5925,7 +5925,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.000636,
         "liveness": 0.2,
         "valence": 0.231,
-        "tempo": 0.431772
+        "tempo": 0.431772,
     },
     "43NhiKnrtGqztxDqXrcUux": {
         "danceability": 0.514,
@@ -5936,7 +5936,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.262,
         "valence": 0.359,
-        "tempo": 0.5442319999999999
+        "tempo": 0.5442319999999999,
     },
     "4rMNgxEwGWoPHIUcvB5BrB": {
         "danceability": 0.574,
@@ -5947,7 +5947,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.0816,
         "valence": 0.434,
-        "tempo": 0.599924
+        "tempo": 0.599924,
     },
     "1VNWaY3uNfoeWqb5U8x2QX": {
         "danceability": 0.47,
@@ -5958,7 +5958,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00000111,
         "liveness": 0.133,
         "valence": 0.215,
-        "tempo": 0.452432
+        "tempo": 0.452432,
     },
     "5TvFfDlVoUWZvfqrhTJzD7": {
         "danceability": 0.464,
@@ -5969,7 +5969,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.0789,
         "valence": 0.306,
-        "tempo": 0.374112
+        "tempo": 0.374112,
     },
     "6LtPIXlIzPOTF8vTecYjRe": {
         "danceability": 0.635,
@@ -5980,7 +5980,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.154,
         "valence": 0.203,
-        "tempo": 0.41621600000000003
+        "tempo": 0.41621600000000003,
     },
     "219eUQBWnfmADjKZEWEfSM": {
         "danceability": 0.533,
@@ -5991,7 +5991,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00000574,
         "liveness": 0.264,
         "valence": 0.21,
-        "tempo": 0.543804
+        "tempo": 0.543804,
     },
     "6qlfzOpeLcdoSxrgbkR0Zi": {
         "danceability": 0.676,
@@ -6002,7 +6002,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0289,
         "liveness": 0.144,
         "valence": 0.176,
-        "tempo": 0.41606400000000004
+        "tempo": 0.41606400000000004,
     },
     "4eHbdreAnSOrDDsFfc4Fpm": {
         "danceability": 0.306,
@@ -6013,7 +6013,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0000053,
         "liveness": 0.0839,
         "valence": 0.108,
-        "tempo": 0.26792
+        "tempo": 0.26792,
     },
     "7JogKto8cNNBqz3dZERgDh": {
         "danceability": 0.453,
@@ -6024,7 +6024,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00139,
         "liveness": 0.109,
         "valence": 0.229,
-        "tempo": 0.5184719999999999
+        "tempo": 0.5184719999999999,
     },
     "3l5GdoaOPPVWRjIgbTBejJ": {
         "danceability": 0.324,
@@ -6035,7 +6035,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0000289,
         "liveness": 0.11,
         "valence": 0.193,
-        "tempo": 0.665464
+        "tempo": 0.665464,
     },
     "2ye824NM1m7Nc2UPXtwZjL": {
         "danceability": 0.515,
@@ -6046,7 +6046,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.258,
         "valence": 0.765,
-        "tempo": 0.303688
+        "tempo": 0.303688,
     },
     "2oQGYzfRcI6Lo8SbX4oJ1V": {
         "danceability": 0.706,
@@ -6057,7 +6057,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.0822,
         "valence": 0.28,
-        "tempo": 0.45233999999999996
+        "tempo": 0.45233999999999996,
     },
     "1tL40tfdtUaSLek4DvDDr3": {
         "danceability": 0.449,
@@ -6068,7 +6068,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.0966,
         "valence": 0.201,
-        "tempo": 0.373068
+        "tempo": 0.373068,
     },
     "1NrJYpdAi7uosDRPmSYrsG": {
         "danceability": 0.593,
@@ -6079,7 +6079,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0000222,
         "liveness": 0.102,
         "valence": 0.502,
-        "tempo": 0.472032
+        "tempo": 0.472032,
     },
     "7gpy7sfWPNuOKmUNs3XQYE": {
         "danceability": 0.388,
@@ -6090,7 +6090,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.000293,
         "liveness": 0.082,
         "valence": 0.365,
-        "tempo": 0.581736
+        "tempo": 0.581736,
     },
     "2Oehrcv4Kov0SuIgWyQY9e": {
         "danceability": 0.327,
@@ -6101,7 +6101,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00009,
         "liveness": 0.28,
         "valence": 0.416,
-        "tempo": 0.718244
+        "tempo": 0.718244,
     },
     "2S9Hmv3pv86ScVA8XnFmOW": {
         "danceability": 0.671,
@@ -6112,7 +6112,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.46,
         "valence": 0.525,
-        "tempo": 0.56808
+        "tempo": 0.56808,
     },
     "2JFEZO2ZxzffY0wd9MYEu3": {
         "danceability": 0.512,
@@ -6123,7 +6123,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.142,
         "valence": 0.352,
-        "tempo": 0.379552
+        "tempo": 0.379552,
     },
     "0rpIH5otu7ykvZPdcQuRPh": {
         "danceability": 0.556,
@@ -6134,7 +6134,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0000833,
         "liveness": 0.125,
         "valence": 0.144,
-        "tempo": 0.41600400000000004
+        "tempo": 0.41600400000000004,
     },
     "5yRQpqzkKRYozrMsmU70ww": {
         "danceability": 0.319,
@@ -6145,7 +6145,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0682,
         "liveness": 0.122,
         "valence": 0.184,
-        "tempo": 0.226732
+        "tempo": 0.226732,
     },
     "3TCauNPqFiniaYHBvEVoHG": {
         "danceability": 0.456,
@@ -6156,7 +6156,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00000305,
         "liveness": 0.114,
         "valence": 0.0992,
-        "tempo": 0.30476
+        "tempo": 0.30476,
     },
     "5LybmO1dYVB6fJFkDkyQ0n": {
         "danceability": 0.542,
@@ -6167,7 +6167,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.342,
         "liveness": 0.101,
         "valence": 0.227,
-        "tempo": 0.317584
+        "tempo": 0.317584,
     },
     "4T2SmVJPtDdugk5j5xV1d5": {
         "danceability": 0.458,
@@ -6178,7 +6178,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.161,
         "valence": 0.363,
-        "tempo": 0.5596
+        "tempo": 0.5596,
     },
     "3MH3oRNyFb5mNm663xcK7T": {
         "danceability": 0.491,
@@ -6189,7 +6189,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.11,
         "liveness": 0.115,
         "valence": 0.109,
-        "tempo": 0.500344
+        "tempo": 0.500344,
     },
     "4tCWWnk3BXinf7FllmSyHW": {
         "danceability": 0.254,
@@ -6200,7 +6200,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0237,
         "liveness": 0.172,
         "valence": 0.178,
-        "tempo": 0.7527999999999999
+        "tempo": 0.7527999999999999,
     },
     "4oa14QBfWRDfJy2agySy0L": {
         "danceability": 0.27,
@@ -6211,7 +6211,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.146,
         "valence": 0.232,
-        "tempo": 0.674612
+        "tempo": 0.674612,
     },
     "5VwFkx7JOimOGTYfha5rs1": {
         "danceability": 0.567,
@@ -6222,7 +6222,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0000413,
         "liveness": 0.182,
         "valence": 0.233,
-        "tempo": 0.5834600000000001
+        "tempo": 0.5834600000000001,
     },
     "24lMtPOCzP5g4hrg3NklLa": {
         "danceability": 0.637,
@@ -6233,7 +6233,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.0876,
         "valence": 0.434,
-        "tempo": 0.436048
+        "tempo": 0.436048,
     },
     "5sF7hdYvhrcgNq8NZjfK8L": {
         "danceability": 0.405,
@@ -6244,7 +6244,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0000437,
         "liveness": 0.0872,
         "valence": 0.219,
-        "tempo": 0.46744
+        "tempo": 0.46744,
     },
     "7h8Ud480Fm4ReUVxgFF9ZX": {
         "danceability": 0.729,
@@ -6255,7 +6255,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.0541,
         "valence": 0.527,
-        "tempo": 0.419784
+        "tempo": 0.419784,
     },
     "0GgN4MhR5GKn5IcKN0e0rG": {
         "danceability": 0.457,
@@ -6266,7 +6266,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.278,
         "valence": 0.222,
-        "tempo": 0.299936
+        "tempo": 0.299936,
     },
     "45hOVoUyaw7BfwqQMKQNCU": {
         "danceability": 0.667,
@@ -6277,7 +6277,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.179,
         "liveness": 0.0936,
         "valence": 0.247,
-        "tempo": 0.35402
+        "tempo": 0.35402,
     },
     "5xEM5hIgJ1jjgcEBfpkt2F": {
         "danceability": 0.585,
@@ -6288,7 +6288,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00000774,
         "liveness": 0.3,
         "valence": 0.427,
-        "tempo": 0.311948
+        "tempo": 0.311948,
     },
     "0fBSs3fRoh1yJcne77fdu9": {
         "danceability": 0.236,
@@ -6299,7 +6299,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.000001,
         "liveness": 0.087,
         "valence": 0.181,
-        "tempo": 0.291388
+        "tempo": 0.291388,
     },
     "5bxythiVpxTD2nHZMmD8m1": {
         "danceability": 0.526,
@@ -6310,7 +6310,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.0799,
         "valence": 0.313,
-        "tempo": 0.575936
+        "tempo": 0.575936,
     },
     "0X1FYVkgy7Tfw79cY3C7lx": {
         "danceability": 0.361,
@@ -6321,7 +6321,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0000132,
         "liveness": 0.132,
         "valence": 0.212,
-        "tempo": 0.622168
+        "tempo": 0.622168,
     },
     "4Musyaro0NM5Awx8b5c627": {
         "danceability": 0.609,
@@ -6332,7 +6332,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.0978,
         "valence": 0.325,
-        "tempo": 0.39982
+        "tempo": 0.39982,
     },
     "0fQlm2MUzqGDBPkuqq4U1Y": {
         "danceability": 0.474,
@@ -6343,7 +6343,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0402,
         "liveness": 0.254,
         "valence": 0.149,
-        "tempo": 0.544684
+        "tempo": 0.544684,
     },
     "7Fw5i56my24ZBnGS7hFX2n": {
         "danceability": 0.681,
@@ -6354,7 +6354,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.266,
         "valence": 0.591,
-        "tempo": 0.50976
+        "tempo": 0.50976,
     },
     "6HWYtS215rxaaMjvpyG18W": {
         "danceability": 0.459,
@@ -6365,7 +6365,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0000023,
         "liveness": 0.113,
         "valence": 0.281,
-        "tempo": 0.536072
+        "tempo": 0.536072,
     },
     "3ZjnFYlal0fXN6t61wdxhl": {
         "danceability": 0.285,
@@ -6376,7 +6376,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00392,
         "liveness": 0.104,
         "valence": 0.372,
-        "tempo": 0.6199560000000001
+        "tempo": 0.6199560000000001,
     },
     "69uJi5QsBtqlYkGURTBli8": {
         "danceability": 0.588,
@@ -6387,7 +6387,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0000965,
         "liveness": 0.236,
         "valence": 0.113,
-        "tempo": 0.498756
+        "tempo": 0.498756,
     },
     "1hVQx6bg4uKPljAUkNjpY2": {
         "danceability": 0.42,
@@ -6398,7 +6398,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.000237,
         "liveness": 0.164,
         "valence": 0.434,
-        "tempo": 0.520324
+        "tempo": 0.520324,
     },
     "6BtmXhTJMM9sBTHeYYASGz": {
         "danceability": 0.656,
@@ -6409,7 +6409,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.145,
         "valence": 0.86,
-        "tempo": 0.420036
+        "tempo": 0.420036,
     },
     "09ZGF6mwJVzw5jxqbtT53E": {
         "danceability": 0.294,
@@ -6420,7 +6420,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0115,
         "liveness": 0.143,
         "valence": 0.0812,
-        "tempo": 0.56498
+        "tempo": 0.56498,
     },
     "0nJW01T7XtvILxQgC5J7Wh": {
         "danceability": 0.612,
@@ -6431,7 +6431,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.088,
         "valence": 0.387,
-        "tempo": 0.29118
+        "tempo": 0.29118,
     },
     "4IoYz8XqqdowINzfRrFnhi": {
         "danceability": 0.338,
@@ -6442,7 +6442,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.136,
         "valence": 0.4,
-        "tempo": 0.607976
+        "tempo": 0.607976,
     },
     "3VqOi6yIx3eB8BkQaVWBeA": {
         "danceability": 0.419,
@@ -6453,7 +6453,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0318,
         "liveness": 0.108,
         "valence": 0.108,
-        "tempo": 0.5922799999999999
+        "tempo": 0.5922799999999999,
     },
     "47ZWr1Nb0PUgmKgyg5JkgO": {
         "danceability": 0.31,
@@ -6464,7 +6464,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.952,
         "liveness": 0.085,
         "valence": 0.0969,
-        "tempo": 0.580296
+        "tempo": 0.580296,
     },
     "5hOFLQvwOjk1Dp8mNIXEU5": {
         "danceability": 0.539,
@@ -6475,7 +6475,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00000985,
         "liveness": 0.127,
         "valence": 0.187,
-        "tempo": 0.407932
+        "tempo": 0.407932,
     },
     "0MTHQlWgo6iCNjXgM5Z9fr": {
         "danceability": 0.379,
@@ -6486,7 +6486,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00166,
         "liveness": 0.11,
         "valence": 0.0557,
-        "tempo": 0.463108
+        "tempo": 0.463108,
     },
     "3JOVTQ5h8HGFnDdp4VT3MP": {
         "danceability": 0.345,
@@ -6497,7 +6497,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.000366,
         "liveness": 0.103,
         "valence": 0.304,
-        "tempo": 0.696468
+        "tempo": 0.696468,
     },
     "1zuUAaStqmCN9zazkOgB3l": {
         "danceability": 0.602,
@@ -6508,7 +6508,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.105,
         "valence": 0.539,
-        "tempo": 0.360124
+        "tempo": 0.360124,
     },
     "7sapKrjDij2fpDVj0GxP66": {
         "danceability": 0.706,
@@ -6519,7 +6519,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.132,
         "valence": 0.544,
-        "tempo": 0.408148
+        "tempo": 0.408148,
     },
     "2HxjhEugETRl7l4Se24qYv": {
         "danceability": 0.129,
@@ -6530,7 +6530,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0549,
         "liveness": 0.102,
         "valence": 0.0389,
-        "tempo": 0.724212
+        "tempo": 0.724212,
     },
     "1JCCdiru7fhstOIF4N7WJC": {
         "danceability": 0.572,
@@ -6541,7 +6541,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.213,
         "valence": 0.108,
-        "tempo": 0.406372
+        "tempo": 0.406372,
     },
     "3YiM2jGwWrWRxyTTllIuhd": {
         "danceability": 0.238,
@@ -6552,7 +6552,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.135,
         "valence": 0.111,
-        "tempo": 0.307608
+        "tempo": 0.307608,
     },
     "5ihS6UUlyQAfmp48eSkxuQ": {
         "danceability": 0.414,
@@ -6563,7 +6563,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.000223,
         "liveness": 0.117,
         "valence": 0.423,
-        "tempo": 0.6375
+        "tempo": 0.6375,
     },
     "2jdAk8ATWIL3dwT47XpRfu": {
         "danceability": 0.668,
@@ -6574,7 +6574,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00506,
         "liveness": 0.0805,
         "valence": 0.288,
-        "tempo": 0.5366000000000001
+        "tempo": 0.5366000000000001,
     },
     "1zuKjpp4t7BS8JPKi6mkQr": {
         "danceability": 0.424,
@@ -6585,7 +6585,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0593,
         "liveness": 0.101,
         "valence": 0.342,
-        "tempo": 0.36614800000000003
+        "tempo": 0.36614800000000003,
     },
     "13PUJCvdTSCT1dn70tlGdm": {
         "danceability": 0.601,
@@ -6596,7 +6596,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.732,
         "liveness": 0.143,
         "valence": 0.394,
-        "tempo": 0.579976
+        "tempo": 0.579976,
     },
     "0usJ6ywAqqeJx1nQl5SWlP": {
         "danceability": 0.522,
@@ -6607,7 +6607,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0000204,
         "liveness": 0.156,
         "valence": 0.572,
-        "tempo": 0.30419999999999997
+        "tempo": 0.30419999999999997,
     },
     "1uOiqSUUF8hJwR9ETlqkMu": {
         "danceability": 0.434,
@@ -6618,7 +6618,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0000156,
         "liveness": 0.114,
         "valence": 0.104,
-        "tempo": 0.643116
+        "tempo": 0.643116,
     },
     "4o0NjemqhmsYLIMwlcosvW": {
         "danceability": 0.316,
@@ -6629,7 +6629,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.0928,
         "valence": 0.127,
-        "tempo": 0.490028
+        "tempo": 0.490028,
     },
     "50VNvhzyaSplJCKWchN7a8": {
         "danceability": 0.431,
@@ -6640,7 +6640,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.0982,
         "valence": 0.341,
-        "tempo": 0.33884
+        "tempo": 0.33884,
     },
     "7IHOIqZUUInxjVkko181PB": {
         "danceability": 0.5,
@@ -6651,7 +6651,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.000193,
         "liveness": 0.11,
         "valence": 0.176,
-        "tempo": 0.339596
+        "tempo": 0.339596,
     },
     "0BBj0SW3vef8UNzTg4lwH9": {
         "danceability": 0.697,
@@ -6662,7 +6662,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.129,
         "valence": 0.811,
-        "tempo": 0.551904
+        "tempo": 0.551904,
     },
     "1R2SZUOGJqqBiLuvwKOT2Y": {
         "danceability": 0.727,
@@ -6673,7 +6673,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.0911,
         "valence": 0.757,
-        "tempo": 0.528308
+        "tempo": 0.528308,
     },
     "6b5rA9rthDbZDOQp9UbOgl": {
         "danceability": 0.517,
@@ -6684,7 +6684,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.000032,
         "liveness": 0.0873,
         "valence": 0.455,
-        "tempo": 0.554316
+        "tempo": 0.554316,
     },
     "0Z7O8GMQShj9TJrm2yX1R6": {
         "danceability": 0.553,
@@ -6695,7 +6695,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0000301,
         "liveness": 0.053,
         "valence": 0.821,
-        "tempo": 0.519572
+        "tempo": 0.519572,
     },
     "2lwwrWVKdf3LR9lbbhnr6R": {
         "danceability": 0.649,
@@ -6706,7 +6706,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00000223,
         "liveness": 0.0888,
         "valence": 0.553,
-        "tempo": 0.4039
+        "tempo": 0.4039,
     },
     "25nzKGDiua1lE9Qo5V19GL": {
         "danceability": 0.579,
@@ -6717,7 +6717,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.000221,
         "liveness": 0.649,
         "valence": 0.358,
-        "tempo": 0.41996
+        "tempo": 0.41996,
     },
     "1mwt9hzaH7idmC5UCoOUkz": {
         "danceability": 0.553,
@@ -6728,7 +6728,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.16,
         "valence": 0.369,
-        "tempo": 0.367832
+        "tempo": 0.367832,
     },
     "1OXfWI3FQMdsKKC6lkvzSx": {
         "danceability": 0.698,
@@ -6739,7 +6739,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0000169,
         "liveness": 0.105,
         "valence": 0.446,
-        "tempo": 0.507748
+        "tempo": 0.507748,
     },
     "3LmpQiFNgFCnvAnhhvKUyI": {
         "danceability": 0.675,
@@ -6750,7 +6750,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.000139,
         "liveness": 0.33,
         "valence": 0.91,
-        "tempo": 0.41473200000000005
+        "tempo": 0.41473200000000005,
     },
     "66S14BkJDxgkYxLl5DCqOz": {
         "danceability": 0.851,
@@ -6761,7 +6761,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.0827,
         "valence": 0.807,
-        "tempo": 0.5276879999999999
+        "tempo": 0.5276879999999999,
     },
     "6E11E0lT5Zy7yb6iT3y8DN": {
         "danceability": 0.694,
@@ -6772,7 +6772,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.561,
         "valence": 0.563,
-        "tempo": 0.391756
+        "tempo": 0.391756,
     },
     "1VQ6FXasIrdkshSHfX6sde": {
         "danceability": 0.394,
@@ -6783,7 +6783,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0459,
         "liveness": 0.332,
         "valence": 0.479,
-        "tempo": 0.301448
+        "tempo": 0.301448,
     },
     "5WLhAmEGwePI2RD9ZECTw7": {
         "danceability": 0.712,
@@ -6794,7 +6794,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.7,
         "valence": 0.917,
-        "tempo": 0.539608
+        "tempo": 0.539608,
     },
     "0PfcFWevZo1sB9N7C4akEK": {
         "danceability": 0.542,
@@ -6805,7 +6805,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.0605,
         "valence": 0.227,
-        "tempo": 0.5122519999999999
+        "tempo": 0.5122519999999999,
     },
     "7C6NcqS3fNDXLgP5L2Kbgp": {
         "danceability": 0.439,
@@ -6816,7 +6816,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0000547,
         "liveness": 0.14,
         "valence": 0.8,
-        "tempo": 0.604444
+        "tempo": 0.604444,
     },
     "20S0KRq4z2v2Utym0C246s": {
         "danceability": 0.664,
@@ -6827,7 +6827,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.114,
         "valence": 0.501,
-        "tempo": 0.472008
+        "tempo": 0.472008,
     },
     "6B8CAgQ38mWf7xTvFtC0BB": {
         "danceability": 0.309,
@@ -6838,7 +6838,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.102,
         "valence": 0.279,
-        "tempo": 0.338924
+        "tempo": 0.338924,
     },
     "04FvV0kvLmDIrnC6d2Ylfh": {
         "danceability": 0.576,
@@ -6849,7 +6849,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.971,
         "liveness": 0.0871,
         "valence": 0.701,
-        "tempo": 0.47115199999999996
+        "tempo": 0.47115199999999996,
     },
     "5Z7ygHQo02SUrFmcgpwsKW": {
         "danceability": 0.624,
@@ -6860,7 +6860,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.227,
         "valence": 0.45,
-        "tempo": 0.508076
+        "tempo": 0.508076,
     },
     "6mnjcTmK8TewHfyOp3fC9C": {
         "danceability": 0.711,
@@ -6871,7 +6871,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.000125,
         "liveness": 0.215,
         "valence": 0.801,
-        "tempo": 0.512004
+        "tempo": 0.512004,
     },
     "2ihCaVdNZmnHZWt0fvAM7B": {
         "danceability": 0.445,
@@ -6882,7 +6882,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.146,
         "valence": 0.421,
-        "tempo": 0.411512
+        "tempo": 0.411512,
     },
     "0xIVvRmjztR1AwuHrkhH41": {
         "danceability": 0.569,
@@ -6893,7 +6893,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00000112,
         "liveness": 0.086,
         "valence": 0.303,
-        "tempo": 0.512124
+        "tempo": 0.512124,
     },
     "6Uy6K3KdmUdAfelUp0SeXn": {
         "danceability": 0.551,
@@ -6904,7 +6904,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.000021,
         "liveness": 0.0425,
         "valence": 0.758,
-        "tempo": 0.7402519999999999
+        "tempo": 0.7402519999999999,
     },
     "5PsMbxhgWpJMsouEfDTX6r": {
         "danceability": 0.726,
@@ -6915,7 +6915,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.309,
         "valence": 0.867,
-        "tempo": 0.575976
+        "tempo": 0.575976,
     },
     "3G6hD9B2ZHOsgf4WfNu7X1": {
         "danceability": 0.69,
@@ -6926,7 +6926,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.305,
         "valence": 0.416,
-        "tempo": 0.399844
+        "tempo": 0.399844,
     },
     "3DmW6y7wTEYHJZlLo1r6XJ": {
         "danceability": 0.699,
@@ -6937,7 +6937,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0000359,
         "liveness": 0.285,
         "valence": 0.121,
-        "tempo": 0.479948
+        "tempo": 0.479948,
     },
     "2Cd9iWfcOpGDHLz6tVA3G4": {
         "danceability": 0.766,
@@ -6948,7 +6948,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.0764,
         "valence": 0.743,
-        "tempo": 0.507952
+        "tempo": 0.507952,
     },
     "1AvXB7pTYb7irnDLRfE27H": {
         "danceability": 0.881,
@@ -6959,7 +6959,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0000063,
         "liveness": 0.303,
         "valence": 0.62,
-        "tempo": 0.46922800000000003
+        "tempo": 0.46922800000000003,
     },
     "1EzrEOXmMH3G43AXT1y7pA": {
         "danceability": 0.686,
@@ -6970,7 +6970,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.105,
         "valence": 0.718,
-        "tempo": 0.603812
+        "tempo": 0.603812,
     },
     "7DFNE7NO0raLIUbgzY2rzm": {
         "danceability": 0.509,
@@ -6981,7 +6981,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.104,
         "valence": 0.244,
-        "tempo": 0.300356
+        "tempo": 0.300356,
     },
     "3GTXok0dIm0mMqBiVklBYS": {
         "danceability": 0.581,
@@ -6992,7 +6992,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.183,
         "valence": 0.352,
-        "tempo": 0.523608
+        "tempo": 0.523608,
     },
     "1jdNcAD8Ir58RlsdGjJJdx": {
         "danceability": 0.685,
@@ -7003,7 +7003,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00000123,
         "liveness": 0.149,
         "valence": 0.36,
-        "tempo": 0.319964
+        "tempo": 0.319964,
     },
     "1gihuPhrLraKYrJMAEONyc": {
         "danceability": 0.707,
@@ -7014,7 +7014,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00703,
         "liveness": 0.204,
         "valence": 0.919,
-        "tempo": 0.511748
+        "tempo": 0.511748,
     },
     "29YBihzQOmat0U74k4ukdx": {
         "danceability": 0.456,
@@ -7025,7 +7025,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.194,
         "valence": 0.293,
-        "tempo": 0.682608
+        "tempo": 0.682608,
     },
     "1A2UmLDZzDmpdzUjEkCc3z": {
         "danceability": 0.337,
@@ -7036,7 +7036,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.418,
         "valence": 0.444,
-        "tempo": 0.338916
+        "tempo": 0.338916,
     },
     "1P5OPN8MbPgFznEp1b7OiN": {
         "danceability": 0.904,
@@ -7047,7 +7047,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0000358,
         "liveness": 0.0594,
         "valence": 0.679,
-        "tempo": 0.480512
+        "tempo": 0.480512,
     },
     "305WCRhhS10XUcH6AEwZk6": {
         "danceability": 0.613,
@@ -7058,7 +7058,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.000582,
         "liveness": 0.152,
         "valence": 0.537,
-        "tempo": 0.420184
+        "tempo": 0.420184,
     },
     "6jizk5lOUnfpaZXYMdfeC6": {
         "danceability": 0.627,
@@ -7069,7 +7069,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.0962,
         "valence": 0.64,
-        "tempo": 0.32758800000000005
+        "tempo": 0.32758800000000005,
     },
     "0AkQbXGN4KG34TS7xLrM68": {
         "danceability": 0.63,
@@ -7080,7 +7080,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.324,
         "valence": 0.905,
-        "tempo": 0.359968
+        "tempo": 0.359968,
     },
     "2bNrvWD9d5Zn9tS8XvcaMk": {
         "danceability": 0.509,
@@ -7091,7 +7091,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0000667,
         "liveness": 0.316,
         "valence": 0.638,
-        "tempo": 0.511784
+        "tempo": 0.511784,
     },
     "3cySlItpiPiIAzU3NyHCJf": {
         "danceability": 0.66,
@@ -7102,7 +7102,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.000022,
         "liveness": 0.103,
         "valence": 0.627,
-        "tempo": 0.412088
+        "tempo": 0.412088,
     },
     "3lBRNqXjPp2j3JMTCXDTNO": {
         "danceability": 0.545,
@@ -7113,7 +7113,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0000157,
         "liveness": 0.0894,
         "valence": 0.297,
-        "tempo": 0.396396
+        "tempo": 0.396396,
     },
     "0idc0XRnLRovVqpWnGQ6hC": {
         "danceability": 0.818,
@@ -7124,7 +7124,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.575,
         "liveness": 0.0612,
         "valence": 0.729,
-        "tempo": 0.47996
+        "tempo": 0.47996,
     },
     "5Q0Nhxo0l2bP3pNjpGJwV1": {
         "danceability": 0.652,
@@ -7135,7 +7135,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.000115,
         "liveness": 0.0886,
         "valence": 0.47,
-        "tempo": 0.384084
+        "tempo": 0.384084,
     },
     "4O594chXfv4lHvneDP0Ud0": {
         "danceability": 0.581,
@@ -7146,7 +7146,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.533,
         "valence": 0.358,
-        "tempo": 0.379876
+        "tempo": 0.379876,
     },
     "13P5rwmk2EsoFRIz9UCeh9": {
         "danceability": 0.719,
@@ -7157,7 +7157,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00000821,
         "liveness": 0.12,
         "valence": 0.786,
-        "tempo": 0.5201079999999999
+        "tempo": 0.5201079999999999,
     },
     "10ViidwjGLCfVtGPfdcszR": {
         "danceability": 0.545,
@@ -7168,7 +7168,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.000389,
         "liveness": 0.124,
         "valence": 0.127,
-        "tempo": 0.446956
+        "tempo": 0.446956,
     },
     "6vSq5q5DCs1IvwKIq53hj2": {
         "danceability": 0.774,
@@ -7179,7 +7179,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00000649,
         "liveness": 0.0952,
         "valence": 0.654,
-        "tempo": 0.472192
+        "tempo": 0.472192,
     },
     "0grFc6klR3hxoHLcgCYsF4": {
         "danceability": 0.705,
@@ -7190,7 +7190,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0783,
         "liveness": 0.112,
         "valence": 0.448,
-        "tempo": 0.5305080000000001
+        "tempo": 0.5305080000000001,
     },
     "1wAXODAAL6hY64ZdhrnjBO": {
         "danceability": 0.759,
@@ -7201,7 +7201,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0000151,
         "liveness": 0.0864,
         "valence": 0.73,
-        "tempo": 0.488132
+        "tempo": 0.488132,
     },
     "3oqCnpAoHf3SDFynxx7AU4": {
         "danceability": 0.911,
@@ -7212,7 +7212,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.0491,
         "valence": 0.365,
-        "tempo": 0.379916
+        "tempo": 0.379916,
     },
     "5k3U0OGYBccHdKJJu3HrUN": {
         "danceability": 0.408,
@@ -7223,7 +7223,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0000118,
         "liveness": 0.115,
         "valence": 0.725,
-        "tempo": 0.680052
+        "tempo": 0.680052,
     },
     "6hs3SDnbO3f6VQuPO4KBEb": {
         "danceability": 0.5,
@@ -7234,7 +7234,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0000401,
         "liveness": 0.139,
         "valence": 0.745,
-        "tempo": 0.47784
+        "tempo": 0.47784,
     },
     "6VRhkROS2SZHGlp0pxndbJ": {
         "danceability": 0.716,
@@ -7245,7 +7245,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0000322,
         "liveness": 0.317,
         "valence": 0.576,
-        "tempo": 0.440104
+        "tempo": 0.440104,
     },
     "1YI0uK36eupTmw9F8kHysr": {
         "danceability": 0.607,
@@ -7256,7 +7256,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.0595,
         "valence": 0.805,
-        "tempo": 0.352236
+        "tempo": 0.352236,
     },
     "4oeRfmp9XpKWym6YD1WvBP": {
         "danceability": 0.697,
@@ -7267,7 +7267,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.0874,
         "valence": 0.509,
-        "tempo": 0.536864
+        "tempo": 0.536864,
     },
     "1zHlj4dQ8ZAtrayhuDDmkY": {
         "danceability": 0.587,
@@ -7278,7 +7278,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.138,
         "valence": 0.825,
-        "tempo": 0.519888
+        "tempo": 0.519888,
     },
     "6qOEjO2IUD7PjtpsXawq0d": {
         "danceability": 0.482,
@@ -7289,7 +7289,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00106,
         "liveness": 0.105,
         "valence": 0.144,
-        "tempo": 0.36997599999999997
+        "tempo": 0.36997599999999997,
     },
     "5EmCpD8tUj78VW3kgaEjME": {
         "danceability": 0.589,
@@ -7300,7 +7300,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00104,
         "liveness": 0.181,
         "valence": 0.401,
-        "tempo": 0.56012
+        "tempo": 0.56012,
     },
     "2eQOMQkStoRUQyq6HGh1iG": {
         "danceability": 0.307,
@@ -7311,7 +7311,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.0783,
         "valence": 0.34,
-        "tempo": 0.372288
+        "tempo": 0.372288,
     },
     "4Li2WHPkuyCdtmokzW2007": {
         "danceability": 0.788,
@@ -7322,7 +7322,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.348,
         "valence": 0.769,
-        "tempo": 0.5601079999999999
+        "tempo": 0.5601079999999999,
     },
     "0D2VYiRlBv43asKUgieZaM": {
         "danceability": 0.686,
@@ -7333,7 +7333,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0569,
         "liveness": 0.14,
         "valence": 0.0951,
-        "tempo": 0.49975200000000003
+        "tempo": 0.49975200000000003,
     },
     "6SKwQghsR8AISlxhcwyA9R": {
         "danceability": 0.62,
@@ -7344,7 +7344,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.104,
         "valence": 0.481,
-        "tempo": 0.579704
+        "tempo": 0.579704,
     },
     "1ADGydOgtuzBNmdFpcQGLB": {
         "danceability": 0.6,
@@ -7355,7 +7355,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.831,
         "valence": 0.636,
-        "tempo": 0.496128
+        "tempo": 0.496128,
     },
     "352zfYbDFG8sxkmOAhVeuj": {
         "danceability": 0.55,
@@ -7366,7 +7366,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00118,
         "liveness": 0.0886,
         "valence": 0.51,
-        "tempo": 0.504236
+        "tempo": 0.504236,
     },
     "4KoecuyOpZaNFZ0UqVsllc": {
         "danceability": 0.817,
@@ -7377,7 +7377,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.147,
         "valence": 0.916,
-        "tempo": 0.420056
+        "tempo": 0.420056,
     },
     "519uJbE3zyKLlToVA65PrP": {
         "danceability": 0.665,
@@ -7388,7 +7388,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.119,
         "valence": 0.473,
-        "tempo": 0.487844
+        "tempo": 0.487844,
     },
     "4ePP9So5xRzspjLFVVbj90": {
         "danceability": 0.543,
@@ -7399,7 +7399,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0000021,
         "liveness": 0.0565,
         "valence": 0.836,
-        "tempo": 0.41492399999999996
+        "tempo": 0.41492399999999996,
     },
     "3ItzRpwvKtkDSNdRSjXu7Z": {
         "danceability": 0.512,
@@ -7410,7 +7410,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.0775,
         "valence": 0.552,
-        "tempo": 0.618428
+        "tempo": 0.618428,
     },
     "5x9VIW2fS21JMswOt6AORI": {
         "danceability": 0.713,
@@ -7421,7 +7421,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.155,
         "valence": 0.8,
-        "tempo": 0.408312
+        "tempo": 0.408312,
     },
     "4iG2gAwKXsOcijVaVXzRPW": {
         "danceability": 0.438,
@@ -7432,7 +7432,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0777,
         "liveness": 0.3,
         "valence": 0.421,
-        "tempo": 0.40396
+        "tempo": 0.40396,
     },
     "3D4QFgYa3P9P0gjmv4eX6I": {
         "danceability": 0.286,
@@ -7443,7 +7443,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0000648,
         "liveness": 0.0713,
         "valence": 0.618,
-        "tempo": 0.695172
+        "tempo": 0.695172,
     },
     "386RUes7n1uM1yfzgeUuwp": {
         "danceability": 0.738,
@@ -7454,7 +7454,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.279,
         "valence": 0.949,
-        "tempo": 0.6997720000000001
+        "tempo": 0.6997720000000001,
     },
     "3c7vquF4xacCmFrxztLUVH": {
         "danceability": 0.624,
@@ -7465,7 +7465,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.0656,
         "valence": 0.878,
-        "tempo": 0.47642399999999996
+        "tempo": 0.47642399999999996,
     },
     "6GskIhdM6TN6EkPgeSjVfW": {
         "danceability": 0.923,
@@ -7476,7 +7476,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.000142,
         "liveness": 0.104,
         "valence": 0.682,
-        "tempo": 0.372092
+        "tempo": 0.372092,
     },
     "6eLrCtqlpjroAkES2EHCx0": {
         "danceability": 0.818,
@@ -7487,7 +7487,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00000122,
         "liveness": 0.0601,
         "valence": 0.939,
-        "tempo": 0.479952
+        "tempo": 0.479952,
     },
     "5wQeCrJTJxGZnILnyCBHjI": {
         "danceability": 0.645,
@@ -7498,7 +7498,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00000388,
         "liveness": 0.379,
         "valence": 0.568,
-        "tempo": 0.49966000000000005
+        "tempo": 0.49966000000000005,
     },
     "2dLLR6qlu5UJ5gk0dKz0h3": {
         "danceability": 0.674,
@@ -7509,7 +7509,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.132,
         "valence": 0.337,
-        "tempo": 0.339512
+        "tempo": 0.339512,
     },
     "7psPPGwhFzP3pyOcb3ivcT": {
         "danceability": 0.644,
@@ -7520,7 +7520,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.000629,
         "liveness": 0.169,
         "valence": 0.831,
-        "tempo": 0.6196119999999999
+        "tempo": 0.6196119999999999,
     },
     "5nNmj1cLH3r4aA4XDJ2bgY": {
         "danceability": 0.697,
@@ -7531,7 +7531,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.000521,
         "liveness": 0.183,
         "valence": 0.98,
-        "tempo": 0.503764
+        "tempo": 0.503764,
     },
     "5KQrOv9nFVnM465CVGriW9": {
         "danceability": 0.656,
@@ -7542,7 +7542,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00000192,
         "liveness": 0.118,
         "valence": 0.57,
-        "tempo": 0.44804
+        "tempo": 0.44804,
     },
     "0XzkemXSiXJa7VgDFPfU4S": {
         "danceability": 0.862,
@@ -7553,7 +7553,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0000187,
         "liveness": 0.0761,
         "valence": 0.863,
-        "tempo": 0.47999200000000003
+        "tempo": 0.47999200000000003,
     },
     "2oF7FZHIJbzjeEXZ3D0Ku4": {
         "danceability": 0.403,
@@ -7564,7 +7564,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00000803,
         "liveness": 0.147,
         "valence": 0.38,
-        "tempo": 0.531648
+        "tempo": 0.531648,
     },
     "7vIBxqsNQZ3PehEFQr1ZGt": {
         "danceability": 0.676,
@@ -7575,7 +7575,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00213,
         "liveness": 0.116,
         "valence": 0.914,
-        "tempo": 0.47971600000000003
+        "tempo": 0.47971600000000003,
     },
     "05SBRd4fXgn8FX7bf8BCAE": {
         "danceability": 0.695,
@@ -7586,7 +7586,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.237,
         "valence": 0.58,
-        "tempo": 0.499956
+        "tempo": 0.499956,
     },
     "55qBw1900pZKfXJ6Q9A2Lc": {
         "danceability": 0.719,
@@ -7597,7 +7597,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00000302,
         "liveness": 0.139,
         "valence": 0.605,
-        "tempo": 0.479996
+        "tempo": 0.479996,
     },
     "5nWbbQ0sIEabqPxAdqmh66": {
         "danceability": 0.54,
@@ -7608,7 +7608,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.171,
         "liveness": 0.115,
         "valence": 0.347,
-        "tempo": 0.5163519999999999
+        "tempo": 0.5163519999999999,
     },
     "2wqaekenSQZm7hxQOYt8oE": {
         "danceability": 0.725,
@@ -7619,7 +7619,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00000213,
         "liveness": 0.158,
         "valence": 0.76,
-        "tempo": 0.47975599999999996
+        "tempo": 0.47975599999999996,
     },
     "2EcsgXlxz99UMDSPg5T8RF": {
         "danceability": 0.558,
@@ -7630,7 +7630,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.104,
         "valence": 0.228,
-        "tempo": 0.33590800000000004
+        "tempo": 0.33590800000000004,
     },
     "3zKST4nk4QJE77oLjUZ0Ng": {
         "danceability": 0.545,
@@ -7641,7 +7641,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0000464,
         "liveness": 0.0828,
         "valence": 0.458,
-        "tempo": 0.500056
+        "tempo": 0.500056,
     },
     "6t6oULCRS6hnI7rm0h5gwl": {
         "danceability": 0.672,
@@ -7652,7 +7652,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0000675,
         "liveness": 0.0927,
         "valence": 0.392,
-        "tempo": 0.431752
+        "tempo": 0.431752,
     },
     "3wREMcUNM0l9FDaMlvYreI": {
         "danceability": 0.878,
@@ -7663,7 +7663,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.000213,
         "liveness": 0.287,
         "valence": 0.666,
-        "tempo": 0.511984
+        "tempo": 0.511984,
     },
     "1Wl8eGdNRODM6p8LYP2ACB": {
         "danceability": 0.803,
@@ -7674,7 +7674,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.085,
         "valence": 0.763,
-        "tempo": 0.487968
+        "tempo": 0.487968,
     },
     "1YLJVmuzeM2YSUkCCaTNUB": {
         "danceability": 0.492,
@@ -7685,7 +7685,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00379,
         "liveness": 0.117,
         "valence": 0.245,
-        "tempo": 0.599816
+        "tempo": 0.599816,
     },
     "28S2K2KIvnZ9H6AyhRtenm": {
         "danceability": 0.898,
@@ -7696,7 +7696,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00138,
         "liveness": 0.0461,
         "valence": 0.742,
-        "tempo": 0.44594
+        "tempo": 0.44594,
     },
     "2VhPOtIQw2UpQmRVevdviU": {
         "danceability": 0.708,
@@ -7707,7 +7707,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.377,
         "valence": 0.733,
-        "tempo": 0.600232
+        "tempo": 0.600232,
     },
     "3NcO4jGK1Opb5ea0mYLpxb": {
         "danceability": 0.706,
@@ -7718,7 +7718,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00286,
         "liveness": 0.306,
         "valence": 0.684,
-        "tempo": 0.5120439999999999
+        "tempo": 0.5120439999999999,
     },
     "4kO7mrAPfqIrsKwUOK5BFx": {
         "danceability": 0.507,
@@ -7729,7 +7729,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0000014,
         "liveness": 0.0658,
         "valence": 0.272,
-        "tempo": 0.42005200000000004
+        "tempo": 0.42005200000000004,
     },
     "799FjhmpjSISJ07w4DYegO": {
         "danceability": 0.273,
@@ -7740,7 +7740,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0299,
         "liveness": 0.108,
         "valence": 0.613,
-        "tempo": 0.6402279999999999
+        "tempo": 0.6402279999999999,
     },
     "1mT3JpGpB0Xoh5DMLePhfG": {
         "danceability": 0.259,
@@ -7751,7 +7751,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0529,
         "liveness": 0.247,
         "valence": 0.168,
-        "tempo": 0.777276
+        "tempo": 0.777276,
     },
     "2kliub1tQPN1kIZc5OTh92": {
         "danceability": 0.355,
@@ -7762,7 +7762,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.306,
         "valence": 0.379,
-        "tempo": 0.373268
+        "tempo": 0.373268,
     },
     "0khj70h8pejNRukEhOn86O": {
         "danceability": 0.28,
@@ -7773,7 +7773,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.51,
         "liveness": 0.325,
         "valence": 0.149,
-        "tempo": 0.41734
+        "tempo": 0.41734,
     },
     "0cqfbKT48jtLzRD9fWeUpE": {
         "danceability": 0.409,
@@ -7784,7 +7784,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.343,
         "valence": 0.707,
-        "tempo": 0.36048
+        "tempo": 0.36048,
     },
     "4nrsxlCHeaa8NLrfhCI05b": {
         "danceability": 0.46,
@@ -7795,7 +7795,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.392,
         "valence": 0.168,
-        "tempo": 0.365656
+        "tempo": 0.365656,
     },
     "63bpNvVINhy8rnzhHMarNz": {
         "danceability": 0.429,
@@ -7806,7 +7806,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00127,
         "liveness": 0.0374,
         "valence": 0.501,
-        "tempo": 0.45188
+        "tempo": 0.45188,
     },
     "4Z6TC9DxGYchDglmXhDRMx": {
         "danceability": 0.304,
@@ -7817,7 +7817,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.537,
         "valence": 0.266,
-        "tempo": 0.420392
+        "tempo": 0.420392,
     },
     "4sQJXbtxwoKHG7PwMRJ0Ig": {
         "danceability": 0.52,
@@ -7828,7 +7828,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0000497,
         "liveness": 0.0495,
         "valence": 0.807,
-        "tempo": 0.398412
+        "tempo": 0.398412,
     },
     "5INmDdJp913wfbphxKPLG5": {
         "danceability": 0.425,
@@ -7839,7 +7839,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.104,
         "valence": 0.722,
-        "tempo": 0.70232
+        "tempo": 0.70232,
     },
     "3Bmra5h2IaYAou3ilpiP3e": {
         "danceability": 0.209,
@@ -7850,7 +7850,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.458,
         "liveness": 0.29,
         "valence": 0.0882,
-        "tempo": 0.770692
+        "tempo": 0.770692,
     },
     "4LXQ8npd4bvqh8hjGaWccb": {
         "danceability": 0.381,
@@ -7861,7 +7861,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.118,
         "liveness": 0.0617,
         "valence": 0.3,
-        "tempo": 0.477796
+        "tempo": 0.477796,
     },
     "7HtPq5cN7TWBR2OdPGCp0O": {
         "danceability": 0.3,
@@ -7872,7 +7872,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.335,
         "valence": 0.368,
-        "tempo": 0.773548
+        "tempo": 0.773548,
     },
     "4BZLAm5rqqChHZlBlHuSMV": {
         "danceability": 0.459,
@@ -7883,7 +7883,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.146,
         "valence": 0.38,
-        "tempo": 0.41368400000000005
+        "tempo": 0.41368400000000005,
     },
     "3FZyO8oxFtcImgdLaUTSed": {
         "danceability": 0.238,
@@ -7894,7 +7894,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.529,
         "liveness": 0.338,
         "valence": 0.223,
-        "tempo": 0.750384
+        "tempo": 0.750384,
     },
     "44d4sPXDExKXfaKUvAiYM4": {
         "danceability": 0.384,
@@ -7905,7 +7905,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.000997,
         "liveness": 0.0437,
         "valence": 0.62,
-        "tempo": 0.40417200000000003
+        "tempo": 0.40417200000000003,
     },
     "58JHZNXSnQj9xVF5EQBslt": {
         "danceability": 0.42,
@@ -7916,7 +7916,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0227,
         "liveness": 0.133,
         "valence": 0.358,
-        "tempo": 0.32364
+        "tempo": 0.32364,
     },
     "0ml8T03jdL2P2jlxS2lQAn": {
         "danceability": 0.37,
@@ -7927,7 +7927,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00656,
         "liveness": 0.156,
         "valence": 0.173,
-        "tempo": 0.428528
+        "tempo": 0.428528,
     },
     "3ApLPNuBQTcyqOamVDFibl": {
         "danceability": 0.383,
@@ -7938,7 +7938,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.312,
         "valence": 0.385,
-        "tempo": 0.39213600000000004
+        "tempo": 0.39213600000000004,
     },
     "4cSNv2FXDFskLPfdRamou8": {
         "danceability": 0.809,
@@ -7949,7 +7949,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.165,
         "liveness": 0.0955,
         "valence": 0.313,
-        "tempo": 0.47808
+        "tempo": 0.47808,
     },
     "08TJa3EavyWHpSv20Eu1w5": {
         "danceability": 0.46,
@@ -7960,7 +7960,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.154,
         "valence": 0.495,
-        "tempo": 0.368956
+        "tempo": 0.368956,
     },
     "3NoOwvxhI2yMYknxqnFUVx": {
         "danceability": 0.401,
@@ -7971,7 +7971,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.48,
         "valence": 0.317,
-        "tempo": 0.36120800000000003
+        "tempo": 0.36120800000000003,
     },
     "1RCvVwDf0pBLnE5YHxH0EF": {
         "danceability": 0.454,
@@ -7982,7 +7982,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.0566,
         "valence": 0.834,
-        "tempo": 0.6250560000000001
+        "tempo": 0.6250560000000001,
     },
     "6iEHpFdidrauHHDdZ6Q35N": {
         "danceability": 0.312,
@@ -7993,7 +7993,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.227,
         "liveness": 0.0737,
         "valence": 0.471,
-        "tempo": 0.441772
+        "tempo": 0.441772,
     },
     "63kRlVYNLZXPNamT3Vz6mo": {
         "danceability": 0.368,
@@ -8004,7 +8004,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.183,
         "valence": 0.557,
-        "tempo": 0.366664
+        "tempo": 0.366664,
     },
     "3K40yXUifZh7dyPrEpgEPI": {
         "danceability": 0.425,
@@ -8015,7 +8015,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.587,
         "liveness": 0.346,
         "valence": 0.511,
-        "tempo": 0.53592
+        "tempo": 0.53592,
     },
     "3lTsQgEis8nILX5FhkW0jo": {
         "danceability": 0.375,
@@ -8026,7 +8026,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.376,
         "liveness": 0.374,
         "valence": 0.46,
-        "tempo": 0.429236
+        "tempo": 0.429236,
     },
     "6zuYtRl4jTX9kObgsbZBBc": {
         "danceability": 0.279,
@@ -8037,7 +8037,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.348,
         "liveness": 0.314,
         "valence": 0.63,
-        "tempo": 0.6159519999999999
+        "tempo": 0.6159519999999999,
     },
     "0KsQfPkp1A5Ubtnp0TYH8v": {
         "danceability": 0.395,
@@ -8048,7 +8048,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.874,
         "liveness": 0.1,
         "valence": 0.28,
-        "tempo": 0.485512
+        "tempo": 0.485512,
     },
     "1KpRBS8dbDw7LxMhuK7Bso": {
         "danceability": 0.375,
@@ -8059,7 +8059,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.11,
         "valence": 0.651,
-        "tempo": 0.384204
+        "tempo": 0.384204,
     },
     "4UJCoLmTxMjD4VLEpTHjqG": {
         "danceability": 0.418,
@@ -8070,7 +8070,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.144,
         "valence": 0.124,
-        "tempo": 0.54584
+        "tempo": 0.54584,
     },
     "165wS8DOyhHPiNgB8vlfsE": {
         "danceability": 0.353,
@@ -8081,7 +8081,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00212,
         "liveness": 0.361,
         "valence": 0.341,
-        "tempo": 0.399292
+        "tempo": 0.399292,
     },
     "0nabIFzv0LsiO0nEXvdQau": {
         "danceability": 0.433,
@@ -8092,7 +8092,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.359,
         "valence": 0.175,
-        "tempo": 0.441012
+        "tempo": 0.441012,
     },
     "51AFDyuVsCej5yovvYfcVR": {
         "danceability": 0.367,
@@ -8103,7 +8103,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00000757,
         "liveness": 0.222,
         "valence": 0.521,
-        "tempo": 0.38872
+        "tempo": 0.38872,
     },
     "5xL4qVyfR2YOior018gH5m": {
         "danceability": 0.462,
@@ -8114,7 +8114,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00122,
         "liveness": 0.285,
         "valence": 0.857,
-        "tempo": 0.39690800000000004
+        "tempo": 0.39690800000000004,
     },
     "6WgDoQQM0N5afnnteDn71B": {
         "danceability": 0.162,
@@ -8125,7 +8125,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.567,
         "valence": 0.252,
-        "tempo": 0.31813600000000003
+        "tempo": 0.31813600000000003,
     },
     "5ulPjMPtjtH1qR2pZIDuyL": {
         "danceability": 0.289,
@@ -8136,7 +8136,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0000103,
         "liveness": 0.305,
         "valence": 0.409,
-        "tempo": 0.5806520000000001
+        "tempo": 0.5806520000000001,
     },
     "4UDQaLu8iknw7HjbrkEUVq": {
         "danceability": 0.388,
@@ -8147,7 +8147,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0118,
         "liveness": 0.0812,
         "valence": 0.548,
-        "tempo": 0.38218799999999997
+        "tempo": 0.38218799999999997,
     },
     "0P1ZgzaNDz9TmFC5obILxP": {
         "danceability": 0.507,
@@ -8158,7 +8158,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00542,
         "liveness": 0.2,
         "valence": 0.632,
-        "tempo": 0.6387
+        "tempo": 0.6387,
     },
     "2jEcW6xOrt5wljVEy5maqX": {
         "danceability": 0.468,
@@ -8169,7 +8169,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.109,
         "valence": 0.417,
-        "tempo": 0.312968
+        "tempo": 0.312968,
     },
     "49rpiqy4XWHZCBQJq6vu9w": {
         "danceability": 0.302,
@@ -8180,7 +8180,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.343,
         "liveness": 0.127,
         "valence": 0.34,
-        "tempo": 0.478604
+        "tempo": 0.478604,
     },
     "1dsR0VJ32PNep4E3BgzhUt": {
         "danceability": 0.32,
@@ -8191,7 +8191,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00182,
         "liveness": 0.115,
         "valence": 0.367,
-        "tempo": 0.409728
+        "tempo": 0.409728,
     },
     "7xs7qUfv8Bav5QrJwmafsS": {
         "danceability": 0.439,
@@ -8202,7 +8202,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.105,
         "valence": 0.392,
-        "tempo": 0.323484
+        "tempo": 0.323484,
     },
     "7Jx5YvVUd2Okgyw8opP1JW": {
         "danceability": 0.336,
@@ -8213,7 +8213,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.171,
         "liveness": 0.324,
         "valence": 0.544,
-        "tempo": 0.375228
+        "tempo": 0.375228,
     },
     "6gCX0ASfYfyHNuxGmSOw3E": {
         "danceability": 0.374,
@@ -8224,7 +8224,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0116,
         "liveness": 0.225,
         "valence": 0.206,
-        "tempo": 0.438868
+        "tempo": 0.438868,
     },
     "58BhENZPCVbkMjmQ1r6LtJ": {
         "danceability": 0.273,
@@ -8235,7 +8235,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00177,
         "liveness": 0.504,
         "valence": 0.164,
-        "tempo": 0.42741199999999996
+        "tempo": 0.42741199999999996,
     },
     "0PTP53h7PvqEMeGyGClkOk": {
         "danceability": 0.381,
@@ -8246,7 +8246,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00115,
         "liveness": 0.329,
         "valence": 0.595,
-        "tempo": 0.349888
+        "tempo": 0.349888,
     },
     "5kL8sEEWA3V3pv8cQDvadg": {
         "danceability": 0.253,
@@ -8257,7 +8257,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00294,
         "liveness": 0.161,
         "valence": 0.273,
-        "tempo": 0.49979199999999996
+        "tempo": 0.49979199999999996,
     },
     "6Dbhah7ZoLdKyauvDl3qXL": {
         "danceability": 0.38,
@@ -8268,7 +8268,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.314,
         "valence": 0.208,
-        "tempo": 0.62152
+        "tempo": 0.62152,
     },
     "40yv96m1hU8svaLGujCHuN": {
         "danceability": 0.535,
@@ -8279,7 +8279,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.301,
         "valence": 0.383,
-        "tempo": 0.640336
+        "tempo": 0.640336,
     },
     "7EZlzu01NzbR1jWEIDSk5T": {
         "danceability": 0.362,
@@ -8290,7 +8290,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00187,
         "liveness": 0.623,
         "valence": 0.137,
-        "tempo": 0.407724
+        "tempo": 0.407724,
     },
     "6iT13wghlJOnq2Yacam5wo": {
         "danceability": 0.463,
@@ -8301,7 +8301,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0317,
         "liveness": 0.095,
         "valence": 0.592,
-        "tempo": 0.446484
+        "tempo": 0.446484,
     },
     "1JpIwFqqKR2lIRQ0n7aRHo": {
         "danceability": 0.317,
@@ -8312,7 +8312,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.128,
         "liveness": 0.148,
         "valence": 0.345,
-        "tempo": 0.427048
+        "tempo": 0.427048,
     },
     "2UXFumfFrSFwdAZ5g7IQ3b": {
         "danceability": 0.178,
@@ -8323,7 +8323,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.805,
         "liveness": 0.0575,
         "valence": 0.669,
-        "tempo": 0.750112
+        "tempo": 0.750112,
     },
     "42fd0PgwGerbmg9kS8ayr9": {
         "danceability": 0.209,
@@ -8334,7 +8334,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.205,
         "valence": 0.0495,
-        "tempo": 0.60772
+        "tempo": 0.60772,
     },
     "2xHvRPKT306R2QcOEoslQc": {
         "danceability": 0.322,
@@ -8345,7 +8345,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.347,
         "valence": 0.62,
-        "tempo": 0.5928880000000001
+        "tempo": 0.5928880000000001,
     },
     "35PI5Hsq17h723EbyyDFsi": {
         "danceability": 0.388,
@@ -8356,7 +8356,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.359,
         "valence": 0.826,
-        "tempo": 0.397032
+        "tempo": 0.397032,
     },
     "6yQH0rknLdm56kFUPmeKLR": {
         "danceability": 0.563,
@@ -8367,7 +8367,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.38,
         "valence": 0.143,
-        "tempo": 0.40382799999999996
+        "tempo": 0.40382799999999996,
     },
     "5qWnPhPgeeFx4CfVmGZbGR": {
         "danceability": 0.171,
@@ -8378,7 +8378,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.353,
         "valence": 0.373,
-        "tempo": 0.6411359999999999
+        "tempo": 0.6411359999999999,
     },
     "3gN4UFoOnRHlMl3K4kU5zG": {
         "danceability": 0.161,
@@ -8389,7 +8389,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0802,
         "liveness": 0.0926,
         "valence": 0.487,
-        "tempo": 0.775128
+        "tempo": 0.775128,
     },
     "6W9eg0eTlSxXh9zCequMs3": {
         "danceability": 0.308,
@@ -8400,7 +8400,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.343,
         "valence": 0.622,
-        "tempo": 0.655284
+        "tempo": 0.655284,
     },
     "3TDKExlw0O1HdfZxGrHgNJ": {
         "danceability": 0.187,
@@ -8411,7 +8411,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.418,
         "liveness": 0.17,
         "valence": 0.316,
-        "tempo": 0.383804
+        "tempo": 0.383804,
     },
     "69duTNeq7MlV7LxQoEENhX": {
         "danceability": 0.087,
@@ -8422,7 +8422,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00334,
         "liveness": 0.0268,
         "valence": 0.273,
-        "tempo": 0.779092
+        "tempo": 0.779092,
     },
     "6T3IfpYq4IOHhu6DqUX1Kf": {
         "danceability": 0.248,
@@ -8433,7 +8433,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.99,
         "liveness": 0.122,
         "valence": 0.117,
-        "tempo": 0.5602079999999999
+        "tempo": 0.5602079999999999,
     },
     "06jpk6ydgD3gl9l6sW3pbC": {
         "danceability": 0.332,
@@ -8444,7 +8444,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.000131,
         "liveness": 0.112,
         "valence": 0.101,
-        "tempo": 0.42895999999999995
+        "tempo": 0.42895999999999995,
     },
     "4BGPLnsaM7Uhv1sVxKvBYs": {
         "danceability": 0.247,
@@ -8455,7 +8455,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00000447,
         "liveness": 0.123,
         "valence": 0.591,
-        "tempo": 0.39788
+        "tempo": 0.39788,
     },
     "0qHt7KGw9LPm4Ms4qUZlSd": {
         "danceability": 0.547,
@@ -8466,7 +8466,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.433,
         "valence": 0.343,
-        "tempo": 0.382444
+        "tempo": 0.382444,
     },
     "0gTIgmQ0UZlWfekF5gfCBS": {
         "danceability": 0.366,
@@ -8477,7 +8477,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.000206,
         "liveness": 0.366,
         "valence": 0.837,
-        "tempo": 0.659144
+        "tempo": 0.659144,
     },
     "2YBvCFDGEyk0vXUXetkpYl": {
         "danceability": 0.482,
@@ -8488,7 +8488,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.673,
         "valence": 0.449,
-        "tempo": 0.41145600000000004
+        "tempo": 0.41145600000000004,
     },
     "16RLonBmK3BaWJnYRLUiyH": {
         "danceability": 0.18,
@@ -8499,7 +8499,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.000551,
         "liveness": 0.0702,
         "valence": 0.433,
-        "tempo": 0.788172
+        "tempo": 0.788172,
     },
     "26eKJASmShZmCHnEcMOQ0e": {
         "danceability": 0.186,
@@ -8510,7 +8510,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00745,
         "liveness": 0.197,
         "valence": 0.138,
-        "tempo": 0.673928
+        "tempo": 0.673928,
     },
     "2MugQzaqighVOewFQn2vcF": {
         "danceability": 0.348,
@@ -8521,7 +8521,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.275,
         "valence": 0.236,
-        "tempo": 0.616568
+        "tempo": 0.616568,
     },
     "0gKATHq1UtBZlFESbxP0En": {
         "danceability": 0.394,
@@ -8532,7 +8532,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00000797,
         "liveness": 0.188,
         "valence": 0.338,
-        "tempo": 0.599268
+        "tempo": 0.599268,
     },
     "5mqClS3mvTBL2zkg0ZOpw6": {
         "danceability": 0.535,
@@ -8543,7 +8543,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.696,
         "liveness": 0.434,
         "valence": 0.396,
-        "tempo": 0.463648
+        "tempo": 0.463648,
     },
     "4d9LC9QoGja5M3en0HWUq1": {
         "danceability": 0.391,
@@ -8554,7 +8554,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0000701,
         "liveness": 0.446,
         "valence": 0.647,
-        "tempo": 0.36192399999999997
+        "tempo": 0.36192399999999997,
     },
     "6GvyAwquB9ocJ1hbD6CyCB": {
         "danceability": 0.341,
@@ -8565,7 +8565,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00821,
         "liveness": 0.18,
         "valence": 0.388,
-        "tempo": 0.715168
+        "tempo": 0.715168,
     },
     "5VxEAEUiym5NWPzgznkflW": {
         "danceability": 0.233,
@@ -8576,7 +8576,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00174,
         "liveness": 0.0337,
         "valence": 0.389,
-        "tempo": 0.6722319999999999
+        "tempo": 0.6722319999999999,
     },
     "7laqUQr9aQamWSoU7Km85q": {
         "danceability": 0.421,
@@ -8587,7 +8587,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0000549,
         "liveness": 0.0573,
         "valence": 0.529,
-        "tempo": 0.511828
+        "tempo": 0.511828,
     },
     "1oIk7IrqhJllprhFSrGwRj": {
         "danceability": 0.266,
@@ -8598,7 +8598,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.0852,
         "valence": 0.368,
-        "tempo": 0.606724
+        "tempo": 0.606724,
     },
     "4fRvqDwGesdvzhTCGn2OYd": {
         "danceability": 0.419,
@@ -8609,7 +8609,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.0826,
         "valence": 0.595,
-        "tempo": 0.57486
+        "tempo": 0.57486,
     },
     "4ksd5zvWtM0CHCyK1brHWL": {
         "danceability": 0.408,
@@ -8620,7 +8620,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00000658,
         "liveness": 0.689,
         "valence": 0.382,
-        "tempo": 0.393152
+        "tempo": 0.393152,
     },
     "10pTVCewuasUOZQusLFY12": {
         "danceability": 0.214,
@@ -8631,7 +8631,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.106,
         "liveness": 0.359,
         "valence": 0.371,
-        "tempo": 0.664876
+        "tempo": 0.664876,
     },
     "11qLCkqDVvlxRdh1HHZZiS": {
         "danceability": 0.457,
@@ -8642,7 +8642,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00885,
         "liveness": 0.172,
         "valence": 0.35,
-        "tempo": 0.458708
+        "tempo": 0.458708,
     },
     "0mebAatk9MbGKVc10OpTkg": {
         "danceability": 0.383,
@@ -8653,7 +8653,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.22,
         "valence": 0.384,
-        "tempo": 0.550384
+        "tempo": 0.550384,
     },
     "0BOHrlOxCq6g7WkshTGDNe": {
         "danceability": 0.589,
@@ -8664,7 +8664,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00000283,
         "liveness": 0.221,
         "valence": 0.421,
-        "tempo": 0.414996
+        "tempo": 0.414996,
     },
     "450TwWNUwyAufhYtjPXuf8": {
         "danceability": 0.239,
@@ -8675,7 +8675,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.172,
         "liveness": 0.769,
         "valence": 0.534,
-        "tempo": 0.675788
+        "tempo": 0.675788,
     },
     "2fZPDNhVXaK6o5bas9LkxV": {
         "danceability": 0.446,
@@ -8686,7 +8686,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.101,
         "valence": 0.696,
-        "tempo": 0.41628
+        "tempo": 0.41628,
     },
     "3liFiHiH5TWRqJx1K14DDe": {
         "danceability": 0.403,
@@ -8697,7 +8697,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00243,
         "liveness": 0.78,
         "valence": 0.521,
-        "tempo": 0.378264
+        "tempo": 0.378264,
     },
     "1MrHhrZ2BxbYXP0AbZkCVw": {
         "danceability": 0.327,
@@ -8708,7 +8708,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.0629,
         "valence": 0.793,
-        "tempo": 0.752536
+        "tempo": 0.752536,
     },
     "5r9IIunugVM4ncTCgrOtYv": {
         "danceability": 0.33,
@@ -8719,7 +8719,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0569,
         "liveness": 0.0658,
         "valence": 0.642,
-        "tempo": 0.67492
+        "tempo": 0.67492,
     },
     "5KYDkiSEsHLpYC7zZZN4bL": {
         "danceability": 0.437,
@@ -8730,7 +8730,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00000166,
         "liveness": 0.102,
         "valence": 0.227,
-        "tempo": 0.462792
+        "tempo": 0.462792,
     },
     "1eJoCBrCzOd1XF24XZhuJU": {
         "danceability": 0.259,
@@ -8741,7 +8741,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0000603,
         "liveness": 0.121,
         "valence": 0.515,
-        "tempo": 0.788972
+        "tempo": 0.788972,
     },
     "2C3q8kElxfujYlrC5mJ8R1": {
         "danceability": 0.291,
@@ -8752,7 +8752,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.254,
         "liveness": 0.0571,
         "valence": 0.344,
-        "tempo": 0.442576
+        "tempo": 0.442576,
     },
     "2Qno5n2LmLePUp2NihXQ1q": {
         "danceability": 0.474,
@@ -8763,7 +8763,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.284,
         "valence": 0.743,
-        "tempo": 0.52884
+        "tempo": 0.52884,
     },
     "4wtNRd4nxUDXzN7LS0FYsf": {
         "danceability": 0.662,
@@ -8774,7 +8774,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.338,
         "liveness": 0.683,
         "valence": 0.471,
-        "tempo": 0.600296
+        "tempo": 0.600296,
     },
     "36QvafFXhq0CBAz5TVA8uk": {
         "danceability": 0.295,
@@ -8785,7 +8785,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00000768,
         "liveness": 0.332,
         "valence": 0.606,
-        "tempo": 0.656096
+        "tempo": 0.656096,
     },
     "0zrpRDTND3yXJdx2MKJZTl": {
         "danceability": 0.352,
@@ -8796,7 +8796,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.476,
         "liveness": 0.0814,
         "valence": 0.0384,
-        "tempo": 0.505092
+        "tempo": 0.505092,
     },
     "501CSzS4gwNOJnlWHuBt9r": {
         "danceability": 0.666,
@@ -8807,7 +8807,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.114,
         "valence": 0.581,
-        "tempo": 0.440076
+        "tempo": 0.440076,
     },
     "5DYyrolHAsMCHbuwDIy1zT": {
         "danceability": 0.0887,
@@ -8818,7 +8818,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.255,
         "valence": 0.0391,
-        "tempo": 0.748056
+        "tempo": 0.748056,
     },
     "5nHJxwejxKw4nnlMqy8Wkr": {
         "danceability": 0.265,
@@ -8829,7 +8829,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.271,
         "liveness": 0.701,
         "valence": 0.134,
-        "tempo": 0.6074160000000001
+        "tempo": 0.6074160000000001,
     },
     "6Vc5wAMmXdKIAM7WUoEb7N": {
         "danceability": 0.407,
@@ -8840,7 +8840,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00000289,
         "liveness": 0.0913,
         "valence": 0.0765,
-        "tempo": 0.565136
+        "tempo": 0.565136,
     },
     "2ZaYFNn1YQuLSVdHhanr4Q": {
         "danceability": 0.545,
@@ -8851,7 +8851,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0000177,
         "liveness": 0.0841,
         "valence": 0.831,
-        "tempo": 0.392352
+        "tempo": 0.392352,
     },
     "1KDkSCXJIR4CJaVUK9qP7O": {
         "danceability": 0.354,
@@ -8862,7 +8862,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.000029,
         "liveness": 0.176,
         "valence": 0.194,
-        "tempo": 0.324432
+        "tempo": 0.324432,
     },
     "0VZ9xPNa6ROafP6GYYuv2S": {
         "danceability": 0.366,
@@ -8873,7 +8873,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0000167,
         "liveness": 0.108,
         "valence": 0.492,
-        "tempo": 0.346308
+        "tempo": 0.346308,
     },
     "2ZQyksYO4zzhyHNcueL0CP": {
         "danceability": 0.592,
@@ -8884,7 +8884,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.159,
         "valence": 0.293,
-        "tempo": 0.48400400000000005
+        "tempo": 0.48400400000000005,
     },
     "5HQVUIKwCEXpe7JIHyY734": {
         "danceability": 0.715,
@@ -8895,7 +8895,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.115,
         "valence": 0.531,
-        "tempo": 0.38031200000000004
+        "tempo": 0.38031200000000004,
     },
     "5BNxLlPzaAyGKj09vSbZC3": {
         "danceability": 0.55,
@@ -8906,7 +8906,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00417,
         "liveness": 0.0499,
         "valence": 0.411,
-        "tempo": 0.329864
+        "tempo": 0.329864,
     },
     "1XczdQt6RKNkEQfPqUsi3q": {
         "danceability": 0.189,
@@ -8917,7 +8917,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0923,
         "liveness": 0.058,
         "valence": 0.158,
-        "tempo": 0.748848
+        "tempo": 0.748848,
     },
     "7LAJWSKK8JMIZAcblgUMS6": {
         "danceability": 0.215,
@@ -8928,7 +8928,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0585,
         "liveness": 0.0907,
         "valence": 0.0547,
-        "tempo": 0.5317000000000001
+        "tempo": 0.5317000000000001,
     },
     "53Pgsvu3qSYO2aXt5J2vcL": {
         "danceability": 0.592,
@@ -8939,7 +8939,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.13,
         "valence": 0.565,
-        "tempo": 0.6388039999999999
+        "tempo": 0.6388039999999999,
     },
     "3jfr0TF6DQcOLat8gGn7E2": {
         "danceability": 0.548,
@@ -8950,7 +8950,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.000263,
         "liveness": 0.217,
         "valence": 0.405,
-        "tempo": 0.34012
+        "tempo": 0.34012,
     },
     "5IWmU2PNimgYuTLddU2DRo": {
         "danceability": 0.738,
@@ -8961,7 +8961,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.331,
         "valence": 0.556,
-        "tempo": 0.44
+        "tempo": 0.44,
     },
     "4LloVtxNZpeh7q7xdi1DQc": {
         "danceability": 0.315,
@@ -8972,7 +8972,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.702,
         "valence": 0.436,
-        "tempo": 0.690552
+        "tempo": 0.690552,
     },
     "67Hna13dNDkZvBpTXRIaOJ": {
         "danceability": 0.615,
@@ -8983,7 +8983,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.497,
         "liveness": 0.135,
         "valence": 0.216,
-        "tempo": 0.307988
+        "tempo": 0.307988,
     },
     "2nMeu6UenVvwUktBCpLMK9": {
         "danceability": 0.324,
@@ -8994,7 +8994,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0000369,
         "liveness": 0.11,
         "valence": 0.151,
-        "tempo": 0.455944
+        "tempo": 0.455944,
     },
     "4lY95OMGb9WxP6IYut64ir": {
         "danceability": 0.527,
@@ -9005,7 +9005,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.105,
         "valence": 0.221,
-        "tempo": 0.429944
+        "tempo": 0.429944,
     },
     "4G8gkOterJn0Ywt6uhqbhp": {
         "danceability": 0.448,
@@ -9016,7 +9016,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.000108,
         "liveness": 0.668,
         "valence": 0.236,
-        "tempo": 0.54498
+        "tempo": 0.54498,
     },
     "2iXdwVdzA0KrI2Q0iZNJbX": {
         "danceability": 0.871,
@@ -9027,7 +9027,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00000924,
         "liveness": 0.108,
         "valence": 0.659,
-        "tempo": 0.44019600000000003
+        "tempo": 0.44019600000000003,
     },
     "2gUSIsapdX6jEJ0DvjqTt2": {
         "danceability": 0.367,
@@ -9038,7 +9038,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0584,
         "liveness": 0.106,
         "valence": 0.663,
-        "tempo": 0.689432
+        "tempo": 0.689432,
     },
     "5fVZC9GiM4e8vu99W0Xf6J": {
         "danceability": 0.64,
@@ -9049,7 +9049,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.101,
         "valence": 0.361,
-        "tempo": 0.48813999999999996
+        "tempo": 0.48813999999999996,
     },
     "0ygAYQQy7bfDN6gH640bbl": {
         "danceability": 0.616,
@@ -9060,7 +9060,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.139,
         "valence": 0.336,
-        "tempo": 0.34756400000000004
+        "tempo": 0.34756400000000004,
     },
     "0ORwGQJDfpxyNXOKTZpqMX": {
         "danceability": 0.452,
@@ -9071,7 +9071,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.304,
         "liveness": 0.165,
         "valence": 0.389,
-        "tempo": 0.524284
+        "tempo": 0.524284,
     },
     "4nVBt6MZDDP6tRVdQTgxJg": {
         "danceability": 0.6,
@@ -9082,7 +9082,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.119,
         "valence": 0.286,
-        "tempo": 0.48428
+        "tempo": 0.48428,
     },
     "2yuea8dOVphJMCEZOlnyKf": {
         "danceability": 0.315,
@@ -9093,7 +9093,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.014,
         "liveness": 0.086,
         "valence": 0.253,
-        "tempo": 0.564712
+        "tempo": 0.564712,
     },
     "7LVHVU3tWfcxj5aiPFEW4Q": {
         "danceability": 0.209,
@@ -9104,7 +9104,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00195,
         "liveness": 0.113,
         "valence": 0.123,
-        "tempo": 0.55306
+        "tempo": 0.55306,
     },
     "1KqlVt63Q4bl1VdSlymr5C": {
         "danceability": 0.484,
@@ -9115,7 +9115,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.151,
         "valence": 0.51,
-        "tempo": 0.406616
+        "tempo": 0.406616,
     },
     "1JDMO4EVPHtm0xXhJb2IjR": {
         "danceability": 0.588,
@@ -9126,7 +9126,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00188,
         "liveness": 0.122,
         "valence": 0.488,
-        "tempo": 0.6015839999999999
+        "tempo": 0.6015839999999999,
     },
     "6WlS5FP9XcB410zta3C67v": {
         "danceability": 0.507,
@@ -9137,7 +9137,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0561,
         "liveness": 0.108,
         "valence": 0.0812,
-        "tempo": 0.264964
+        "tempo": 0.264964,
     },
     "01uqI4H13Gsd8Lyl1EYd8H": {
         "danceability": 0.688,
@@ -9148,7 +9148,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0000446,
         "liveness": 0.104,
         "valence": 0.299,
-        "tempo": 0.33983199999999997
+        "tempo": 0.33983199999999997,
     },
     "2WZyfujzMweFLnozyUJBkW": {
         "danceability": 0.404,
@@ -9159,7 +9159,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0000208,
         "liveness": 0.129,
         "valence": 0.29,
-        "tempo": 0.58804
+        "tempo": 0.58804,
     },
     "27jdUE1EYDSXZqhjuNxLem": {
         "danceability": 0.738,
@@ -9170,7 +9170,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.616,
         "liveness": 0.106,
         "valence": 0.355,
-        "tempo": 0.373832
+        "tempo": 0.373832,
     },
     "3Y8WRvVlQHMvtBwaV4TGlJ": {
         "danceability": 0.555,
@@ -9181,7 +9181,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0000231,
         "liveness": 0.107,
         "valence": 0.149,
-        "tempo": 0.6077319999999999
+        "tempo": 0.6077319999999999,
     },
     "13D36vAQxgYzwK1qI3IVGr": {
         "danceability": 0.416,
@@ -9192,7 +9192,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00047,
         "liveness": 0.274,
         "valence": 0.455,
-        "tempo": 0.44964
+        "tempo": 0.44964,
     },
     "4gIKec1woB9bIWIG8K7SZn": {
         "danceability": 0.533,
@@ -9203,7 +9203,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.149,
         "valence": 0.161,
-        "tempo": 0.42411200000000004
+        "tempo": 0.42411200000000004,
     },
     "3n69hLUdIsSa1WlRmjMZlW": {
         "danceability": 0.616,
@@ -9214,7 +9214,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.000879,
         "liveness": 0.205,
         "valence": 0.286,
-        "tempo": 0.600284
+        "tempo": 0.600284,
     },
     "0GNI8K3VATWBABQFAzBAYe": {
         "danceability": 0.621,
@@ -9225,7 +9225,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0000612,
         "liveness": 0.117,
         "valence": 0.125,
-        "tempo": 0.447572
+        "tempo": 0.447572,
     },
     "3DrjZArsPsoqbLzUZZV1Id": {
         "danceability": 0.529,
@@ -9236,7 +9236,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.334,
         "valence": 0.286,
-        "tempo": 0.567572
+        "tempo": 0.567572,
     },
     "4otHnPszGCLCH6zB5yq5lw": {
         "danceability": 0.505,
@@ -9247,7 +9247,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.15,
         "liveness": 0.634,
         "valence": 0.0768,
-        "tempo": 0.47983600000000004
+        "tempo": 0.47983600000000004,
     },
     "04cxAqa9ZgLwvEskosNVsB": {
         "danceability": 0.47,
@@ -9258,7 +9258,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00000128,
         "liveness": 0.313,
         "valence": 0.214,
-        "tempo": 0.6803400000000001
+        "tempo": 0.6803400000000001,
     },
     "3ibKnFDaa3GhpPGlOUj7ff": {
         "danceability": 0.656,
@@ -9269,7 +9269,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.118,
         "valence": 0.556,
-        "tempo": 0.378056
+        "tempo": 0.378056,
     },
     "7JIuqL4ZqkpfGKQhYlrirs": {
         "danceability": 0.452,
@@ -9280,7 +9280,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.143,
         "valence": 0.209,
-        "tempo": 0.55086
+        "tempo": 0.55086,
     },
     "5pRvd7BtQZ42S9zegc0nOa": {
         "danceability": 0.284,
@@ -9291,7 +9291,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.677,
         "liveness": 0.105,
         "valence": 0.121,
-        "tempo": 0.54548
+        "tempo": 0.54548,
     },
     "1mr3616BzLdhXfJmLmRsO8": {
         "danceability": 0.513,
@@ -9302,7 +9302,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.118,
         "valence": 0.461,
-        "tempo": 0.720472
+        "tempo": 0.720472,
     },
     "0sGNcx6lfc3zrbiIOxY4vb": {
         "danceability": 0.433,
@@ -9313,7 +9313,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00000375,
         "liveness": 0.171,
         "valence": 0.0385,
-        "tempo": 0.395924
+        "tempo": 0.395924,
     },
     "72C7aUQECOhNtnD0AC36ua": {
         "danceability": 0.512,
@@ -9324,7 +9324,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.0881,
         "valence": 0.336,
-        "tempo": 0.59156
+        "tempo": 0.59156,
     },
     "4RL77hMWUq35NYnPLXBpih": {
         "danceability": 0.379,
@@ -9335,7 +9335,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00106,
         "liveness": 0.118,
         "valence": 0.169,
-        "tempo": 0.665868
+        "tempo": 0.665868,
     },
     "6TK1td7il9OFbaMsZBslXS": {
         "danceability": 0.427,
@@ -9346,7 +9346,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.0889,
         "valence": 0.155,
-        "tempo": 0.37038
+        "tempo": 0.37038,
     },
     "58CrldAc1Z5WIBozT1NMJH": {
         "danceability": 0.469,
@@ -9357,7 +9357,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.0873,
         "valence": 0.36,
-        "tempo": 0.268044
+        "tempo": 0.268044,
     },
     "7fXyuQqEBwpKtCa8PomO7B": {
         "danceability": 0.59,
@@ -9368,7 +9368,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00000459,
         "liveness": 0.117,
         "valence": 0.112,
-        "tempo": 0.30847199999999997
+        "tempo": 0.30847199999999997,
     },
     "6HFbq7cewJ7rPiffV0ciil": {
         "danceability": 0.545,
@@ -9379,7 +9379,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00197,
         "liveness": 0.214,
         "valence": 0.16,
-        "tempo": 0.499892
+        "tempo": 0.499892,
     },
     "5JQ21uZ49Hn5VjPiyDSqza": {
         "danceability": 0.479,
@@ -9390,7 +9390,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.000454,
         "liveness": 0.0486,
         "valence": 0.339,
-        "tempo": 0.639988
+        "tempo": 0.639988,
     },
     "7b71WsDLb8gG0cSyDTFAEW": {
         "danceability": 0.603,
@@ -9401,7 +9401,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.043,
         "liveness": 0.1,
         "valence": 0.72,
-        "tempo": 0.511848
+        "tempo": 0.511848,
     },
     "64gpgh5jBMxyh7iVJll23t": {
         "danceability": 0.531,
@@ -9412,7 +9412,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00000259,
         "liveness": 0.101,
         "valence": 0.34,
-        "tempo": 0.42736799999999997
+        "tempo": 0.42736799999999997,
     },
     "1nuqzCMgj2lxZCmpdCmIGv": {
         "danceability": 0.635,
@@ -9423,7 +9423,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00256,
         "liveness": 0.142,
         "valence": 0.357,
-        "tempo": 0.543304
+        "tempo": 0.543304,
     },
     "2bbhyUWJ5VjdfI3P4PRLu2": {
         "danceability": 0.49,
@@ -9434,7 +9434,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00000974,
         "liveness": 0.113,
         "valence": 0.184,
-        "tempo": 0.356616
+        "tempo": 0.356616,
     },
     "5pwZCwzKqjkMOgjgTPTtFO": {
         "danceability": 0.572,
@@ -9445,7 +9445,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.111,
         "valence": 0.295,
-        "tempo": 0.563868
+        "tempo": 0.563868,
     },
     "3wsZYuHJrk3lssa7V7jvye": {
         "danceability": 0.285,
@@ -9456,7 +9456,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.000073,
         "liveness": 0.104,
         "valence": 0.203,
-        "tempo": 0.615392
+        "tempo": 0.615392,
     },
     "0HZhYMZOcUzZKSFwPOti6m": {
         "danceability": 0.349,
@@ -9467,7 +9467,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.12,
         "valence": 0.0886,
-        "tempo": 0.298164
+        "tempo": 0.298164,
     },
     "4xHpqKKjWAULcbFlVefLrw": {
         "danceability": 0.449,
@@ -9478,7 +9478,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.901,
         "liveness": 0.131,
         "valence": 0.105,
-        "tempo": 0.499744
+        "tempo": 0.499744,
     },
     "4pGqFOfzvfe6avb9kbZicC": {
         "danceability": 0.695,
@@ -9489,7 +9489,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.000212,
         "liveness": 0.0879,
         "valence": 0.414,
-        "tempo": 0.49606
+        "tempo": 0.49606,
     },
     "1zVhMuH7agsRe6XkljIY4U": {
         "danceability": 0.439,
@@ -9500,7 +9500,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.000643,
         "liveness": 0.114,
         "valence": 0.253,
-        "tempo": 0.575232
+        "tempo": 0.575232,
     },
     "1wJL1A0QUHJPf2cm7tsrdw": {
         "danceability": 0.714,
@@ -9511,7 +9511,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.174,
         "valence": 0.554,
-        "tempo": 0.49964
+        "tempo": 0.49964,
     },
     "4z1O25cq9g2kuJemmUxc21": {
         "danceability": 0.81,
@@ -9522,7 +9522,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.000151,
         "liveness": 0.11,
         "valence": 0.446,
-        "tempo": 0.479892
+        "tempo": 0.479892,
     },
     "0BhZWr9gPZNlVdWWigvYA9": {
         "danceability": 0.495,
@@ -9533,7 +9533,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.36,
         "valence": 0.431,
-        "tempo": 0.639972
+        "tempo": 0.639972,
     },
     "3U4isOIWM3VvDubwSI3y7a": {
         "danceability": 0.422,
@@ -9544,7 +9544,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.132,
         "valence": 0.331,
-        "tempo": 0.47972000000000004
+        "tempo": 0.47972000000000004,
     },
     "2fSIF8CJhoc9CJhF9vJDXp": {
         "danceability": 0.587,
@@ -9555,7 +9555,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.000162,
         "liveness": 0.0953,
         "valence": 0.288,
-        "tempo": 0.479008
+        "tempo": 0.479008,
     },
     "1VbhR6D6zUoSTBzvnRonXO": {
         "danceability": 0.678,
@@ -9566,7 +9566,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0000278,
         "liveness": 0.0772,
         "valence": 0.519,
-        "tempo": 0.327988
+        "tempo": 0.327988,
     },
     "7yFMhCJOsH7khgpdnyrZAZ": {
         "danceability": 0.373,
@@ -9577,7 +9577,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00000196,
         "liveness": 0.383,
         "valence": 0.189,
-        "tempo": 0.375052
+        "tempo": 0.375052,
     },
     "6ybViy2qrO9sIi41EgRJgx": {
         "danceability": 0.732,
@@ -9588,7 +9588,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.000011,
         "liveness": 0.0659,
         "valence": 0.618,
-        "tempo": 0.352696
+        "tempo": 0.352696,
     },
     "3cnRYoW4nYzIuVPCp7k5iG": {
         "danceability": 0.773,
@@ -9599,7 +9599,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0000136,
         "liveness": 0.0953,
         "valence": 0.443,
-        "tempo": 0.299908
+        "tempo": 0.299908,
     },
     "7MVuuF7Jvof8rYYZ2qxDO1": {
         "danceability": 0.6,
@@ -9610,7 +9610,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.59,
         "liveness": 0.154,
         "valence": 0.553,
-        "tempo": 0.31882
+        "tempo": 0.31882,
     },
     "30BsewEJZPxfuLNAlZPFje": {
         "danceability": 0.63,
@@ -9621,7 +9621,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00000387,
         "liveness": 0.0926,
         "valence": 0.343,
-        "tempo": 0.39232799999999995
+        "tempo": 0.39232799999999995,
     },
     "4u26EevCNXMhlvE1xFBJwX": {
         "danceability": 0.606,
@@ -9632,7 +9632,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.275,
         "valence": 0.362,
-        "tempo": 0.522956
+        "tempo": 0.522956,
     },
     "3LKOq8Tsv3ufu8t1LLQf9Y": {
         "danceability": 0.144,
@@ -9643,7 +9643,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.859,
         "liveness": 0.155,
         "valence": 0.0761,
-        "tempo": 0.561284
+        "tempo": 0.561284,
     },
     "7DImv0qWPEiAYUPJ0yKuDd": {
         "danceability": 0.835,
@@ -9654,7 +9654,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.456,
         "liveness": 0.113,
         "valence": 0.369,
-        "tempo": 0.47992
+        "tempo": 0.47992,
     },
     "2Guz1b911CbpG8L92cnglI": {
         "danceability": 0.29,
@@ -9665,7 +9665,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.00000303,
         "liveness": 0.626,
         "valence": 0.382,
-        "tempo": 0.45048
+        "tempo": 0.45048,
     },
     "5JDcQAztvZTIkrWoZihgvC": {
         "danceability": 0.447,
@@ -9676,7 +9676,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.28,
         "valence": 0.564,
-        "tempo": 0.292556
+        "tempo": 0.292556,
     },
     "63xBKQr7HJkKaSyhwEWCnE": {
         "danceability": 0.377,
@@ -9687,7 +9687,7 @@ let songsLargeClearCluster = {
         "instrumentalness": 0.0000136,
         "liveness": 0.149,
         "valence": 0.165,
-        "tempo": 0.596592
+        "tempo": 0.596592,
     },
     "5RbjZdW8vLZQJpRAZwNIdX": {
         "danceability": 0.518,
@@ -9698,8 +9698,8 @@ let songsLargeClearCluster = {
         "instrumentalness": 0,
         "liveness": 0.1,
         "valence": 0.164,
-        "tempo": 0.426048
-    }
+        "tempo": 0.426048,
+    },
 };
 
 module.exports.songs = songs;
