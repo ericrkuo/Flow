@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "test": "mocha main/test/**/*.js --timeout 20000"
+    "test": "mocha main/test/**/*.js --timeout 20000",
+    "eslint": "npx eslint ./main ./public",
+    "eslintFix": "npx eslint ./main ./public --fix"
   },
   "dependencies": {
     "3": "^2.1.0",
@@ -24,8 +26,11 @@
     "http-errors": "~1.6.3",
     "mocha": "^7.1.2",
     "morgan": "~1.9.1",
-    "pug": "2.0.0-beta11",
+    "pug": "3.0.0",
     "request": "^2.88.2",
     "spotify-web-api-node": "^4.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.16.0"
   }
 }

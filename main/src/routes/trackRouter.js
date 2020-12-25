@@ -1,11 +1,10 @@
-var express = require('express');
+const express = require("express");
 const {trackLimiter} = require("./rateLimiter");
 const {checkCredentials, refreshCredentialsIfExpired} = require("./middleware");
-var router = express.Router();
-const {Main} = require("../Main")
+const router = express.Router();
 
 //#region Sample Data For Testing Purposes
-let tracks = {};
+const tracks = {};
 tracks["703Y8dw2MMfEodrw5D6hDd"] = {
     track: {
         "album": {
@@ -13,24 +12,24 @@ tracks["703Y8dw2MMfEodrw5D6hDd"] = {
             "artists": [
                 {
                     "external_urls": {
-                        "spotify": "https://open.spotify.com/artist/5schXx0Ys4N52iU7On2j4c"
+                        "spotify": "https://open.spotify.com/artist/5schXx0Ys4N52iU7On2j4c",
                     },
                     "href": "https://api.spotify.com/v1/artists/5schXx0Ys4N52iU7On2j4c",
                     "id": "5schXx0Ys4N52iU7On2j4c",
                     "name": "Made in M",
                     "type": "artist",
-                    "uri": "spotify:artist:5schXx0Ys4N52iU7On2j4c"
+                    "uri": "spotify:artist:5schXx0Ys4N52iU7On2j4c",
                 },
                 {
                     "external_urls": {
-                        "spotify": "https://open.spotify.com/artist/0SM6zo7lSdqyplZo6XRX76"
+                        "spotify": "https://open.spotify.com/artist/0SM6zo7lSdqyplZo6XRX76",
                     },
                     "href": "https://api.spotify.com/v1/artists/0SM6zo7lSdqyplZo6XRX76",
                     "id": "0SM6zo7lSdqyplZo6XRX76",
                     "name": "Smuv",
                     "type": "artist",
-                    "uri": "spotify:artist:0SM6zo7lSdqyplZo6XRX76"
-                }
+                    "uri": "spotify:artist:0SM6zo7lSdqyplZo6XRX76",
+                },
             ],
             "available_markets": [
                 "AD",
@@ -111,10 +110,10 @@ tracks["703Y8dw2MMfEodrw5D6hDd"] = {
                 "US",
                 "UY",
                 "VN",
-                "ZA"
+                "ZA",
             ],
             "external_urls": {
-                "spotify": "https://open.spotify.com/album/54mO5n5EwJJFXFa0oPse02"
+                "spotify": "https://open.spotify.com/album/54mO5n5EwJJFXFa0oPse02",
             },
             "href": "https://api.spotify.com/v1/albums/54mO5n5EwJJFXFa0oPse02",
             "id": "54mO5n5EwJJFXFa0oPse02",
@@ -122,47 +121,47 @@ tracks["703Y8dw2MMfEodrw5D6hDd"] = {
                 {
                     "height": 640,
                     "url": "https://i.scdn.co/image/ab67616d0000b27362bb8c7bc046aabe09a5203e",
-                    "width": 640
+                    "width": 640,
                 },
                 {
                     "height": 300,
                     "url": "https://i.scdn.co/image/ab67616d00001e0262bb8c7bc046aabe09a5203e",
-                    "width": 300
+                    "width": 300,
                 },
                 {
                     "height": 64,
                     "url": "https://i.scdn.co/image/ab67616d0000485162bb8c7bc046aabe09a5203e",
-                    "width": 64
-                }
+                    "width": 64,
+                },
             ],
             "name": "Nest",
             "release_date": "2016-11-04",
             "release_date_precision": "day",
             "total_tracks": 24,
             "type": "album",
-            "uri": "spotify:album:54mO5n5EwJJFXFa0oPse02"
+            "uri": "spotify:album:54mO5n5EwJJFXFa0oPse02",
         },
         "artists": [
             {
                 "external_urls": {
-                    "spotify": "https://open.spotify.com/artist/5schXx0Ys4N52iU7On2j4c"
+                    "spotify": "https://open.spotify.com/artist/5schXx0Ys4N52iU7On2j4c",
                 },
                 "href": "https://api.spotify.com/v1/artists/5schXx0Ys4N52iU7On2j4c",
                 "id": "5schXx0Ys4N52iU7On2j4c",
                 "name": "Made in M",
                 "type": "artist",
-                "uri": "spotify:artist:5schXx0Ys4N52iU7On2j4c"
+                "uri": "spotify:artist:5schXx0Ys4N52iU7On2j4c",
             },
             {
                 "external_urls": {
-                    "spotify": "https://open.spotify.com/artist/0SM6zo7lSdqyplZo6XRX76"
+                    "spotify": "https://open.spotify.com/artist/0SM6zo7lSdqyplZo6XRX76",
                 },
                 "href": "https://api.spotify.com/v1/artists/0SM6zo7lSdqyplZo6XRX76",
                 "id": "0SM6zo7lSdqyplZo6XRX76",
                 "name": "Smuv",
                 "type": "artist",
-                "uri": "spotify:artist:0SM6zo7lSdqyplZo6XRX76"
-            }
+                "uri": "spotify:artist:0SM6zo7lSdqyplZo6XRX76",
+            },
         ],
         "available_markets": [
             "AD",
@@ -243,16 +242,16 @@ tracks["703Y8dw2MMfEodrw5D6hDd"] = {
             "US",
             "UY",
             "VN",
-            "ZA"
+            "ZA",
         ],
         "disc_number": 1,
         "duration_ms": 92250,
         "explicit": false,
         "external_ids": {
-            "isrc": "DEQ121642402"
+            "isrc": "DEQ121642402",
         },
         "external_urls": {
-            "spotify": "https://open.spotify.com/track/703Y8dw2MMfEodrw5D6hDd"
+            "spotify": "https://open.spotify.com/track/703Y8dw2MMfEodrw5D6hDd",
         },
         "href": "https://api.spotify.com/v1/tracks/703Y8dw2MMfEodrw5D6hDd",
         "id": "703Y8dw2MMfEodrw5D6hDd",
@@ -262,7 +261,7 @@ tracks["703Y8dw2MMfEodrw5D6hDd"] = {
         "preview_url": "https://p.scdn.co/mp3-preview/1954c2e4dbf035d82648a9cec39dd144ffc27c0d?cid=774b29d4f13844c495f206cafdad9c86",
         "track_number": 21,
         "type": "track",
-        "uri": "spotify:track:703Y8dw2MMfEodrw5D6hDd"
+        "uri": "spotify:track:703Y8dw2MMfEodrw5D6hDd",
     },
     audioFeatures: {
         "danceability": 0.857,
@@ -273,9 +272,9 @@ tracks["703Y8dw2MMfEodrw5D6hDd"] = {
         "instrumentalness": 0.954,
         "liveness": 0.109,
         "valence": 0.776,
-        "tempo": 0.3316
-    }
-}
+        "tempo": 0.3316,
+    },
+};
 
 tracks["2RycgtfFQZOPgEGrzBGE0j"] = {
     track: {
@@ -284,14 +283,14 @@ tracks["2RycgtfFQZOPgEGrzBGE0j"] = {
             "artists": [
                 {
                     "external_urls": {
-                        "spotify": "https://open.spotify.com/artist/5XTn5Az9AcSKu0oaauC5ES"
+                        "spotify": "https://open.spotify.com/artist/5XTn5Az9AcSKu0oaauC5ES",
                     },
                     "href": "https://api.spotify.com/v1/artists/5XTn5Az9AcSKu0oaauC5ES",
                     "id": "5XTn5Az9AcSKu0oaauC5ES",
                     "name": "quickly, quickly",
                     "type": "artist",
-                    "uri": "spotify:artist:5XTn5Az9AcSKu0oaauC5ES"
-                }
+                    "uri": "spotify:artist:5XTn5Az9AcSKu0oaauC5ES",
+                },
             ],
             "available_markets": [
                 "AD",
@@ -372,10 +371,10 @@ tracks["2RycgtfFQZOPgEGrzBGE0j"] = {
                 "US",
                 "UY",
                 "VN",
-                "ZA"
+                "ZA",
             ],
             "external_urls": {
-                "spotify": "https://open.spotify.com/album/2JhVhsYSe65vunncE4AYV1"
+                "spotify": "https://open.spotify.com/album/2JhVhsYSe65vunncE4AYV1",
             },
             "href": "https://api.spotify.com/v1/albums/2JhVhsYSe65vunncE4AYV1",
             "id": "2JhVhsYSe65vunncE4AYV1",
@@ -383,37 +382,37 @@ tracks["2RycgtfFQZOPgEGrzBGE0j"] = {
                 {
                     "height": 640,
                     "url": "https://i.scdn.co/image/ab67616d0000b273c417aad130701f49d8e629b8",
-                    "width": 640
+                    "width": 640,
                 },
                 {
                     "height": 300,
                     "url": "https://i.scdn.co/image/ab67616d00001e02c417aad130701f49d8e629b8",
-                    "width": 300
+                    "width": 300,
                 },
                 {
                     "height": 64,
                     "url": "https://i.scdn.co/image/ab67616d00004851c417aad130701f49d8e629b8",
-                    "width": 64
-                }
+                    "width": 64,
+                },
             ],
             "name": "Quickly Quickly, Vol. 1",
             "release_date": "2017-04-16",
             "release_date_precision": "day",
             "total_tracks": 10,
             "type": "album",
-            "uri": "spotify:album:2JhVhsYSe65vunncE4AYV1"
+            "uri": "spotify:album:2JhVhsYSe65vunncE4AYV1",
         },
         "artists": [
             {
                 "external_urls": {
-                    "spotify": "https://open.spotify.com/artist/5XTn5Az9AcSKu0oaauC5ES"
+                    "spotify": "https://open.spotify.com/artist/5XTn5Az9AcSKu0oaauC5ES",
                 },
                 "href": "https://api.spotify.com/v1/artists/5XTn5Az9AcSKu0oaauC5ES",
                 "id": "5XTn5Az9AcSKu0oaauC5ES",
                 "name": "quickly, quickly",
                 "type": "artist",
-                "uri": "spotify:artist:5XTn5Az9AcSKu0oaauC5ES"
-            }
+                "uri": "spotify:artist:5XTn5Az9AcSKu0oaauC5ES",
+            },
         ],
         "available_markets": [
             "AD",
@@ -494,16 +493,16 @@ tracks["2RycgtfFQZOPgEGrzBGE0j"] = {
             "US",
             "UY",
             "VN",
-            "ZA"
+            "ZA",
         ],
         "disc_number": 1,
         "duration_ms": 332173,
         "explicit": false,
         "external_ids": {
-            "isrc": "QMPKX1729751"
+            "isrc": "QMPKX1729751",
         },
         "external_urls": {
-            "spotify": "https://open.spotify.com/track/2RycgtfFQZOPgEGrzBGE0j"
+            "spotify": "https://open.spotify.com/track/2RycgtfFQZOPgEGrzBGE0j",
         },
         "href": "https://api.spotify.com/v1/tracks/2RycgtfFQZOPgEGrzBGE0j",
         "id": "2RycgtfFQZOPgEGrzBGE0j",
@@ -513,7 +512,7 @@ tracks["2RycgtfFQZOPgEGrzBGE0j"] = {
         "preview_url": "https://p.scdn.co/mp3-preview/15edb3e9d1647124a20350e8d9ec66893120378c?cid=774b29d4f13844c495f206cafdad9c86",
         "track_number": 10,
         "type": "track",
-        "uri": "spotify:track:2RycgtfFQZOPgEGrzBGE0j"
+        "uri": "spotify:track:2RycgtfFQZOPgEGrzBGE0j",
     },
     audioFeatures: {
         "danceability": 0.637,
@@ -524,9 +523,9 @@ tracks["2RycgtfFQZOPgEGrzBGE0j"] = {
         "instrumentalness": 0.305,
         "liveness": 0.0968,
         "valence": 0.361,
-        "tempo": 0.52806
-    }
-}
+        "tempo": 0.52806,
+    },
+};
 
 tracks["1a31jGgyZ5c2d10CPWkGxM"] = {
     track: {
@@ -535,14 +534,14 @@ tracks["1a31jGgyZ5c2d10CPWkGxM"] = {
             "artists": [
                 {
                     "external_urls": {
-                        "spotify": "https://open.spotify.com/artist/0HcyeAioEKhfwVcJAoyN36"
+                        "spotify": "https://open.spotify.com/artist/0HcyeAioEKhfwVcJAoyN36",
                     },
                     "href": "https://api.spotify.com/v1/artists/0HcyeAioEKhfwVcJAoyN36",
                     "id": "0HcyeAioEKhfwVcJAoyN36",
                     "name": "Knowmadic",
                     "type": "artist",
-                    "uri": "spotify:artist:0HcyeAioEKhfwVcJAoyN36"
-                }
+                    "uri": "spotify:artist:0HcyeAioEKhfwVcJAoyN36",
+                },
             ],
             "available_markets": [
                 "AD",
@@ -623,10 +622,10 @@ tracks["1a31jGgyZ5c2d10CPWkGxM"] = {
                 "US",
                 "UY",
                 "VN",
-                "ZA"
+                "ZA",
             ],
             "external_urls": {
-                "spotify": "https://open.spotify.com/album/3fnNTl700nWn7bK3glgmHl"
+                "spotify": "https://open.spotify.com/album/3fnNTl700nWn7bK3glgmHl",
             },
             "href": "https://api.spotify.com/v1/albums/3fnNTl700nWn7bK3glgmHl",
             "id": "3fnNTl700nWn7bK3glgmHl",
@@ -634,37 +633,37 @@ tracks["1a31jGgyZ5c2d10CPWkGxM"] = {
                 {
                     "height": 640,
                     "url": "https://i.scdn.co/image/ab67616d0000b273a552a98a4e8c8a3d569afc1f",
-                    "width": 640
+                    "width": 640,
                 },
                 {
                     "height": 300,
                     "url": "https://i.scdn.co/image/ab67616d00001e02a552a98a4e8c8a3d569afc1f",
-                    "width": 300
+                    "width": 300,
                 },
                 {
                     "height": 64,
                     "url": "https://i.scdn.co/image/ab67616d00004851a552a98a4e8c8a3d569afc1f",
-                    "width": 64
-                }
+                    "width": 64,
+                },
             ],
             "name": "Fade",
             "release_date": "2017-04-09",
             "release_date_precision": "day",
             "total_tracks": 1,
             "type": "album",
-            "uri": "spotify:album:3fnNTl700nWn7bK3glgmHl"
+            "uri": "spotify:album:3fnNTl700nWn7bK3glgmHl",
         },
         "artists": [
             {
                 "external_urls": {
-                    "spotify": "https://open.spotify.com/artist/0HcyeAioEKhfwVcJAoyN36"
+                    "spotify": "https://open.spotify.com/artist/0HcyeAioEKhfwVcJAoyN36",
                 },
                 "href": "https://api.spotify.com/v1/artists/0HcyeAioEKhfwVcJAoyN36",
                 "id": "0HcyeAioEKhfwVcJAoyN36",
                 "name": "Knowmadic",
                 "type": "artist",
-                "uri": "spotify:artist:0HcyeAioEKhfwVcJAoyN36"
-            }
+                "uri": "spotify:artist:0HcyeAioEKhfwVcJAoyN36",
+            },
         ],
         "available_markets": [
             "AD",
@@ -745,16 +744,16 @@ tracks["1a31jGgyZ5c2d10CPWkGxM"] = {
             "US",
             "UY",
             "VN",
-            "ZA"
+            "ZA",
         ],
         "disc_number": 1,
         "duration_ms": 157000,
         "explicit": false,
         "external_ids": {
-            "isrc": "TCACZ1795346"
+            "isrc": "TCACZ1795346",
         },
         "external_urls": {
-            "spotify": "https://open.spotify.com/track/1a31jGgyZ5c2d10CPWkGxM"
+            "spotify": "https://open.spotify.com/track/1a31jGgyZ5c2d10CPWkGxM",
         },
         "href": "https://api.spotify.com/v1/tracks/1a31jGgyZ5c2d10CPWkGxM",
         "id": "1a31jGgyZ5c2d10CPWkGxM",
@@ -764,7 +763,7 @@ tracks["1a31jGgyZ5c2d10CPWkGxM"] = {
         "preview_url": "https://p.scdn.co/mp3-preview/c49a73aa7328443e3f0e25ceee6a6cb2205d0cab?cid=774b29d4f13844c495f206cafdad9c86",
         "track_number": 1,
         "type": "track",
-        "uri": "spotify:track:1a31jGgyZ5c2d10CPWkGxM"
+        "uri": "spotify:track:1a31jGgyZ5c2d10CPWkGxM",
     },
     audioFeatures: {
         "danceability": 0.693,
@@ -775,9 +774,9 @@ tracks["1a31jGgyZ5c2d10CPWkGxM"] = {
         "instrumentalness": 0.235,
         "liveness": 0.0941,
         "valence": 0.511,
-        "tempo": 0.29594
-    }
-}
+        "tempo": 0.29594,
+    },
+};
 
 tracks["0BD9XqvXSSxlHsdBlLKhqA"] = {
     track: {
@@ -786,14 +785,14 @@ tracks["0BD9XqvXSSxlHsdBlLKhqA"] = {
             "artists": [
                 {
                     "external_urls": {
-                        "spotify": "https://open.spotify.com/artist/6x5HLaMcoxaULXpgN0NJbb"
+                        "spotify": "https://open.spotify.com/artist/6x5HLaMcoxaULXpgN0NJbb",
                     },
                     "href": "https://api.spotify.com/v1/artists/6x5HLaMcoxaULXpgN0NJbb",
                     "id": "6x5HLaMcoxaULXpgN0NJbb",
                     "name": "Flughand",
                     "type": "artist",
-                    "uri": "spotify:artist:6x5HLaMcoxaULXpgN0NJbb"
-                }
+                    "uri": "spotify:artist:6x5HLaMcoxaULXpgN0NJbb",
+                },
             ],
             "available_markets": [
                 "AD",
@@ -874,10 +873,10 @@ tracks["0BD9XqvXSSxlHsdBlLKhqA"] = {
                 "US",
                 "UY",
                 "VN",
-                "ZA"
+                "ZA",
             ],
             "external_urls": {
-                "spotify": "https://open.spotify.com/album/6Ads7rAZhNDWrcZqaCwJg6"
+                "spotify": "https://open.spotify.com/album/6Ads7rAZhNDWrcZqaCwJg6",
             },
             "href": "https://api.spotify.com/v1/albums/6Ads7rAZhNDWrcZqaCwJg6",
             "id": "6Ads7rAZhNDWrcZqaCwJg6",
@@ -885,37 +884,37 @@ tracks["0BD9XqvXSSxlHsdBlLKhqA"] = {
                 {
                     "height": 640,
                     "url": "https://i.scdn.co/image/ab67616d0000b273d6d7ecd82517d793aabf67f0",
-                    "width": 640
+                    "width": 640,
                 },
                 {
                     "height": 300,
                     "url": "https://i.scdn.co/image/ab67616d00001e02d6d7ecd82517d793aabf67f0",
-                    "width": 300
+                    "width": 300,
                 },
                 {
                     "height": 64,
                     "url": "https://i.scdn.co/image/ab67616d00004851d6d7ecd82517d793aabf67f0",
-                    "width": 64
-                }
+                    "width": 64,
+                },
             ],
             "name": "EXPEDITion Vol. 7: Moonloops",
             "release_date": "2016-02-26",
             "release_date_precision": "day",
             "total_tracks": 18,
             "type": "album",
-            "uri": "spotify:album:6Ads7rAZhNDWrcZqaCwJg6"
+            "uri": "spotify:album:6Ads7rAZhNDWrcZqaCwJg6",
         },
         "artists": [
             {
                 "external_urls": {
-                    "spotify": "https://open.spotify.com/artist/6x5HLaMcoxaULXpgN0NJbb"
+                    "spotify": "https://open.spotify.com/artist/6x5HLaMcoxaULXpgN0NJbb",
                 },
                 "href": "https://api.spotify.com/v1/artists/6x5HLaMcoxaULXpgN0NJbb",
                 "id": "6x5HLaMcoxaULXpgN0NJbb",
                 "name": "Flughand",
                 "type": "artist",
-                "uri": "spotify:artist:6x5HLaMcoxaULXpgN0NJbb"
-            }
+                "uri": "spotify:artist:6x5HLaMcoxaULXpgN0NJbb",
+            },
         ],
         "available_markets": [
             "AD",
@@ -996,16 +995,16 @@ tracks["0BD9XqvXSSxlHsdBlLKhqA"] = {
             "US",
             "UY",
             "VN",
-            "ZA"
+            "ZA",
         ],
         "disc_number": 1,
         "duration_ms": 93635,
         "explicit": false,
         "external_ids": {
-            "isrc": "DEQ121637902"
+            "isrc": "DEQ121637902",
         },
         "external_urls": {
-            "spotify": "https://open.spotify.com/track/0BD9XqvXSSxlHsdBlLKhqA"
+            "spotify": "https://open.spotify.com/track/0BD9XqvXSSxlHsdBlLKhqA",
         },
         "href": "https://api.spotify.com/v1/tracks/0BD9XqvXSSxlHsdBlLKhqA",
         "id": "0BD9XqvXSSxlHsdBlLKhqA",
@@ -1015,7 +1014,7 @@ tracks["0BD9XqvXSSxlHsdBlLKhqA"] = {
         "preview_url": "https://p.scdn.co/mp3-preview/0ea98e690511d73c52f47d613fe747fe4f78f5e9?cid=774b29d4f13844c495f206cafdad9c86",
         "track_number": 2,
         "type": "track",
-        "uri": "spotify:track:0BD9XqvXSSxlHsdBlLKhqA"
+        "uri": "spotify:track:0BD9XqvXSSxlHsdBlLKhqA",
     },
     audioFeatures: {
         "danceability": 0.769,
@@ -1026,26 +1025,26 @@ tracks["0BD9XqvXSSxlHsdBlLKhqA"] = {
         "instrumentalness": 0.862,
         "liveness": 0.118,
         "valence": 0.641,
-        "tempo": 0.323804
-    }
-}
+        "tempo": 0.323804,
+    },
+};
 
-
-let sampleData = {
+/* eslint-disable no-unused-vars*/
+const sampleData = {
     tracks: tracks,
     userInfo: {
         "display_name": "Eric Kuo",
         "email": "ericrkuo@gmail.com",
         "external_urls": {
-            "spotify": "https://open.spotify.com/"
+            "spotify": "https://open.spotify.com/",
         },
         "images": [
             {
                 "height": null,
                 "url": "../libraries/pictures/unknownuser.png",
-                "width": null
-            }
-        ]
+                "width": null,
+            },
+        ],
     },
     mood: {
         "dominantMood": "surprise",
@@ -1057,41 +1056,34 @@ let sampleData = {
             "happiness": 0.394,
             "neutral": 0.013,
             "sadness": 0,
-            "surprise": 0.004
-        }
+            "surprise": 0.004,
+        },
     },
     test: {"I'm": 2},
-}
+};
 //#endregion
 
 // input: dataURL
 // output: returns html rendering of the tracks
-router.get('/', checkCredentials, function (req, res, next) {
+router.get("/", checkCredentials, function (req, res) {
     // use res.render("track", sampleData) for testing purposes
-
     if (req.app.locals.main.result) {
         return res.render("track", req.app.locals.main.result);
     } else {
-        // TODO: at this point, user's credentials are valid, but they do not have custom curated tracks
-        //  display an 'error' page, which tells user they need to take a photo, and has a button prompting to go back to homepage
-        return res.render('error', {
-            message: "No custom tracks yet, please take a photo to get curated tracks",
-            error: {status: 400, stack: "no stack"}
-        });
+        return res.redirect("/webcam/#/error/no-photo-submitted");
     }
 });
 
 // REQUIRES: req.body to contain a list of track URI's in format ["spotify:track:1ue7zm5TVVvmoQV8lK6K2H", ...]
-router.post('/', [trackLimiter, refreshCredentialsIfExpired], function (req, res, next) {
-    let main = req.app.locals.main;
+router.post("/", [trackLimiter, refreshCredentialsIfExpired], function (req, res) {
+    const main = req.app.locals.main;
     return main.createMoodPlaylist(req.body)
         .then((playlistURL) => {
             return res.status(200).json({link: playlistURL});
         })
         .catch((err) => {
-            console.log(err);
-            return res.status(400).json({"error": err.message});
-        })
+            return res.status(500).json({errorMsg: "Please try again later </br> </br>" + err.message});
+        });
 });
 
 module.exports = router;

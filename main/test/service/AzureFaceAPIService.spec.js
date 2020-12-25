@@ -1,5 +1,5 @@
-var chai = require("chai");
-var sampleDataURL = require("../resources/sampleDataURL");
+const chai = require("chai");
+const sampleDataURL = require("../resources/sampleDataURL");
 const Err = require("../../src/constant/Error");
 const {AzureFaceAPIService} = require("../../src/service/AzureFaceAPIService");
 
@@ -7,7 +7,7 @@ let azureFaceAPIService;
 describe("unit test for dataURL", function () {
 
     before(function () {
-        require('dotenv').config();
+        require("dotenv").config();
         azureFaceAPIService = new AzureFaceAPIService();
     });
 
@@ -15,7 +15,7 @@ describe("unit test for dataURL", function () {
         return azureFaceAPIService.getEmotions(sampleDataURL.dataURL1)
             .then((res) => {
                 console.log(res);
-                chai.assert(typeof res === 'object' && !Array.isArray(res));
+                chai.assert(typeof res === "object" && !Array.isArray(res));
             }).catch((err) => {
                 console.log(err);
                 chai.expect.fail("not supposed to fail");
@@ -54,7 +54,7 @@ describe("unit test for dataURL", function () {
 
     it("test getEmotions - no user detected in image", function () {
         return azureFaceAPIService.getEmotions(sampleDataURL.emptyDataURL)
-            .then((res) => {
+            .then(() => {
                 chai.expect.fail("supposed to fail");
             }).catch((err) => {
                 console.log(err);
@@ -145,11 +145,11 @@ describe("unit test for dataURL", function () {
 
     it("test handleAzureFaceAPIResponse", function () {
         try {
-            let emotion = {
-                anger: 0, contempt: 0, disgust: 0, fear: 0, happiness: 0, neutral: 0.999, sadness: 0, surprise: 0
+            const emotion = {
+                anger: 0, contempt: 0, disgust: 0, fear: 0, happiness: 0, neutral: 0.999, sadness: 0, surprise: 0,
             };
-            let result = azureFaceAPIService.handleAzureFaceAPIResponse({
-                data: [{faceAttributes: {emotion: emotion}}]
+            const result = azureFaceAPIService.handleAzureFaceAPIResponse({
+                data: [{faceAttributes: {emotion: emotion}}],
             });
             chai.expect(JSON.stringify(result)).to.be.equal(JSON.stringify(emotion));
         } catch (e) {

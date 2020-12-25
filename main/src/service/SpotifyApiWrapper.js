@@ -13,17 +13,17 @@ function executeMethod(callback) {
         })
         .catch(async (e) => {
             if (e instanceof WebapiError && e.statusCode === 429) {
-                console.log(`Rate limiting error - trying again after ${TIME_TO_WAIT/1000} seconds`)
+                console.log(`Rate limiting error - trying again after ${TIME_TO_WAIT/1000} seconds`);
                 await sleep(TIME_TO_WAIT);
                 return callback();
             } else {
                 throw e;
             }
-        })
+        });
 }
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-module.exports.executeMethod = executeMethod
+module.exports.executeMethod = executeMethod;

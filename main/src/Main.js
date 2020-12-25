@@ -2,7 +2,7 @@ const {KMean} = require("./clustering/KMean");
 const {AzureFaceAPIService} = require("./service/AzureFaceAPIService");
 const {SpotifyService} = require("./service/SpotifyService");
 const {EmotionService} = require("./service/EmotionService");
-const SpotifyWebApi = require('spotify-web-api-node');
+const SpotifyWebApi = require("spotify-web-api-node");
 const Err = require("./constant/Error");
 const {RefreshCredentialService} = require("./service/RefreshCredentialService");
 const DESIRED_NUM_SONGS = 30;
@@ -24,7 +24,7 @@ class Main {
     * */
 
     constructor() {
-        require('dotenv').config();
+        require("dotenv").config();
         this.dataURL = null;
         this.azureFaceAPIService = new AzureFaceAPIService();
         this.spotifyApi = new SpotifyWebApi({
@@ -35,7 +35,7 @@ class Main {
         this.emotionService = new EmotionService(this.spotifyApi);
         this.spotifyService = new SpotifyService(this.spotifyApi);
         this.kMean = new KMean();
-        this.refreshCredentialService = new RefreshCredentialService(this.spotifyApi)
+        this.refreshCredentialService = new RefreshCredentialService(this.spotifyApi);
         this.result = null;
     }
 
@@ -50,7 +50,7 @@ class Main {
         return this.azureFaceAPIService.getEmotions(this.dataURL)
             .then((res) => {
                 emotions = res;
-                let dominantEmotion = this.emotionService.getDominantExpression(res);
+                const dominantEmotion = this.emotionService.getDominantExpression(res);
                 this.spotifyService.mood = dominantEmotion;
                 return this.emotionService.getFeatures(dominantEmotion);
             })
@@ -61,8 +61,8 @@ class Main {
             })
             .then((audioFeatureData) => {
                 audioFeatureData["X"] = songX[1];
-                let [bestK, clusters, map] = this.kMean.getOptimalKClusters(audioFeatureData);
-                let arrayOfSongIDS = this.getSongIDsOfClusterContainingSongX(clusters);
+                const [bestK, clusters, map] = this.kMean.getOptimalKClusters(audioFeatureData);
+                const arrayOfSongIDS = this.getSongIDsOfClusterContainingSongX(clusters);
                 newArrayOfSongIDS = this.getDesiredNumberSongs(bestK, arrayOfSongIDS, map);
                 return this.setResults(newArrayOfSongIDS, audioFeatureData, this.spotifyService.mood, emotions);
             })
@@ -80,9 +80,9 @@ class Main {
             return Promise.reject(new Err.InvalidDataURLError());
         }
         let songX;
-        let dominantEmotion = "happiness";
-        let newArrayOfSongIDS
-        let emotions = {
+        const dominantEmotion = "happiness";
+        let newArrayOfSongIDS;
+        const emotions = {
             "anger": 0.575,
             "contempt": 0,
             "disgust": 0.006,
@@ -90,7 +90,7 @@ class Main {
             "happiness": 0.394,
             "neutral": 0.013,
             "sadness": 0,
-            "surprise": 0.004
+            "surprise": 0.004,
         };
         return this.emotionService.getFeatures(dominantEmotion)
             .then((feature) => {
@@ -100,19 +100,18 @@ class Main {
             })
             .then((audioFeatureData) => {
                 audioFeatureData["X"] = songX[1];
-                let [bestK, clusters, map] = this.kMean.getOptimalKClusters(audioFeatureData);
-                let arrayOfSongIDS = this.getSongIDsOfClusterContainingSongX(clusters);
+                const [bestK, clusters, map] = this.kMean.getOptimalKClusters(audioFeatureData);
+                const arrayOfSongIDS = this.getSongIDsOfClusterContainingSongX(clusters);
                 newArrayOfSongIDS = this.getDesiredNumberSongs(bestK, arrayOfSongIDS, map);
                 return this.setResults(newArrayOfSongIDS, audioFeatureData, this.spotifyService.mood, emotions);
             })
-            .then((res) => {
-                let self = this;
+            .then(() => {
                 return newArrayOfSongIDS;
             })
             .catch((err) => {
                 console.log(err);
                 throw err;
-            })
+            });
     }
 
     // PURPOSE - set the results for global access inside trackRouter.js
@@ -120,10 +119,10 @@ class Main {
     // trackObjects = {{id: {track, audioFeatures}}, {id: {track, audioFeatures}}, {id: {track, audioFeatures}}, ...}
     setResults(songIDs, audioFeatureData, mood, emotions) {
         this.result = {tracks: {}, userInfo: {}, mood: {}};
-        for (let songID of songIDs) {
+        for (const songID of songIDs) {
             this.result.tracks[songID] = {
                 track: this.spotifyService.trackHashMap.get(songID),
-                audioFeatures: audioFeatureData[songID]
+                audioFeatures: audioFeatureData[songID],
             };
         }
 
@@ -135,13 +134,13 @@ class Main {
                 this.result.userInfo = res;
             }).catch((err) => {
                 throw err;
-            })
+            });
     }
 
     // returns an array of songIDs for the cluster that contains songX
     getSongIDsOfClusterContainingSongX(clusters) {
-        for (let cluster of clusters) {
-            for (let song of cluster) {
+        for (const cluster of clusters) {
+            for (const song of cluster) {
                 if (song[0] === "X") {
                     return this.getSongIDSFromCluster(cluster);
                 }
@@ -150,38 +149,38 @@ class Main {
     }
 
     getSongIDSFromCluster(cluster) {
-        let arr = [];
-        for (let song of cluster) {
+        const arr = [];
+        for (const song of cluster) {
             if (song[0] !== "X") arr.push(song[0]);
         }
         return arr;
     }
 
     getDesiredNumberSongs(bestK, arrayOfSongIDS, map) {
-        let n = arrayOfSongIDS.length;
+        const n = arrayOfSongIDS.length;
         console.log("ORIGINAL NUMBER OF SONGS: " + n);
 
         if (n >= DESIRED_NUM_SONGS) {
             return arrayOfSongIDS.slice(0, DESIRED_NUM_SONGS);
         } else {
             // sorted map based on Silhouette value
-            let sortedMap = Array.from(map.entries()).sort((x, y) => {
+            const sortedMap = Array.from(map.entries()).sort((x, y) => {
                 if (x[1][0] < y[1][0]) return 1;
                 if (x[1][0] > y[1][0]) return -1;
                 return 0;
             });
-            let set = new Set();
-            for (let id of arrayOfSongIDS) {
+            const set = new Set();
+            for (const id of arrayOfSongIDS) {
                 if (id !== "X") {
                     set.add(id);
                 }
             }
             // for each entry of the map, add in the song IDs to the set until set reaches DESIRED_NUM_SONGS or iterated through entire map array
-            for (let entry of sortedMap) {
+            for (const entry of sortedMap) {
                 if (entry[0] !== bestK) {
-                    let clusters = entry[1][1];
-                    let cluster = this.getSongIDsOfClusterContainingSongX(clusters);
-                    for (let id of cluster) {
+                    const clusters = entry[1][1];
+                    const cluster = this.getSongIDsOfClusterContainingSongX(clusters);
+                    for (const id of cluster) {
                         if (id !== "X") {
                             set.add(id);
                         }
@@ -195,7 +194,7 @@ class Main {
     }
 
     printOutAllSongTitles(cluster) {
-        for (let song of cluster) {
+        for (const song of cluster) {
             if (song !== "X") {
                 console.log(this.spotifyService.trackHashMap.get(song).name);
             }

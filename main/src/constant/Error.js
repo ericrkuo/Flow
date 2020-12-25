@@ -18,7 +18,7 @@ class InvalidResponseError extends Error {
 //#region AzureFaceApiService Errors
 class NoUserDetectedError extends Error {
     constructor() {
-        super("No user detected in photo");
+        super("No user detected in the photo");
         this.name = "NoUserDetectedError";
     }
 }
@@ -62,7 +62,7 @@ class KMeanClusterError extends Error {
 //#region Main Errors
 class InvalidDataURLError extends Error {
     constructor() {
-        super("dataURL is not set");
+        super("The dataURL is not set");
         this.name = "InvalidDataURLError";
     }
 }

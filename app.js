@@ -11,7 +11,6 @@ var usersRouter = require('./main/src/routes/users');
 var webcamRouter = require('./main/src/routes/webcamRouter');
 var spotifyRouter = require('./main/src/routes/spotifyRouter');
 var tracksRouter = require('./main/src/routes/trackRouter');
-var tutorialRouter = require('./main/src/routes/tutorialRouter')
 var infoRouter = require('./main/src/routes/infoRouter')
 
 var app = express();
@@ -32,7 +31,6 @@ app.use('/users', usersRouter);
 app.use('/webcam', webcamRouter);
 app.use('/spotify', spotifyRouter);
 app.use('/tracks', tracksRouter);
-app.use('/tutorial', tutorialRouter);
 app.use('/info', infoRouter);
 
 // catch 404 and forward to error handler
