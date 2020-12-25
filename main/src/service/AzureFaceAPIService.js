@@ -59,7 +59,7 @@ class AzureFaceAPIService {
 
     convertDataURIToBinary(dataURI) {
         return new Promise((resolve, reject) => {
-            if (!dataURI || typeof dataURI !== "string") return reject(new Err.InvalidInputError("dataURI is formatted improperly"));
+            if (!dataURI || typeof dataURI !== "string") return reject(new Err.InvalidInputError("The dataURI is formatted improperly"));
 
             const BASE64_MARKER = ";base64,";
             const base64Index = dataURI.indexOf(BASE64_MARKER) + BASE64_MARKER.length;

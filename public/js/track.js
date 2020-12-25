@@ -14,6 +14,17 @@ $("#playlistModal").on("hide.bs.modal", function () {
     $("#collapsePlaylistMessage").collapse("hide");
 });
 
+$(document).on("click", ".alert-close", function() {
+    $(this).parent().hide();
+});
+
+const errorAlert = document.getElementById("errorAlert");
+const errorAlertClose = document.getElementById("errorAlertClose");
+
+errorAlertClose.addEventListener("click", () => {
+    hide([errorAlert]);
+});
+
 initialize();
 initializeUserInfoDiv();
 initializeTracksDiv();
@@ -21,15 +32,14 @@ initializeMoodDiv();
 initializePlaylistDiv();
 
 function initialize() {
-    const tutorialButton = document.getElementById("tutorial");
     const homeButton = document.getElementById("home");
     const aboutUsButton = document.getElementById("info");
     const newString = "btn-outline-dark";
     const oldString = "btn-outline-light";
 
-    tutorialButton.setAttribute("class", tutorialButton.getAttribute("class").replace(oldString, newString));
     homeButton.setAttribute("class", homeButton.getAttribute("class").replace(oldString, newString));
     aboutUsButton.setAttribute("class", aboutUsButton.getAttribute("class").replace(oldString, newString));
+    hide([errorAlert]);
 
 }
 
@@ -235,6 +245,7 @@ function addPlaylistEventListeners() {
 
     createPlaylistButton.addEventListener("click", async function () {
         const isConfirmPlaylistChecked = confirmPlaylistInput.checked;
+        $("#errorAlert").html("").hide();
 
         if (isConfirmPlaylistChecked) {
             const data = getAllTrackURLs();
@@ -261,10 +272,20 @@ function addPlaylistEventListeners() {
                         $("#playlistModal").modal("hide");
                         window.open(url, "_blank");
                     })
-                    .catch((errMessage) => {
-                        alert(errMessage);
+                    .catch((error) => {
+                        $("#errorAlert").append("<a class=\"close alert-close\">&times</a>" +
+                            "<span>"+"Sorry, we encountered an error. " + "</span>");
+
+                        if(error.response) {
+                            $("#errorAlert").append("<span>" + error.response.data.errorMsg +"</span>");
+                        } else if (error.message) {
+                            $("#errorAlert").append("<span>"+"Sorry, we encountered an error. " +
+                                error.message +"</span>");
+                        }
+
                         cancelPlaylistButton.removeAttribute("disabled");
                         createPlaylistButton.removeAttribute("disabled");
+                        show([errorAlert, errorAlertClose]);
                     });
             }
         } else {
@@ -309,7 +330,7 @@ function sendPOSTRequestToCreatePlaylist(data) {
             if (response && response.data && response.data.link && typeof response.data.link === "string") {
                 return response.data.link;
             } else {
-                throw new Error("response is null or response.link is null or not a string");
+                throw new Error("Response is null or response.link is null or not a string");
             }
         })
         .catch((error) => {
@@ -409,9 +430,7 @@ function initializeModalContent(id) {
     }
 
     const urlButton = document.getElementById("modal-content-button");
-    urlButton.addEventListener("click", () => {
-        window.open(trackURL, "_blank");
-    });
+    urlButton.onclick = () => { window.open(trackURL, "_blank"); };
 }
 
 function initializeModalImage(id) {
@@ -457,5 +476,17 @@ function getTimeInMinutes(totalMs) {
 function removeAllChildren(node) {
     while (node.firstChild) {
         node.removeChild(node.lastChild);
+    }
+}
+
+function hide(elements) {
+    for (const element of elements) {
+        element.style.setProperty("display", "none");
+    }
+}
+
+function show(elements) {
+    for (const element of elements) {
+        element.style.removeProperty("display");
     }
 }

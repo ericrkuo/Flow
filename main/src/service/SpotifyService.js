@@ -439,7 +439,7 @@ class SpotifyService {
                     },
                     );
                 } else {
-                    throw new Err.InvalidResponseError("no user info or mood is currently not set");
+                    throw new Err.InvalidResponseError("No user info or mood is currently not set");
                 }
             }).catch((err) => {
                 console.log(err);
@@ -458,11 +458,11 @@ class SpotifyService {
                         return this.spotifyApi.addTracksToPlaylist(playlist.body.id, trackURLs);
                     });
                 } else {
-                    throw new Err.InvalidResponseError("playlist did not create correctly");
+                    throw new Err.InvalidResponseError("Playlist did not create correctly");
                 }
             })
             .then((result) => {
-                if (!link || result.statusCode !== 200 && result.statusCode !== 201) throw new Err.InvalidResponseError("link is null or tracks did not add correctly");
+                if (!link || result.statusCode !== 200 && result.statusCode !== 201) throw new Err.InvalidResponseError("Playlist link is null or tracks were not added correctly");
                 return link;
             })
             .catch((err) => {

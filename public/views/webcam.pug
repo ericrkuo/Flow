@@ -7,6 +7,11 @@ block append stylesheets
     link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css')
 block content
     .container-fluid.text-center#webcam
+        .alert.alert-info.show#infoAlert(role='alert')
+            span#infoAlertSpan Please make sure your photo is clear and only a single face is in the frame!
+        .alert.alert-danger.hide#errorAlert(role='alert')
+            span#errorAlertSpan
+        .breakSpace
         h2.text-white#header How are you feeling right now?
         .container-fluid.d-flex.justify-content-center
             video#video.video-animation(playsinline='' autoplay='')
