@@ -353,10 +353,12 @@ class SpotifyService {
 
 
     getListOfUserPlaylistsIDs() {
-        return executeMethod(() => {
-            // todo: this is wrong need the userId of the user who we granted permission to
-            return this.spotifyApi.getUserPlaylists();
-        })
+        return this.getUserInfo()
+            .then((userInfo) => {
+                return executeMethod(() => {
+                    return this.spotifyApi.getUserPlaylists(userInfo.id);
+                });
+            })
             .then((res) => {
                 if (!this.isResponseBodyItemsValid(res)) return [];
                 const playlistsIDs = [];
