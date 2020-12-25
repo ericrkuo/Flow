@@ -357,7 +357,7 @@ class SpotifyService {
             .then((userInfo) => {
                 return executeMethod(() => {
                     return this.spotifyApi.getUserPlaylists(userInfo.id);
-                })
+                });
             })
             .then((res) => {
                 if (!this.isResponseBodyItemsValid(res)) return [];
