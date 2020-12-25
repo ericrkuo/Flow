@@ -1,21 +1,6 @@
 const Err = require("../constant/Error");
 const {executeMethod} = require("./SpotifyApiWrapper");
 
-class EmotionService {
-
-    /* PLAN: Find the emotion with largest value possible.
-    * -> (MATCHING OR OPPOSITE) ANGER plays aggressive, harsh music or neutral's
-    * -> CONTEMPT plays ???
-    * -> DISGUST plays ???
-    * -> (OPPOSITE) FEAR plays calm, ambient music
-    * -> (MATCHING OR OPPOSITE) HAPPY plays happy music or sad's
-    * -> (MATCHING OR OPPOSITE) NEUTRAL plays calm, ambient music or anger's
-    * -> (MATCHING OR OPPOSITE) SADNESS plays sad music or happy's
-    * -> SURPRISE plays ???
-    *
-    *
-    * */
-
 //#region EmotionService Map
 const emotionMap = {
     anger: [
@@ -703,6 +688,22 @@ const emotionMap = {
     ],
 };
 //#endregion
+
+class EmotionService {
+
+    /* PLAN: Find the emotion with largest value possible.
+    * -> (MATCHING OR OPPOSITE) ANGER plays aggressive, harsh music or neutral's
+    * -> CONTEMPT plays ???
+    * -> DISGUST plays ???
+    * -> (OPPOSITE) FEAR plays calm, ambient music
+    * -> (MATCHING OR OPPOSITE) HAPPY plays happy music or sad's
+    * -> (MATCHING OR OPPOSITE) NEUTRAL plays calm, ambient music or anger's
+    * -> (MATCHING OR OPPOSITE) SADNESS plays sad music or happy's
+    * -> SURPRISE plays ???
+    *
+    *
+    * */
+
 
     /**
      * Constructor for EmotionService class
