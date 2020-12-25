@@ -45,8 +45,8 @@ router.get("/login", (req, res) => {
         main = req.app.locals.main;
     }
 
-    let spotifyApi = main.spotifyApi;
-    let html = spotifyApi.createAuthorizeURL(scopes);
+    const spotifyApi = main.spotifyApi;
+    const html = spotifyApi.createAuthorizeURL(scopes);
     console.log(html);
 
     const state = generateRandomString(16);
@@ -73,7 +73,7 @@ router.get("/callback", async (req, res) => {
         main = req.app.locals.main;
     }
 
-    let spotifyApi = main.spotifyApi;
+    const spotifyApi = main.spotifyApi;
     const {code} = req.query;
     console.log(code);
 
@@ -86,9 +86,9 @@ router.get("/callback", async (req, res) => {
             console.log("ACCESS TOKEN: " + spotifyApi.getAccessToken());
             console.log("\n");
             console.log("REFRESH TOKEN: " + spotifyApi.getRefreshToken());
-            return res.redirect('/webcam');
-        }).catch((err) => {
-            return res.redirect('/#/error/invalid-token');
+            return res.redirect("/webcam");
+        }).catch(() => {
+            return res.redirect("/#/error/invalid-token");
         });
 });
 

@@ -14,12 +14,12 @@ $("#playlistModal").on("hide.bs.modal", function () {
     $("#collapsePlaylistMessage").collapse("hide");
 });
 
-$(document).on('click', '.alert-close', function() {
+$(document).on("click", ".alert-close", function() {
     $(this).parent().hide();
-})
+});
 
-let errorAlert = document.getElementById("errorAlert");
-let errorAlertClose = document.getElementById("errorAlertClose");
+const errorAlert = document.getElementById("errorAlert");
+const errorAlertClose = document.getElementById("errorAlertClose");
 
 errorAlertClose.addEventListener("click", () => {
     hide([errorAlert]);
@@ -275,24 +275,24 @@ function addPlaylistEventListeners() {
                         window.open(url, "_blank");
                     })
                     .catch((error) => {
-                        $('#errorAlert').append('<a class="close alert-close">&times</a>' +
-                            '<span>'+'Sorry, we encountered an error. ' + '</span>');
+                        $("#errorAlert").append("<a class=\"close alert-close\">&times</a>" +
+                            "<span>"+"Sorry, we encountered an error. " + "</span>");
 
                         if(error.response) {
-                            $('#errorAlert').append('<span>' + error.response.data.errorMsg +'</span>');
+                            $("#errorAlert").append("<span>" + error.response.data.errorMsg +"</span>");
 
                             if(error.response.data.redirectLink) {
                                 setTimeout(function() {
-                                    location.href= error.response.data.redirectLink
+                                    location.href= error.response.data.redirectLink;
                                 }, 5000);
                             }
                         } else if (error.message) {
-                            $('#errorAlert').append('<span>'+'Sorry, we encountered an error. ' +
-                                error.message +'</span>');
+                            $("#errorAlert").append("<span>"+"Sorry, we encountered an error. " +
+                                error.message +"</span>");
                         }
 
-                        cancelPlaylistButton.removeAttribute('disabled');
-                        createPlaylistButton.removeAttribute('disabled');
+                        cancelPlaylistButton.removeAttribute("disabled");
+                        createPlaylistButton.removeAttribute("disabled");
                         show([errorAlert, errorAlertClose]);
                     });
             }
@@ -490,13 +490,13 @@ function removeAllChildren(node) {
 }
 
 function hide(elements) {
-    for (let element of elements) {
+    for (const element of elements) {
         element.style.setProperty("display", "none");
     }
 }
 
 function show(elements) {
-    for (let element of elements) {
+    for (const element of elements) {
         element.style.removeProperty("display");
     }
 }

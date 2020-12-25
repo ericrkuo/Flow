@@ -1,7 +1,7 @@
 const express = require("express");
 const {webcamLimiter} = require("./rateLimiter");
 const {checkCredentials, refreshCredentialsIfExpired, checkWebcamPostBody} = require("./middleware");
-var router = express.Router();
+const router = express.Router();
 
 /* GET home page. */
 router.get("/", checkCredentials, function (req, res) {
@@ -10,13 +10,13 @@ router.get("/", checkCredentials, function (req, res) {
     return res.render("webcam");
 });
 
-router.post('/', [webcamLimiter, refreshCredentialsIfExpired, checkWebcamPostBody], function (req, res, next) {
-    let main = req.app.locals.main;
+router.post("/", [webcamLimiter, refreshCredentialsIfExpired, checkWebcamPostBody], function (req, res) {
+    const main = req.app.locals.main;
     main.dataURL = req.body.dataURL;
     return main.getRelevantSongsTestingPurposes()
-        .then((tracks) => {
+        .then(() => {
             console.log("REACHED HERE");
-            let result = main.result;
+            const result = main.result;
             if (result) {
                 return res.status(200).json({result: result});
             } else {

@@ -8,9 +8,9 @@ const getTracksButton = document.getElementById("get-tracks");
 const errorMsgElement = document.getElementById("spanErrorMsg");
 const loadingDiv = document.getElementById("loader");
 const webcam = document.getElementById("webcam");
-let infoAlert = document.getElementById("infoAlert");
-let errorAlert = document.getElementById("errorAlert");
-let errorAlertSpan = document.getElementById("errorAlertSpan");
+const infoAlert = document.getElementById("infoAlert");
+const errorAlert = document.getElementById("errorAlert");
+const errorAlertSpan = document.getElementById("errorAlertSpan");
 let stream;
 
 const constraints = {
@@ -34,10 +34,10 @@ async function init() {
         handleSuccess(stream);
     } catch (err) {
         show([errorAlert]);
-        $('#errorAlert').append('<span>'+'Sorry, we encountered an error. Redirecting you in 5 seconds ...' +
-            error.response.data.errorMsg +'</span>');
+        $("#errorAlert").append("<span>"+"Sorry, we encountered an error. Redirecting you in 5 seconds ..." +
+            error.response.data.errorMsg +"</span>");
         setTimeout(function() {
-            location.href = "/"
+            location.href = "/";
         }, 5000);
     }
 }
@@ -83,26 +83,26 @@ function postTracks(dataURL) {
             hide([loadingDiv]);
             show([webcam, errorAlert]);
             $("#header").hide();
-            $('#errorAlert').append('<span>'+'Sorry, we encountered an error. ' + '</span>');
+            $("#errorAlert").append("<span>"+"Sorry, we encountered an error. " + "</span>");
 
             if(error.response) {
-                $('#errorAlert').append('<span>' + error.response.data.errorMsg +'</span>');
+                $("#errorAlert").append("<span>" + error.response.data.errorMsg +"</span>");
 
                 if(error.response.data.redirectLink) {
                     setTimeout(function() {
-                        location.href= error.response.data.redirectLink
+                        location.href= error.response.data.redirectLink;
                     }, 5000);
                 }
             } else if (error.message) {
-                $('#errorAlert').append('<span>'+'Sorry, we encountered an error. ' +
-                    error.message +'</span>');
+                $("#errorAlert").append("<span>"+"Sorry, we encountered an error. " +
+                    error.message +"</span>");
             }
 
         });
 }
 
 getTracksButton.onclick = () => {
-    const dataURL = canvas.toDataURL('image/png', 1);
+    const dataURL = canvas.toDataURL("image/png", 1);
     hide([webcam]);
     show([loadingDiv]);
     $("#errorAlert").html("").hide();

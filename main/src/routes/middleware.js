@@ -4,8 +4,6 @@ const {Main} = require("../Main");
  * Checks whether user is authenticated and authorized. If so, proceed with next(), otherwise redirect user to login page
  * Used as middle ware function
  * */
-const {Main} = require("../Main");
-
 function checkCredentials(req, res, next) {
     const main = req.app.locals.main;
     if (!isMainAndSpotifyApiAndRefreshCredentialValid) {
