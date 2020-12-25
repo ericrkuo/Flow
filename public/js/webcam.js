@@ -33,12 +33,9 @@ async function init() {
         stream = await navigator.mediaDevices.getUserMedia(constraints);
         handleSuccess(stream);
     } catch (err) {
+        $("#errorAlert").append("<span>"+"Sorry, we encountered an error. " +
+            err.response.data.errorMsg +"</span>");
         show([errorAlert]);
-        $("#errorAlert").append("<span>"+"Sorry, we encountered an error. Redirecting you in 5 seconds ..." +
-            error.response.data.errorMsg +"</span>");
-        setTimeout(function() {
-            location.href = "/";
-        }, 5000);
     }
 }
 
@@ -81,7 +78,6 @@ function postTracks(dataURL) {
         })
         .catch((error) => {
             hide([loadingDiv]);
-            show([webcam, errorAlert]);
             $("#header").hide();
             $("#errorAlert").append("<span>"+"Sorry, we encountered an error. " + "</span>");
 
@@ -92,6 +88,7 @@ function postTracks(dataURL) {
                     error.message +"</span>");
             }
 
+            show([webcam, errorAlert]);
         });
 }
 
@@ -118,7 +115,6 @@ takePhotoButton.addEventListener("click", () => {
 
 tryAgainButton.addEventListener("click", () => {
     hideAndShowHTMLElementsForTryAgainButton();
-    show([infoAlert]);
     return init();
 });
 
@@ -127,6 +123,7 @@ function hideAndShowHTMLElementsForTryAgainButton() {
     show([video]);
     hide([afterCaptureButtons, canvas]);
     hide([errorAlert]);
+    show([infoAlert]);
 }
 
 function hideAndShowHTMLElementsForCaptureButton() {
