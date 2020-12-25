@@ -23,6 +23,10 @@
             "error",
             "double"
         ],
+        "eol-last": [
+            "error",
+            "always"
+        ],
         "semi": [
             "error",
             "always"
