@@ -704,11 +704,22 @@ class EmotionService {
     *
     * */
 
+
+    /**
+     * Constructor for EmotionService class
+     * Find the emotion with largest value possible.
+     * @param spotifyApi - instance of SpotifyAPI
+     */
     constructor(spotifyApi) {
         this.spotifyApi = spotifyApi;
         this.features = ["danceability", "energy", "loudness", "speechiness", "acousticness", "instrumentalness", "liveness", "valence", "tempo"];
     }
 
+    /**
+     * Gets the song features associated with the dominant mood, based on audio features for tracks
+     * @param mood - current mood of user
+     * @returns {Promise<never>|Promise<T | void>} - Object of features for this mood
+     */
     getFeatures(mood) {
         if (typeof mood !== "string" || !emotionMap[mood]) return Promise.reject(new Err.InvalidInputError(mood + " is not a recognized mood, cannot get audio features"));
         const numTracks = emotionMap[mood].length;
@@ -743,6 +754,11 @@ class EmotionService {
             });
     }
 
+    /**
+     * Gets the dominant emotion for the current user based on largest value
+     * @param emotionData - data with quantities for each emotion
+     * @returns string - user's most dominant mood
+     */
     getDominantExpression(emotionData) {
         if (!this.isEmotionDataValid(emotionData)) throw new Err.InvalidInputError("Cannot get dominant expression in EmotionService, data isn't formatted correctly");
 
@@ -759,6 +775,11 @@ class EmotionService {
         return dominantEmotion;
     }
 
+    /**
+     * Checks if emotion data provided is valid
+     * @param emotionData - data provided by AzureFaceAPI
+     * @returns boolean - returns true if emotionData is not null/undefined, is an object, and is not an array
+     */
     isEmotionDataValid(emotionData) {
         return emotionData && typeof emotionData === "object" && !Array.isArray(emotionData);
     }

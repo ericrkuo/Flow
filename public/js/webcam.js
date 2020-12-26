@@ -26,6 +26,10 @@ video.addEventListener("animationend", ()=> {
     show([beforeCaptureButtons]);
 });
 
+/**
+ * Initializes webcam page
+ * @returns {Promise<void>}
+ */
 async function init() {
     try {
         hide([canvas, afterCaptureButtons, beforeCaptureButtons, loadingDiv]);
@@ -39,6 +43,10 @@ async function init() {
     }
 }
 
+/**
+ * Handles success of video stream
+ * @param stream - current video stream
+ */
 function handleSuccess(stream) {
     window.stream = stream;
     video.srcObject = stream;
@@ -53,12 +61,20 @@ init();
 // hide([webcam]);
 // show([loadingDiv]);
 
+/**
+ * Turns off the video stream
+ */
 function turnOffStream() {
     stream.getTracks().forEach(function (track) {
         track.stop();
     });
 }
 
+/**
+ * Makes a POST request to /webcam to get personalized tracks
+ * @param dataURL - image of the user
+ * @returns {Promise<T | void>}
+ */
 function postTracks(dataURL) {
     const data = JSON.stringify({dataURL: dataURL});
     const url = window.location.origin + "/webcam";
@@ -92,6 +108,9 @@ function postTracks(dataURL) {
         });
 }
 
+/**
+ * Adds event listener to "Get Tracks" button and calls postTracks
+ */
 getTracksButton.onclick = () => {
     const dataURL = canvas.toDataURL("image/png", 1);
     hide([webcam]);
@@ -101,6 +120,9 @@ getTracksButton.onclick = () => {
 };
 
 
+/**
+ * Adds event listener to "Take Photo" button to capture image of user
+ */
 takePhotoButton.addEventListener("click", () => {
     // dimension of pixels in canvas
     canvas.width = video.offsetWidth;
@@ -113,11 +135,17 @@ takePhotoButton.addEventListener("click", () => {
     turnOffStream();
 });
 
+/**
+ * Adds event listener to "Try Again" button to capture a better image
+ */
 tryAgainButton.addEventListener("click", () => {
     hideAndShowHTMLElementsForTryAgainButton();
     return init();
 });
 
+/**
+ * Hides and shows elements for "Try Again" button
+ */
 function hideAndShowHTMLElementsForTryAgainButton() {
     video.className = "video-no-animation";
     show([video]);
@@ -126,17 +154,28 @@ function hideAndShowHTMLElementsForTryAgainButton() {
     show([infoAlert]);
 }
 
+/**
+ * Hides and shows elements for "Capture" button
+ */
 function hideAndShowHTMLElementsForCaptureButton() {
     hide([video, beforeCaptureButtons]);
     show([afterCaptureButtons, canvas]);
 }
 
+/**
+ * Hides each element from page
+ * @param elements - list of current HTML elements
+ */
 function hide(elements) {
     for (const element of elements) {
         element.style.setProperty("display", "none");
     }
 }
 
+/**
+ * Shows each element from page
+ * @param elements - list of current HTML elements
+ */
 function show(elements) {
     for (const element of elements) {
         element.style.removeProperty("display");

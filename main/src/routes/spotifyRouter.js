@@ -17,8 +17,8 @@ const scopes = ["user-read-private",
 
 /**
  * Generates a random string containing numbers and letters
- * @param  {number} length The length of the string
- * @return {string} The generated string
+ * @param  {number} - length The length of the string
+ * @return {string} - the generated string
  */
 const generateRandomString = function(length) {
     let text = "";
@@ -32,11 +32,16 @@ const generateRandomString = function(length) {
 
 const stateKey = "spotify_auth_state";
 
-/* GET home page. */
+/**
+ * Handles GET request for spotify page
+ */
 router.get("/", function (req, res) {
     res.render("index", {title: "Express"});
 });
 
+/**
+ * Handles GET request for spotify/login page
+ */
 router.get("/login", (req, res) => {
     let main = req.app.locals.main;
 
@@ -54,6 +59,9 @@ router.get("/login", (req, res) => {
     res.redirect(html + "&state=" + state + "&show_dialog=true");
 });
 
+/**
+ * Handles GET request for spotify/callback page
+ */
 router.get("/callback", async (req, res) => {
     const state = req.query.state || null;
     const storedState = req.cookies ? req.cookies[stateKey] : null;

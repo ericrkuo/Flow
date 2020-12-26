@@ -2,24 +2,28 @@ const Err = require("../constant/Error");
 
 class KMean {
 
-    /*
-    * Summary.kMean algorithm
-    *
-    * High Level Steps.
-    * 1. choose k random centroids
-    * 2. move each data vector to closest centroid, so create the clusters
-    * 3. recalculate the means of the centroids
-    * 4. if centroids shifted, redo steps, otherwise return clusters
-    *
-    * Description.
-    * * features = {f1,f2,f3,...}
-    * * track = [id, {f1,f2,f3,f4,...}]
-    * * data: [track1, track2, track3, ...] - array of tracks where each track = [trackID, audioFeatures]
-    * * centroids: [0: features0, 1: features1, ..., k: featuresk] - array of k audio features
-    * * clusters: [0: [tracks], 1: [tracks], 2: [tracks], ..., k: [tracks]] - array of k tracks where each track = [trackID, audioFeatures]
-    * * vecArray: [0: features0, 1: features1, ..., k: featuresk] - array of k audioFeatures, vecArray[i] is average of all audioFeatures for this.clusters[i]
-    *
-    * */
+
+    /**
+     * Summary of the kMean algorithm
+     * ====== High Level Steps ======
+     * 1. choose k random centroids
+     * 2. move each data vector to closest centroid, so create the clusters
+     * 3. recalculate the means of the centroids
+     * 4. if centroids shifted, redo steps, otherwise return clusters
+     *
+     * ====== Description ======
+     * features = {f1,f2,f3,...}
+     * track = [id, {f1,f2,f3,f4,...}]
+     * * data: [track1, track2, track3, ...] - array of tracks where each track = [trackID, audioFeatures]
+     * * centroids: [0: features0, 1: features1, ..., k: featuresk] - array of k audio features
+     * clusters: [0: [tracks], 1: [tracks], 2: [tracks], ..., k: [tracks]] - array of k tracks where each track = [trackID, audioFeatures]
+     * vecArray: [0: features0, 1: features1, ..., k: featuresk] - array of k audioFeatures, vecArray[i] is average of all audioFeatures for this.clusters[i]
+     *
+     * @param data - list of songs with associated features
+     * @param k - number of centroids
+     * @returns {*[]} - array of k clusters
+     *
+     */
     kMean(data, k) {
         this.data = Object.entries(data); // [ [id1, {f1, f2, ...}], [id2, {f1, f2, ...}], ...]
         this.k = k;
@@ -47,10 +51,9 @@ class KMean {
     }
 
     /**
-    * Summary. Forgy Method
-    *
-    * Description. Choose k centroids at random
-    */
+     * Forgy Method
+     * Choose k centroids at random
+     */
     initializeKRandomCentroids() {
         const length = this.data.length - 1;
         const arr = [];
@@ -66,14 +69,14 @@ class KMean {
         }
     }
 
-    /*
-    * Summary. K Means++ method - O(k^2 * n) - bad
-    *
-    * High Level Steps.
-    * 1. choose one random centroid first
-    * 2. for each data vector, find the minimum distance to all previously chosen centroids
-    * 3. choose the next centroid as the data vector that has the largest min distance (furthest from all centroids)
-    * */
+    /**
+     * K Means++ method - O(k^2 * n) - bad
+     *
+     * ====== High Level Steps ======
+     * 1. choose one random centroid first
+     * 2. for each data vector, find the minimum distance to all previously chosen centroids
+     * 3. choose the next centroid as the data vector that has the largest min distance (furthest from all centroids)
+     */
     initializeKPlusPlusCentroids() {
         const n = this.data.length;
 
@@ -109,14 +112,13 @@ class KMean {
     }
 
     /**
-     * Summary. K Means++ method - O(k * n) - good
+     * K Means++ method - O(k * n) - good
      *
-     * * for each value of k, the next centroid is the data point that is furthest from all centroids already found so far
+     * For each value of k, the next centroid is the data point that is furthest from all centroids already found so far
      * * O(k*n) because for any centroid j where j=[0...k] and any track t in this.data, minDistanceMap will already have computed
      * the minimum distance from t to all centroids [0...j-2], therefore we only need to compute distance from t to
      * centroid[j-1] to update minDistanceMap. Then we find the furthest data point from all centroids [0...j-1],
      * let this data point be i and set centroids[j]=i. Continue to calculate rest of centroids
-     *
      */
     initializeKPlusPlusCentroidsOptimized() {
         const n = this.data.length;
@@ -146,13 +148,13 @@ class KMean {
     }
 
     /**
-     * Summary. Groups data points into clusters based on centroids and shifts centroids with each iteration.
+     * Groups data points into clusters based on centroids and shifts centroids with each iteration.
      * Shifts centroids until the maximum distance between vecArray[i] and clusters[i] is no greater than this.meanValueLeniency
      *
-     * * this.data = array of tracks where each track = [trackID, audioFeatures]
-     * * this.centroids = array of k audio features
-     * * this.clusters = array of k tracks where each track = [trackID, audioFeatures]
-     * * vecArray = array of k audioFeatures, vecArray[i] is average of all audioFeatures for this.clusters[i]
+     * this.data = array of tracks where each track = [trackID, audioFeatures]
+     * this.centroids = array of k audio features
+     * this.clusters = array of k tracks where each track = [trackID, audioFeatures]
+     * vecArray = array of k audioFeatures, vecArray[i] is average of all audioFeatures for this.clusters[i]
      *
      * @throws KMeanIterationError - if more iterations than this.MAX_ITERATIONS
      * @throws KMeanClusterError - if don't find k clusters or a cluster is empty
@@ -214,6 +216,11 @@ class KMean {
         this.iterate();
     }
 
+    /**
+     * Finds the index of the nearest centroid for the current track
+     * @param track - current song
+     * @returns {number} - index of nearest centroid
+     */
     findIndexOfNearestCentroid(track) {
         let minDistance = Infinity;
         let index = 0;
@@ -229,6 +236,10 @@ class KMean {
     }
 
     // TODO: research other types of distance (manhattan etc)
+    /**
+     * Calculates the distance between the two tracks
+     * @returns {number} - amoount of distance
+     */
     distance(track1, track2) {
         let distance = 0;
         for (const feature of this.features) {
@@ -238,17 +249,16 @@ class KMean {
     }
 
     /**
-     * Summary. Computes silhouette method
+     * Computes silhouette method
      *
-     * Description. compute the mean s(i) for each data point i
+     * Compute the mean s(i) for each data point i
      * * s(i) = 0 if |C(i)| = 1
      * * s(i) = (b(i)-a(i))/max(a(i), b(i))
      * * a(i) = similarity of i to cluster - average distance of i to every other point in cluster
      * * b(i) = dissimilarity of i to other clusters - minimum mean distance to all other clusters
      *
-     * @param clusters Array of clusters where each cluster is a track [trackId, audioFeatureData]
-     *
-     * @return Returns array with bestK, clusters of the bestK, and map of all k values and their silhouetteValue's and clusters. map = {k: [silhouetteValue, clusters]} .
+     * @param clusters - array of clusters where each cluster is a track [trackId, audioFeatureData]
+     * @return [*{}]- array with bestK, clusters of the bestK, and map of all k values and their silhouetteValue's and clusters. map = {k: [silhouetteValue, clusters]} .
      */
     computeSilhouetteValue(clusters) {
         this.a = new Map();
@@ -266,6 +276,10 @@ class KMean {
         return silhouetteValue / sSize;
     }
 
+    /**
+     * Computes a(i) for each cluster in the set of clusters
+     * @param clusters - current group of clusters
+     */
     computeAForAllClusters(clusters) {
         for (const cluster of clusters) {
             if (cluster.length === 1) {
@@ -278,13 +292,10 @@ class KMean {
     }
 
     /**
-     * Summary. Computes a value for a single cluster, similarity of i to cluster
+     * Computes a value for a single cluster, similarity of i to cluster
+     * For each data point i, calculate the average distance of i to every point in the same cluster
      *
-     * Description.
-     * * for each data point i, calculate the average distance of i to every point in the same cluster
-     *
-     *
-     * @param cluster
+     * @param cluster - current cluster
      */
     computeAForSingleCluster(cluster) {
         const n = cluster.length;
@@ -302,14 +313,14 @@ class KMean {
     }
 
     /**
-     * Summary. Computes b value for a single cluster, dissimilarity of i to other clusters
+     * Computes b value for a single cluster, dissimilarity of i to other clusters
      *
-     * Description. Finds the minimum mean distance to all other clusters
-     * * for each data point i, calculate the distance from i to cluster j (for each cluster j [0...k])
-     * * distance between data point i and cluster j is the mean distance from i to every data point in cluster j
-     * * find the minimum mean distance from i to all clusters [0...k]
+     * Finds the minimum mean distance to all other clusters
+     * for each data point i, calculate the distance from i to cluster j (for each cluster j [0...k])
+     * distance between data point i and cluster j is the mean distance from i to every data point in cluster j
+     * find the minimum mean distance from i to all clusters [0...k]
      *
-     * @param clusters
+     * @param clusters - current group of clusters
      */
     computeBForAllClusters(clusters) {
         for (let i = 0; i < this.k; i++) {
@@ -331,6 +342,12 @@ class KMean {
         }
     }
 
+    /**
+     * Compute the average distance between a track and cluster
+     * @param t1 - a track
+     * @param cluster - current cluster
+     * @returns {number} - mean distance
+     */
     computeMeanDistanceToCluster(t1, cluster) {
         const n = cluster.length;
         let sumDistance = 0;
@@ -340,6 +357,10 @@ class KMean {
         return sumDistance / n;
     }
 
+    /**
+     * Computes s(i) for all the clusters
+     * @param clusters - current group of clusters
+     */
     computeSForAllClusters(clusters) {
         for (const cluster of clusters) {
             for (const track of cluster) {
@@ -357,10 +378,9 @@ class KMean {
     }
 
     /**
-     * Description. Goes through range of k's and runs kMean algorithm and computes silhouetteValue for each k.
+     * Goes through range of k's and runs kMean algorithm and computes silhouetteValue for each k.
      *
      * @param data Object where key is trackID and value is track audio features
-     *
      * @return Returns array with bestK, clusters of the bestK, and map of all k values and their silhouetteValue's and clusters. map = {k: [silhouetteValue, clusters]} .
      */
     getOptimalKClusters(data) {

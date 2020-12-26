@@ -3,18 +3,23 @@ const readMoreForHowWeDidItButton = document.getElementById("readHowWeDidIt");
 const readMoreFutureButton = document.getElementById("readFuture");
 const readMoreReflectionButton = document.getElementById("readReflection");
 
+/**
+ * Adds event listener for the "Get Started" button and directs user to /webcam
+ */
 getStartedButton.addEventListener("click", () => {
     location.href = "/webcam";
 });
 
+/**
+ * Centers the modal on the page
+ *  Make sure you don't hide the top part of the modal w/ a negative margin if it's longer than the screen height
+ *  and keep the margin equal to the bottom margin of the modal
+ */
 function centerModal() {
     $(this).css("display", "block");
     const $dialog = $(this).find(".modal-dialog");
     let offset = ($(window).height() - $dialog.height()) / 2;
     const bottomMargin = parseInt($dialog.css("marginBottom"), 10);
-
-    // Make sure you don't hide the top part of the modal w/ a negative margin if it's longer than the screen height,
-    // and keep the margin equal to the bottom margin of the modal
     if (offset < bottomMargin) offset = bottomMargin;
     $dialog.css("margin-top", offset);
 }
@@ -25,6 +30,9 @@ $(window).on("resize", function () {
     $(".modal:visible").each(centerModal);
 });
 
+/**
+ * Upon click of the "How We Did it" button, opens/centers modal and inserts title/text description
+ */
 readMoreForHowWeDidItButton.addEventListener("click", () => {
     $("#infoModal").modal("show", centerModal);
     $("#infoModalLabel").text("HOW WE DID IT");
@@ -46,6 +54,9 @@ readMoreForHowWeDidItButton.addEventListener("click", () => {
         "user flow as well as ensured our code was robust to handle unexpected errors.");
 });
 
+/**
+ * Upon click of the "Future" button, opens/centers modal and inserts title/text description
+ */
 readMoreFutureButton.addEventListener("click", () => {
     $("#infoModal").modal("show", centerModal);
     $("#infoModalLabel").text("THE FUTURE");
@@ -58,6 +69,9 @@ readMoreFutureButton.addEventListener("click", () => {
         " of recommended tracks");
 });
 
+/**
+ * Upon click of the "Reflection" button, opens/centers modal and inserts title/text description
+ */
 readMoreReflectionButton.addEventListener("click", () => {
     $("#infoModal").modal("show", centerModal);
     $("#infoModalLabel").text("REFLECTION");

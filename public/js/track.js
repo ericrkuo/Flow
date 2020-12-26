@@ -31,6 +31,9 @@ initializeTracksDiv();
 initializeMoodDiv();
 initializePlaylistDiv();
 
+/**
+ * Initializes track page
+ */
 function initialize() {
     const homeButton = document.getElementById("home");
     const aboutUsButton = document.getElementById("info");
@@ -43,6 +46,9 @@ function initialize() {
 
 }
 
+/**
+ * Initializes div for all the tracks
+ */
 function initializeTracksDiv() {
     const tracksDiv = document.getElementById("tracks-div");
     let counter = 1;
@@ -75,6 +81,11 @@ function initializeTracksDiv() {
 
 }
 
+/**
+ * Creates a track card for current track ID
+ * @param id - current track ID
+ * @returns {HTMLDivElement}
+ */
 function createTrackCard(id) {
     const container = document.createElement("div");
     container.className = TRACK_CARD_CONTAINER;
@@ -101,7 +112,9 @@ function createTrackCard(id) {
     return container;
 }
 
-
+/**
+ * Initializes mood div
+ */
 function initializeMoodDiv() {
     document.getElementById("mood-string").innerText = mood.dominantMood;
 
@@ -145,6 +158,9 @@ function initializeMoodDiv() {
     });
 }
 
+/**
+ * Initializes playlist div and adds event listeners
+ */
 function initializePlaylistDiv() {
     const playlistRowClassName = PLAYLIST_ROW;
     let counter = 1;
@@ -177,6 +193,11 @@ function initializePlaylistDiv() {
     addPlaylistEventListeners();
 }
 
+/**
+ * Creates a playlist card for current track ID
+ * @param id - current track ID
+ * @returns {HTMLDivElement}
+ */
 function createPlaylistCard(id) {
     const row = document.createElement("div");
     row.className = PLAYLIST_CARD_ROW;
@@ -313,6 +334,11 @@ function addPlaylistEventListeners() {
     });
 }
 
+/**
+ * Sends a POST request to /tracks to create a playlist for the user
+ * @param data - user's tracks data
+ * @returns {Promise<T | void>}
+ */
 function sendPOSTRequestToCreatePlaylist(data) {
     const url = window.location.origin + "/tracks";
 
@@ -338,6 +364,10 @@ function sendPOSTRequestToCreatePlaylist(data) {
         });
 }
 
+/**
+ * Gets all the spotify URLS for the current tracks
+ * @returns {string[]} - array of track URL strings
+ */
 function getAllTrackURLs() {
     const data = [];
     for (const id of playlistMap.keys()) {
@@ -349,6 +379,9 @@ function getAllTrackURLs() {
     return data;
 }
 
+/**
+ * Initializes user info div
+ */
 function initializeUserInfoDiv() {
     const img = document.getElementById("user-image");
     img.src = getUserImageURL();
@@ -359,13 +392,20 @@ function initializeUserInfoDiv() {
     });
 }
 
-// MODAL INFO ---------------------------------------
+/**
+ * Performs initialization of modal information
+ * @param id - ID of current track
+ */
 function editModalContent(id) {
     initializeModalImage(id);
     initializeModalContent(id);
     initializeModalAnalytics(id);
 }
 
+/**
+ * Initializes modal analytics
+ * @param id - current track ID
+ */
 function initializeModalAnalytics(id) {
     const trackChart = document.createElement("canvas");
     modalAnalytics.appendChild(trackChart);
@@ -404,6 +444,10 @@ function initializeModalAnalytics(id) {
     });
 }
 
+/**
+ * Initializes modal content
+ * @param id - current track ID
+ */
 function initializeModalContent(id) {
     const track = tracks[id].track;
     const previewURL = track.preview_url;
@@ -433,10 +477,19 @@ function initializeModalContent(id) {
     urlButton.onclick = () => { window.open(trackURL, "_blank"); };
 }
 
+/**
+ * Initializes modal image
+ * @param id - current track ID
+ */
 function initializeModalImage(id) {
     document.getElementById("modal-image").src = getAlbumImageURL(id);
 }
 
+/**
+ * Gets the image URL of current album
+ * @param id - current track ID
+ * @returns {string|string|*}
+ */
 function getAlbumImageURL(id) {
     const images = tracks[id].track.album.images;
     if (images.length !== 0 && images[0].url !== undefined && images[0].url !== null && images[0].url !== "") {
@@ -446,6 +499,10 @@ function getAlbumImageURL(id) {
     }
 }
 
+/**
+ * Gets the image URL of current user
+ * @returns {string|string|*}
+ */
 function getUserImageURL() {
     const userImages = userInfo.images;
     if (userImages.length !== 0 && userImages[0].url !== undefined && userImages[0].url !== null && userImages[0].url !== "") {
@@ -455,6 +512,11 @@ function getUserImageURL() {
     }
 }
 
+/**
+ * Gets artist names of artists
+ * @param artists - list of current artists
+ * @returns {string}
+ */
 function getArtistNames(artists) {
     let artistNames = "";
     let n = artists.length;
@@ -464,6 +526,11 @@ function getArtistNames(artists) {
     return artistNames + artists[--n].name;
 }
 
+/**
+ * Converts ms to minutes
+ * @param totalMs - total ms of current song
+ * @returns {string} - total mins of current song
+ */
 function getTimeInMinutes(totalMs) {
     const totalSeconds = totalMs / 1000;
     const minutes = Math.floor(totalSeconds / 60);
@@ -473,6 +540,10 @@ function getTimeInMinutes(totalMs) {
 
 }
 
+/**
+ * Removes all children from node
+ * @param node - current node
+ */
 function removeAllChildren(node) {
     while (node.firstChild) {
         node.removeChild(node.lastChild);

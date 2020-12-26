@@ -1,6 +1,9 @@
 const homeButton = document.getElementById("home");
 const aboutUsButton = document.getElementById("info");
 
+/**
+ * Adds event listeners to all navigation buttons for tutorial, home, and about us buttons
+ */
 homeButton.addEventListener("click", ()=>{
     location.href = "/";
 });
@@ -10,6 +13,9 @@ aboutUsButton.addEventListener("click", ()=>{
 
 updateNavigation();
 
+/**
+ * Updates the navigation display to bold for current page
+ */
 function updateNavigation() {
     const path = window.location.pathname;
     const stringToAdd = " font-weight-bold";

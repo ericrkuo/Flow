@@ -3,13 +3,18 @@ const {webcamLimiter} = require("./rateLimiter");
 const {checkCredentials, refreshCredentialsIfExpired, checkWebcamPostBody} = require("./middleware");
 const router = express.Router();
 
-/* GET home page. */
+/**
+ * Handles GET request for webcam page
+ */
 router.get("/", checkCredentials, function (req, res) {
     // res.sendFile(path.join(__dirname+"/webcam.html"), {json: json});
     // res.sendFile(absolutePath.getAbsolutePath());
     return res.render("webcam");
 });
 
+/**
+ * Handles POST request for webcam page to get relevant songs for user
+ */
 router.post("/", [webcamLimiter, refreshCredentialsIfExpired, checkWebcamPostBody], function (req, res) {
     const main = req.app.locals.main;
     main.dataURL = req.body.dataURL;

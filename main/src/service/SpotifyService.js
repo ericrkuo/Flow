@@ -3,30 +3,41 @@ const {executeMethod} = require("./SpotifyApiWrapper");
 
 class SpotifyService {
 
-    /*
-    * addRecentlyPlayedTracks()  - 50
-    * addTopTracks()             - 100
-    * addSavedTracks()           - 150
-    * addTopArtistTracks()       - 200
-    * addSeedTracks()            - 100
-    * addUserPlaylistsTracks     - 100
-    * addAllTracksToHashMap()
-    * getAllAudioFeatures() - adds all tracks to hashmap and gets all the audio features
-    * */
-
-
+    /**
+     * Constructor for spotifyService class
+     * Default mood is happiness
+     *
+     * addRecentlyPlayedTracks()  - 50
+     * addTopTracks()             - 100
+     * addSavedTracks()           - 150
+     * addTopArtistTracks()       - 200
+     * addSeedTracks()            - 100
+     * addUserPlaylistsTracks     - 100
+     * addAllTracksToHashMap()
+     * getAllAudioFeatures() - adds all tracks to hashmap and gets all the audio features
+     *
+     * @param spotifyApi - current instance of spotifyApi
+     */
     constructor(spotifyApi) {
         this.spotifyApi = spotifyApi;
         this.trackHashMap = new Map();
-        this.mood = "happiness"; // default
+        this.mood = "happiness";
     }
 
+    /**
+     * Sample function used to test validity of credentials
+     * @returns {Promise<T|*|undefined>}
+     */
     sampleFunction() {
         return executeMethod( () => {
             return this.spotifyApi.getArtistAlbums("43ZHCT0cAZBISjO8DG9PnE");
         });
     }
 
+    /**
+     * Adds all recently played, top, saved, seed, top artist, and user playlists tracks to map
+     * @returns boolean - true upon successful addition
+     */
     addAllTracksToHashMap() {
         const promises = [];
         promises.push(this.addRecentlyPlayedTracks());
@@ -46,6 +57,10 @@ class SpotifyService {
             });
     }
 
+    /**
+     * Adds current set of tracks to hashmap
+     * @param tracks - current set of tracks
+     */
     addTracksToHashMap(tracks) {
         if (!tracks || tracks.length === 0 || !Array.isArray(tracks)) {
             console.log("tracks is empty or null");
@@ -56,15 +71,29 @@ class SpotifyService {
         }
     }
 
+    /**
+     * Determines if response body items is valid
+     * @param res - response body
+     * @returns boolean - returns true if response, body, and items are all not null/undefined
+     */
     isResponseBodyItemsValid(res) {
         return res && res.body && res.body.items;
     }
 
+    /**
+     * Determines if response body tracks is valid
+     * @param res - response body
+     * @returns boolean - returns true if response, body, and tracks are all not null/undefined
+     */
     isResponseBodyTracksValid(res) {
         return res && res.body && res.body.tracks;
     }
 
-    // NOTE: if listened to song X 10 times, will return song X 10 times in the array
+    /**
+     * Adds recently played tracks
+     * If song X was listened to 10 times, it will return the song 10 times in the array
+     * @returns boolean - true if tracks were successfully added
+     */
     addRecentlyPlayedTracks() {
         return executeMethod(
             () => {
@@ -87,6 +116,10 @@ class SpotifyService {
             });
     }
 
+    /**
+     * Adds top tracks
+     * @returns boolean - true if tracks were successfully added
+     */
     addTopTracks() {
         const options = [{limit: 50}, {limit: 50, offset: 49}];
         const promises = [];
@@ -112,6 +145,10 @@ class SpotifyService {
             });
     }
 
+    /**
+     * Adds saved tracks
+     * @returns boolean - true if tracks were successfully added
+     */
     addSavedTracks() {
         const options = [{limit: 50}, {limit: 50, offset: 50}, {limit: 50, offset: 100}];
         const promises = [];
@@ -142,6 +179,10 @@ class SpotifyService {
             });
     }
 
+    /**
+     * Adds top artists tracks
+     * @returns boolean - true if tracks were successfully added
+     */
     addTopArtistsTracks() {
         return executeMethod(
             () => {
@@ -172,7 +213,11 @@ class SpotifyService {
         // return Promise.all(promises);
     }
 
-    // NOTE: currently using US as country code
+    /**
+     * Adds artist top tracks
+     * Currently using US for country code
+     * @returns boolean - true if tracks were successfully added
+     */
     addArtistTopTracks(artist) {
         return executeMethod(
             () => {
@@ -190,7 +235,11 @@ class SpotifyService {
             });
     }
 
-    // NOTE: no longer used because of rate limiting for spotifyApi
+    /**
+     * Adds similar artists tracks
+     * Not currently being used because of rate limiting for spotifyApi
+     * @returns boolean - true if tracks were successfully added
+     */
     addSimilarArtistsTopTracks(artist) {
         return executeMethod(
             () => {
@@ -212,6 +261,10 @@ class SpotifyService {
             });
     }
 
+    /**
+     * Gets all the audio features for all the tracks
+     * @returns {Promise<{} | void>}
+     */
     getAllAudioFeatures() {
         return this.addAllTracksToHashMap()
             .then(() => {
@@ -263,6 +316,11 @@ class SpotifyService {
             });
     }
 
+    /**
+     * Gets the audio features for a specific set of tracks
+     * @param tracks - current tracks
+     * @returns {Promise<T | * | undefined | void>}
+     */
     getAudioFeatures(tracks) {
         return executeMethod(
             () => {
@@ -274,13 +332,14 @@ class SpotifyService {
             });
     }
 
-    /*
-    * get recommendations based on seeds (browse)
-    *   - browse by genres (happy,sad) https://developer.spotify.com/console/get-available-genre-seeds/
-    *   - put in seed tracks and seed artists for more recommendations (personalized to user)
-    *   - NOTE** only 5 seeds max total
-    * get 50 happy, 50 sad, 50 chill, 50 ambient,  50 for top 5 artist, 50 for top 5 track
-    * */
+    /**
+     * Gets recommendations based on seeds (browse)
+     *   - browse by genres (happy,sad) https://developer.spotify.com/console/get-available-genre-seeds/
+     *   - put in seed tracks and seed artists for more recommendations (personalized to user)
+     *   - NOTE** only 5 seeds max total
+     * get 50 happy, 50 sad, 50 chill, 50 ambient,  50 for top 5 artist, 50 for top 5 track
+     * @returns boolean - returns true if seed tracks were successfully added
+     */
     addSeedTracks() {
         const promises = [];
         // let optionsArray = [
@@ -352,6 +411,10 @@ class SpotifyService {
     }
 
 
+    /**
+     * Gets a list of playlist IDs for current user
+     * @returns {Promise<string[]>}
+     */
     getListOfUserPlaylistsIDs() {
         return this.getUserInfo()
             .then((userInfo) => {
@@ -373,7 +436,10 @@ class SpotifyService {
             });
     }
 
-
+    /**
+     * Adds user playlists tracks
+     * @returns boolean - returns true if user playlists tracks were successfully added
+     */
     addUserPlaylistsTracks() {
         const NUM_TRACKS_FOR_EACH_PLAYLIST = 100;
         return this.getListOfUserPlaylistsIDs()
@@ -408,8 +474,10 @@ class SpotifyService {
             });
     }
 
-
-    // returns name, email, URL, and image of user
+    /**
+     * Returns information about current Spotify user
+     * @returns JSON - name, email, URL, image of user
+     */
     getUserInfo() {
         return executeMethod(() => {
             return this.spotifyApi.getMe();
@@ -429,8 +497,13 @@ class SpotifyService {
             });
     }
 
-    // NOTE: this will create duplicate playlist if playlist already exists, there is no way to delete a playlist through Spotify API
-    // since deleting a playlist will only make the owner unfollow it, while others can still follow the "deleted" playlist
+
+    /**
+     * Creates new playlist for current user
+     * This will create duplicate playlist if playlist already exists, there is no way to delete a playlist through Spotify API
+     * since deleting a playlist will only make the owner unfollow it, while others can still follow the "deleted" playlist
+     * @returns {Promise<T>}
+     */
     createNewPlaylist() {
         return this.getUserInfo()
             .then((result) => {
@@ -449,6 +522,11 @@ class SpotifyService {
             });
     }
 
+    /**
+     * Creates a new playlist based on list of track URLs
+     * @param trackURLs - list of track URLs
+     * @returns {Promise<T>}
+     */
     getNewPlaylist(trackURLs) {
         let link = null;
         if (!this.isTrackURLsValid(trackURLs)) return Promise.reject(new Err.InvalidInputError("trackURLs is invalid, ensure is a non-empty array"));
@@ -473,10 +551,20 @@ class SpotifyService {
             });
     }
 
+    /**
+     * Checks if created playlist is valid
+     * @param playlist - current playlist generated
+     * @returns boolean - returns true if created playlist, body and items are not null/undefined, status codes are successful
+     */
     isCreatedPlaylistValid(playlist) {
         return playlist && playlist.body && (playlist.statusCode === 200 || playlist.statusCode === 201) && playlist.body.external_urls && playlist.body.external_urls.spotify && playlist.body.id;
     }
 
+    /**
+     * Checks if track URLs are valid
+     * @param trackURLs - current list of track URLs
+     * @returns boolean - returns true if trackURLs are not null/undefined/size zero, and in the format of an array
+     */
     isTrackURLsValid(trackURLs) {
         return trackURLs && Array.isArray(trackURLs) && trackURLs.length !== 0;
     }
