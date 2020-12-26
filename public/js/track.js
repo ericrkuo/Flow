@@ -474,9 +474,7 @@ function initializeModalContent(id) {
     }
 
     const urlButton = document.getElementById("modal-content-button");
-    urlButton.addEventListener("click", () => {
-        window.open(trackURL, "_blank");
-    });
+    urlButton.onclick = () => { window.open(trackURL, "_blank"); };
 }
 
 /**
