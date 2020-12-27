@@ -7,7 +7,6 @@ var logger = require('morgan');
 require('dotenv').config();
 
 var indexRouter = require('./main/src/routes/indexRouter');
-var usersRouter = require('./main/src/routes/users');
 var webcamRouter = require('./main/src/routes/webcamRouter');
 var spotifyRouter = require('./main/src/routes/spotifyRouter');
 var tracksRouter = require('./main/src/routes/trackRouter');
@@ -27,7 +26,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/webcam', webcamRouter);
 app.use('/spotify', spotifyRouter);
 app.use('/tracks', tracksRouter);
