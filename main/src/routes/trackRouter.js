@@ -1,6 +1,7 @@
 const express = require("express");
+const {Main} = require("../Main");
 const {trackLimiter} = require("./rateLimiter");
-const {checkCredentials, refreshCredentialsIfExpired} = require("./middleware");
+const {checkCredentials, checkTrackPostBody} = require("./middleware");
 const router = express.Router();
 
 //#region Sample Data For Testing Purposes
@@ -1069,8 +1070,8 @@ const sampleData = {
  */
 router.get("/", checkCredentials, function (req, res) {
     // use res.render("track", sampleData) for testing purposes
-    if (req.app.locals.main.result) {
-        return res.render("track", req.app.locals.main.result);
+    if (req.session.result) {
+        return res.render("track", req.session.result);
     } else {
         return res.redirect("/webcam/#/error/no-photo-submitted");
     }
@@ -1080,9 +1081,10 @@ router.get("/", checkCredentials, function (req, res) {
  *  Handles POST request for tracks page to create a new playlist
  *  Requires req.body to contain a list of track URI's in format ["spotify:track:1ue7zm5TVVvmoQV8lK6K2H", ...]
  */
-router.post("/", [trackLimiter, refreshCredentialsIfExpired], function (req, res) {
-    const main = req.app.locals.main;
-    return main.createMoodPlaylist(req.body)
+router.post("/", [trackLimiter, checkCredentials, checkTrackPostBody], function (req, res) {
+    const main = new Main();
+    main.spotifyApi.setAccessToken(req.session.access_token);
+    return main.createMoodPlaylist(req.body.tracks)
         .then((playlistURL) => {
             return res.status(200).json({link: playlistURL});
         })
