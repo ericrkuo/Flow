@@ -18,8 +18,7 @@ describe("unit test for Main", function () {
         main.dataURL = "TestDataURL";
         return main.getRelevantSongsTestingPurposes()
             .then((resp) => {
-                chai.expect(Object.keys(resp).length).to.be.equal(30);
-                chai.assert(main.result && main.result.tracks && main.result.userInfo && main.result.mood);
+                assertResponseFromMain(resp);
             })
             .catch((err) => {
                 console.log(err);
@@ -43,8 +42,7 @@ describe("unit test for Main", function () {
         main.dataURL = sampleDataURL.dataURL1;
         return main.getRelevantSongs()
             .then((resp) => {
-                chai.expect(Object.keys(resp).length).to.be.equal(30);
-                chai.assert(main.result && main.result.tracks && main.result.userInfo && main.result.mood);
+                assertResponseFromMain(resp);
             })
             .catch((err) => {
                 console.log(err);
@@ -96,4 +94,28 @@ describe("unit test for Main", function () {
             });
     });
 
+    function assertResponseFromMain(resp) {
+        // check first level properties
+        chai.expect(resp).to.have.own.property("tracks");
+        chai.expect(resp).to.have.own.property("userInfo");
+        chai.expect(resp).to.have.own.property("mood");
+
+        // check tracks
+        chai.expect(Object.keys(resp.tracks).length).to.be.equal(30);
+        for (const track of Object.values(resp.tracks)) {
+            chai.expect(track).to.have.own.property("track");
+            chai.expect(track).to.have.own.property("audioFeatures");
+        }
+
+        // check userInfo
+        chai.expect(resp.userInfo).to.have.own.property("display_name");
+        chai.expect(resp.userInfo).to.have.own.property("email");
+        chai.expect(resp.userInfo).to.have.own.property("external_urls");
+        chai.expect(resp.userInfo).to.have.own.property("images");
+        chai.expect(resp.userInfo).to.have.own.property("id");
+
+        // check mood
+        chai.expect(resp.mood).to.have.own.property("dominantMood");
+        chai.expect(resp.mood).to.have.own.property("emotions");
+    }
 });

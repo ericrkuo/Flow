@@ -21,7 +21,7 @@ class Main {
      * 8. Find song X in cluster
      * 9. Get songs in cluster containing song X
      * 10. Get desired number of songs (currently 30) if cluster has too much or too little
-     * 11. Return this.result (see this.setResults)
+     * 11. return result from getResults
      */
     constructor() {
         require("dotenv").config();
@@ -36,7 +36,6 @@ class Main {
         this.spotifyService = new SpotifyService(this.spotifyApi);
         this.kMean = new KMean();
         this.refreshCredentialService = new RefreshCredentialService(this.spotifyApi);
-        this.result = null;
     }
 
     /**
@@ -68,10 +67,7 @@ class Main {
                 const [bestK, clusters, map] = this.kMean.getOptimalKClusters(audioFeatureData);
                 const arrayOfSongIDS = this.getSongIDsOfClusterContainingSongX(clusters);
                 newArrayOfSongIDS = this.getDesiredNumberSongs(bestK, arrayOfSongIDS, map);
-                return this.setResults(newArrayOfSongIDS, audioFeatureData, this.spotifyService.mood, emotions);
-            })
-            .then(() => {
-                return newArrayOfSongIDS;
+                return this.getResults(newArrayOfSongIDS, audioFeatureData, this.spotifyService.mood, emotions);
             })
             .catch((err) => {
                 console.log(err);
@@ -111,10 +107,7 @@ class Main {
                 const [bestK, clusters, map] = this.kMean.getOptimalKClusters(audioFeatureData);
                 const arrayOfSongIDS = this.getSongIDsOfClusterContainingSongX(clusters);
                 newArrayOfSongIDS = this.getDesiredNumberSongs(bestK, arrayOfSongIDS, map);
-                return this.setResults(newArrayOfSongIDS, audioFeatureData, this.spotifyService.mood, emotions);
-            })
-            .then(() => {
-                return newArrayOfSongIDS;
+                return this.getResults(newArrayOfSongIDS, audioFeatureData, this.spotifyService.mood, emotions);
             })
             .catch((err) => {
                 console.log(err);
@@ -132,21 +125,22 @@ class Main {
      * @returns {Promise<T | void>}
      *          of this format {tracks: trackObjects, userInfo: userInfoObject, mood: {dominantMood, {happiness: 0.8, sadness: 0.2}}}
      */
-    setResults(songIDs, audioFeatureData, mood, emotions) {
-        this.result = {tracks: {}, userInfo: {}, mood: {}};
+    getResults(songIDs, audioFeatureData, mood, emotions) {
+        const result = {tracks: {}, userInfo: {}, mood: {}};
         for (const songID of songIDs) {
-            this.result.tracks[songID] = {
+            result.tracks[songID] = {
                 track: this.spotifyService.trackHashMap.get(songID),
                 audioFeatures: audioFeatureData[songID],
             };
         }
 
-        this.result.mood.dominantMood = mood;
-        this.result.mood.emotions = emotions;
+        result.mood.dominantMood = mood;
+        result.mood.emotions = emotions;
 
         return this.spotifyService.getUserInfo()
             .then((res) => {
-                this.result.userInfo = res;
+                result.userInfo = res;
+                return result;
             }).catch((err) => {
                 throw err;
             });

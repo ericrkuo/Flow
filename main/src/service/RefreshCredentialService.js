@@ -31,6 +31,7 @@ class RefreshCredentialService {
 
     /**
      * Checks credential and attempts to get/set a new access token with existing refresh token
+     * Note: this is only used internally for testing
      * @returns {Promise<T | void>}
      */
     tryRefreshCredential() {

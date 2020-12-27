@@ -1,4 +1,5 @@
-const {Main} = require("../Main");
+const SpotifyWebApi = require("spotify-web-api-node");
+const {RefreshCredentialService} = require("../service/RefreshCredentialService");
 
 /**
  * Checks whether user is authenticated and authorized. If so, proceed with next(), otherwise redirect user to login page
@@ -9,13 +10,19 @@ const {Main} = require("../Main");
  * @returns {Promise<T | void>|*|void|Response}
  */
 function checkCredentials(req, res, next) {
-    const main = req.app.locals.main;
-    if (!isMainAndSpotifyApiAndRefreshCredentialValid) {
-        req.app.locals.main = new Main();
+    if (!req.session.access_token) {
         return res.redirect("/spotify/login");
     }
 
-    return main.refreshCredentialService.checkCredentials()
+    const spotifyApi = new SpotifyWebApi({
+        clientId: process.env.SPOTIFY_API_ID,
+        clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
+        redirectUri: process.env.CALLBACK_URL,
+    });
+    spotifyApi.setAccessToken(req.session.access_token);
+    const refreshCredentialService = new RefreshCredentialService(spotifyApi);
+
+    return refreshCredentialService.checkCredentials()
         .then((result) => {
             if (result) return next();
             return res.redirect("/spotify/login");
@@ -27,45 +34,7 @@ function checkCredentials(req, res, next) {
 }
 
 /**
- * Tries refreshing the credentials if they are invalid.
- * Used as middle ware function
- * @param req - current incoming request
- * @param res - current response to request
- * @param next - handler for next fn
- * @returns {Promise<T | void>|*|void|Response}
- */
-function refreshCredentialsIfExpired(req, res, next) {
-    const main = req.app.locals.main;
-    if (!isMainAndSpotifyApiAndRefreshCredentialValid) {
-        req.app.locals.main = new Main();
-        return res.redirect("/spotify/login");
-    }
-
-    return main.refreshCredentialService.checkCredentials()
-        .then((isValid) => {
-            if (!isValid) {
-                return main.refreshCredentialService.tryRefreshCredential();
-            }
-        })
-        .then(() => {
-            return next();
-        })
-        .catch((err) => {
-            throw err;
-        });
-}
-
-/**
- * Checks whether the instance Main, spotifyApi, and refreshCredentialService are valid
- * @param main - current instance of Main file
- * @returns boolean - returns true if main, spotify api, refresh credential service, and spotify tokens are defined
- */
-function isMainAndSpotifyApiAndRefreshCredentialValid(main) {
-    return main && main.spotifyApi && main.refreshCredentialService && main.spotifyApi.getAccessToken() && main.spotifyApi.getRefreshToken();
-}
-
-/**
- * Checks if webcam post body and dataURL is null or undefined
+ * Checks validity of request body for POST /webcam
  */
 function checkWebcamPostBody(req, res, next) {
     if (!req.body || !req.body.dataURL) {
@@ -75,6 +44,17 @@ function checkWebcamPostBody(req, res, next) {
     }
 }
 
+/**
+ * Checks validity of request body for POST /tracks
+ */
+function checkTrackPostBody(req, res, next) {
+    if (!req.body || !req.body.tracks || !Array.isArray(req.body.tracks) || req.body.tracks.length === 0) {
+        return res.status(404).json({errorMsg: "Selected playlist tracks are invalid"});
+    } else {
+        return next();
+    }
+}
+
 module.exports.checkCredentials = checkCredentials;
-module.exports.refreshCredentialsIfExpired = refreshCredentialsIfExpired;
 module.exports.checkWebcamPostBody = checkWebcamPostBody;
+module.exports.checkTrackPostBody = checkTrackPostBody;

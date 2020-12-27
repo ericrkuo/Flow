@@ -276,7 +276,7 @@ function addPlaylistEventListeners() {
             } else {
                 cancelPlaylistButton.setAttribute("disabled", "");
                 createPlaylistButton.setAttribute("disabled", "");
-                return sendPOSTRequestToCreatePlaylist(JSON.stringify(data))
+                return sendPOSTRequestToCreatePlaylist({tracks: data})
                     .then((url) => {
                         cancelPlaylistButton.removeAttribute("disabled");
                         createPlaylistButton.className = createPlaylistButton.className.replace("btn-primary", "btn-secondary");
