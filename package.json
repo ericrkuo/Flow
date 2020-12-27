@@ -5,8 +5,8 @@
   "scripts": {
     "start": "node ./bin/www",
     "test": "mocha main/test/**/*.js --timeout 20000",
-    "eslint": "echo running eslint && npx eslint ./main ./public",
-    "eslintFix": "npx eslint ./main ./public --fix"
+    "eslint": "echo running eslint && npx eslint ./main ./public app.js",
+    "eslintFix": "npx eslint ./main ./public app.js --fix"
   },
   "dependencies": {
     "3": "^2.1.0",

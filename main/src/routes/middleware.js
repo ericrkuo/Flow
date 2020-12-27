@@ -3,7 +3,7 @@ const {RefreshCredentialService} = require("../service/RefreshCredentialService"
 
 /**
  * Checks whether user is authenticated and authorized. If so, proceed with next(), otherwise redirect user to login page
- * Used as middle ware function
+ * Used as middleware
  * @param req - current incoming request
  * @param res - current response to request
  * @param next - handler for next fn
@@ -35,6 +35,11 @@ function checkCredentials(req, res, next) {
 
 /**
  * Checks validity of request body for POST /webcam
+ * Used as middleware
+ * @param req - current incoming request
+ * @param res - current response to request
+ * @param next - handler for next fn
+ * @returns {Promise<T | void>|*|void|Response}
  */
 function checkWebcamPostBody(req, res, next) {
     if (!req.body || !req.body.dataURL) {
@@ -46,6 +51,11 @@ function checkWebcamPostBody(req, res, next) {
 
 /**
  * Checks validity of request body for POST /tracks
+ * Used as middleware
+ * @param req - current incoming request
+ * @param res - current response to request
+ * @param next - handler for next fn
+ * @returns {Promise<T | void>|*|void|Response}
  */
 function checkTrackPostBody(req, res, next) {
     if (!req.body || !req.body.tracks || !Array.isArray(req.body.tracks) || req.body.tracks.length === 0) {

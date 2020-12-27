@@ -21,7 +21,7 @@ class Main {
      * 8. Find song X in cluster
      * 9. Get songs in cluster containing song X
      * 10. Get desired number of songs (currently 30) if cluster has too much or too little
-     * 11. return result from getResults
+     * 11. Return result from getResults
      */
     constructor() {
         require("dotenv").config();
