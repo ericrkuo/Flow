@@ -21,9 +21,9 @@ $(document).on("click", ".alert-close", function() {
 const errorAlert = document.getElementById("errorAlert");
 const errorAlertClose = document.getElementById("errorAlertClose");
 
-errorAlertClose.addEventListener("click", () => {
+errorAlertClose.onclick = () => {
     hide([errorAlert]);
-});
+};
 
 initialize();
 initializeUserInfoDiv();
@@ -96,9 +96,9 @@ function createTrackCard(id) {
     image.className = TRACK_CARD_IMAGE;
     image.setAttribute("data-toggle", "modal");
     image.setAttribute("data-target", "#trackModal");
-    image.addEventListener("click", function () {
+    image.onclick = () => {
         editModalContent(id);
-    });
+    };
 
     const trackTitle = document.createElement("span");
     trackTitle.className = TRACK_CARD_TITLE;
@@ -226,7 +226,7 @@ function createPlaylistCard(id) {
     trackInfoColumn.append(trackSpan, artistSpan);
     row.append(trackColumn, trackInfoColumn);
 
-    row.addEventListener("click", () => {
+    row.onclick = () => {
         if (playlistMap.has(id)) {
             playlistMap.delete(id);
 
@@ -244,7 +244,7 @@ function createPlaylistCard(id) {
                 $("#collapsePlaylistMessage").collapse("hide");
             }
         }
-    });
+    };
 
     return row;
 }
@@ -258,13 +258,13 @@ function addPlaylistEventListeners() {
     const collapsePlaylistMessageText = document.getElementById("collapsePlaylistMessageText");
 
     // Collapse message if user confirms playlist creation
-    confirmPlaylistInput.addEventListener("click", function () {
+    confirmPlaylistInput.onclick = () => {
         if (confirmPlaylistInput.checked && collapsePlaylistMessageText.innerText === PLAYLIST_CHECK_MESSAGE) {
             $("#collapsePlaylistMessage").collapse("hide");
         }
-    });
+    };
 
-    createPlaylistButton.addEventListener("click", async function () {
+    createPlaylistButton.onclick = async () => {
         const isConfirmPlaylistChecked = confirmPlaylistInput.checked;
         $("#errorAlert").html("").hide();
 
@@ -285,9 +285,9 @@ function addPlaylistEventListeners() {
                         playlistButton.removeAttribute("data-toggle");
                         playlistButton.removeAttribute("data-target");
                         playlistButton.innerText = "Go to playlist";
-                        playlistButton.addEventListener("click", () => {
+                        playlistButton.onclick = () => {
                             window.open(url, "_blank");
-                        });
+                        };
 
                         $("#collapsePlaylistMessage").collapse("hide");
                         $("#playlistModal").modal("hide");
@@ -313,9 +313,9 @@ function addPlaylistEventListeners() {
             collapsePlaylistMessageText.innerText = PLAYLIST_CHECK_MESSAGE;
             $("#collapsePlaylistMessage").collapse("show");
         }
-    });
+    };
 
-    selectAllInput.addEventListener("click", function () {
+    selectAllInput.onclick = () => {
         const isChecked = selectAllInput.checked;
         for (const id of Object.keys(tracks)) {
             const row = document.getElementById("playlistRow-" + id);
@@ -331,7 +331,7 @@ function addPlaylistEventListeners() {
                 }
             }
         }
-    });
+    };
 }
 
 /**
@@ -387,9 +387,9 @@ function initializeUserInfoDiv() {
     img.src = getUserImageURL();
 
     document.getElementById("user-name").innerText = userInfo.display_name || "Anonymous user";
-    document.getElementById("user-link").addEventListener("click", () => {
+    document.getElementById("user-link").onclick = () => {
         window.open(userInfo.external_urls.spotify, "_blank");
-    });
+    };
 }
 
 /**

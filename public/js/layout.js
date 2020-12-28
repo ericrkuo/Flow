@@ -4,12 +4,12 @@ const aboutUsButton = document.getElementById("info");
 /**
  * Adds event listeners to all navigation buttons for tutorial, home, and about us buttons
  */
-homeButton.addEventListener("click", ()=>{
+homeButton.onclick = () => {
     location.href = "/";
-});
-aboutUsButton.addEventListener("click", ()=>{
+};
+aboutUsButton.onclick = () => {
     location.href = "/info";
-});
+};
 
 updateNavigation();
 
