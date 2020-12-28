@@ -30,7 +30,7 @@ router.post("/", [webcamLimiter, checkCredentials, checkWebcamPostBody], functio
             }
         })
         .catch((err) => {
-            return res.status(500).json({errorMsg: "Please try taking another photo! </br> </br>" + err.message});
+            return res.status(500).json({errorMsg: `Please try taking another photo! \n ${err.message}`});
         });
 });
 

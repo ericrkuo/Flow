@@ -1089,7 +1089,7 @@ router.post("/", [trackLimiter, checkCredentials, checkTrackPostBody], function 
             return res.status(200).json({link: playlistURL});
         })
         .catch((err) => {
-            return res.status(500).json({errorMsg: "Please try again later </br> </br>" + err.message});
+            return res.status(500).json({errorMsg: `Please try again later. \n ${err.message}`});
         });
 });
 

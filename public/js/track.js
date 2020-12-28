@@ -12,18 +12,12 @@ $("#trackModal").on("hide.bs.modal", function () {
 
 $("#playlistModal").on("hide.bs.modal", function () {
     $("#collapsePlaylistMessage").collapse("hide");
+    $(".error-alert").alert("close"); // close all alerts with classname error-alert
 });
 
 $(document).on("click", ".alert-close", function() {
     $(this).parent().hide();
 });
-
-const errorAlert = document.getElementById("errorAlert");
-const errorAlertClose = document.getElementById("errorAlertClose");
-
-errorAlertClose.onclick = () => {
-    hide([errorAlert]);
-};
 
 initialize();
 initializeUserInfoDiv();
@@ -42,8 +36,6 @@ function initialize() {
 
     homeButton.setAttribute("class", homeButton.getAttribute("class").replace(oldString, newString));
     aboutUsButton.setAttribute("class", aboutUsButton.getAttribute("class").replace(oldString, newString));
-    hide([errorAlert]);
-
 }
 
 /**
@@ -266,7 +258,6 @@ function addPlaylistEventListeners() {
 
     createPlaylistButton.onclick = async () => {
         const isConfirmPlaylistChecked = confirmPlaylistInput.checked;
-        $("#errorAlert").html("").hide();
 
         if (isConfirmPlaylistChecked) {
             const data = getAllTrackURLs();
@@ -294,19 +285,9 @@ function addPlaylistEventListeners() {
                         window.open(url, "_blank");
                     })
                     .catch((error) => {
-                        $("#errorAlert").append("<a class=\"close alert-close\">&times</a>" +
-                            "<span>"+"Sorry, we encountered an error. " + "</span>");
-
-                        if(error.response) {
-                            $("#errorAlert").append("<span>" + error.response.data.errorMsg +"</span>");
-                        } else if (error.message) {
-                            $("#errorAlert").append("<span>"+"Sorry, we encountered an error. " +
-                                error.message +"</span>");
-                        }
-
+                        generateAlert(error.response?.data?.errorMsg ?? error.message);
                         cancelPlaylistButton.removeAttribute("disabled");
                         createPlaylistButton.removeAttribute("disabled");
-                        show([errorAlert, errorAlertClose]);
                     });
             }
         } else {
@@ -550,14 +531,32 @@ function removeAllChildren(node) {
     }
 }
 
-function hide(elements) {
-    for (const element of elements) {
-        element.style.setProperty("display", "none");
-    }
-}
+/**
+ * Generates a bootstrap alert dynamically
+ * */
+function generateAlert(errorMessage) {
+    const alertDiv = document.getElementById("alert-div");
+    const container = document.createElement("div");
+    container.className = "container text-center";
+    const alert = document.createElement("div");
+    alert.className = "alert alert-danger alert-dismissible fade show error-alert";
+    alert.setAttribute("role", "alert");
 
-function show(elements) {
-    for (const element of elements) {
-        element.style.removeProperty("display");
-    }
+    const span = document.createElement("span");
+    span.innerText = `Sorry, we encountered an error. ${errorMessage}`;
+
+    const button = document.createElement("button");
+    button.setAttribute("type", "button");
+    button.setAttribute("data-dismiss", "alert");
+    button.setAttribute("aria-label", "Close");
+    button.className = "close";
+
+    const span2 = document.createElement("span");
+    span2.setAttribute("aria-hidden", "true");
+    span2.innerText = "×";
+
+    button.appendChild(span2);
+    alert.append(span, button);
+    container.appendChild(alert);
+    alertDiv.appendChild(container);
 }

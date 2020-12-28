@@ -3,15 +3,15 @@
 }
 
 .alert {
-    width: 80vmin;
+    width: 65%;
     display: inline-block;
     position: relative;
 }
 
 .video-animation {
-    height: 70vmin;
+    height: 65vmin;
     -webkit-mask-image: url("../libraries/circle.png");
-    -webkit-mask-size: 65vmin;
+    -webkit-mask-size: 60vmin;
     -webkit-mask-position: center;
     -webkit-mask-repeat: no-repeat;
     animation: backInDown;
@@ -19,17 +19,17 @@
 }
 
 .video-no-animation {
-    height: 70vmin;
+    height: 65vmin;
     -webkit-mask-image: url("../libraries/circle.png");
-    -webkit-mask-size: 65vmin;
+    -webkit-mask-size: 60vmin;
     -webkit-mask-position: center;
     -webkit-mask-repeat: no-repeat;
 }
 
 #canvas {
-    height: 70vmin;
+    height: 65vmin;
     -webkit-mask-image: url("../libraries/circle.png");
-    -webkit-mask-size: 65vmin;
+    -webkit-mask-size: 60vmin;
     -webkit-mask-position: center;
     -webkit-mask-repeat: no-repeat;
 }
