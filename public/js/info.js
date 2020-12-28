@@ -6,9 +6,9 @@ const readMoreReflectionButton = document.getElementById("readReflection");
 /**
  * Adds event listener for the "Get Started" button and directs user to /webcam
  */
-getStartedButton.addEventListener("click", () => {
+getStartedButton.onclick = () => {
     location.href = "/webcam";
-});
+};
 
 /**
  * Centers the modal on the page
@@ -33,7 +33,7 @@ $(window).on("resize", function () {
 /**
  * Upon click of the "How We Did it" button, opens/centers modal and inserts title/text description
  */
-readMoreForHowWeDidItButton.addEventListener("click", () => {
+readMoreForHowWeDidItButton.onclick = () => {
     $("#infoModal").modal("show", centerModal);
     $("#infoModalLabel").text("HOW WE DID IT");
     $("#infoModalText").html("We navigated the software lifecycle, from requirement gathering, to scope-based " +
@@ -52,12 +52,12 @@ readMoreForHowWeDidItButton.addEventListener("click", () => {
         "minimize the number of bugs when making changes to our code. Finally, another difficult problem " +
         "was designing the life-cycle of requests travelling from client to server side. We architected the " +
         "user flow as well as ensured our code was robust to handle unexpected errors.");
-});
+};
 
 /**
  * Upon click of the "Future" button, opens/centers modal and inserts title/text description
  */
-readMoreFutureButton.addEventListener("click", () => {
+readMoreFutureButton.onclick = () => {
     $("#infoModal").modal("show", centerModal);
     $("#infoModalLabel").text("THE FUTURE");
     $("#infoModalText").html("As with any outstanding project, application or product- there is always room for " +
@@ -67,12 +67,12 @@ readMoreFutureButton.addEventListener("click", () => {
         " </br> > Implement other machine learning algorithms in substitution of kMeans </br> > Utilize a database " +
         "system for more organized data management </br> > Introduce opposite moods as a selection choice for types" +
         " of recommended tracks");
-});
+};
 
 /**
  * Upon click of the "Reflection" button, opens/centers modal and inserts title/text description
  */
-readMoreReflectionButton.addEventListener("click", () => {
+readMoreReflectionButton.onclick = () => {
     $("#infoModal").modal("show", centerModal);
     $("#infoModalLabel").text("REFLECTION");
     $("#infoModalText").html("Being able to explore new frameworks, learn machine learning, and experiment with " +
@@ -88,4 +88,4 @@ readMoreReflectionButton.addEventListener("click", () => {
         "was also our first time working heavily on front-end. Though we took a longer time, we were very " +
         "happy to have discovered Bootstrap and JQuery! </br> </br> Thanks to many trials and errors, we are " +
         "proud of what we have accomplished, both with this service and in terms of our growth as software engineers.");
-});
+};

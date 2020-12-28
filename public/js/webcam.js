@@ -22,9 +22,9 @@ $(function () {
     $("[data-toggle=\"tooltip\"]").tooltip();
 });
 
-video.addEventListener("animationend", ()=> {
+video.onanimationend = () => {
     show([beforeCaptureButtons]);
-});
+};
 
 /**
  * Initializes webcam page
@@ -123,7 +123,7 @@ getTracksButton.onclick = () => {
 /**
  * Adds event listener to "Take Photo" button to capture image of user
  */
-takePhotoButton.addEventListener("click", () => {
+takePhotoButton.onclick = () => {
     // dimension of pixels in canvas
     canvas.width = video.offsetWidth;
     canvas.height = video.offsetHeight;
@@ -133,15 +133,15 @@ takePhotoButton.addEventListener("click", () => {
 
     hideAndShowHTMLElementsForCaptureButton();
     turnOffStream();
-});
+};
 
 /**
  * Adds event listener to "Try Again" button to capture a better image
  */
-tryAgainButton.addEventListener("click", () => {
+tryAgainButton.onclick = () => {
     hideAndShowHTMLElementsForTryAgainButton();
     return init();
-});
+};
 
 /**
  * Hides and shows elements for "Try Again" button
