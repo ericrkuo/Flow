@@ -8,9 +8,6 @@ const getTracksButton = document.getElementById("get-tracks");
 const errorMsgElement = document.getElementById("spanErrorMsg");
 const loadingDiv = document.getElementById("loader");
 const webcam = document.getElementById("webcam");
-const infoAlert = document.getElementById("infoAlert");
-const errorAlert = document.getElementById("errorAlert");
-const errorAlertSpan = document.getElementById("errorAlertSpan");
 let stream;
 
 const constraints = {
@@ -33,13 +30,10 @@ video.onanimationend = () => {
 async function init() {
     try {
         hide([canvas, afterCaptureButtons, beforeCaptureButtons, loadingDiv]);
-        hide([errorAlert]);
         stream = await navigator.mediaDevices.getUserMedia(constraints);
         handleSuccess(stream);
     } catch (err) {
-        $("#errorAlert").append("<span>"+"Sorry, we encountered an error. " +
-            err.response.data.errorMsg +"</span>");
-        show([errorAlert]);
+        generateAlert(err.response.data.errorMsg ?? err.message);
     }
 }
 
@@ -93,19 +87,41 @@ function postTracks(dataURL) {
             location.href = "/tracks";
         })
         .catch((error) => {
+            generateAlert(error.response?.data?.errorMsg ?? error.message);
             hide([loadingDiv]);
             $("#header").hide();
-            $("#errorAlert").append("<span>"+"Sorry, we encountered an error. " + "</span>");
-
-            if(error.response) {
-                $("#errorAlert").append("<span>" + error.response.data.errorMsg +"</span>");
-            } else if (error.message) {
-                $("#errorAlert").append("<span>"+"Sorry, we encountered an error. " +
-                    error.message +"</span>");
-            }
-
-            show([webcam, errorAlert]);
+            show([webcam]);
         });
+}
+
+/**
+ * Generates a bootstrap alert dynamically
+ * */
+function generateAlert(errorMessage) {
+    const alertDiv = document.getElementById("alert-div");
+    const container = document.createElement("div");
+    container.className = "container text-center";
+    const alert = document.createElement("div");
+    alert.className = "alert alert-danger alert-dismissible fade show error-alert";
+    alert.setAttribute("role", "alert");
+
+    const span = document.createElement("span");
+    span.innerText = `Sorry, we encountered an error. ${errorMessage}`;
+
+    const button = document.createElement("button");
+    button.setAttribute("type", "button");
+    button.setAttribute("data-dismiss", "alert");
+    button.setAttribute("aria-label", "Close");
+    button.className = "close";
+
+    const span2 = document.createElement("span");
+    span2.setAttribute("aria-hidden", "true");
+    span2.innerText = "×";
+
+    button.appendChild(span2);
+    alert.append(span, button);
+    container.appendChild(alert);
+    alertDiv.appendChild(container);
 }
 
 /**
@@ -150,8 +166,7 @@ function hideAndShowHTMLElementsForTryAgainButton() {
     video.className = "video-no-animation";
     show([video]);
     hide([afterCaptureButtons, canvas]);
-    hide([errorAlert]);
-    show([infoAlert]);
+    $(".error-alert").alert("close"); // close all alerts with classname error-alert (we don't want to dismiss info alert)
 }
 
 /**
