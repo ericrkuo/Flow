@@ -1,35 +1,27 @@
-let tutorialButton = document.getElementById("tutorial");
-let homeButton = document.getElementById("home");
-let aboutUsButton = document.getElementById("info");
+const homeButton = document.getElementById("home");
+const aboutUsButton = document.getElementById("info");
 
-tutorialButton.addEventListener("click", ()=>{
-    console.log("click");
-   location.href = "/tutorial";
-});
-
-homeButton.addEventListener("click", ()=>{
-    console.log("click");
+/**
+ * Adds event listeners to all navigation buttons for tutorial, home, and about us buttons
+ */
+homeButton.onclick = () => {
     location.href = "/";
-});
-
-aboutUsButton.addEventListener("click", ()=>{
-    console.log("click");
+};
+aboutUsButton.onclick = () => {
     location.href = "/info";
-});
+};
 
 updateNavigation();
 
+/**
+ * Updates the navigation display to bold for current page
+ */
 function updateNavigation() {
-    let path = window.location.pathname;
-    let stringToAdd = " font-weight-bold";
+    const path = window.location.pathname;
+    const stringToAdd = " font-weight-bold";
     switch (path) {
         case "/": {
             homeButton.setAttribute("class", homeButton.getAttribute("class").concat(stringToAdd));
-            break;
-        }
-
-        case "/tutorial": {
-            tutorialButton.setAttribute("class", tutorialButton.getAttribute("class").concat(stringToAdd));
             break;
         }
 

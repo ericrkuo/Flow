@@ -61,6 +61,8 @@ Certain optimizations made to K-means include using K-means++ to ensure better i
 * [Express](https://expressjs.com/)
 * [Azure Cognitive Servces](https://docs.microsoft.com/en-us/azure/cognitive-services/)
 * [Spotify for Developers](https://developer.spotify.com/documentation/web-api/)
+* [Express-session](https://github.com/expressjs/session)
+* [memorystore](https://github.com/roccomuso/memorystore)
 * [Mocha](https://mochajs.org/)
 * [Chai](https://www.chaijs.com/)
 * [Bootstrap](https://getbootstrap.com)
@@ -104,21 +106,13 @@ git clone https://github.com/ericrkuo/Flow.git
 ```sh
 npm install
 ```
-4. Enter your Azure Face API key and Spotify credentials in a new file called `.env` in the root directory of the code
-```JS
-AZUREKEY= 'ENTER YOUR AZURE FACE API KEY';
-SPOTIFY_API_ID= 'ENTER THE API ID ASSOCIATED WITH YOUR SPOTIFY DEVELOPERS ACCOUNT'
-SPOTIFY_CLIENT_SECRET= 'ENTER THE CLIENT SECRET ASSOCIATED WITH YOUR SPOTIFY DEVELOPERS ACCOUNT'
-CALLBACK_URL= '<WEB SERVICE URL>/SPOTIFY/CALLBACK'
-ACCESS_TOKEN='ENTER THE ACCESS TOKEN ASSOCIATED WITH YOUR SPOTIFY ACCOUNT. THIS IS FOR TESTING PURPOSES'
-REFRESH_TOKEN='ENTER THE REFRESH TOKEN ASSOCIATED WTIH YOUR SPOTIFY ACCOUNT. THIS IS FOR TESTING PURPOSES'
-```
+4. Copy `sample.env` and rename to `.env` in the root directory of the code. Then fill out the respective environment variables.
 
 
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-This section is currently unavailable, please refer to the Tutorial tab in our web service for instructions! 
+This section is currently unavailable! Check back soon! 
 
 
 <!-- ROADMAP -->

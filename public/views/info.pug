@@ -1,0 +1,117 @@
+extends layout
+
+append stylesheets
+    meta(charset='utf-8')
+    meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no")
+    link(rel='stylesheet', href='/stylesheets/backgroundCSS.css')
+block content
+    .container-fluid.text-center.p-0
+        .container.py-5
+            .row.h-100.align-items-center.py-5
+                .col-lg-6
+                    h1.display-4.text-white ABOUT US
+                    p.lead.text-muted.mb-0.text-white-50 How did it all start?
+                .col-lg-6.d-none.d-lg-block
+                    img.img-fluid(src='../libraries/pictures/header.svg' alt='')
+        .bg-white.py-5
+            .container.py-5
+                .row.align-items-center.mb-5
+                    .col-lg-6.order-2.order-lg-1
+                        h2.font-weight-light WELCOME
+                        br
+                        p.text-muted.mb-4
+                            | Welcome to Flow, a service designed to curate a playlist based on your current mood
+                            | and Spotify history. Simply capture a selfie showing how you feel, and we’ll do
+                            | the work for you! Excited to see what results you’ll get?
+                        a#getStarted.btn.btn-light.px-5.rounded-pill.shadow-sm GET STARTED
+                        .mt-5
+                    .col-lg-5.px-5.mx-auto.order-1.order-lg-2
+                        img.img-fluid.mb-4.mb-lg-0(src='../libraries/pictures/welcome.png' alt='')
+                        .mt-5
+                .row.align-items-center
+                    .col-lg-5.px-5.mx-auto
+                        img.img-fluid.mb-4.mb-lg-0(src='../libraries/pictures/motivation.png' alt='')
+                        .mt-5
+                    .col-lg-6
+                        h2.font-weight-light OUR MOTIVATION
+                        br
+                        p.text-muted.mb-4
+                            | We love music and are avid Spotify users, however, we wanted to make it more personalized
+                            | and we thought this was the perfect opportunity to gain firsthand experience with machine
+                            | learning as well! Flow is also inspired by our passion for creating innovative and exciting
+                            | software projects- specifically our desire to learn new concepts, frameworks, libraries,
+                            | and tools used in the present tech industry.
+                .row.align-items-center.mb-5
+                    .col-lg-6.order-2.order-lg-1
+                        h2.font-weight-light HOW WE DID IT
+                        br
+                        p.text-muted.mb-4
+                            | We navigated the software lifecycle, from requirement gathering, to scope-based
+                            | development and to technical delivery. The technologies we used include ...
+                        a.btn.btn-light.px-5.rounded-pill.shadow-sm#readHowWeDidIt(type='button' data-toggle="modal") READ MORE
+                        #infoModal.modal.fade(tabindex='-1' role='dialog' aria-hidden='true')
+                            .modal-dialog(role='document').modal-dialog-centered
+                                .modal-content.bg
+                                    .modal-header
+                                        h5#infoModalLabel.modal-title.text-white.font-weight-bold.text-center
+                                        button.close(type='button' data-dismiss='modal' aria-label='Close')
+                                            span(aria-hidden='true') &times;
+                                    .modal-body.text-left.text-white#infoModalText
+                        .mt-5
+                    .col-lg-5.px-5.mx-auto.order-1.order-lg-2
+                        img.img-fluid.mb-4.mb-lg-0(src='../libraries/pictures/howWeDidIt.png' alt='')
+                        .mt-5
+                .row.align-items-center
+                    .col-lg-5.px-5.mx-auto
+                        img.img-fluid.mb-4.mb-lg-0(src='../libraries/pictures/future.png' alt='')
+                        .mt-5
+                    .col-lg-6
+                        h2.font-weight-light THE FUTURE
+                        br
+                        p.text-muted.mb-4
+                            | As with any outstanding project, application or product- there is always room for
+                            | improvements! For Flow, in the near future, we hope to be able to execute the
+                            | following ideas ...
+                        a.btn.btn-light.px-5.rounded-pill.shadow-sm#readFuture(type='button' data-toggle="modal" data-target="#infoModal") READ MORE
+                        .mt-5
+                .row.align-items-center.mb-5
+                    .col-lg-6.order-2.order-lg-1
+                        h2.font-weight-light REFLECTION
+                        br
+                        p.text-muted.mb-4
+                            | Being able to explore new frameworks, learn machine learning, and experiment with
+                            | various APIs and libraries, has been extremely fun and eye-opening! Though at times
+                            | difficult through the hours of debugging and confusion, we are grateful to have been
+                            | able to dedicate our energy and efforts to this project whole-heartedly ...
+                        a.btn.btn-light.px-5.rounded-pill.shadow-sm#readReflection(type='button' data-toggle="modal" data-target="#infoModal") READ MORE
+                    .col-lg-5.px-5.mx-auto.order-1.order-lg-2
+                        img.img-fluid.mb-4.mb-lg-0(src='../libraries/pictures/reflection.png' alt='')
+                        .mt-5
+        .bg-light.py-5
+            .container.py-5
+                .row.mb-4.d-flex.justify-content-center.align-items-center.h-100.justify-content-md-center
+                    .col-lg-5
+                        h2.display-4.font-weight-light OUR TEAM
+                        p.font-italic.text-muted Meet the two behind the creation.
+                .row.text-center.d-flex.justify-content-center.align-items-center.justify-content-md-center
+                    .col-xl-3.col-sm-6.mb-5
+                        .bg-white.rounded.shadow-sm.py-5.px-4
+                            img.img-fluid.rounded-circle.mb-3.img-thumbnail.shadow-sm(src='../libraries/pictures/ericsHeadshot.jpg' alt='' width='98')
+                            h5.mb-0 ERIC KUO
+                            br
+                            span.small.text-uppercase.text-muted 3rd year
+                            br
+                            span.small.text-uppercase CS @ UBC
+                            br
+                            a(href='//linkedin.com/in/eric-k-1198b6192/').small Connect with Eric
+                    .col-xl-3.col-sm-6.mb-5
+                        .bg-white.rounded.shadow-sm.py-5.px-4
+                            img.img-fluid.rounded-circle.mb-3.img-thumbnail.shadow-sm(src='../libraries/pictures/lilysHeadshot.png' alt='' width='100')
+                            h5.mb-0 LILY DU
+                            br
+                            span.small.text-uppercase.text-muted 3rd year
+                            br
+                            span.small.text-uppercase CS + Business @ UBC
+                            br
+                            a(href='//linkedin.com/in/lilyydu').small Connect with Lily
+        script(src='/js/info.js')

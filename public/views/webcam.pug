@@ -1,0 +1,30 @@
+extends layout
+
+block append stylesheets
+    link(href='../libraries/circle.png', type="image")
+    link(rel='stylesheet', href='/stylesheets/webcamCSS.css')
+    link(rel='stylesheet', href='/stylesheets/backgroundCSS.css')
+    link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css')
+block content
+    .container-fluid.text-center#webcam
+        .container-fluid#alert-div
+            .container.text-center
+                .alert.alert-info.alert-dismissable.fade.show(role='alert')
+                    span Please make sure your photo is clear and only a single face is in the frame!
+                    button.close.alert-close(type="button" data-dismiss="alert" aria-label="Close")
+                        span(aria-hidden='true') &times;
+        h3.text-white.mb-0#header How are you feeling right now?
+        .container-fluid.d-flex.justify-content-center
+            video#video.video-animation(playsinline='' autoplay='')
+            canvas#canvas
+        .container-fluid.text-center
+            #beforeCaptureGroup.btn-group(role='group')
+                button.btn.btn-outline-light(type='button')#take-photo CAPTURE
+            #afterCaptureGroup.btn-group(role='group')
+                button.btn.btn-outline-light.mx-2(type='button')#try-again TAKE PHOTO AGAIN
+                button.btn.btn-outline-light(type='button' data-toggle="tooltip" data-placement="top" title=`Submit your selfie and we’ll curate your tracks based on your mood and Spotify history!`)#get-tracks SUBMIT
+    #loader.container-fluid.text-center
+        .container#box
+        .container#shadow
+        h1.mt-5.text-white#loading-text Curating your playlist
+    script(src='/js/webcam.js')

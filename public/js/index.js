@@ -1,5 +1,8 @@
-let getStartedButton = document.getElementById("getStarted")
+const getStartedButton = document.getElementById("getStarted");
 
-getStartedButton.addEventListener("click", () => {
+/**
+ * Adds event listener for "Get Started" button and redirects to /webcam page
+ */
+getStartedButton.onclick = () => {
     location.href = "/webcam";
-})
+};

@@ -1,61 +1,42 @@
-#webcam {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    align-items: center;
-    width: 100vw;
-    height: 100vh;
+#header {
+    font-size: 4vmin;
 }
 
-#videowrap {
-    width: 100%;
-    height: 80vmin;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.alert {
+    width: 65%;
+    display: inline-block;
+    position: relative;
 }
 
-#video {
-    height: 70vmin;
+.video-animation {
+    height: 65vmin;
     -webkit-mask-image: url("../libraries/circle.png");
-    -webkit-mask-size: 65vmin;
+    -webkit-mask-size: 60vmin;
     -webkit-mask-position: center;
     -webkit-mask-repeat: no-repeat;
     animation: backInDown;
     animation-duration: 2s;
 }
 
-#canvas {
+.video-no-animation {
+    height: 65vmin;
     -webkit-mask-image: url("../libraries/circle.png");
-    -webkit-mask-size: 65vmin;
+    -webkit-mask-size: 60vmin;
     -webkit-mask-position: center;
     -webkit-mask-repeat: no-repeat;
 }
 
-#controller {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
-    width: inherit;
-    height: 10%;
-}
-
-#take-photo {
-    width: 200px;
-    height: 50px;
+#canvas {
+    height: 65vmin;
+    -webkit-mask-image: url("../libraries/circle.png");
+    -webkit-mask-size: 60vmin;
+    -webkit-mask-position: center;
+    -webkit-mask-repeat: no-repeat;
 }
 
 #loader {
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
+    position: fixed;
+    top: 40%;
 }
 
 /*makes jello move across*/
@@ -90,7 +71,7 @@
     opacity: 0.1;
     border-radius: 50%;
     animation: shadow .5s linear infinite;
-    margin-top: 1.2vmin;
+    margin-top: 1.5vmin;
 }
 
 @keyframes shadow {
@@ -99,9 +80,9 @@
     }
 }
 
-#loadingtext::after {
+#loading-text::after {
     content: ' .';
-    animation: dots 1s steps(5, end) infinite;
+    animation: dots 1.5s steps(5, end) infinite;
 }
 
 @keyframes dots {
@@ -123,4 +104,8 @@
         text-shadow:
                 .25em 0 0 white,
                 .5em 0 0 white;}
+}
+
+#webcam {
+    width: 86%
 }

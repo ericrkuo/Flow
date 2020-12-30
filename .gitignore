@@ -1,11 +1,11 @@
 node_modules/
-package-lock.json
 coverage
 .env
+.out/
 Project_Default.xml
-sampleDataURL.js
 **/.idea/workspace.xml
 **/.idea/tasks.xml
 **/.idea/dictionaries
 **/flow.iml
 **/.idea/jsLibraryMappings.xml
+**/.idea/aws.xml

@@ -8,21 +8,12 @@
     height: 2em;
 }
 
-#tracks-div {
-    /*max-height: 90vh;*/
-    /*overflow: auto;*/
-}
-
-#user-image {
-    /*width: 35vmin;*/
-    /*height: 35vmin;*/
-}
-
 #mood {
     height: 45vmin;
 }
 
 .track-image {
+    width: 80%;
     transition: transform .1s ease-in-out;
 }
 
@@ -62,26 +53,9 @@
 }
 
 .playlist-image {
-    height: 9vh;
-}
-
-body {
-    /*background: #ddd6f3;  !* fallback for old browsers *!*/
-    /*background: -webkit-linear-gradient(to bottom, #faaca8, #ddd6f3);  !* Chrome 10-25, Safari 5.1-6 *!*/
-    /*background: linear-gradient(to bottom, #faaca8, #ddd6f3); !* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ *!*/
+    width: 9vh;
 }
 
 .alert-playlist-label {
     color: red;
 }
-/*@keyframes gradient {*/
-/*    0% {*/
-/*        background-position: 0% 50%;*/
-/*    }*/
-/*    50% {*/
-/*        background-position: 100% 50%;*/
-/*    }*/
-/*    100% {*/
-/*        background-position: 0% 50%;*/
-/*    }*/
-/*}*/

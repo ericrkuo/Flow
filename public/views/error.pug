@@ -1,0 +1,17 @@
+extends layout
+
+block append stylesheets
+  link(rel='stylesheet', href='/stylesheets/errorCSS.css')
+
+block content
+  #main
+    .fof
+      if error && error.status && message
+        h1= 'Error ' + error.status + ' ' + message
+      else if error && error.status
+        h1= 'Error' + error.status
+      else if message
+        h1='Error 404 Not Found ' + message
+      else
+        h1='Sorry an unexpected error occurred'
+  script(src='/js/error.js')
