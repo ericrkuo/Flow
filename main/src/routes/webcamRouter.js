@@ -20,7 +20,7 @@ router.post("/", [webcamLimiter, checkCredentials, checkWebcamPostBody], functio
     const main = new Main();
     main.dataURL = req.body.dataURL;
     main.spotifyApi.setAccessToken(req.session.access_token);
-    return main.getRelevantSongsTestingPurposes()
+    return main.getRelevantSongs()
         .then((result) => {
             if (result) {
                 req.session.result = result;
