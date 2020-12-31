@@ -21,6 +21,21 @@ const spotifyApi = new SpotifyWebApi({
 });
 
 /**
+* Generates a random string containing numbers and letters
+* @param  {number} length The length of the string
+* @return {string} the generated string
+*/
+function generateRandomString(length) {
+    let text = "";
+    const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for (let i = 0; i < length; i++) {
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+    return text;
+}
+
+/**
  * Handles GET request for spotify page
  */
 router.get("/", function (req, res) {
@@ -31,7 +46,9 @@ router.get("/", function (req, res) {
  * Handles GET request for spotify/login page
  */
 router.get("/login", (req, res) => {
-    const html = spotifyApi.createAuthorizeURL(scopes);
+    const state = generateRandomString(100);
+    req.session.spotifyCallBackState = state;
+    const html = spotifyApi.createAuthorizeURL(scopes, state);
     res.redirect(html + "&show_dialog=true");
 });
 
@@ -39,6 +56,9 @@ router.get("/login", (req, res) => {
  * Handles GET request for spotify/callback page
  */
 router.get("/callback", async (req, res) => {
+    if (req.query.state !== req.session.spotifyCallBackState) {
+        return res.redirect("/#/error/state-mistmatch");
+    }
     const {code} = req.query;
     return spotifyApi.authorizationCodeGrant(code)
         .then((data) => {
