@@ -25,7 +25,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
 // express-session
-const sess = session({
+const sess = {
     store: new MemoryStore({
         ttl: 45 * 60 * 1000, // 45 minutes
         checkPeriod: 30 * 60 * 1000, // half an hour
@@ -34,14 +34,15 @@ const sess = session({
     resave: false,
     saveUninitialized: false,
     rolling: false,
-});
+    cookie: {},
+};
 
 // https://github.com/expressjs/session#cookiesecure
 if (process.env.ENVIRONMENT === "production") {
     app.set("trust proxy", 1); // trust first proxy
     sess.cookie.secure = true; // serve secure cookies
 }
-app.use(sess);
+app.use(session(sess));
 
 app.use("/", indexRouter);
 app.use("/webcam", webcamRouter);
