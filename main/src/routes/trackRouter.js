@@ -1084,7 +1084,7 @@ router.get("/", checkCredentials, function (req, res) {
 router.post("/", [trackLimiter, checkCredentials, checkTrackPostBody], function (req, res) {
     const main = new Main();
     main.spotifyApi.setAccessToken(req.session.access_token);
-    return main.createMoodPlaylist(req.body.tracks)
+    return main.createMoodPlaylist(req.body.tracks, req.body.mood)
         .then((playlistURL) => {
             return res.status(200).json({link: playlistURL});
         })

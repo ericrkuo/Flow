@@ -514,7 +514,7 @@ class SpotifyService {
                     },
                     );
                 } else {
-                    throw new Err.InvalidResponseError("No user info or mood is currently not set");
+                    throw new Err.InvalidResponseError("User info or mood is currently not set");
                 }
             }).catch((err) => {
                 console.log(err);

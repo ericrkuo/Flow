@@ -234,9 +234,11 @@ class Main {
      * Calls for creation of new Spotify playlist based on user's dominant mood
      * Requires array of track URIs in format ["spotify:track:1ue7zm5TVVvmoQV8lK6K2H", ...]
      * @param tracks - tracks in final result for user
+     * @param mood - user's dominant emotion
      * @returns {Promise<never>} - new playlist body from SpotifyService
      */
-    createMoodPlaylist(tracks) {
+    createMoodPlaylist(tracks, mood) {
+        this.spotifyService.mood = mood;
         return this.spotifyService.getNewPlaylist(tracks);
     }
 }
