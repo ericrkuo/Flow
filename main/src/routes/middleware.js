@@ -59,8 +59,10 @@ function checkWebcamPostBody(req, res, next) {
  */
 function checkTrackPostBody(req, res, next) {
     if (!req.body || !req.body.tracks || !Array.isArray(req.body.tracks) || req.body.tracks.length === 0) {
-        return res.status(404).json({errorMsg: "Selected playlist tracks are invalid"});
-    } else {
+        return res.status(400).json({errorMsg: "Selected playlist tracks are invalid"});
+    } else if (!req.body.mood || typeof req.body.mood !== "string") {
+        return res.status(400).json({errorMsg: "No mood was specified for the playlist"});
+    }else {
         return next();
     }
 }
