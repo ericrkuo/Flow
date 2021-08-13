@@ -19,10 +19,6 @@ describe("unit test for Main", function () {
         return main.getRelevantSongsTestingPurposes()
             .then((resp) => {
                 assertResponseFromMain(resp);
-            })
-            .catch((err) => {
-                console.log(err);
-                chai.expect.fail("not supposed to fail");
             });
     });
 
@@ -33,7 +29,6 @@ describe("unit test for Main", function () {
                 chai.expect.fail("supposed to fail");
             })
             .catch((err) => {
-                console.log(err);
                 chai.expect(err).to.be.instanceOf(Err.InvalidDataURLError);
             });
     });
@@ -43,10 +38,6 @@ describe("unit test for Main", function () {
         return main.getRelevantSongs()
             .then((resp) => {
                 assertResponseFromMain(resp);
-            })
-            .catch((err) => {
-                console.log(err);
-                chai.expect.fail("not supposed to fail");
             });
     });
 
@@ -56,7 +47,6 @@ describe("unit test for Main", function () {
                 chai.assert.fail("expected error to be thrown");
             })
             .catch((e) => {
-                console.log(e);
                 chai.expect(e).to.be.instanceOf(Err.InvalidInputError);
             });
     });
@@ -67,7 +57,6 @@ describe("unit test for Main", function () {
                 chai.assert.fail("expected error to be thrown");
             })
             .catch((e) => {
-                console.log(e);
                 chai.expect(e).to.be.instanceOf(Err.InvalidInputError);
             });
     });
@@ -78,7 +67,6 @@ describe("unit test for Main", function () {
                 chai.assert.fail("expected error to be thrown");
             })
             .catch((e) => {
-                console.log(e);
                 chai.expect(e).to.be.instanceOf(Err.InvalidInputError);
             });
     });
@@ -89,7 +77,6 @@ describe("unit test for Main", function () {
                 chai.assert.fail("expected error to be thrown");
             })
             .catch((e) => {
-                console.log(e);
                 chai.expect(e).to.be.instanceOf(Err.InvalidInputError);
             });
     });
