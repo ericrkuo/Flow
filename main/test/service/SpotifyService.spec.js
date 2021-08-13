@@ -50,10 +50,6 @@ describe("unit test for SpotifyService", function () {
             .then((res) => {
                 console.log("# RECENT SONGS ADDED: " + spotifyService.trackHashMap.size);
                 chai.assert(res);
-            })
-            .catch((err) => {
-                console.log(err);
-                chai.expect.fail("not supposed to fail");
             });
     });
 
@@ -62,10 +58,6 @@ describe("unit test for SpotifyService", function () {
             .then((res) => {
                 console.log("# TOP SONGS ADDED: " + spotifyService.trackHashMap.size);
                 chai.assert(res);
-            })
-            .catch((err) => {
-                console.log(err);
-                chai.expect.fail("not supposed to fail");
             });
 
     });
@@ -75,10 +67,6 @@ describe("unit test for SpotifyService", function () {
             .then((res) => {
                 console.log("# TOP ARTIST SONGS ADDED: " + spotifyService.trackHashMap.size);
                 chai.assert(res);
-            })
-            .catch((err) => {
-                console.log(err);
-                chai.expect.fail("not supposed to fail");
             });
 
     });
@@ -88,10 +76,6 @@ describe("unit test for SpotifyService", function () {
             .then((res) => {
                 console.log("# SAVED SONGS ADDED: " + spotifyService.trackHashMap.size);
                 chai.assert(res);
-            })
-            .catch((err) => {
-                console.log(err);
-                chai.expect.fail("not supposed to fail");
             });
 
     });
@@ -99,12 +83,7 @@ describe("unit test for SpotifyService", function () {
     it("get all sample data audio features", function () {
         return spotifyService.getAllAudioFeatures()
             .then((res) => {
-                // console.log(res);
                 chai.expect(Object.keys(res).length).to.be.equal(spotifyService.trackHashMap.size);
-            })
-            .catch((err) => {
-                console.log(err);
-                chai.expect.fail("not supposed to fail");
             });
 
     });
@@ -117,10 +96,6 @@ describe("unit test for SpotifyService", function () {
             .then((res) => {
                 chai.assert(res);
                 console.log("# RECENT SONGS ADDED: " + spotifyService.trackHashMap.size);
-            })
-            .catch((err) => {
-                console.log(err);
-                chai.expect.fail("not supposed to fail");
             });
     }
 
@@ -161,10 +136,6 @@ describe("unit test for SpotifyService", function () {
             .then((res) => {
                 console.log("# RECENT SONGS ADDED: " + spotifyService.trackHashMap.size);
                 chai.assert(res);
-            })
-            .catch((err) => {
-                console.log(err);
-                chai.expect.fail("not supposed to fail");
             });
     });
 
@@ -173,10 +144,6 @@ describe("unit test for SpotifyService", function () {
             .then((res) => {
                 console.log("# PLAYLIST SONGS ADDED: " + spotifyService.trackHashMap.size);
                 chai.assert(res);
-            })
-            .catch((err) => {
-                console.log(err);
-                chai.expect.fail("not supposed to fail");
             });
     });
 
@@ -188,10 +155,6 @@ describe("unit test for SpotifyService", function () {
                 chai.expect(res.images).to.not.be.undefined;
                 chai.expect(res.external_urls).to.not.be.undefined;
                 console.log(res);
-            })
-            .catch((err) => {
-                console.log(err);
-                chai.expect.fail("not supposed to fail");
             });
     });
 
@@ -203,10 +166,6 @@ describe("unit test for SpotifyService", function () {
                 chai.assert.isNotNull(result.body);
                 chai.expect(result.body.name).to.be.equal("Flow Playlist: " + spotifyService.mood);
                 chai.assert.isFalse(result.body.public);
-            })
-            .catch((err) => {
-                console.log(err);
-                chai.expect.fail("not supposed to fail");
             });
     });
 
@@ -217,7 +176,6 @@ describe("unit test for SpotifyService", function () {
                 chai.expect.fail("supposed to fail");
             })
             .catch((err) => {
-                console.log(err);
                 chai.expect(err).to.be.instanceOf(Err.InvalidResponseError);
             });
     });
@@ -230,9 +188,6 @@ describe("unit test for SpotifyService", function () {
             .then((url) => {
                 chai.assert.isNotNull(url);
                 chai.expect(typeof url).to.be.equal("string");
-            }).catch((err) => {
-                console.log(err);
-                chai.expect.fail("not supposed to fail");
             });
     });
 
@@ -242,7 +197,6 @@ describe("unit test for SpotifyService", function () {
                 chai.expect.fail("supposed to fail");
             })
             .catch((err) => {
-                console.log(err);
                 chai.expect(err).to.be.instanceOf(Err.InvalidInputError);
             });
     });
@@ -253,7 +207,6 @@ describe("unit test for SpotifyService", function () {
                 chai.expect.fail("supposed to fail");
             })
             .catch((err) => {
-                console.log(err);
                 chai.expect(err).to.be.instanceOf(Err.InvalidInputError);
             });
     });
@@ -264,7 +217,6 @@ describe("unit test for SpotifyService", function () {
                 chai.expect.fail("supposed to fail");
             })
             .catch((err) => {
-                console.log(err);
                 chai.expect(err).to.be.instanceOf(Err.InvalidInputError);
             });
     });

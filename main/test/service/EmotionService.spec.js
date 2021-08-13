@@ -27,9 +27,6 @@ describe("unit test for EmotionService", function () {
             .then((features) => {
                 console.log(features);
                 chai.assert(typeof features === "object");
-            })
-            .catch((err) => {
-                chai.expect.fail("not supposed to fail" + err);
             });
     });
 
@@ -46,9 +43,6 @@ describe("unit test for EmotionService", function () {
                     console.log(res);
                     chai.assert(typeof res === "object");
                 }
-            })
-            .catch((e) => {
-                chai.expect.fail("not supposed to fail" + e);
             });
     });
 
@@ -58,7 +52,6 @@ describe("unit test for EmotionService", function () {
                 chai.expect.fail("supposed to fail");
             })
             .catch((err) => {
-                console.log(err);
                 chai.expect(err).to.be.instanceOf(Err.InvalidInputError);
             });
     });
@@ -69,7 +62,6 @@ describe("unit test for EmotionService", function () {
                 chai.expect.fail("supposed to fail");
             })
             .catch((err) => {
-                console.log(err);
                 chai.expect(err).to.be.instanceOf(Err.InvalidInputError);
             });
     });
@@ -80,7 +72,6 @@ describe("unit test for EmotionService", function () {
                 chai.expect.fail("supposed to fail");
             })
             .catch((err) => {
-                console.log(err);
                 chai.expect(err).to.be.instanceOf(Err.InvalidInputError);
             });
     });
@@ -91,7 +82,6 @@ describe("unit test for EmotionService", function () {
                 chai.expect.fail("supposed to fail");
             })
             .catch((err) => {
-                console.log(err);
                 chai.expect(err).to.be.instanceOf(Err.InvalidInputError);
             });
     });
@@ -103,30 +93,22 @@ describe("unit test for EmotionService", function () {
                 const dominantExpression = emotionService.getDominantExpression(res);
                 chai.expect(dominantExpression).to.be.equal("neutral");
                 console.log(dominantExpression);
-            }).catch((err) => {
-                console.log(err);
-                chai.expect.fail("not supposed to fail");
             });
     });
 
     it("test getDominantExpressions", function () {
-        try {
-            const data = {
-                anger: 0,
-                contempt: 0,
-                disgust: 0,
-                fear: 0,
-                happiness: 0,
-                neutral: 0.999,
-                sadness: 0,
-                surprise: 0,
-            };
-            const result = emotionService.getDominantExpression(data);
-            chai.expect(result).to.be.equal("neutral");
-        } catch (e) {
-            console.log(e);
-            chai.expect.fail("not supposed to fail");
-        }
+        const data = {
+            anger: 0,
+            contempt: 0,
+            disgust: 0,
+            fear: 0,
+            happiness: 0,
+            neutral: 0.999,
+            sadness: 0,
+            surprise: 0,
+        };
+        const result = emotionService.getDominantExpression(data);
+        chai.expect(result).to.be.equal("neutral");
     });
 
     it("test getDominantExpressions - invalid input null", function () {
@@ -134,7 +116,6 @@ describe("unit test for EmotionService", function () {
             emotionService.getDominantExpression(null);
             chai.expect.fail("supposed to fail");
         } catch (e) {
-            console.log(e);
             chai.expect(e).to.be.instanceOf(Err.InvalidInputError);
         }
     });
@@ -144,7 +125,6 @@ describe("unit test for EmotionService", function () {
             emotionService.getDominantExpression("null");
             chai.expect.fail("supposed to fail");
         } catch (e) {
-            console.log(e);
             chai.expect(e).to.be.instanceOf(Err.InvalidInputError);
         }
     });
@@ -154,7 +134,6 @@ describe("unit test for EmotionService", function () {
             emotionService.getDominantExpression([]);
             chai.expect.fail("supposed to fail");
         } catch (e) {
-            console.log(e);
             chai.expect(e).to.be.instanceOf(Err.InvalidInputError);
         }
     });

@@ -16,9 +16,6 @@ describe("unit test for dataURL", function () {
             .then((res) => {
                 console.log(res);
                 chai.assert(typeof res === "object" && !Array.isArray(res));
-            }).catch((err) => {
-                console.log(err);
-                chai.expect.fail("not supposed to fail");
             });
     });
 
@@ -27,7 +24,6 @@ describe("unit test for dataURL", function () {
             .then(() => {
                 chai.expect.fail("supposed to fail");
             }).catch((err) => {
-                console.log(err);
                 chai.expect(err).to.be.instanceOf(Err.InvalidInputError);
             });
     });
@@ -37,7 +33,6 @@ describe("unit test for dataURL", function () {
             .then(() => {
                 chai.expect.fail("supposed to fail");
             }).catch((err) => {
-                console.log(err);
                 chai.expect(err).to.be.instanceOf(Err.InvalidInputError);
             });
     });
@@ -47,7 +42,6 @@ describe("unit test for dataURL", function () {
             .then(() => {
                 chai.expect.fail("supposed to fail");
             }).catch((err) => {
-                console.log(err);
                 chai.expect(err).to.be.instanceOf(Err.AzureFaceApiError);
             });
     });
@@ -57,7 +51,6 @@ describe("unit test for dataURL", function () {
             .then(() => {
                 chai.expect.fail("supposed to fail");
             }).catch((err) => {
-                console.log(err);
                 chai.expect(err).to.be.instanceOf(Err.NoUserDetectedError);
             });
     });
@@ -74,9 +67,6 @@ describe("unit test for dataURL", function () {
                 }
 
                 chai.expect(maxEmotion).to.be.equal("fear");
-            }).catch((err) => {
-                console.log(err);
-                chai.expect.fail("not supposed to fail");
             });
     });
 
@@ -144,16 +134,12 @@ describe("unit test for dataURL", function () {
     });
 
     it("test handleAzureFaceAPIResponse", function () {
-        try {
-            const emotion = {
-                anger: 0, contempt: 0, disgust: 0, fear: 0, happiness: 0, neutral: 0.999, sadness: 0, surprise: 0,
-            };
-            const result = azureFaceAPIService.handleAzureFaceAPIResponse({
-                data: [{faceAttributes: {emotion: emotion}}],
-            });
-            chai.expect(JSON.stringify(result)).to.be.equal(JSON.stringify(emotion));
-        } catch (e) {
-            chai.expect.fail("not supposed to fail");
-        }
+        const emotion = {
+            anger: 0, contempt: 0, disgust: 0, fear: 0, happiness: 0, neutral: 0.999, sadness: 0, surprise: 0,
+        };
+        const result = azureFaceAPIService.handleAzureFaceAPIResponse({
+            data: [{faceAttributes: {emotion: emotion}}],
+        });
+        chai.expect(JSON.stringify(result)).to.be.equal(JSON.stringify(emotion));
     });
 });

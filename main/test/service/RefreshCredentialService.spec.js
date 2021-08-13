@@ -25,9 +25,6 @@ describe("test refreshing with credentials", function () {
         spotifyApi.setAccessToken(expiredAccessToken);
         return refreshCredentialService.checkCredentials().then((result) => {
             chai.assert.isFalse(result);
-        }).catch((err) => {
-            console.log(err);
-            chai.expect.fail("not supposed to fail");
         });
     });
 
@@ -38,8 +35,6 @@ describe("test refreshing with credentials", function () {
             })
             .then((result) => {
                 chai.assert.isTrue(result);
-            }).catch((err) => {
-                chai.expect.fail("not supposed to fail" + err);
             });
     });
 
@@ -60,10 +55,6 @@ describe("test refreshing with credentials", function () {
         return refreshCredentialService.tryRefreshCredential()
             .then((newAccessToken) => {
                 chai.expect(oldAccessToken).to.not.equal(newAccessToken);
-            })
-            .catch((e) => {
-                console.log("Caught error" + e);
-                chai.expect.fail("not supposed to fail");
             });
     });
 });
